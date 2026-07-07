@@ -14,7 +14,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Inter+Tight:ital,wght@0,400..800;1,400..800&family=Fragment+Mono:ital@0;1&display=swap" rel="stylesheet">
   <link rel="icon" href="favicon.svg?v=2" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css?v=15">
+  <link rel="stylesheet" href="styles.css?v=16">
 </head>
 <body>
 
@@ -66,12 +66,35 @@
           </span>
         </div>
         <div>
-          <div class="card">
-            <p class="eyebrow">What to include</p>
-            <h3>Make the first email easy</h3>
-            <p>A sentence on your business, what the video is for, a rough timeline, and a ballpark budget if you have one. No brief required — a hunch is enough to start.</p>
-            <p style="margin-top: 1rem;"><em>We reply within one business day.</em></p>
-          </div>
+          <form class="card contact-form" action="contact-form.php" method="POST">
+            <p class="eyebrow">Or send it right here</p>
+            <h3>Tell us what you're making</h3>
+
+            <div class="form-notice form-notice--sent" hidden>Thanks — your message is on its way. We reply within one business day.</div>
+            <div class="form-notice form-notice--error" hidden>Something was missing — please check your name, email and message and try again.</div>
+
+            <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;">
+
+            <label class="form-field">
+              <span>Name</span>
+              <input type="text" name="name" required autocomplete="name">
+            </label>
+            <label class="form-field">
+              <span>Email</span>
+              <input type="email" name="email" required autocomplete="email">
+            </label>
+            <label class="form-field">
+              <span>Ballpark budget <em>(optional — it helps, honest)</em></span>
+              <input type="text" name="budget" placeholder="e.g. $5,000">
+            </label>
+            <label class="form-field">
+              <span>What's the project?</span>
+              <textarea name="message" rows="5" required placeholder="A sentence on your business, what the video is for, and a rough timeline. A hunch is enough to start."></textarea>
+            </label>
+
+            <button type="submit" class="btn">Send it over</button>
+            <p class="form-small">We reply within one business day.</p>
+          </form>
         </div>
       </div>
     </section>
@@ -128,6 +151,6 @@
     </div>
   </footer>
 
-  <script src="script.js?v=15"></script>
+  <script src="script.js?v=16"></script>
 </body>
 </html>

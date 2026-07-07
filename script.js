@@ -18,6 +18,16 @@ const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 const heroVideo = document.querySelector(".hero-video");
 if (heroVideo && reduced) heroVideo.pause();
 
+// Contact form result notices (?sent=1 / ?error=1)
+const params = new URLSearchParams(window.location.search);
+if (params.has("sent") || params.has("error")) {
+  const notice = document.querySelector(params.has("sent") ? ".form-notice--sent" : ".form-notice--error");
+  if (notice) {
+    notice.hidden = false;
+    notice.scrollIntoView({ block: "center" });
+  }
+}
+
 // Click-to-play Vimeo embeds
 document.querySelectorAll("[data-vimeo]").forEach((thumb) => {
   thumb.addEventListener("click", () => {
