@@ -1192,6 +1192,10 @@ a:focus-visible, button:focus-visible {
 
 .partner-logo img { max-height: 3.75rem; width: auto; }
 
+/* light chip — for full-colour logos that need a white ground */
+.partner-logo--onlight { background: #fff; border-color: rgba(12, 13, 9, 0.12); }
+.partner-logo--onlight img { max-height: 4.5rem; }
+
 /* typeset wordmark lockup for partners we link by name rather than logo */
 .partner-logo--wordmark span {
   font-family: var(--font-display);
