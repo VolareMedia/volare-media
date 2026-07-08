@@ -1210,6 +1210,63 @@ a:focus-visible, button:focus-visible {
 /* films grouped by event within one section */
 .film-group + .film-group { margin-top: clamp(2.75rem, 5vw, 4.5rem); }
 
+/* brand event pages — per-year blocks */
+.year-block + .year-block {
+  margin-top: clamp(2.75rem, 5vw, 4.5rem);
+  padding-top: clamp(2.75rem, 5vw, 4.5rem);
+  border-top: 1px solid var(--line);
+}
+.year-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.5rem 1.75rem;
+  margin-bottom: 1.25rem;
+}
+.year-head .year {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  font-size: clamp(2.25rem, 5vw, 3.75rem);
+}
+.year-raised {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--lilac);
+}
+.year-figure {
+  color: var(--muted);
+  margin-bottom: clamp(1.5rem, 3vw, 2.25rem);
+}
+.year-figure strong { color: var(--cream); font-weight: 600; }
+
+/* media-sponsor pill — "we donated all our time and resources" */
+.sponsor-note {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--volt);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 0.5rem 1rem;
+  margin-top: 1.75rem;
+}
+.sponsor-note::before {
+  content: "";
+  width: 0.55rem;
+  height: 0.55rem;
+  background: var(--volt);
+  border-radius: 50%;
+  flex: none;
+}
+
 /* single embedded video, full width of the content column */
 .video-feature {
   position: relative;
