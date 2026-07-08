@@ -1294,3 +1294,20 @@ a:focus-visible, button:focus-visible {
 
 .media-placeholder .eyebrow { justify-content: center; }
 .media-placeholder p { max-width: 40rem; margin: 0 auto; }
+
+/* full-bleed photo divider to break up a page */
+.photo-strip {
+  height: clamp(15rem, 40vw, 30rem);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* contained rounded photo inside a section */
+.section-photo {
+  width: 100%;
+  max-height: 34rem;
+  object-fit: cover;
+  border-radius: 1.25rem;
+  border: 1px solid var(--line);
+}
