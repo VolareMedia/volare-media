@@ -374,6 +374,71 @@ em {
   to { transform: translateX(-50%); }
 }
 
+/* ---------- social strip (thin divider between sections) ---------- */
+
+.social-strip {
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  padding: 1.4rem 0;
+}
+
+.social-strip-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem 2rem;
+  flex-wrap: wrap;
+}
+
+.social-strip-label {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.social-strip-label .dot { color: var(--lilac); }
+
+.social-strip-links {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.social-strip-links a {
+  display: grid;
+  place-items: center;
+  width: 2.9rem;
+  height: 2.9rem;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease, transform 0.25s ease;
+}
+
+.social-strip-links svg {
+  width: 1.2rem;
+  height: 1.2rem;
+  fill: currentColor;
+}
+
+.social-strip-links a:nth-child(odd) { color: var(--volt); }
+.social-strip-links a:nth-child(even) { color: var(--lilac); }
+
+.social-strip-links a:hover { transform: translateY(-3px); }
+
+.social-strip-links a:nth-child(odd):hover {
+  background: var(--volt);
+  border-color: var(--volt);
+  color: var(--bg);
+}
+
+.social-strip-links a:nth-child(even):hover {
+  background: var(--lilac);
+  border-color: var(--lilac);
+  color: var(--bg);
+}
+
 /* ---------- sections ---------- */
 
 .section { padding-top: var(--section-gap); padding-bottom: var(--section-gap); }
