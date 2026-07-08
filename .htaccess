@@ -1,0 +1,14 @@
+# Volare Media — redirects & basics
+
+# Old Zyrosite URLs (still in Google's index) → closest new page.
+# Anchored with ^...$ so real .html files are never matched.
+RedirectMatch 301 ^/voice-over-recording/?$      /services.html
+RedirectMatch 301 ^/film-production/?$           /services.html
+RedirectMatch 301 ^/marketing-videos/?$          /services.html
+RedirectMatch 301 ^/music-video-production/?$    /services.html
+RedirectMatch 301 ^/services/?$                  /services.html
+RedirectMatch 301 ^/blog/?$                      /journal.html
+RedirectMatch 301 ^/contact/?$                   /contact.html
+RedirectMatch 301 ^/about/?$                     /about.html
+RedirectMatch 301 ^/privacy-policy/?$            /
+RedirectMatch 301 ^/terms-and-conditions/?$      /
