@@ -863,6 +863,17 @@ a.card:hover .card-cue { color: var(--volt); }
   color: var(--muted);
 }
 
+/* fully-clickable partner cards + linked section photos */
+a.partner-card {
+  display: block;
+  text-decoration: none;
+  transition: border-color 0.2s, transform 0.2s;
+}
+a.partner-card:hover { border-color: var(--volt); transform: translateY(-3px); }
+a.partner-card:hover .bracket { color: var(--volt); }
+a .section-photo { transition: opacity 0.25s; }
+a:hover .section-photo { opacity: 0.85; }
+
 /* compact reviews strip */
 .reviews-compact { padding-top: clamp(2rem, 4vw, 3rem); padding-bottom: clamp(2rem, 4vw, 3rem); }
 .reviews-compact .section-head { margin-bottom: clamp(1rem, 2vw, 1.5rem); }
