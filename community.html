@@ -14,7 +14,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Inter+Tight:ital,wght@0,400..800;1,400..800&family=Fragment+Mono:ital@0;1&display=swap" rel="stylesheet">
   <link rel="icon" href="favicon.svg?v=2" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css?v=22">
+  <link rel="stylesheet" href="styles.css?v=28">
 </head>
 <body>
 
@@ -31,8 +31,15 @@
       <button class="nav-toggle" aria-expanded="false" aria-controls="main-nav">Menu</button>
       <nav class="main-nav" id="main-nav" aria-label="Main">
         <a href="index.html">Home</a>
-        <a href="services.html">Services</a>
-        <a href="creative-direction.html">Creative Direction</a>
+        <div class="nav-drop">
+          <a class="nav-drop-trigger" href="services.html">Services<span class="caret" aria-hidden="true">▾</span></a>
+          <div class="nav-drop-menu">
+            <a href="services.html">All Services</a>
+            <a href="creative-direction.html">Creative Direction</a>
+            <a href="event-videography.html">Event Videography</a>
+            <a href="corporate-video.html">Corporate Video</a>
+          </div>
+        </div>
         <a href="agencies.html">Agencies</a>
         <a href="work.html">Work</a>
         <a href="about.html">About</a>
@@ -45,7 +52,10 @@
 
   <main>
 
-    <section class="hero photo-band photo-band--side" style="--photo: url('assets/img/peninsula-gives-event.jpg'); --photo-pos: 50% 58%;">
+    <section class="hero video-band" style="--video-opacity: 0.35;">
+      <video class="band-video" autoplay muted loop playsinline preload="metadata" poster="assets/img/peninsula-gives-event.jpg" aria-hidden="true">
+        <source src="assets/fundraiser-loop.mp4" type="video/mp4">
+      </video>
       <div class="wrap">
         <p class="eyebrow">Community &amp; giving</p>
         <h1 class="display-xl">The causes<br>we <span class="sweep">love<span class="dot">.</span></span></h1>
@@ -53,7 +63,7 @@
       </div>
     </section>
 
-    <section class="section band--peach photo-band photo-band--side" style="--photo: url('assets/img/bts-blue.jpg'); --photo-pos: 15% 40%; --photo-opacity: 0.55;">
+    <section class="section band--peach photo-band photo-band--side" style="--photo: url('assets/img/peninsula-gives-event.jpg'); --photo-pos: 50% 58%; --photo-opacity: 0.55;">
       <div class="wrap">
         <div class="section-head reveal">
           <div>
@@ -103,15 +113,6 @@
           <a class="bracket" href="community-fashion-splash.html">See our work</a>
         </div>
 
-        <div class="partner-card">
-          <div class="partner-logo partner-logo--onlight">
-            <img src="assets/img/bc-childrens-hospital-logo.png" alt="BC Children's Hospital Foundation logo">
-          </div>
-          <h3>BC Children's Hospital</h3>
-          <p>The throughline in almost all of this work. Care and research for the sickest and most injured kids from every corner of British Columbia.</p>
-          <a class="bracket" href="https://www.bcchf.ca" rel="noopener">Visit the Foundation</a>
-        </div>
-
       </div>
     </section>
 
@@ -153,6 +154,8 @@
               <li><a href="services.html">Services</a></li>
               <li><a href="creative-direction.html">Creative Direction</a></li>
               <li><a href="agencies.html">Agencies &amp; Brands</a></li>
+              <li><a href="event-videography.html">Event Videography</a></li>
+              <li><a href="corporate-video.html">Corporate Video</a></li>
               <li><a href="work.html">Work</a></li>
               <li><a href="about.html">About</a></li>
               <li><a href="community.html">Community</a></li>

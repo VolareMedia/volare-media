@@ -15,7 +15,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Inter+Tight:ital,wght@0,400..800;1,400..800&family=Fragment+Mono:ital@0;1&display=swap" rel="stylesheet">
   <link rel="icon" href="favicon.svg?v=2" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css?v=22">
+  <link rel="stylesheet" href="styles.css?v=28">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -79,8 +79,15 @@
       <button class="nav-toggle" aria-expanded="false" aria-controls="main-nav">Menu</button>
       <nav class="main-nav" id="main-nav" aria-label="Main">
         <a href="index.html">Home</a>
-        <a href="services.html">Services</a>
-        <a href="creative-direction.html">Creative Direction</a>
+        <div class="nav-drop">
+          <a class="nav-drop-trigger" href="services.html">Services<span class="caret" aria-hidden="true">▾</span></a>
+          <div class="nav-drop-menu">
+            <a href="services.html">All Services</a>
+            <a href="creative-direction.html">Creative Direction</a>
+            <a href="event-videography.html">Event Videography</a>
+            <a href="corporate-video.html">Corporate Video</a>
+          </div>
+        </div>
         <a href="agencies.html" aria-current="page">Agencies</a>
         <a href="work.html">Work</a>
         <a href="about.html">About</a>
@@ -140,7 +147,7 @@
       </div>
     </section>
 
-    <section class="section band--sky">
+    <section class="section band--sky photo-band photo-band--side" style="--photo: url('assets/img/agency-colour-grading-suite.jpg'); --photo-pos: 15% 35%; --photo-opacity: 0.5;">
       <div class="wrap">
         <div class="section-head reveal">
           <div>
@@ -207,7 +214,10 @@
       </div>
     </section>
 
-    <section class="section band--ink photo-band photo-band--side" style="--photo: url('assets/img/bts-monitor.jpg'); --photo-pos: 60% 35%; --photo-opacity: 0.55;">
+    <section class="section band--ink video-band" style="--video-opacity: 0.2;">
+      <video class="band-video" autoplay muted loop playsinline preload="metadata" aria-hidden="true">
+        <source src="assets/banner-loop-3.mp4" type="video/mp4">
+      </video>
       <div class="wrap">
         <div class="section-head reveal">
           <div>
@@ -219,7 +229,7 @@
         <div class="stat-grid reveal">
           <div class="stat"><h3>35+</h3><p>brands and artists trusted us with their story, across BC and Canada</p></div>
           <div class="stat"><h3>85+</h3><p>videos shot, cut and delivered — commercials to music videos</p></div>
-          <div class="stat"><h3>61</h3><p>BC stations carried a single Volare Media commercial</p></div>
+          <div class="stat"><h3>20K+</h3><p>followers across Volare Media’s social channels</p></div>
           <div class="stat"><h3>5.0★</h3><p>Google rating from the people we've worked with</p></div>
         </div>
       </div>
@@ -227,12 +237,13 @@
 
     <section class="marquee" aria-label="Clients">
       <div class="marquee-track">
-        <span>Harbour City Kitchens</span><span>Stratos Nutrition</span><span>Maxxam Insurance</span><span>De Mode en Vogue</span><span>Sixty Forty</span><span>VICA</span><span>Peninsula Gives</span><span>Tailgate Toolkit</span><span>Harris</span>
-        <span>Harbour City Kitchens</span><span>Stratos Nutrition</span><span>Maxxam Insurance</span><span>De Mode en Vogue</span><span>Sixty Forty</span><span>VICA</span><span>Peninsula Gives</span><span>Tailgate Toolkit</span><span>Harris</span>
+        <span>Harbour City Kitchens</span><span>Stratos Nutrition</span><span>Maxxam Insurance</span><span>De Mode en Vogue</span><span>Sixty Forty</span><span>VICA</span><span>Peninsula Gives</span><span>Tailgate Toolkit</span><span>Harris</span><span>White Wolf Homes</span>
+        <span>Harbour City Kitchens</span><span>Stratos Nutrition</span><span>Maxxam Insurance</span><span>De Mode en Vogue</span><span>Sixty Forty</span><span>VICA</span><span>Peninsula Gives</span><span>Tailgate Toolkit</span><span>Harris</span><span>White Wolf Homes</span>
       </div>
     </section>
 
-    <section class="section wrap" id="faq">
+    <section class="section photo-band photo-band--side" id="faq" style="--photo: url('assets/img/vm-street-shoot-crew.jpg'); --photo-pos: 60% 45%; --photo-opacity: 0.4;">
+      <div class="wrap">
       <div class="section-head reveal">
         <div>
           <p class="eyebrow">Common questions</p>
@@ -290,6 +301,7 @@
         </details>
 
       </div>
+      </div>
     </section>
 
     <section class="cta band--volt">
@@ -316,6 +328,8 @@
               <li><a href="services.html">Services</a></li>
               <li><a href="creative-direction.html">Creative Direction</a></li>
               <li><a href="agencies.html">Agencies &amp; Brands</a></li>
+              <li><a href="event-videography.html">Event Videography</a></li>
+              <li><a href="corporate-video.html">Corporate Video</a></li>
               <li><a href="work.html">Work</a></li>
               <li><a href="about.html">About</a></li>
               <li><a href="community.html">Community</a></li>

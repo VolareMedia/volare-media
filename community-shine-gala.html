@@ -14,7 +14,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Inter+Tight:ital,wght@0,400..800;1,400..800&family=Fragment+Mono:ital@0;1&display=swap" rel="stylesheet">
   <link rel="icon" href="favicon.svg?v=2" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css?v=22">
+  <link rel="stylesheet" href="styles.css?v=28">
 </head>
 <body>
 
@@ -31,8 +31,15 @@
       <button class="nav-toggle" aria-expanded="false" aria-controls="main-nav">Menu</button>
       <nav class="main-nav" id="main-nav" aria-label="Main">
         <a href="index.html">Home</a>
-        <a href="services.html">Services</a>
-        <a href="creative-direction.html">Creative Direction</a>
+        <div class="nav-drop">
+          <a class="nav-drop-trigger" href="services.html">Services<span class="caret" aria-hidden="true">▾</span></a>
+          <div class="nav-drop-menu">
+            <a href="services.html">All Services</a>
+            <a href="creative-direction.html">Creative Direction</a>
+            <a href="event-videography.html">Event Videography</a>
+            <a href="corporate-video.html">Corporate Video</a>
+          </div>
+        </div>
         <a href="agencies.html">Agencies</a>
         <a href="work.html">Work</a>
         <a href="about.html">About</a>
@@ -45,15 +52,24 @@
 
   <main>
 
-    <section class="hero wrap">
+    <section class="hero video-band" style="--video-opacity: 0.35;">
+      <video class="band-video" autoplay muted loop playsinline preload="metadata" poster="assets/img/shine-gala-2024-xcZNd4GcZYI.jpg" aria-hidden="true">
+        <source src="assets/shine-gala-loop.mp4" type="video/mp4">
+      </video>
+      <div class="wrap">
       <p class="eyebrow"><a href="community.html" class="bracket">Community</a> &nbsp;/&nbsp; Shine Gala</p>
       <h1 class="display-xl">Shine <span class="sweep">Gala<span class="dot">.</span></span></h1>
       <p class="lede">The Shine Gala is a dazzling Victoria evening of fashion, food and fundraising, all in support of BC Children's Hospital. In 2024 we were honoured to join in and help tell the stories at its heart.</p>
       <p class="lede">Volare Media came on as media sponsor, donating all of our time and resources to make these films — because the families behind them deserve to be seen.</p>
       <p class="sponsor-note">Volare Media · Media Sponsor · 2024</p>
+      <div class="partner-logo" style="max-width: 14rem; margin-top: 1.5rem; min-height: 5.5rem;">
+        <a href="https://www.bcchf.ca" rel="noopener" aria-label="BC Children's Hospital Foundation"><img src="assets/img/bcchf-logo-white.png" alt="BC Children's Hospital Foundation logo" style="max-height: 4rem;"></a>
+      </div>
+    </div>
     </section>
 
-    <section class="section wrap">
+    <section class="section section--tight band--sky">
+      <div class="wrap">
 
       <div class="year-block reveal">
         <div class="year-head">
@@ -61,8 +77,6 @@
           <span class="year-raised">Media Sponsor · Two films</span>
         </div>
         <p class="lede">For the 2024 gala we produced two films. The first shares Quinn's story through the voices of her family — from the moment they learned she had cancer to the journey that followed. The second follows Quinn's Beads of Courage, the program that marks every brave step of a child's treatment.</p>
-        <!-- TODO: Chris to confirm the amount raised at the 2024 Shine Gala -->
-        <p class="year-figure">Funds raised at the 2024 gala — <strong>to be confirmed</strong>.</p>
         <div class="work-grid">
           <article class="work-card">
             <button class="video-thumb" data-youtube="xcZNd4GcZYI" aria-label="Play: Quinn's Story — Shine Gala 2024 film for BC Children's Hospital">
@@ -83,23 +97,10 @@
         </div>
       </div>
 
-    </section>
-
-    <!-- Photos + social posts from the Shine Gala to be added -->
-    <section class="section wrap">
-      <div class="section-head reveal">
-        <div>
-          <p class="eyebrow">More to come</p>
-          <h2 class="display-lg">Photos &amp; posts,<br><span class="sweep">landing here<span class="dot">.</span></span></h2>
-        </div>
-      </div>
-      <div class="media-placeholder reveal">
-        <p class="eyebrow">Placeholder</p>
-        <p>Behind-the-scenes photos and social posts from the Shine Gala will live here — and future years' films land as they're ready.</p>
       </div>
     </section>
 
-    <section class="cta band--volt">
+    <section class="cta band--ink photo-band" style="--photo: url('assets/img/shine-gala-2024-AY32ydFKFWc.jpg'); --photo-pos: 50% 30%; --photo-opacity: 0.4;">
       <div class="wrap reveal">
         <p class="eyebrow">Learn more</p>
         <h2 class="display-lg">See what the Shine<br>Gala is all about<span class="dot">.</span></h2>
@@ -123,6 +124,8 @@
               <li><a href="services.html">Services</a></li>
               <li><a href="creative-direction.html">Creative Direction</a></li>
               <li><a href="agencies.html">Agencies &amp; Brands</a></li>
+              <li><a href="event-videography.html">Event Videography</a></li>
+              <li><a href="corporate-video.html">Corporate Video</a></li>
               <li><a href="work.html">Work</a></li>
               <li><a href="about.html">About</a></li>
               <li><a href="community.html">Community</a></li>

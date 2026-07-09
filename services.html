@@ -14,7 +14,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Inter+Tight:ital,wght@0,400..800;1,400..800&family=Fragment+Mono:ital@0;1&display=swap" rel="stylesheet">
   <link rel="icon" href="favicon.svg?v=2" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css?v=22">
+  <link rel="stylesheet" href="styles.css?v=28">
 </head>
 <body>
 
@@ -31,8 +31,15 @@
       <button class="nav-toggle" aria-expanded="false" aria-controls="main-nav">Menu</button>
       <nav class="main-nav" id="main-nav" aria-label="Main">
         <a href="index.html">Home</a>
-        <a href="services.html" aria-current="page">Services</a>
-        <a href="creative-direction.html">Creative Direction</a>
+        <div class="nav-drop">
+          <a class="nav-drop-trigger" href="services.html" aria-current="page">Services<span class="caret" aria-hidden="true">▾</span></a>
+          <div class="nav-drop-menu">
+            <a href="services.html" aria-current="page">All Services</a>
+            <a href="creative-direction.html">Creative Direction</a>
+            <a href="event-videography.html">Event Videography</a>
+            <a href="corporate-video.html">Corporate Video</a>
+          </div>
+        </div>
         <a href="agencies.html">Agencies</a>
         <a href="work.html">Work</a>
         <a href="about.html">About</a>
@@ -45,25 +52,27 @@
 
   <main>
 
-    <section class="hero wrap">
+    <section class="hero photo-band photo-band--side" style="--photo: url('assets/img/videographer-camera-vancouver-island.jpg'); --photo-pos: 70% 35%; --photo-opacity: 0.55;">
+      <div class="wrap">
       <p class="eyebrow">Services <span style="color: var(--muted);">(006)</span></p>
       <h1 class="display-xl">Start to <span class="sweep">screen<span class="dot">.</span></span></h1>
       <p class="lede">Six phases, one crew. Every Volare Media project follows the same path — from the first idea to the day it reaches your audience, anywhere in BC or Canada.</p>
+    </div>
     </section>
 
     <section class="wrap" style="padding-bottom: var(--section-gap);">
       <div class="service-list">
 
-        <div class="service-row" id="creative-direction">
+        <a class="service-row" id="creative-direction" href="creative-direction.html">
           <span class="service-num">(001)</span>
           <h3>We Direct</h3>
           <div>
-            <p>Creative direction, brand positioning and concept development. Before a single frame is shot, we find the idea worth shooting — and make sure it fits your brand and your budget. <a href="creative-direction.html" class="bracket" style="font-size:0.85rem;">Creative direction in depth</a></p>
+            <p>Creative direction, brand positioning and concept development. Before a single frame is shot, we find the idea worth shooting — and make sure it fits your brand and your budget.</p>
             <ul class="service-includes">
               <li>Brand positioning</li><li>Concept development</li><li>Treatments &amp; scripts</li><li>Campaign strategy</li><li>Visual direction</li>
             </ul>
           </div>
-        </div>
+        </a>
 
         <div class="service-row" id="pre-production">
           <span class="service-num">(002)</span>
@@ -109,7 +118,7 @@
           </div>
         </div>
 
-        <div class="service-row" id="support">
+        <a class="service-row" id="support" href="agencies.html#brand-teams">
           <span class="service-num">(006)</span>
           <h3>We Support</h3>
           <div>
@@ -118,7 +127,7 @@
               <li>Ongoing editing</li><li>Content calendars</li><li>Digital media support</li>
             </ul>
           </div>
-        </div>
+        </a>
 
       </div>
     </section>
@@ -140,7 +149,10 @@
       </div>
     </section>
 
-    <section class="section band--mint photo-band photo-band--side" style="--photo: url('assets/img/bts-blue.jpg'); --photo-pos: 15% 30%; --photo-opacity: 0.55;">
+    <section class="section band--mint video-band" style="--video-opacity: 0.18;">
+      <video class="band-video" autoplay muted loop playsinline preload="metadata" aria-hidden="true">
+        <source src="assets/banner-loop-3.mp4" type="video/mp4">
+      </video>
       <div class="wrap">
         <div class="section-head reveal">
           <div>
@@ -149,12 +161,13 @@
           </div>
         </div>
         <div class="card-grid reveal">
-          <div class="card"><p class="eyebrow">Broadcast</p><h3>TV &amp; radio commercials</h3><p>Broadcast-ready spots, cleared and delivered to stations across British Columbia.</p></div>
-          <div class="card"><p class="eyebrow">Brand</p><h3>Brand films &amp; documentaries</h3><p>Authentic storytelling that shows who you are — not just what you sell.</p></div>
-          <div class="card"><p class="eyebrow">Music</p><h3>Music videos</h3><p>Film-industry craft for artists, from concept and treatment through final grade.</p></div>
-          <div class="card"><p class="eyebrow">Film</p><h3>Film production</h3><p>Narrative shorts and features — our roots are in film, and we still make it.</p></div>
-          <div class="card"><p class="eyebrow">Corporate</p><h3>Corporate &amp; testimonial video</h3><p>Recruiting, training and customer-story videos your team will actually be proud of.</p></div>
-          <div class="card"><p class="eyebrow">Digital</p><h3>Social media content</h3><p>Platform-native video for Instagram, Facebook, TikTok and YouTube — built to perform in the feed.</p></div>
+          <a class="card" href="work.html"><p class="eyebrow">Broadcast</p><h3>TV &amp; radio commercials</h3><p>Broadcast-ready spots, cleared and delivered to stations across British Columbia.</p><span class="card-cue">See the work</span></a>
+          <a class="card" href="work.html"><p class="eyebrow">Brand</p><h3>Brand films &amp; documentaries</h3><p>Authentic storytelling that shows who you are — not just what you sell.</p><span class="card-cue">See the work</span></a>
+          <a class="card" href="work.html"><p class="eyebrow">Music</p><h3>Music videos</h3><p>Film-industry craft for artists, from concept and treatment through final grade.</p><span class="card-cue">See the work</span></a>
+          <a class="card" href="work.html"><p class="eyebrow">Film</p><h3>Film production</h3><p>Narrative shorts and features — our roots are in film, and we still make it.</p><span class="card-cue">See the work</span></a>
+          <a class="card" href="corporate-video.html"><p class="eyebrow">Corporate</p><h3>Corporate &amp; testimonial video</h3><p>Recruiting, training and customer-story videos your team will actually be proud of.</p><span class="card-cue">Corporate video in depth</span></a>
+          <a class="card" href="event-videography.html"><p class="eyebrow">Events</p><h3>Event videography</h3><p>Galas, fundraisers, conferences and launches — recap films and next-day social clips.</p><span class="card-cue">Event coverage in depth</span></a>
+          <a class="card" href="work.html"><p class="eyebrow">Digital</p><h3>Social media content</h3><p>Platform-native video for Instagram, Facebook, TikTok and YouTube — built to perform in the feed.</p><span class="card-cue">See the work</span></a>
           <div class="card"><p class="eyebrow">Audio</p><h3>Voice over recording</h3><p>Professional VO recording for commercials, explainers and radio.</p></div>
         </div>
       </div>
@@ -184,6 +197,8 @@
               <li><a href="services.html">Services</a></li>
               <li><a href="creative-direction.html">Creative Direction</a></li>
               <li><a href="agencies.html">Agencies &amp; Brands</a></li>
+              <li><a href="event-videography.html">Event Videography</a></li>
+              <li><a href="corporate-video.html">Corporate Video</a></li>
               <li><a href="work.html">Work</a></li>
               <li><a href="about.html">About</a></li>
               <li><a href="community.html">Community</a></li>

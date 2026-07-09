@@ -14,7 +14,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Inter+Tight:ital,wght@0,400..800;1,400..800&family=Fragment+Mono:ital@0;1&display=swap" rel="stylesheet">
   <link rel="icon" href="favicon.svg?v=2" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css?v=22">
+  <link rel="stylesheet" href="styles.css?v=28">
 </head>
 <body>
 
@@ -31,8 +31,15 @@
       <button class="nav-toggle" aria-expanded="false" aria-controls="main-nav">Menu</button>
       <nav class="main-nav" id="main-nav" aria-label="Main">
         <a href="index.html">Home</a>
-        <a href="services.html">Services</a>
-        <a href="creative-direction.html">Creative Direction</a>
+        <div class="nav-drop">
+          <a class="nav-drop-trigger" href="services.html">Services<span class="caret" aria-hidden="true">▾</span></a>
+          <div class="nav-drop-menu">
+            <a href="services.html">All Services</a>
+            <a href="creative-direction.html">Creative Direction</a>
+            <a href="event-videography.html">Event Videography</a>
+            <a href="corporate-video.html">Corporate Video</a>
+          </div>
+        </div>
         <a href="agencies.html">Agencies</a>
         <a href="work.html">Work</a>
         <a href="about.html">About</a>
@@ -45,77 +52,85 @@
 
   <main>
 
-    <section class="hero wrap">
+    <section class="hero video-band" style="--video-opacity: 0.35;">
+      <video class="band-video" autoplay muted loop playsinline preload="metadata" poster="assets/img/peninsula-gives-event.jpg" aria-hidden="true">
+        <source src="assets/peninsula-recap-loop.mp4" type="video/mp4">
+      </video>
+      <div class="wrap">
       <p class="eyebrow"><a href="community.html" class="bracket">Community</a> &nbsp;/&nbsp; Peninsula Gives</p>
       <h1 class="display-xl">Peninsula <span class="sweep">Gives<span class="dot">.</span></span></h1>
       <p class="lede">Peninsula Gives is a local charity that throws unforgettable events to raise money for BC Children's Hospital. They were the ones who first brought us into this world — and every year since, we've been proud to help their story reach further than any room ever could.</p>
       <p class="lede">On every one of these, Volare Media was the media sponsor. We donated all of our time and resources to make these films happen, because we believe in what Peninsula Gives does.</p>
       <p class="sponsor-note">Volare Media · Media Sponsor since 2023</p>
+      <div class="partner-logo" style="max-width: 14rem; margin-top: 1.5rem; min-height: 5.5rem;">
+        <a href="https://www.bcchf.ca" rel="noopener" aria-label="BC Children's Hospital Foundation"><img src="assets/img/bcchf-logo-white.png" alt="BC Children's Hospital Foundation logo" style="max-height: 4rem;"></a>
+      </div>
+    </div>
     </section>
 
-    <section class="section wrap">
+    <section class="section section--tight photo-band" style="--photo: url('assets/img/peninsula-gives-crowd-1.jpg'); --photo-pos: 50% 30%; --photo-opacity: 0.25;">
+      <div class="wrap">
+      <div class="year-row">
 
-      <div class="year-block reveal">
-        <div class="year-head">
-          <span class="year">2025<span class="dot">.</span></span>
-          <span class="year-raised">Media Sponsor · Documentary film</span>
+        <div class="year-block reveal">
+          <div class="year-head">
+            <span class="year">2023<span class="dot">.</span></span>
+            <span class="year-raised">Where it started</span>
+          </div>
+                    <div class="work-grid">
+            <article class="work-card">
+              <button class="video-thumb" data-youtube="kUSeRtxOvEk" aria-label="Play: Lilly's Story — Peninsula Gives 2023 film for BC Children's Hospital">
+                <img src="assets/img/peninsula-gives-2023.jpg" alt="Still from Lilly's Story, the Peninsula Gives 2023 film for BC Children's Hospital" loading="lazy">
+                <span class="play-btn" aria-hidden="true"></span>
+              </button>
+              <h3>Lilly's Story</h3>
+              <span class="work-tag">Film — for BC Children's Hospital</span>
+            </article>
+          </div>
+          <p class="lede">Our first year as media sponsor — the film that began the partnership, in support of BC Children's Hospital.</p>
         </div>
-        <p class="lede">For 2025 we produced a documentary-style film following Oliver and his family — a look at the powerful intersection of medical expertise, innovation and compassionate care that makes BC Children's Hospital so extraordinary.</p>
-        <!-- TODO: Chris to confirm the amount raised in 2025 -->
-        <p class="year-figure">Funds raised in 2025 — <strong>to be confirmed</strong>.</p>
-        <div class="work-grid">
-          <article class="work-card">
-            <button class="video-thumb" data-youtube="QGUlt4GclyY" aria-label="Play: Oliver's Story — Peninsula Gives 2025 documentary for BC Children's Hospital">
-              <img src="assets/img/peninsula-gives-2025.jpg" alt="Still from Oliver's Story, the Peninsula Gives 2025 documentary for BC Children's Hospital" loading="lazy">
-              <span class="play-btn" aria-hidden="true"></span>
-            </button>
-            <h3>Oliver's Story</h3>
-            <span class="work-tag">Documentary — a family's journey at BC Children's Hospital</span>
-          </article>
+
+        <div class="year-block reveal">
+          <div class="year-head">
+            <span class="year">2024<span class="dot">.</span></span>
+            <span class="year-raised">Media Sponsor</span>
+          </div>
+                    <div class="work-grid">
+            <article class="work-card">
+              <button class="video-thumb" data-youtube="Y1PcutXbxtA" aria-label="Play: Quinn's Story — Peninsula Gives 2024 film for BC Children's Hospital">
+                <img src="assets/img/peninsula-gives-2024.jpg" alt="Still from Quinn's Story, the Peninsula Gives 2024 film for BC Children's Hospital" loading="lazy">
+                <span class="play-btn" aria-hidden="true"></span>
+              </button>
+              <h3>Quinn's Story</h3>
+              <span class="work-tag">Film — Quinn's journey, in her family's words</span>
+            </article>
+          </div>
+          <p class="lede">Quinn's story, told through the voices of her family — the film that powered the 2024 campaign.</p>
         </div>
+
+        <div class="year-block reveal">
+          <div class="year-head">
+            <span class="year">2025<span class="dot">.</span></span>
+            <span class="year-raised">Documentary film</span>
+          </div>
+                    <div class="work-grid">
+            <article class="work-card">
+              <button class="video-thumb" data-youtube="QGUlt4GclyY" aria-label="Play: Oliver's Story — Peninsula Gives 2025 documentary for BC Children's Hospital">
+                <img src="assets/img/peninsula-gives-2025.jpg" alt="Still from Oliver's Story, the Peninsula Gives 2025 documentary for BC Children's Hospital" loading="lazy">
+                <span class="play-btn" aria-hidden="true"></span>
+              </button>
+              <h3>Oliver's Story</h3>
+              <span class="work-tag">Documentary — a family's journey at BC Children's Hospital</span>
+            </article>
+          </div>
+          <p class="lede">A documentary following Oliver and his family through the extraordinary care at BC Children's Hospital.</p>
+        </div>
+
       </div>
-
-      <div class="year-block reveal">
-        <div class="year-head">
-          <span class="year">2024<span class="dot">.</span></span>
-          <span class="year-raised">Media Sponsor · Two films</span>
-        </div>
-        <p class="lede">In 2024 we told Quinn's story through the voices of her family, and produced a second film alongside the Digital Lab at BC Children's Hospital to help power the campaign.</p>
-        <!-- TODO: Chris to confirm the amount raised in 2024 -->
-        <p class="year-figure">Funds raised in 2024 — <strong>to be confirmed</strong>.</p>
-        <div class="work-grid">
-          <article class="work-card">
-            <button class="video-thumb" data-youtube="Y1PcutXbxtA" aria-label="Play: Quinn's Story — Peninsula Gives 2024 film for BC Children's Hospital">
-              <img src="assets/img/peninsula-gives-2024.jpg" alt="Still from Quinn's Story, the Peninsula Gives 2024 film for BC Children's Hospital" loading="lazy">
-              <span class="play-btn" aria-hidden="true"></span>
-            </button>
-            <h3>Quinn's Story</h3>
-            <span class="work-tag">Film — Quinn and her family</span>
-          </article>
-          <article class="work-card">
-            <button class="video-thumb" data-vimeo="970880312" aria-label="Play: Digital Lab — Peninsula Gives 2024 fundraiser film for BC Children's Hospital">
-              <img src="https://i.vimeocdn.com/video/1884571923-db111377d4e4e4179c7b4b597aceed51e7fb26d197ea7952f97d932480699f46-d_1280x720?region=us" alt="Still from the Digital Lab fundraiser film for Peninsula Gives 2024, supporting BC Children's Hospital" loading="lazy">
-              <span class="play-btn" aria-hidden="true"></span>
-            </button>
-            <h3>Digital Lab</h3>
-            <span class="work-tag">Film — Digital Lab at BC Children's Hospital</span>
-          </article>
-        </div>
       </div>
-
     </section>
 
-    <section class="section wrap">
-      <div class="section-head reveal">
-        <div>
-          <p class="eyebrow">From the events</p>
-          <h2 class="display-lg">A night that<br><span class="sweep">gives back<span class="dot">.</span></span></h2>
-        </div>
-      </div>
-      <img class="section-photo reveal" src="assets/img/peninsula-gives-crowd-2.jpg" alt="Guests gathered and smiling at a Peninsula Gives fundraising dinner" loading="lazy">
-    </section>
-
-    <section class="cta band--volt">
+    <section class="cta band--ink photo-band" style="--photo: url('assets/img/peninsula-gives-crowd-2.jpg'); --photo-pos: 50% 35%; --photo-opacity: 0.45;">
       <div class="wrap reveal">
         <p class="eyebrow">Learn more</p>
         <h2 class="display-lg">See what Peninsula<br>Gives is all about<span class="dot">.</span></h2>
@@ -139,6 +154,8 @@
               <li><a href="services.html">Services</a></li>
               <li><a href="creative-direction.html">Creative Direction</a></li>
               <li><a href="agencies.html">Agencies &amp; Brands</a></li>
+              <li><a href="event-videography.html">Event Videography</a></li>
+              <li><a href="corporate-video.html">Corporate Video</a></li>
               <li><a href="work.html">Work</a></li>
               <li><a href="about.html">About</a></li>
               <li><a href="community.html">Community</a></li>
