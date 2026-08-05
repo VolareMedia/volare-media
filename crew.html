@@ -129,16 +129,26 @@
     .crew-links a::before { content: "[ "; color: var(--volt); }
     .crew-links a::after { content: " ]"; color: var(--volt); }
     .crew-links a:hover { color: var(--volt); }
-    .partner-chip {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: #fff;
-      border-radius: 0.85rem;
-      padding: 0.9rem 1.1rem;
-      margin-bottom: 1.35rem;
+    /* faded homepage snippet at the top of each partner card */
+    #partners .card { overflow: hidden; }
+    .partner-shot {
+      display: block;
+      position: relative;
+      margin: calc(-1 * clamp(1.5rem, 3vw, 2.25rem)) calc(-1 * clamp(1.5rem, 3vw, 2.25rem)) 1.35rem;
     }
-    .partner-chip img { max-height: 5rem; width: auto; }
+    .partner-shot img {
+      width: 100%;
+      aspect-ratio: 960 / 390;
+      object-fit: cover;
+      display: block;
+      opacity: 0.85;
+    }
+    .partner-shot::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(12, 13, 9, 0.18), rgba(20, 22, 15, 0.5) 62%, #14160F);
+    }
   </style>
 </head>
 <body>
@@ -267,6 +277,7 @@
       <div class="card-grid reveal">
 
         <a class="card" href="https://townleyvm.ca/" rel="noopener">
+          <span class="partner-shot"><img src="assets/img/partner-townleyvm.jpg" alt="" loading="lazy"></span>
           <p class="eyebrow">DIT · Engineering</p>
           <h3>Townley Visual Media</h3>
           <p>On set DIT support with technical and digital engineering, keeping cameras, data and the digital pipeline running smoothly from set to post.</p>
@@ -274,6 +285,7 @@
         </a>
 
         <a class="card" href="https://gripvictoria.ca/" rel="noopener">
+          <span class="partner-shot"><img src="assets/img/partner-gripvictoria.jpg" alt="" loading="lazy"></span>
           <p class="eyebrow">Grip · Rigging</p>
           <h3>Free Lance Industries</h3>
           <p>Grip and rigging support for our productions, keeping cameras and lights exactly where the shot needs them, safely.</p>
@@ -281,6 +293,7 @@
         </a>
 
         <a class="card" href="https://www.untoldforge.com/" rel="noopener">
+          <span class="partner-shot"><img src="assets/img/partner-untoldforge.jpg" alt="" loading="lazy"></span>
           <p class="eyebrow">Audio</p>
           <h3>Untold Forge</h3>
           <p>Jon's studio. Audio recording and post-production, plus a service for preserving personal stories, memories and legacies.</p>
@@ -288,6 +301,7 @@
         </a>
 
         <a class="card" href="https://www.dhphotography.ca/" rel="noopener">
+          <span class="partner-shot"><img src="assets/img/partner-dhphotography.jpg" alt="" loading="lazy"></span>
           <p class="eyebrow">Photography · BTS</p>
           <h3>Dominic Hall</h3>
           <p>Photography and behind the scenes coverage on our sets, capturing the stills while we capture the motion.</p>
@@ -295,7 +309,7 @@
         </a>
 
         <a class="card" href="https://sastudioservices.com/" rel="noopener">
-          <span class="partner-chip"><img src="assets/img/sarah-alexander-logo.png" alt="Sarah Alexander Studio Services logo"></span>
+          <span class="partner-shot"><img src="assets/img/partner-sastudioservices.jpg" alt="" loading="lazy"></span>
           <p class="eyebrow">Producer Support</p>
           <h3>Sarah Alexander Studio Services</h3>
           <p>Executive and production support for film and TV producers: scheduling, logistics, onboarding, documentation and real-time communications, from development through distribution.</p>
