@@ -129,6 +129,16 @@
     .crew-links a::before { content: "[ "; color: var(--volt); }
     .crew-links a::after { content: " ]"; color: var(--volt); }
     .crew-links a:hover { color: var(--volt); }
+    .partner-chip {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #fff;
+      border-radius: 0.85rem;
+      padding: 0.9rem 1.1rem;
+      margin-bottom: 1.35rem;
+    }
+    .partner-chip img { max-height: 5rem; width: auto; }
   </style>
 </head>
 <body>
@@ -282,6 +292,14 @@
           <h3>Dominic Hall</h3>
           <p>Photography and behind the scenes coverage on our sets, capturing the stills while we capture the motion.</p>
           <span class="card-cue">dhphotography.ca</span>
+        </a>
+
+        <a class="card" href="https://sastudioservices.com/" rel="noopener">
+          <span class="partner-chip"><img src="assets/img/sarah-alexander-logo.png" alt="Sarah Alexander Studio Services logo"></span>
+          <p class="eyebrow">Producer Support</p>
+          <h3>Sarah Alexander Studio Services</h3>
+          <p>Executive and production support for film and TV producers: scheduling, logistics, onboarding, documentation and real-time communications, from development through distribution.</p>
+          <span class="card-cue">sastudioservices.com</span>
         </a>
 
       </div>
