@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Meet the Crew: The Department Heads at Volare Media</title>
-  <meta name="description" content="Meet the department heads at Volare Media, a crew-first video production company on Vancouver Island: Chris Chisholm (marketing), Jackie Taylor (film) and Jonathan Wright (audio).">
+  <meta name="description" content="Meet the department heads at Volare Media, a crew-first video production company on Vancouver Island: Chris Chisholm, Jackie Taylor, Jonathan Wright and Ashley Chisholm.">
   <link rel="canonical" href="https://www.volaremedia.net/crew.html">
   <script type="application/ld+json">
   {
@@ -37,6 +37,12 @@
           "jobTitle": "Head of Audio Department",
           "email": "mailto:jon@untoldforge.com",
           "sameAs": "https://www.untoldforge.com/"
+        },
+        {
+          "@type": "Person",
+          "name": "Ashley Chisholm",
+          "jobTitle": "Budgets, Bookkeeping & Customer Service",
+          "email": "mailto:info@volaremedia.net"
         }
       ]
     }
@@ -56,10 +62,11 @@
     /* crew page only — call-sheet cards */
     .crew-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(4, 1fr);
       gap: clamp(1.25rem, 2.5vw, 2rem);
     }
-    @media (max-width: 62rem) {
+    @media (max-width: 68rem) { .crew-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 40rem) {
       .crew-grid { grid-template-columns: 1fr; }
       .crew-card { max-width: 30rem; width: 100%; margin: 0 auto; }
     }
@@ -210,6 +217,17 @@
             <p class="crew-role">Audio Engineer · Voice Over Specialist</p>
             <p class="crew-bio">Jon leads the audio department with years of experience in recording, editing and post-production, specializing in dialogue clarity, tone matching and mix balance for broadcast, film and online delivery. Jon is also the founder of Untold Forge, an audio studio helping people preserve their personal stories, memories and legacies.</p>
             <div class="crew-links"><a href="mailto:jon@untoldforge.com">jon@untoldforge.com</a> <a href="https://www.untoldforge.com/" rel="noopener">untoldforge.com</a></div>
+          </div>
+        </article>
+
+        <article class="crew-card">
+          <div class="crew-photo--tbd" aria-hidden="true">[ photo to come ]</div>
+          <div class="crew-body">
+            <p class="crew-num">( 004 ) · <em>Production</em></p>
+            <h3 class="crew-name">Ashley Chisholm</h3>
+            <p class="crew-role">Budgets · Bookkeeping · Customer Service</p>
+            <p class="crew-bio">Ashley runs the production office: budgets, bookkeeping and customer service. Every project that stays on budget and every quick reply from the office inbox has Ashley behind it.</p>
+            <div class="crew-links"><a href="mailto:info@volaremedia.net">info@volaremedia.net</a></div>
           </div>
         </article>
 
