@@ -20,12 +20,12 @@ rsync -az --delete $DRY \
   --exclude '.git' \
   --exclude '.DS_Store' \
   --exclude 'deploy.sh' \
-  --exclude 'jacky' \
+  --exclude 'jackie' \
   -e "ssh -i $SSH_KEY -p $SSH_PORT" \
   ./ "$REMOTE"
 
-# NOTE: 'jacky' is Jacky Taylor's site preview living at public_html/jacky/
-# (deployed from ../jacky-taylor). The exclude protects it from --delete.
+# NOTE: 'jackie' is Jackie Taylor's site preview living at public_html/jackie/
+# (deployed from ../jackie-taylor). The exclude protects it from --delete.
 
 echo "✓ Done. Live at https://www.volaremedia.net/"
 echo "  (Tip: also run 'git push' to keep the GitHub backup in sync.)"
