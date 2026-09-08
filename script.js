@@ -74,3 +74,6 @@ if (reduced || !("IntersectionObserver" in window)) {
   );
   reveals.forEach((el) => observer.observe(el));
 }
+
+// Pause the mockup loops when reduced motion is requested
+if (reduced) document.querySelectorAll(".packages-stage video").forEach((v) => v.pause());
