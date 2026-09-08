@@ -1588,6 +1588,34 @@ a:focus-visible, button:focus-visible {
   margin-top: 2.25rem;
 }
 
+/* "We make ads for" platform line under the package CTA */
+.pkg-platforms {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.55rem;
+  margin-top: 1.6rem;
+}
+
+.pkg-platforms-label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--volt);
+  margin-right: 0.4rem;
+}
+
+.pkg-platforms span:not(.pkg-platforms-label) {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  padding: 0.3rem 0.7rem;
+  border: 1px solid rgba(214, 255, 61, 0.5);
+  border-radius: 999px;
+  color: var(--cream);
+}
+
 /* blurred variant of the side photo band: sits behind the top block only,
    sized to the width so a tall section doesn't stretch it into streaks */
 .photo-band--blur::before {
