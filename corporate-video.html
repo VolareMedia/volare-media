@@ -24,8 +24,20 @@
     .corp-card ul { list-style: none; margin-top: 1rem; display: flex; flex-wrap: wrap; gap: 0.4rem; }
     .corp-card li { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.04em; padding: 0.3rem 0.6rem; border: 1px solid var(--line); border-radius: 999px; color: var(--muted); }
     .corp-work .work-card p { color: var(--muted); margin-top: 0.7rem; font-size: 0.98rem; max-width: 36rem; }
-    .corp-steps .card h3 { margin-top: 0.4rem; }
-    @media (max-width: 56rem) { .corp-cards { grid-template-columns: minmax(0, 1fr); } }
+    .care-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); grid-auto-rows: minmax(0, auto); gap: 1rem; }
+    .care-photo { grid-column: 3; grid-row: 1 / span 2; margin: 0; border-radius: 1.25rem; overflow: hidden; border: 1px solid var(--line); background: var(--bg-raised); }
+    .care-photo img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; }
+    .care-card h3 { font-size: 1.35rem; }
+    .care-card p:not(.eyebrow) { font-size: 0.95rem; }
+    .care-cta { background: var(--volt); border-color: var(--volt); color: var(--bg); display: flex; flex-direction: column; }
+    .care-cta .eyebrow { color: var(--bg); }
+    .care-cta .eyebrow::before { background: var(--bg); }
+    .care-cta h3 { font-size: 1.6rem; }
+    .care-cta p:not(.eyebrow) { color: rgba(12, 13, 9, 0.72); margin-bottom: 1.25rem; }
+    .care-cta .btn { align-self: flex-start; margin-top: auto; background: var(--bg); color: var(--volt); border-color: var(--bg); }
+    .care-cta .btn:hover { background: transparent; color: var(--bg); }
+    @media (max-width: 72rem) { .care-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .care-photo { grid-column: 2; grid-row: 1 / span 2; } }
+    @media (max-width: 56rem) { .corp-cards, .care-grid { grid-template-columns: minmax(0, 1fr); } .care-photo { grid-column: auto; grid-row: auto; aspect-ratio: 4 / 3; } }
   </style>
   <script type="application/ld+json">
   {
@@ -136,14 +148,14 @@
         </div>
         <div class="corp-cards reveal">
           <div class="card corp-card">
-            <span class="corp-shot"><img src="assets/img/stock-corporate-interview-office.jpg" alt="A videographer filming a woman for a company website video in an office" loading="lazy"></span>
+            <span class="corp-shot"><img src="assets/img/home-interview-testimonial.jpg" alt="A client filmed for a website testimonial in her living room" loading="lazy"></span>
             <p class="eyebrow">Your website</p>
             <h3>The videos that do the explaining</h3>
             <p>The about film, the facility tour, the how-we-work piece, the customer testimonial. Answers to the questions people ask before they buy, so your sales team doesn't have to answer them one at a time.</p>
             <ul><li>About films</li><li>Facility tours</li><li>Process films</li><li>Testimonials</li></ul>
           </div>
           <div class="card corp-card">
-            <span class="corp-shot"><img src="assets/img/corp-bts-5.jpg" alt="Volare Media crew filming an interview in a client's office" loading="lazy"></span>
+            <span class="corp-shot"><img src="assets/img/corp-inside-company.jpg" alt="Volare Media crew filming inside a client's showroom" loading="lazy"></span>
             <p class="eyebrow">Inside your company</p>
             <h3>Video your people actually finish</h3>
             <p>Training and onboarding that gets watched to the end, safety videos, executive messages and town-hall recaps, delivered in whatever format your intranet or inbox needs.</p>
@@ -155,6 +167,58 @@
             <h3>Where corporate video gets seen</h3>
             <p>Leadership pieces, culture films, recruiting clips and milestone stories, cut to the length and shape LinkedIn rewards. This is where the people hiring you, and the people you want to hire, are already looking.</p>
             <ul><li>Leadership</li><li>Culture</li><li>Recruiting</li><li>Milestones</li></ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- We take care of everything: process + the questions people ask -->
+    <section class="section band--peach" id="how-we-work">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div>
+            <p class="eyebrow">How we work</p>
+            <h2 class="display-lg">We take care of<br><span class="sweep">everything<span class="dot">.</span></span></h2>
+          </div>
+          <p class="lede" style="max-width:30rem;">Big project or small, one afternoon or several days across departments, the process is the same. You bring the people and the story. We bring everything else.</p>
+        </div>
+        <div class="care-grid reveal">
+          <figure class="care-photo"><img src="assets/img/corp-care-photo.jpg" alt="Volare Media camera operator on a Sony FX6 during a corporate shoot" loading="lazy"></figure>
+          <div class="card care-card">
+            <p class="eyebrow">(001) Pre-interview</p>
+            <h3>We get to know you first</h3>
+            <p>A call with whoever will be on camera before the shoot, so nobody meets us for the first time under the lights and the questions are built around what they actually have to say.</p>
+          </div>
+          <div class="card care-card">
+            <p class="eyebrow">(002) Scripted or genuine</p>
+            <h3>Teleprompter, or real questions</h3>
+            <p>A written script and a teleprompter when the message has to be exact. Genuine questions and honest answers when it shouldn't be. We're set up for both, and we'll tell you which one your piece needs.</p>
+          </div>
+          <div class="card care-card">
+            <p class="eyebrow">(003) Director and writer</p>
+            <h3>Shaped before, directed on the day</h3>
+            <p>We work closely with a director and a writer, so the story is planned before anyone rolls and directed on set. Your people get guided, not just pointed at.</p>
+          </div>
+          <div class="card care-card">
+            <p class="eyebrow">(004) One day or several</p>
+            <h3>Sized to the job</h3>
+            <p>Some projects are a single afternoon. Some run across days, sites and departments. We plan the shoot days to fit the project, and once a crew is in the building we capture everything the plan calls for.</p>
+          </div>
+          <div class="card care-card">
+            <p class="eyebrow">(005) Your location, or not</p>
+            <h3>On your turf, or somewhere better</h3>
+            <p>We film at your office, shop, warehouse or job site, scouted ahead and scheduled around your day. And if you don't want it to feel too corporate, we take it somewhere else: a studio, a second location, wherever the piece works best.</p>
+          </div>
+          <div class="card care-card">
+            <p class="eyebrow">(006) Delivery</p>
+            <h3>Every cut you need</h3>
+            <p>The website film, the internal versions, LinkedIn cutdowns, captions, and files sized for your intranet, inbox or sales deck. Same colour, sound and finish as our broadcast work.</p>
+          </div>
+          <div class="card care-cta">
+            <p class="eyebrow">Ready when you are</p>
+            <h3>Tell us about the project<span class="dot">.</span></h3>
+            <p>A sentence on the business and what the video is for is enough to start.</p>
+            <a class="btn" href="contact.html">Start a project</a>
           </div>
         </div>
       </div>
@@ -198,9 +262,10 @@
     <section class="wrap" style="padding-top: var(--section-gap); padding-bottom: var(--section-gap);">
       <div class="section-head reveal">
         <div>
-          <p class="eyebrow">What we make</p>
-          <h2 class="display-lg">Four kinds of<br>corporate video<span class="dot">.</span></h2>
+          <p class="eyebrow">Corporate video production</p>
+          <h2 class="display-lg">Corporate videos that keep<br>your business <span class="sweep">moving<span class="dot">.</span></span></h2>
         </div>
+        <p class="lede" style="max-width:34rem;">Business video production for companies across Vancouver Island, BC and Canada: the films that explain what you do, train your people, recruit the next ones, cover your events and keep everyone connected. One crew, built for your website, your team and LinkedIn.</p>
       </div>
       <div class="service-list reveal">
         <div class="service-row" id="story">
@@ -235,6 +300,14 @@
             <ul class="service-includes"><li>Executive messages</li><li>Announcements</li><li>Town-hall recaps</li><li>Milestone films</li></ul>
           </div>
         </div>
+        <div class="service-row" id="events">
+          <span class="service-num">(005)</span>
+          <h3>Events, retreats &amp; seminars</h3>
+          <div>
+            <p>Conferences, corporate retreats, seminars, AGMs, galas and fundraisers. Covered on the day and cut into recap films, speaker clips and highlights your team can share while the room is still talking about it. <a href="event-videography.html">More on event videography</a>.</p>
+            <ul class="service-includes"><li>Event recaps</li><li>Retreat films</li><li>Seminar recordings</li><li>Fundraisers &amp; galas</li><li>Speaker clips</li></ul>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -245,78 +318,15 @@
           <div class="bts-copy">
             <p class="eyebrow">On set</p>
             <h3 class="display-md">A small crew,<br>on your turf<span class="dot">.</span></h3>
-            <p>Nobody on your staff signed up to be on camera, so we don't treat them like talent on a deadline. We keep the crew small, the mood easy, and we interview instead of scripting. Offices, shops, warehouses, job sites: we scout ahead, bring only the gear the job needs and schedule around your busiest hours. One planned day routinely produces a website film, interview material, a training module and b-roll your team reuses for months.</p>
+            <p>Nobody on your staff signed up to be on camera, so we don't treat them like talent on a deadline. We keep the crew small and the mood easy. Offices, shops, warehouses, job sites: we scout ahead, bring only the gear the job needs and schedule around your busiest hours. One well-planned shoot routinely produces a website film, interview material, a training module and b-roll your team reuses for months.</p>
           </div>
           <ul class="bts-row">
-            <li><img src="assets/img/corp-bts-1.jpg" alt="A corporate interview set: leather couch, lights and two cameras in a studio" loading="lazy"></li>
+            <li><img src="assets/img/corp-bts-1.jpg" alt="Volare Media camera operator on a Sony FX6 during a corporate shoot" loading="lazy"></li>
             <li><img src="assets/img/corp-bts-2.jpg" alt="An interview playing back on the production monitor" loading="lazy"></li>
-            <li><img src="assets/img/corp-bts-3.jpg" alt="Camera operator framing a shot on a client's premises" loading="lazy"></li>
-            <li><img src="assets/img/corp-bts-4.jpg" alt="The crew at video village on an office shoot" loading="lazy"></li>
-            <li><img src="assets/img/corp-bts-5.jpg" alt="Volare Media crew filming in a client's office" loading="lazy"></li>
+            <li><img src="assets/img/corp-bts-3.jpg" alt="Camera operator filming an interview on a client's premises" loading="lazy"></li>
+            <li><img src="assets/img/corp-bts-4.jpg" alt="Camera operator and client checking the shot on the monitor" loading="lazy"></li>
+            <li><img src="assets/img/corp-bts-5.jpg" alt="Camera operator with a client on a showroom shoot" loading="lazy"></li>
           </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- How it works -->
-    <section class="section photo-band photo-band--side corp-steps" style="--photo: url('assets/img/stock-corporate-camera-monitor.jpg'); --photo-pos: 60% 50%; --photo-opacity: 0.4;">
-      <div class="wrap">
-        <div class="section-head reveal">
-          <div>
-            <p class="eyebrow">How it works</p>
-            <h2 class="display-lg">A day of ours<br>for an hour of yours<span class="dot">.</span></h2>
-          </div>
-        </div>
-        <div class="card-grid reveal">
-          <div class="card">
-            <p class="eyebrow">(001) Plan</p>
-            <h3>We do the homework</h3>
-            <p>A call to pin down the goal and where the video will live, a shot list, and pre-interview calls so nobody meets us for the first time on camera.</p>
-          </div>
-          <div class="card">
-            <p class="eyebrow">(002) Shoot</p>
-            <h3>One day, on site</h3>
-            <p>A compact crew at your office, shop or job site, working around your operations. Your people walk in, sit down, film, and get back to their day.</p>
-          </div>
-          <div class="card">
-            <p class="eyebrow">(003) Deliver</p>
-            <h3>Every cut you need</h3>
-            <p>The website film, the internal versions, LinkedIn cutdowns, captions, and files sized for your intranet, your inbox or your sales deck. Same colour, sound and finish as our broadcast work.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- FAQ -->
-    <section class="section band--peach photo-band photo-band--side" id="faq" style="--photo: url('assets/img/bts-monitor.jpg'); --photo-pos: 60% 40%; --photo-opacity: 0.4;">
-      <div class="wrap">
-        <div class="section-head reveal">
-          <div>
-            <p class="eyebrow">Common questions</p>
-            <h2 class="display-lg">Asked, <span class="sweep">answered</span><span class="dot">.</span></h2>
-          </div>
-        </div>
-        <div class="card-grid reveal">
-          <div class="card">
-            <p class="eyebrow">Location</p>
-            <h3>Can you film at our office?</h3>
-            <p>Almost always yes, and it's usually better. Your space tells the story. We scout ahead, keep the footprint small and work around your day.</p>
-          </div>
-          <div class="card">
-            <p class="eyebrow">Nerves</p>
-            <h3>Our people aren't actors.</h3>
-            <p>Good. We interview, we don't script. A pre-call, a calm set and the right questions get the take where someone says the true thing, plainly.</p>
-          </div>
-          <div class="card">
-            <p class="eyebrow">Value</p>
-            <h3>Can we batch several videos?</h3>
-            <p>That's how we prefer to work. Getting a crew in the building is the expensive part, so once we're there we capture everything the plan calls for.</p>
-          </div>
-          <div class="card">
-            <p class="eyebrow">Support</p>
-            <h3>Scripts and teleprompter?</h3>
-            <p>Both, when the piece needs them. Executive messages and training often do. Interviews and culture pieces almost never should.</p>
-          </div>
         </div>
       </div>
     </section>
