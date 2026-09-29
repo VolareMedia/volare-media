@@ -1,18 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Google tag (gtag.js): Google Ads conversion tracking -->
+  <!-- Meta Pixel: Volare Media Marketing's Pixel (dataset 612504680491197) -->
+  <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '612504680491197');
+    fbq('track', 'PageView');
+    // Standard event: contact form sent (contact-form.php redirects to contact.html?sent=1)
+    if (/[?&]sent=1/.test(location.search)) fbq('track', 'Lead');
+    // Standard event: phone number tapped (tel: links anywhere on the page)
+    document.addEventListener('click', function (e) {
+      var a = e.target.closest && e.target.closest('a[href^="tel:"]');
+      if (a) fbq('track', 'Contact');
+    });
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=612504680491197&ev=PageView&noscript=1"/></noscript>
+  <!-- Google tag (gtag.js): Google Ads conversion tracking (AW-16968991307) + Google Analytics 4 (G-0VDTC0MJHJ) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=AW-16968991307"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     gtag('config', 'AW-16968991307');
+    gtag('config', 'G-0VDTC0MJHJ');
     // Contact form sent (contact-form.php redirects to contact.html?sent=1)
-    if (/[?&]sent=1/.test(location.search)) gtag('event', 'conversion', {'send_to': 'AW-16968991307/e1ijCNKw5YYdEMuEuZs_'});
+    if (/[?&]sent=1/.test(location.search)) {
+      gtag('event', 'conversion', {'send_to': 'AW-16968991307/e1ijCNKw5YYdEMuEuZs_'});
+      gtag('event', 'generate_lead', {'method': 'contact_form'});
+    }
     // Phone number tapped
     document.addEventListener('click', function (e) {
-      if (e.target.closest && e.target.closest('a[href^="tel:"]')) gtag('event', 'conversion', {'send_to': 'AW-16968991307/qA6TCNWw5YYdEMuEuZs_'});
+      if (e.target.closest && e.target.closest('a[href^="tel:"]')) {
+        gtag('event', 'conversion', {'send_to': 'AW-16968991307/qA6TCNWw5YYdEMuEuZs_'});
+        gtag('event', 'phone_tap');
+      }
     });
   </script>
   <meta charset="UTF-8">
