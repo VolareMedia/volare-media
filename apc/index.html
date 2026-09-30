@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>APC video deliverables | Volare Media</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="color-scheme" content="light only">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800&family=Inter:wght@400;500;600&family=Fragment+Mono&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme:light only;
+  --paper:#F4F3E8; --grid:rgba(12,13,9,.055);
+  --ink:#0C0D09; --ink-soft:#5A5B50; --line:#CFCEBE;
+  --card:#FFFFFF; --chrome:#E8E7D9;
+  --volt:#D6FF3D; --lilac:#C9BAF4; --lilac-ink:#23194D;
+  --story:#23222B;
+  --confirm:#7A7B6E; --ok:#3E7A10;
+  --shadow:0 1px 0 rgba(12,13,9,.05), 0 12px 26px -16px rgba(12,13,9,.35);
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px); scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{
+  margin:0; color:var(--ink); background-color:var(--paper);
+  background-image:linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size:28px 28px;
+  font:400 16px/1.55 Inter, system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3{font-family:"Inter Tight", Inter, system-ui, Arial, sans-serif; margin:0}
+.wrap{max-width:1160px; margin:0 auto; padding:40px 24px 80px}
+
+/* Brand bar */
+.brand{display:flex; justify-content:space-between; align-items:center; margin-bottom:48px}
+.wordmark{font:800 22px/1 "Inter Tight", Inter, Arial, sans-serif; letter-spacing:-.03em; color:var(--ink); text-decoration:none}
+.wordmark i{font-style:normal; background:var(--volt); color:#0C0D09; border-radius:6px; padding:2px 6px; margin-right:6px}
+.jump{font:600 14px/1 Inter, Arial, sans-serif; color:#0C0D09; background:var(--volt); border-radius:999px; padding:11px 16px; text-decoration:none}
+
+/* Header */
+.top{display:grid; grid-template-columns:1fr auto; gap:32px; align-items:end; margin-bottom:56px}
+.brandline{color:var(--ink-soft); font-size:14px; margin:0 0 14px}
+h1{font-size:clamp(40px,6vw,76px); line-height:.96; font-weight:800; letter-spacing:-.035em}
+.intro{max-width:56ch; margin:18px 0 0; color:var(--ink-soft)}
+.tally{display:flex; gap:10px}
+.tally div{background:var(--card); box-shadow:var(--shadow); border-radius:14px; padding:14px 18px; min-width:118px}
+.tally b{display:block; font:800 38px/1 "Inter Tight", Inter, Arial, sans-serif; letter-spacing:-.02em}
+.tally span{font-size:13px; color:var(--ink-soft)}
+.tally .l{background:var(--volt); color:#0C0D09}
+.tally .l span{color:#3A3B30}
+
+.sec{margin-top:72px}
+.sec-head{display:flex; align-items:baseline; justify-content:space-between; gap:16px; border-bottom:2px solid var(--ink); padding-bottom:10px; margin-bottom:28px}
+.sec-head h2{font-size:30px; font-weight:700; letter-spacing:-.02em}
+.sec-head p{margin:0; color:var(--ink-soft); font-size:14px}
+
+/* Sitemap */
+.home-row{display:flex; justify-content:center}
+.home-row .page{width:min(560px,100%)}
+.branch{height:44px; position:relative}
+.branch::before{content:""; position:absolute; left:50%; top:0; height:22px; border-left:2px solid var(--line)}
+.branch::after{content:""; position:absolute; left:calc(100%/6); right:calc(100%/6); top:22px; border-top:2px solid var(--line)}
+.children{display:grid; grid-template-columns:repeat(3,1fr); gap:22px; align-items:start}
+.children .page{position:relative}
+.children .page::before{content:""; position:absolute; left:50%; top:-22px; height:22px; border-left:2px solid var(--line)}
+.page{background:var(--card); border-radius:12px; box-shadow:var(--shadow); overflow:hidden}
+.bar{display:flex; align-items:center; gap:8px; background:var(--chrome); padding:9px 12px}
+.dots{display:flex; gap:5px}
+.dots i{width:8px; height:8px; border-radius:50%; background:var(--line); display:block}
+.url{flex:1; background:var(--card); border-radius:6px; font:12px "Fragment Mono", ui-monospace, Menlo, monospace; color:var(--ink-soft); padding:3px 10px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+.body{padding:16px}
+.page-title{display:flex; justify-content:space-between; align-items:baseline; gap:10px; margin-bottom:12px}
+.page-title h3{font-size:21px; font-weight:700; letter-spacing:-.015em}
+.count{font:700 13px/1 Inter, Arial, sans-serif; background:#0C0D09; color:var(--volt); border-radius:999px; padding:6px 10px; white-space:nowrap}
+.slot{position:relative; border-radius:8px; background:var(--lilac); color:var(--lilac-ink); display:flex; align-items:flex-end; padding:8px 10px}
+.slot.banner{aspect-ratio:16/6; margin-bottom:6px}
+.slot::before{content:""; position:absolute; left:50%; top:46%; transform:translate(-35%,-50%); border-style:solid; border-width:9px 0 9px 15px; border-color:transparent transparent transparent currentColor; opacity:.75}
+.slot.banner::before{border-width:13px 0 13px 21px}
+.slot small{font-size:11px; font-weight:600; line-height:1.2; position:relative}
+.slot.tbc{background:transparent; border:2px dashed var(--confirm); color:var(--confirm)}
+.meta{display:flex; flex-wrap:wrap; gap:6px 14px; font-size:13px; color:var(--ink-soft); margin:4px 0 14px}
+.meta strong{color:var(--ink); font-weight:600}
+.grid{display:grid; grid-template-columns:repeat(3,1fr); gap:6px}
+.grid .slot{aspect-ratio:16/10}
+.label{font-size:13px; font-weight:600; margin:0 0 8px}
+.page-foot{border-top:1px solid var(--chrome); margin-top:14px; padding-top:10px; font-size:13px; color:var(--ink-soft)}
+.page-foot strong{color:var(--ink)}
+.note{font-size:13px; color:var(--ink-soft); margin:10px 0 0}
+
+/* Story flow */
+.flow{display:grid; grid-template-columns:1fr 64px 1.1fr 64px 1fr; align-items:center}
+.col{display:flex; flex-direction:column; gap:10px}
+.src,.out{background:var(--card); border-radius:12px; box-shadow:var(--shadow); padding:12px 14px}
+.src b,.out b{display:block; font-family:"Inter Tight", Inter, Arial, sans-serif; font-size:16px}
+.src span,.out span{font-size:13px; color:var(--ink-soft)}
+.src.lead{border-left:6px solid var(--lilac)}
+.out.l{background:var(--volt); color:#0C0D09}
+.out.l span{color:#3A3B30}
+.arrow{height:2px; background:var(--line); position:relative; margin:0 8px}
+.arrow::after{content:""; position:absolute; right:-2px; top:-5px; border-style:solid; border-width:6px 0 6px 9px; border-color:transparent transparent transparent var(--line)}
+.core{background-color:var(--story); color:#F4F3E8; border-radius:14px; padding:22px;
+  background-image:repeating-linear-gradient(135deg, rgba(201,186,244,.10) 0 2px, transparent 2px 12px)}
+.core h3{font-size:24px; font-weight:800; letter-spacing:-.02em; margin-bottom:8px; color:var(--volt)}
+.core p{margin:0; font-size:14px; opacity:.9}
+.flow-note{margin:18px 0 0; color:var(--ink-soft); font-size:14px; max-width:70ch}
+
+/* Beyond */
+.duo{display:grid; grid-template-columns:1.2fr 1fr; gap:22px}
+.panel{border-radius:14px; padding:24px; box-shadow:var(--shadow); background:var(--card)}
+.panel h3{font-size:24px; font-weight:700; letter-spacing:-.015em; margin-bottom:6px}
+.panel p{margin:0 0 14px; color:var(--ink-soft)}
+.social{background:transparent; border:2px dashed var(--confirm); box-shadow:none}
+.facts{display:grid; grid-template-columns:auto 1fr; gap:6px 14px; font-size:14px; margin:0 0 16px}
+.facts dt{font-weight:600}
+.facts dd{margin:0; color:var(--ink-soft)}
+.phones{display:flex; gap:10px; margin-top:6px}
+.phones .slot{flex:0 0 auto}
+.p916{width:54px; aspect-ratio:9/16}
+.p11{width:78px; aspect-ratio:1/1; align-self:flex-end}
+.p169{width:124px; aspect-ratio:16/9; align-self:flex-end}
+.volume{display:grid; grid-template-columns:repeat(4,1fr); gap:8px}
+.vol{border:2px solid var(--line); border-radius:10px; padding:10px; text-align:center}
+.vol b{display:block; font:800 26px/1.1 "Inter Tight", Inter, Arial, sans-serif}
+.vol span{font-size:12px; color:var(--ink-soft)}
+.vol.own{border-style:dashed}
+.launch{background-color:var(--volt); color:#0C0D09; box-shadow:var(--shadow);
+  background-image:repeating-linear-gradient(135deg, rgba(12,13,9,.05) 0 2px, transparent 2px 12px)}
+.launch p{color:#34352B}
+.flag{display:inline-block; background:#0C0D09; color:var(--volt); font-weight:700; font-size:13px; border-radius:999px; padding:5px 12px; margin-bottom:14px}
+.launch .slot{aspect-ratio:16/7; background:#0C0D09; color:var(--volt); margin:6px 0 14px}
+.launch .slot::before{border-width:16px 0 16px 26px}
+.due-big{display:flex; align-items:baseline; gap:12px}
+.due-big b{font:800 44px/1 "Inter Tight", Inter, Arial, sans-serif; letter-spacing:-.025em}
+.due-big span{color:#34352B; font-size:14px}
+
+/* Timeline */
+.timeline{display:grid; grid-template-columns:repeat(4,1fr); position:relative}
+.timeline::before{content:""; position:absolute; left:0; right:0; top:9px; border-top:2px solid var(--line)}
+.stop{position:relative; padding:30px 18px 0 0}
+.stop::before{content:""; position:absolute; top:2px; left:0; width:16px; height:16px; border-radius:50%; background:var(--card); border:3px solid var(--ink)}
+.stop.hot::before{background:var(--volt); border-color:#0C0D09}
+.stop.tbd::before{border-style:dashed; border-color:var(--confirm)}
+.stop h3{font-size:20px; font-weight:700}
+.stop p{margin:4px 0 0; font-size:14px; color:var(--ink-soft)}
+
+/* Questionnaire */
+.tabs{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:20px}
+.tab{font:600 15px/1 Inter, Arial, sans-serif; color:var(--ink); background:var(--card); border:2px solid var(--line); border-radius:999px; padding:11px 16px; cursor:pointer}
+.tab[aria-selected="true"]{background:#0C0D09; color:var(--volt); border-color:#0C0D09}
+.tab .n{font-weight:500; opacity:.75; margin-left:6px}
+.tab.all-done:not([aria-selected="true"]){border-color:var(--ok)}
+.tab:focus-visible,.opt input:focus-visible+span,.field:focus-visible,.btn:focus-visible,.jump:focus-visible{outline:3px solid var(--lilac); outline-offset:2px}
+.panelq[hidden]{display:none}
+.panelq > p{margin:0 0 16px; color:var(--ink-soft); max-width:70ch}
+.q{background:var(--card); border-radius:12px; box-shadow:var(--shadow); padding:18px 20px; margin:0 0 12px; border:0; border-left:6px solid transparent; transition:border-color .2s}
+.q.done{border-left-color:var(--volt)}
+.q legend{font:700 17px/1.3 "Inter Tight", Inter, Arial, sans-serif; padding:0; margin-bottom:4px; float:left; width:100%}
+.q .why{clear:both; margin:0 0 12px; font-size:14px; color:var(--ink-soft)}
+.opts{clear:both; display:flex; flex-wrap:wrap; gap:8px}
+.opt{position:relative}
+.opt input{position:absolute; opacity:0; pointer-events:none}
+.opt span{display:block; border:2px solid var(--line); border-radius:10px; padding:10px 14px; font-size:15px; cursor:pointer; background:var(--card)}
+.opt input:checked+span{border-color:#0C0D09; background:var(--volt); color:#0C0D09; font-weight:600}
+.field{font:15px Inter, Arial, sans-serif; color:var(--ink); background:var(--paper); border:2px solid var(--line); border-radius:10px; padding:10px 12px; width:100%; max-width:420px; margin-top:10px; clear:both; display:block}
+textarea.field{max-width:none; min-height:96px; resize:vertical}
+.more{display:none}
+.more.show{display:block}
+.next{display:flex; justify-content:flex-end; margin-top:6px}
+.btn{font:600 15px/1 Inter, Arial, sans-serif; border-radius:999px; padding:13px 20px; cursor:pointer; border:2px solid #0C0D09; background:var(--card); color:var(--ink)}
+.btn.primary{background:#0C0D09; color:var(--volt); font-size:17px; padding:16px 26px}
+.btn[disabled]{opacity:.55; cursor:wait}
+
+.send{margin-top:36px; background:var(--card); border-radius:16px; box-shadow:var(--shadow); padding:24px; border-top:6px solid var(--volt)}
+.send h3{font-size:24px; font-weight:800; letter-spacing:-.02em; margin-bottom:4px}
+.send > p{margin:0 0 16px; color:var(--ink-soft)}
+.send-grid{display:grid; grid-template-columns:1fr 1fr; gap:14px}
+.send label.lbl{font-size:14px; font-weight:600; display:block}
+.send .field{max-width:none; margin-top:6px}
+.send-row{display:flex; align-items:center; gap:16px; flex-wrap:wrap; margin-top:18px}
+.progress{font-size:14px; color:var(--ink-soft)}
+.msg{margin-top:16px; border-radius:12px; padding:14px 16px; font-size:15px; display:none}
+.msg.ok{display:block; background:var(--volt); color:#0C0D09}
+.msg.err{display:block; background:#FBE3DC; color:#6B1F0B}
+.msg a{color:inherit; font-weight:600}
+.hp{position:absolute; left:-9999px}
+
+footer{margin-top:64px; font-size:13px; color:var(--ink-soft); display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap}
+
+@media (max-width:900px){
+  .top{grid-template-columns:1fr}
+  .branch{display:none}
+  .children{grid-template-columns:1fr; gap:18px; margin-top:18px}
+  .children .page::before{display:none}
+  .duo{grid-template-columns:1fr}
+  .flow{grid-template-columns:1fr; gap:10px}
+  .arrow{width:2px; height:26px; margin:0 auto}
+  .arrow::after{right:-5px; top:auto; bottom:-2px; border-width:9px 6px 0 6px; border-color:var(--line) transparent transparent transparent}
+  .volume{grid-template-columns:repeat(2,1fr)}
+  .timeline{grid-template-columns:1fr; gap:18px; padding-left:4px}
+  .timeline::before{left:11px; right:auto; top:0; bottom:0; border-top:0; border-left:2px solid var(--line)}
+  .stop{padding:0 0 0 34px}
+  .stop::before{top:3px; left:4px}
+  .send-grid{grid-template-columns:1fr}
+}
+@media (max-width:520px){
+  .wrap{padding:28px 16px 60px}
+  .brand{margin-bottom:32px}
+  .tally{flex-wrap:wrap}
+  .tally div{flex:1 1 30%; min-width:0}
+  .btn.primary{width:100%}
+}
+@media print{
+  body{background-image:none}
+  .page,.panel,.q,.tally div,.send{box-shadow:none; border:1px solid #ccc}
+  .jump,.send,.next{display:none}
+  .panelq[hidden]{display:block}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav class="brand" aria-label="Volare Media"><span class="wordmark"><i>vm.</i>Volare Media</span><a class="jump" href="#need">Answer the questions</a></nav>
+
+  <header class="top">
+    <div>
+      <p class="brandline">Prepared for APC by Volare Media, September 2026</p>
+      <h1>Video deliverables</h1>
+      <p class="intro">Here is every video we're planning, laid out on the website where it will live, plus the pieces that sit outside the site. Solid frames are videos we're making. Dashed frames are the ones we need you to confirm.</p>
+      <p class="intro" style="margin-top:10px; color:var(--ink)"><strong>15+ videos in total</strong>, plus social media cuts.</p>
+    </div>
+    <div class="tally" aria-label="Totals">
+      <div><b>14+</b><span>website videos</span></div>
+      <div class="l"><b>1</b><span>launch video</span></div>
+      <div><b>?</b><span>social cuts</span></div>
+    </div>
+  </header>
+
+  <!-- WEBSITE -->
+  <section class="sec" aria-labelledby="web">
+    <div class="sec-head"><h2 id="web">The website</h2><p>4 pages, 14+ videos</p></div>
+
+    <div class="tree">
+      <div class="home-row">
+        <article class="page">
+          <div class="bar"><span class="dots"><i></i><i></i><i></i></span><span class="url">apc / home</span></div>
+          <div class="body">
+            <div class="page-title"><h3>Home page</h3><span class="count">1 video</span></div>
+            <div class="slot banner"><small>Web banner video, with audio</small></div>
+            <p class="meta"><span>Craig's founder story, with partner and seller moments cut in.</span><span>The strongest cut of the set.</span></p>
+            <div class="slot tbc" style="aspect-ratio:16/3"><small>Anything else on the home page?</small></div>
+            <div class="page-foot">Due <strong>November 1</strong> (to confirm)</div>
+          </div>
+        </article>
+      </div>
+
+      <div class="branch" aria-hidden="true"></div>
+
+      <div class="children">
+        <article class="page">
+          <div class="bar"><span class="dots"><i></i><i></i><i></i></span><span class="url">apc / partners</span></div>
+          <div class="body">
+            <div class="page-title"><h3>Partners</h3><span class="count">9 to 10 videos</span></div>
+            <div class="slot banner tbc"><small>Web banner video?</small></div>
+            <p class="meta"><span>Banner, and audio or silent: <strong>to confirm</strong></span></p>
+            <p class="label">Partner testimonials (9 filmed)</p>
+            <div class="grid">
+              <div class="slot"><small>1</small></div><div class="slot"><small>2</small></div><div class="slot"><small>3</small></div>
+              <div class="slot"><small>4</small></div><div class="slot"><small>5</small></div><div class="slot"><small>6</small></div>
+              <div class="slot"><small>7</small></div><div class="slot"><small>8</small></div><div class="slot"><small>9</small></div>
+            </div>
+            <div class="page-foot">Due <strong>November 1</strong> (to confirm)</div>
+          </div>
+        </article>
+
+        <article class="page">
+          <div class="bar"><span class="dots"><i></i><i></i><i></i></span><span class="url">apc / sellers</span></div>
+          <div class="body">
+            <div class="page-title"><h3>Sellers</h3><span class="count">1 video</span></div>
+            <div class="slot banner tbc"><small>Banner likely not needed</small></div>
+            <p class="meta"><span>With one testimonial, the seller video can carry this page on its own.</span></p>
+            <p class="label">Seller testimonial (filmed)</p>
+            <div class="grid">
+              <div class="slot"><small>1</small></div>
+            </div>
+            <div class="page-foot">Due <strong>November 1</strong> (to confirm)</div>
+          </div>
+        </article>
+
+        <article class="page">
+          <div class="bar"><span class="dots"><i></i><i></i><i></i></span><span class="url">apc / founders</span></div>
+          <div class="body">
+            <div class="page-title"><h3>Founders</h3><span class="count">3 videos</span></div>
+            <p class="label">Founder interviews (still to film, who is on camera to confirm)</p>
+            <div class="grid">
+              <div class="slot tbc"><small>Craig</small></div>
+              <div class="slot tbc"><small>Mike</small></div>
+              <div class="slot tbc"><small>Jeff</small></div>
+            </div>
+            <div class="slot tbc" style="aspect-ratio:16/4; margin-top:6px"><small>Plus a group interview with all three?</small></div>
+            <p class="note">Craig's interview is the main voice of the project. Whether any founder clips also sit on the site as their own testimonials, and where, is your call.</p>
+            <div class="page-foot">Filming date <strong>to book</strong></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- STORY FLOW -->
+  <section class="sec" aria-labelledby="story">
+    <div class="sec-head"><h2 id="story">How the story comes together</h2><p>What we film, and what it becomes</p></div>
+    <div class="flow">
+      <div class="col">
+        <div class="src lead"><b>Founder interview</b><span>Craig, and possibly Mike and Jeff. Why APC exists and who it helps. Still to film.</span></div>
+        <div class="src"><b>Partner testimonials</b><span>9 filmed</span></div>
+        <div class="src"><b>Seller testimonial</b><span>1 filmed</span></div>
+      </div>
+      <div class="arrow" aria-hidden="true"></div>
+      <div class="core">
+        <h3>One story</h3>
+        <p>Craig's story carries the narrative. Partner and seller voices are woven in between as proof, documentary style.</p>
+      </div>
+      <div class="arrow" aria-hidden="true"></div>
+      <div class="col">
+        <div class="out"><b>Web banner videos</b><span>Home page, plus any other pages that get one</span></div>
+        <div class="out"><b>Standalone testimonials</b><span>Partners and Sellers pages</span></div>
+        <div class="out"><b>Social cuts</b><span>Short pieces for LinkedIn and more</span></div>
+        <div class="out l"><b>Launch video</b><span>The full story, December 1</span></div>
+      </div>
+    </div>
+    <p class="flow-note">The founder shoot is the missing piece. The banners and the launch video are built around it, so locking a filming date is the first step.</p>
+  </section>
+
+  <!-- BEYOND THE WEBSITE -->
+  <section class="sec" aria-labelledby="beyond">
+    <div class="sec-head"><h2 id="beyond">Beyond the website</h2><p>Not part of the site build</p></div>
+    <div class="duo">
+      <article class="panel social">
+        <h3>Social media</h3>
+        <p>Short, professional cuts pulled from the founder interview and testimonials, made for a business audience.</p>
+        <dl class="facts">
+          <dt>Where</dt><dd>LinkedIn first, plus any other channels you use</dd>
+          <dt>Formats</dt><dd>Vertical, square and widescreen as needed</dd>
+          <dt>Length</dt><dd>Roughly 15 to 60 seconds each</dd>
+        </dl>
+        <div class="phones" aria-hidden="true" style="margin-bottom:18px">
+          <div class="slot tbc p916"></div>
+          <div class="slot tbc p11"></div>
+          <div class="slot tbc p169"></div>
+        </div>
+        <p class="label">Roughly how many cuts are you picturing? Once the total video count is locked, we'll map out exactly which pieces get cut and for where.</p>
+        <div class="volume">
+          <div class="vol"><b>6</b><span>Light</span></div>
+          <div class="vol"><b>12</b><span>Standard</span></div>
+          <div class="vol"><b>20+</b><span>Full campaign</span></div>
+          <div class="vol own"><b>?</b><span>Your number</span></div>
+        </div>
+      </article>
+
+      <article class="panel launch">
+        <span class="flag">Launch event only, not on the website</span>
+        <h3>Launch video</h3>
+        <p>The longest and biggest piece of the project. A documentary-style film built on Craig's founder story, with partner and seller testimonials woven through it. Made to play at the launch event.</p>
+        <div class="slot"><small>Long-form launch video</small></div>
+        <div class="due-big"><b>December 1</b><span>due date (to confirm)</span></div>
+      </article>
+    </div>
+  </section>
+
+  <!-- TIMELINE -->
+  <section class="sec" aria-labelledby="dates">
+    <div class="sec-head"><h2 id="dates">Key dates</h2><p>2026</p></div>
+    <div class="timeline">
+      <div class="stop"><h3>September</h3><p>9 partner and 1 seller testimonial filmed</p></div>
+      <div class="stop tbd"><h3>October</h3><p>Founder shoot, which unlocks the banners and launch video. Remaining website interviews.</p></div>
+      <div class="stop"><h3>November 1</h3><p>Everything for the website delivered. Final launch video pieces filmed through November.</p></div>
+      <div class="stop hot"><h3>December 1</h3><p>Launch video delivered</p></div>
+    </div>
+  </section>
+
+  <!-- QUESTIONS -->
+  <section class="sec" aria-labelledby="need">
+    <div class="sec-head"><h2 id="need">What we need from you</h2><p>Tap an answer for each. These lock in the final count.</p></div>
+
+    <div class="tabs" role="tablist" aria-label="Question groups">
+      <button class="tab" role="tab" id="t-f" aria-controls="p-f" aria-selected="true">Founders<span class="n" data-count="p-f"></span></button>
+      <button class="tab" role="tab" id="t-w" aria-controls="p-w" aria-selected="false" tabindex="-1">Website<span class="n" data-count="p-w"></span></button>
+      <button class="tab" role="tab" id="t-s" aria-controls="p-s" aria-selected="false" tabindex="-1">Social media<span class="n" data-count="p-s"></span></button>
+      <button class="tab" role="tab" id="t-l" aria-controls="p-l" aria-selected="false" tabindex="-1">Launch video<span class="n" data-count="p-l"></span></button>
+    </div>
+
+    <div class="panelq" role="tabpanel" id="p-f" aria-labelledby="t-f">
+      <p>The founder shoot is the first thing to lock in. Preparing for one person on camera is very different from preparing for three, so these answers shape the whole shoot.</p>
+      <fieldset class="q"><legend>Who are we filming?</legend>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="f_who" value="craig"><span>Craig only</span></label>
+          <label class="opt"><input type="radio" name="f_who" value="all"><span>Craig, Mike and Jeff</span></label>
+          <label class="opt"><input type="radio" name="f_who" value="unsure"><span>Not decided yet</span></label>
+        </div></fieldset>
+      <fieldset class="q"><legend>When can we film?</legend>
+        <p class="why">Pick a date in October that works for everyone on camera.</p>
+        <input class="field" type="date" name="f_date" min="2026-10-01" max="2026-10-31" aria-label="Founder filming date">
+      </fieldset>
+      <fieldset class="q"><legend>Do you want a separate video for each founder?</legend>
+        <p class="why">Either way, the founder interview is the voice of the banners and the launch video. This is about extra standalone videos on top of that.</p>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="f_sep" value="yes"><span>Yes, one video per founder</span></label>
+          <label class="opt"><input type="radio" name="f_sep" value="no"><span>No, use the interviews inside the other videos only</span></label>
+          <label class="opt"><input type="radio" name="f_sep" value="unsure"><span>Not sure yet</span></label>
+        </div></fieldset>
+      <fieldset class="q"><legend>If yes, where do the founder videos go?</legend>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="f_where" value="own"><span>Their own Founders page</span></label>
+          <label class="opt"><input type="radio" name="f_where" value="home"><span>Home page</span></label>
+          <label class="opt"><input type="radio" name="f_where" value="other"><span>Somewhere else</span></label>
+          <label class="opt"><input type="radio" name="f_where" value="na"><span>Not needed</span></label>
+        </div></fieldset>
+      <div class="next"><button type="button" class="btn" data-go="t-w">Next: Website</button></div>
+    </div>
+
+    <div class="panelq" role="tabpanel" id="p-w" aria-labelledby="t-w" hidden>
+      <fieldset class="q"><legend>Home page: is the banner video the only video there?</legend>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="w_home" value="only"><span>Yes, just the banner</span></label>
+          <label class="opt"><input type="radio" name="w_home" value="more"><span>No, we want more</span></label>
+        </div>
+        <textarea class="field more" data-when="w_home=more" name="w_home_more" aria-label="What else on the home page" placeholder="What else would you like on the home page?"></textarea></fieldset>
+      <fieldset class="q"><legend>Partners page: do you want a banner video?</legend>
+        <p class="why">The home page banner has audio. Other page banners can have audio too, or run silent as quick visual flashes.</p>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="w_partner" value="audio"><span>Yes, with audio</span></label>
+          <label class="opt"><input type="radio" name="w_partner" value="silent"><span>Yes, silent</span></label>
+          <label class="opt"><input type="radio" name="w_partner" value="none"><span>No banner</span></label>
+        </div></fieldset>
+      <fieldset class="q"><legend>Sellers page: banner, or just the seller video?</legend>
+        <p class="why">There is one seller testimonial, so we'd suggest letting that video carry the page.</p>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="w_seller" value="none"><span>Just the seller video</span></label>
+          <label class="opt"><input type="radio" name="w_seller" value="audio"><span>Add a banner with audio</span></label>
+          <label class="opt"><input type="radio" name="w_seller" value="silent"><span>Add a silent banner</span></label>
+        </div></fieldset>
+      <fieldset class="q"><legend>Is everything for the website due November 1?</legend>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="w_due" value="yes"><span>Yes, November 1</span></label>
+          <label class="opt"><input type="radio" name="w_due" value="other"><span>A different date</span></label>
+        </div>
+        <input class="field more" data-when="w_due=other" type="date" name="w_due_date" aria-label="Website due date"></fieldset>
+      <fieldset class="q"><legend>Any other page that needs video?</legend>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="w_other" value="no"><span>No, that's everything</span></label>
+          <label class="opt"><input type="radio" name="w_other" value="yes"><span>Yes, there's another page</span></label>
+        </div>
+        <textarea class="field more" data-when="w_other=yes" name="w_other_more" aria-label="Other page" placeholder="Which page, and what kind of video?"></textarea></fieldset>
+      <div class="next"><button type="button" class="btn" data-go="t-s">Next: Social media</button></div>
+    </div>
+
+    <div class="panelq" role="tabpanel" id="p-s" aria-labelledby="t-s" hidden>
+      <p>Once the total video count is locked, we'll propose exactly which pieces get cut and for where.</p>
+      <fieldset class="q"><legend>Roughly how many social cuts?</legend>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="s_count" value="6"><span>About 6</span></label>
+          <label class="opt"><input type="radio" name="s_count" value="12"><span>About 12</span></label>
+          <label class="opt"><input type="radio" name="s_count" value="20"><span>20 or more</span></label>
+          <label class="opt"><input type="radio" name="s_count" value="unsure"><span>Not sure, suggest a number</span></label>
+        </div></fieldset>
+      <fieldset class="q"><legend>Where will they be posted?</legend>
+        <p class="why">Pick all that apply.</p>
+        <div class="opts">
+          <label class="opt"><input type="checkbox" name="s_where" value="linkedin"><span>LinkedIn</span></label>
+          <label class="opt"><input type="checkbox" name="s_where" value="instagram"><span>Instagram</span></label>
+          <label class="opt"><input type="checkbox" name="s_where" value="facebook"><span>Facebook</span></label>
+          <label class="opt"><input type="checkbox" name="s_where" value="youtube"><span>YouTube</span></label>
+          <label class="opt"><input type="checkbox" name="s_where" value="other"><span>Somewhere else</span></label>
+        </div></fieldset>
+      <fieldset class="q"><legend>How will you use them?</legend>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="s_use" value="organic"><span>Regular posts</span></label>
+          <label class="opt"><input type="radio" name="s_use" value="ads"><span>Paid ads</span></label>
+          <label class="opt"><input type="radio" name="s_use" value="both"><span>Both</span></label>
+        </div></fieldset>
+      <div class="next"><button type="button" class="btn" data-go="t-l">Next: Launch video</button></div>
+    </div>
+
+    <div class="panelq launchq" role="tabpanel" id="p-l" aria-labelledby="t-l" hidden>
+      <p>The final launch pieces get filmed in November, so we want to lock the delivery date now.</p>
+      <fieldset class="q"><legend>Does December 1 work for the launch video?</legend>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="l_due" value="yes"><span>Yes, December 1</span></label>
+          <label class="opt"><input type="radio" name="l_due" value="other"><span>We need a different date</span></label>
+        </div>
+        <input class="field more" data-when="l_due=other" type="date" name="l_due_date" aria-label="Launch video due date"></fieldset>
+      <fieldset class="q"><legend>When is the launch event?</legend>
+        <input class="field" type="date" name="l_event" min="2026-12-01" aria-label="Launch event date">
+      </fieldset>
+    </div>
+
+    <form class="send" id="sendForm" novalidate>
+      <h3>Send your answers</h3>
+      <p>Skipped something? That's fine, send what you have and we'll follow up on the rest.</p>
+      <div><label class="lbl" for="who">Your name</label><input class="field" id="who" name="who" autocomplete="name" required style="max-width:420px"></div>
+      <div style="margin-top:14px"><label class="lbl" for="extra">Anything else we should know?</label><textarea class="field" id="extra" name="extra"></textarea></div>
+      <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <div class="send-row">
+        <button type="submit" class="btn primary" id="sendBtn">Send answers to Volare Media</button>
+        <span class="progress" id="progress"></span>
+      </div>
+      <div class="msg" id="msg" role="status" aria-live="polite"></div>
+    </form>
+  </section>
+
+  <footer><span>Volare Media, Victoria BC</span><span>Counts are based on what's confirmed so far and will update once the questions above are answered.</span></footer>
+</div>
+<script>
+/* ===== SETTINGS: paste your Web3Forms access key here ===== */
+var WEB3FORMS_KEY = "db888747-1626-4811-9d86-d82ae9f4c2dd";
+var FALLBACK_EMAIL = "chris@volaremedia.net"; /* shown if sending fails */
+/* ========================================================== */
+(function(){
+  var STORE="apc-deliverables-answers-v1";
+  var tabs=[].slice.call(document.querySelectorAll('.tab'));
+  var qs=[].slice.call(document.querySelectorAll('.panelq .q'));
+  function show(t, scroll){
+    tabs.forEach(function(x){var on=x===t; x.setAttribute('aria-selected',on); x.tabIndex=on?0:-1;
+      document.getElementById(x.getAttribute('aria-controls')).hidden=!on;});
+    if(scroll) document.getElementById('need').scrollIntoView();
+  }
+  tabs.forEach(function(t,i){
+    t.addEventListener('click',function(){show(t)});
+    t.addEventListener('keydown',function(e){
+      var d=e.key==='ArrowRight'?1:e.key==='ArrowLeft'?-1:0; if(!d)return;
+      var n=tabs[(i+d+tabs.length)%tabs.length]; n.focus(); show(n);
+    });
+  });
+  document.querySelectorAll('[data-go]').forEach(function(b){
+    b.addEventListener('click',function(){show(document.getElementById(b.getAttribute('data-go')),true)});
+  });
+
+  function answered(q){
+    return [].some.call(q.querySelectorAll('input,textarea'),function(i){
+      if(i.classList.contains('more'))return false;
+      return (i.type==='radio'||i.type==='checkbox')?i.checked:!!i.value;});
+  }
+  function update(){
+    document.querySelectorAll('.more').forEach(function(m){
+      var w=m.getAttribute('data-when').split('='); var sel=document.querySelector('input[name="'+w[0]+'"]:checked');
+      m.classList.toggle('show', !!sel && sel.value===w[1]);
+    });
+    var total=0, done=0;
+    qs.forEach(function(q){var d=answered(q); q.classList.toggle('done',d); total++; if(d)done++;});
+    document.querySelectorAll('[data-count]').forEach(function(n){
+      var p=document.getElementById(n.getAttribute('data-count'));
+      var all=p.querySelectorAll('.q').length, d=p.querySelectorAll('.q.done').length;
+      n.textContent=d+'/'+all;
+      n.parentNode.classList.toggle('all-done', d===all);
+    });
+    document.getElementById('progress').textContent=done+' of '+total+' questions answered';
+  }
+  function save(){
+    var data={};
+    document.querySelectorAll('input,textarea').forEach(function(i){
+      if(!i.name||i.name==='botcheck')return;
+      if(i.type==='radio'||i.type==='checkbox'){ if(i.checked)(data[i.name]=data[i.name]||[]).push(i.value); }
+      else data[i.name]=i.value;
+    });
+    try{localStorage.setItem(STORE,JSON.stringify(data));}catch(e){}
+  }
+  function load(){
+    var data=null; try{data=JSON.parse(localStorage.getItem(STORE)||'null');}catch(e){}
+    if(!data)return;
+    document.querySelectorAll('input,textarea').forEach(function(i){
+      if(!i.name||!(i.name in data))return;
+      if(i.type==='radio'||i.type==='checkbox') i.checked=(data[i.name]||[]).indexOf(i.value)>-1;
+      else i.value=data[i.name]||'';
+    });
+  }
+  load(); update();
+  document.addEventListener('change',function(){update();save();});
+  document.addEventListener('input',function(e){if(e.target.matches('textarea,input[type=text],input[type=email],input:not([type])')){update();save();}});
+
+  function summary(){
+    var lines=[];
+    document.querySelectorAll('.panelq').forEach(function(p){
+      var tab=document.querySelector('[aria-controls="'+p.id+'"]').firstChild.textContent.trim();
+      lines.push('\n== '+tab.toUpperCase()+' ==');
+      p.querySelectorAll('.q').forEach(function(q){
+        var title=q.querySelector('legend').textContent.trim(), ans=[];
+        q.querySelectorAll('input:checked').forEach(function(i){ans.push(i.nextElementSibling.textContent.trim());});
+        q.querySelectorAll('input[type=date],textarea').forEach(function(i){
+          if(i.value && (!i.classList.contains('more')||i.classList.contains('show'))) ans.push(i.value);
+        });
+        lines.push(title+'\n  '+(ans.length?ans.join(', '):'(not answered)'));
+      });
+    });
+    return lines.join('\n');
+  }
+
+  var form=document.getElementById('sendForm'), btn=document.getElementById('sendBtn'), msg=document.getElementById('msg');
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    var who=document.getElementById('who');
+    if(!who.value.trim()){ who.focus(); msg.className='msg err'; msg.textContent='Please add your name so we know who sent this.'; return; }
+    btn.disabled=true; btn.textContent='Sending...'; msg.className='msg';
+    var body=summary(); var extra=document.getElementById('extra').value.trim();
+    var payload={
+      access_key:WEB3FORMS_KEY,
+      subject:'APC deliverables answers from '+who.value.trim(),
+      from_name:'APC deliverables page',
+      name:who.value.trim(),
+      answers:body,
+      notes:extra||'(none)',
+      botcheck:form.botcheck.checked
+    };
+    fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(payload)})
+      .then(function(r){return r.json();})
+      .then(function(j){
+        if(!j.success) throw new Error(j.message||'failed');
+        msg.className='msg ok'; msg.textContent='Thanks, your answers are in. We\'ll be in touch shortly.';
+        btn.textContent='Sent'; 
+      })
+      .catch(function(){
+        btn.disabled=false; btn.textContent='Send answers to Volare Media';
+        var mail='mailto:'+FALLBACK_EMAIL+'?subject='+encodeURIComponent('APC deliverables answers')+'&body='+encodeURIComponent('From: '+who.value+'\n'+body+'\n\nNotes: '+extra);
+        msg.className='msg err';
+        msg.innerHTML='That didn\'t go through. Your answers are still saved on this page, so you can try again, or <a href="'+mail+'">send them by email instead</a>.';
+      });
+  });
+})();
+</script>
+</body>
+</html>
