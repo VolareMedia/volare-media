@@ -66,7 +66,13 @@
     .corp-card .corp-shot img { width: 100%; height: 100%; object-fit: cover; opacity: 0.9; }
     .corp-card ul { list-style: none; margin-top: 1rem; display: flex; flex-wrap: wrap; gap: 0.4rem; }
     .corp-card li { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.04em; padding: 0.3rem 0.6rem; border: 1px solid var(--line); border-radius: 999px; color: var(--muted); }
-    .corp-work .work-card p { color: var(--muted); margin-top: 0.7rem; font-size: 0.98rem; max-width: 36rem; }
+    .corp-feature { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: clamp(1.5rem, 4vw, 3.5rem); align-items: center; }
+    .corp-feature .video-thumb { margin-bottom: 0; }
+    .corp-feature-copy .eyebrow { margin-bottom: 0.75rem; }
+    .corp-feature-copy h3 { font-size: clamp(1.8rem, 3vw, 2.6rem); margin-bottom: 0.6rem; }
+    .corp-feature-copy .work-tag { display: block; margin-bottom: 1rem; }
+    .corp-feature-copy p:not(.eyebrow) { color: var(--muted); margin-top: 0.8rem; }
+    @media (max-width: 56rem) { .corp-feature { grid-template-columns: minmax(0, 1fr); } }
     .care-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); grid-auto-rows: minmax(0, auto); gap: 1rem; }
     .care-photo { grid-column: 3; grid-row: 1 / span 2; margin: 0; border-radius: 1.25rem; overflow: hidden; border: 1px solid var(--line); background: var(--bg-raised); }
     .care-photo img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; }
@@ -267,36 +273,27 @@
       </div>
     </section>
 
-    <!-- Two examples -->
+    <!-- Featured project -->
     <section class="section band--sky corp-work" id="corporate-work">
       <div class="wrap">
         <div class="section-head reveal">
           <div>
-            <p class="eyebrow">Two examples</p>
+            <p class="eyebrow">Featured project</p>
             <h2 class="display-lg">Corporate work,<br>done <span class="sweep">right<span class="dot">.</span></span></h2>
           </div>
           <a class="bracket" href="work.html">See all work</a>
         </div>
-        <div class="work-grid work-grid--featured reveal">
-          <article class="work-card">
-            <!-- VIDEO: HCK's own Vimeo copy (1012852279) is domain-locked to their site, so this links out for now. Swap to <button class="video-thumb" data-youtube="…"> once Chris uploads it to the Volare channel. -->
-            <a class="video-thumb" href="https://harbourcitykitchens.com/facility-tour" target="_blank" rel="noopener" aria-label="Watch the Harbour City Kitchens facility tour on their website">
-              <img src="assets/img/hck-facility-tour-poster.jpg" alt="Behind the scenes on the Harbour City Kitchens shoot" loading="lazy">
-              <span class="play-btn" aria-hidden="true"></span>
-            </a>
-            <h3>Harbour City Kitchens: Facility Tour</h3>
-            <span class="work-tag">Website film: the warehouse, the factory, how a kitchen gets built · watch it on harbourcitykitchens.com</span>
-            <p>Made for their website, for customers who wanted to see past the showroom: the warehouse, the factory floor and how a kitchen actually comes together. It was never meant to be a commercial, and that's exactly why it works. Three minutes that answer the questions people ask before they buy.</p>
-          </article>
-          <article class="work-card">
-            <button class="video-thumb" data-youtube="G6EoryyEAEs" aria-label="Play: White Wolf Homes brand film, Building a Legacy">
-              <img src="assets/img/white-wolf-homes.jpg" alt="Still from the White Wolf Homes brand film" loading="lazy">
-              <span class="play-btn" aria-hidden="true"></span>
-            </button>
-            <h3>White Wolf Homes: Building a Legacy</h3>
-            <span class="work-tag">Brand film: a custom home builder, told by the people who build</span>
-            <p>The owner on the tailgate at a job site, talking about craftsmanship and what the company stands for. No script, no pitch. It lives on their website and works on LinkedIn, where the people who hire builders actually spend their time.</p>
-          </article>
+        <div class="corp-feature reveal">
+          <button class="video-thumb" data-youtube="QvmIoVtuQyY" aria-label="Play: Harbour City Kitchens facility tour">
+            <img src="assets/img/hck-facility-tour-poster.jpg" alt="Still from the Harbour City Kitchens facility tour film" loading="lazy">
+            <span class="play-btn" aria-hidden="true"></span>
+          </button>
+          <div class="corp-feature-copy">
+            <p class="eyebrow">Harbour City Kitchens</p>
+            <h3>Facility Tour</h3>
+            <span class="work-tag">Website film: the warehouse, the factory, how a kitchen gets built</span>
+            <p>Made for their website, for customers who wanted to see past the showroom: the warehouse, the factory floor and how a kitchen actually comes together. It was never meant to be a commercial, and that's exactly why it works. Three minutes that answer the questions people ask before they buy, and a piece their sales team can send instead of explaining it all again.</p>
+          </div>
         </div>
       </div>
     </section>
