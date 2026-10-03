@@ -1,5 +1,9 @@
 # Volare Media — redirects & basics
 
+# Serve pages as UTF-8 (without this the server sends a bare text/html and
+# browsers fell back to windows-1252, showing "Â·" for "·")
+AddDefaultCharset UTF-8
+
 # Old Zyrosite URLs (still in Google's index) → closest new page.
 # Anchored with ^...$ so real .html files are never matched.
 RedirectMatch 301 ^/voice-over-recording/?$      /services.html
@@ -10,5 +14,5 @@ RedirectMatch 301 ^/services/?$                  /services.html
 RedirectMatch 301 ^/blog/?$                      /journal.html
 RedirectMatch 301 ^/contact/?$                   /contact.html
 RedirectMatch 301 ^/about/?$                     /about.html
-RedirectMatch 301 ^/privacy-policy/?$            /
+RedirectMatch 301 ^/privacy-policy/?$            /privacy-policy.html
 RedirectMatch 301 ^/terms-and-conditions/?$      /
