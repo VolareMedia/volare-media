@@ -2137,3 +2137,8 @@ a:focus-visible, button:focus-visible {
 /* inside journal articles, keep the captures uncropped */
 .article .compare-frame img { width: 100%; aspect-ratio: auto; object-fit: initial; border: 0; border-radius: 0; }
 .article .compare-col { margin: 0; }
+/* static before/after: fixed crops, no scrolling */
+.site-compare--static .compare-frame { height: auto; overflow: hidden; }
+.site-compare--static .compare-frame img { transition: none; }
+.site-compare--static .compare-col:hover .compare-frame img { transform: none; }
+.compare-frame video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: cover; margin-top: 1.6rem; background: #231b1e; }

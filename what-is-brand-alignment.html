@@ -258,23 +258,22 @@
       </ul>
 
       <div class="article-compare">
-        <div class="site-compare">
+        <div class="site-compare site-compare--static">
         <figure class="compare-col">
-          <div class="compare-frame" tabindex="0" aria-label="Scrollable capture of the current It's A Doodle homepage">
-            <img src="assets/img/doodle-before-full.jpg" alt="The full current It's A Doodle homepage: a busy, older layout with mixed logos, bullet-point copy and coloured blocks" loading="lazy">
+          <div class="compare-frame">
+            <img src="assets/img/doodle-before-cluttered.jpg" alt="A section of the current It's A Doodle homepage: a long wall of small bullet-point text on a pink-to-blue gradient beside four bright coloured tiles" loading="lazy">
           </div>
           <span class="before-stamp">Before</span>
-          <figcaption>The current homepage. Two names, three logos, and a layout that has grown in layers.</figcaption>
+          <figcaption>Part of the current homepage. Walls of text, mixed colours and a layout that has grown in layers.</figcaption>
         </figure>
         <figure class="compare-col compare-col--after">
-          <div class="compare-frame" tabindex="0" aria-label="Scrollable capture of the new It's A Doodle homepage design">
-            <img src="assets/img/doodle-after-full.jpg" alt="The new It's A Doodle homepage design: a video hero, three clear paths, Google reviews, video testimonials and a note from the owner" loading="lazy">
+          <div class="compare-frame">
+            <video class="lazy-loop" muted loop playsinline preload="none" poster="assets/img/doodle-after-top.jpg" data-src="assets/doodle-after-hero.mp4" aria-label="The top of the new It's A Doodle homepage design playing: a video hero of Labradoodle puppies, the headline Labradoodle puppies raised like family, and the cursor leaving a trail of paw prints"></video>
           </div>
           <span class="before-stamp">After</span>
-          <figcaption>The new homepage design, in progress. The name and logos update to It's A Doodle K9 Service with the new brand.</figcaption>
+          <figcaption>The top of the new homepage design, in progress, paw-print cursor trail and all. The name and logos update to It's A Doodle K9 Service with the new brand.</figcaption>
         </figure>
       </div>
-      <p class="compare-hint">Hover over each page to scroll it</p>
       </div>
 
       <p>The new website is planned to launch in 2027, with the new name, logos and the rest of the alignment rolling out alongside it. We'll share the finished before and after when it's live, because the result we care about isn't a prettier logo. It's a family watching the video, landing on the site, checking the Instagram and the Google reviews, and feeling like they've met the same warm, trustworthy business every time.</p>
@@ -353,6 +352,20 @@
         <a class="btn" href="contact.html?project=brand">Align my brand</a>
       </div>
     </section>
+
+
+    <script>
+      // Load and play looping demo clips only when they scroll into view
+      (function () {
+        var vids = document.querySelectorAll('video.lazy-loop');
+        function start(v) { if (!v.src) v.src = v.dataset.src; var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+        if (!('IntersectionObserver' in window)) { vids.forEach(start); return; }
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) { if (e.isIntersecting) start(e.target); else e.target.pause(); });
+        }, { rootMargin: '200px' });
+        vids.forEach(function (v) { io.observe(v); });
+      })();
+    </script>
 
   </main>
 
