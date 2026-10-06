@@ -58,7 +58,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Inter+Tight:ital,wght@0,400..800;1,400..800&family=Fragment+Mono:ital@0;1&display=swap" rel="stylesheet">
   <link rel="icon" href="favicon.svg?v=2" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css?v=31">
+  <link rel="stylesheet" href="styles.css?v=32">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -106,6 +106,12 @@
     ]
   }
   </script>
+  <style>
+    .mv-brand { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: clamp(1.5rem, 4vw, 4rem); align-items: center; }
+    .mv-brand .eyebrow { margin-bottom: 1rem; }
+    .mv-brand-links { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 1.75rem; margin-top: 1.5rem; }
+    @media (max-width: 56rem) { .mv-brand { grid-template-columns: minmax(0, 1fr); } }
+  </style>
 </head>
 <body>
 
@@ -131,6 +137,7 @@
             <a href="event-videography.html">Event Videography</a>
             <a href="corporate-video.html">Corporate Video</a>
             <a href="website-development.html">Websites &amp; Branding</a>
+            <a href="brand-alignment.html">Brand Alignment</a>
             <a href="agencies.html">Agencies</a>
           </div>
         </div>
@@ -174,42 +181,44 @@
       </div>
     </section>
 
-    <section class="wrap" style="padding-bottom: var(--section-gap);">
-      <div class="service-list">
+    <section class="grid-bleed grid-bleed--glow grid-bleed--left" style="padding-bottom: var(--section-gap);">
+      <div class="wrap">
+        <div class="service-list">
 
-        <div class="service-row" id="commercials">
-          <span class="service-num">(001)</span>
-          <h3>Commercials &amp; campaigns</h3>
-          <div>
-            <p>The 15, 30 and 60-second spots that anchor a campaign, built for TV, YouTube pre-roll and paid social. From a single hero commercial to a full campaign with cutdowns for every placement. Whether it's a broadcast TV commercial cleared for stations across BC or a scroll-stopping pre-roll ad, we handle concept, production and delivery end to end.</p>
-            <ul class="service-includes">
-              <li>TV commercials</li><li>Pre-roll ads</li><li>Campaign cutdowns</li><li>Broadcast delivery</li>
-            </ul>
+          <div class="service-row" id="commercials">
+            <span class="service-num">(001)</span>
+            <h3>Commercials &amp; campaigns</h3>
+            <div>
+              <p>The 15, 30 and 60-second spots that anchor a campaign, built for TV, YouTube pre-roll and paid social. From a single hero commercial to a full campaign with cutdowns for every placement. Whether it's a broadcast TV commercial cleared for stations across BC or a scroll-stopping pre-roll ad, we handle concept, production and delivery end to end.</p>
+              <ul class="service-includes">
+                <li>TV commercials</li><li>Pre-roll ads</li><li>Campaign cutdowns</li><li>Broadcast delivery</li>
+              </ul>
+            </div>
           </div>
-        </div>
 
-        <div class="service-row" id="brand-films">
-          <span class="service-num">(002)</span>
-          <h3>Brand films</h3>
-          <div>
-            <p>The longer, story-led piece that says who you are and why it matters. Brand films earn attention on your website, in the room and across social, and they age well. Perfect for your homepage, sales decks and social channels, a brand film is the one video that keeps working long after a campaign ends.</p>
-            <ul class="service-includes">
-              <li>Brand story</li><li>Founder stories</li><li>About films</li><li>Manifesto pieces</li>
-            </ul>
+          <div class="service-row" id="brand-films">
+            <span class="service-num">(002)</span>
+            <h3>Brand films</h3>
+            <div>
+              <p>The longer, story-led piece that says who you are and why it matters. Brand films earn attention on <a href="website-development.html">your website</a>, in the room and across social, and they age well. Perfect for your homepage, sales decks and social channels, a brand film is the one video that keeps working long after a campaign ends.</p>
+              <ul class="service-includes">
+                <li>Brand story</li><li>Founder stories</li><li>About films</li><li>Manifesto pieces</li>
+              </ul>
+            </div>
           </div>
-        </div>
 
-        <div class="service-row" id="product">
-          <span class="service-num">(003)</span>
-          <h3>Product videos</h3>
-          <div>
-            <p>Show the thing, clearly and beautifully. Launch videos, explainers and demo films that make a product make sense, and make people want it. From e-commerce and product-launch videos to how-it-works explainers, we make the product the hero and the benefit obvious.</p>
-            <ul class="service-includes">
-              <li>Launch videos</li><li>Explainers</li><li>Product demos</li><li>Feature films</li>
-            </ul>
+          <div class="service-row" id="product">
+            <span class="service-num">(003)</span>
+            <h3>Product videos</h3>
+            <div>
+              <p>Show the thing, clearly and beautifully. Launch videos, explainers and demo films that make a product make sense, and make people want it. From e-commerce and product-launch videos to how-it-works explainers, we make the product the hero and the benefit obvious.</p>
+              <ul class="service-includes">
+                <li>Launch videos</li><li>Explainers</li><li>Product demos</li><li>Feature films</li>
+              </ul>
+            </div>
           </div>
-        </div>
 
+        </div>
       </div>
     </section>
 
@@ -234,7 +243,7 @@
           <span class="service-num">(005)</span>
           <h3>Interviews &amp; testimonials</h3>
           <div>
-            <p>Real customers and real results on camera. Testimonial and case-study videos that build trust faster than any claim you could write yourself. Customer stories, founder interviews and case-study films give your marketing the social proof that turns interest into sales.</p>
+            <p>Real customers and real results on camera. Testimonial and case-study videos that build trust faster than any claim you could write yourself. Customer stories, <a href="how-we-film-interviews.html">founder interviews</a> and case-study films give your marketing the social proof that turns interest into sales.</p>
             <ul class="service-includes">
               <li>Customer testimonials</li><li>Case-study films</li><li>Interview edits</li><li>Social proof</li>
             </ul>
@@ -354,6 +363,23 @@
       </div>
     </section>
 
+    <!-- Brand alignment blurb -->
+    <section class="section section--tight band--sky grid-bleed grid-bleed--glow" aria-labelledby="mv-brand">
+      <div class="wrap mv-brand reveal">
+        <div>
+          <p class="eyebrow">Brand alignment</p>
+          <h2 id="mv-brand" class="display-md">Great video deserves a brand that <span class="sweep">matches<span class="dot">.</span></span></h2>
+        </div>
+        <div>
+          <p class="lede">A video can win the click and still lose the customer, when they land on a website or Instagram page that looks like a different company. Our brand alignment packages line up your logo, name, colours and message everywhere people find you, so the attention your video earns turns into trust.</p>
+          <div class="mv-brand-links">
+            <a class="btn" href="brand-alignment.html">Brand alignment</a>
+            <a class="bracket" href="what-is-brand-alignment.html">Read: why brands drift</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="section photo-band photo-band--side" id="faq" style="--photo: url('assets/img/bts-operator-focus.jpg'); --photo-pos: 55% 35%; --photo-opacity: 0.35;">
       <div class="wrap">
       <div class="section-head reveal">
@@ -384,7 +410,7 @@
             <span class="card-toggle" aria-hidden="true"></span>
           </summary>
           <div class="card-more">
-            <p>Many clients start with one hero commercial or brand film, then we cut it into shorter ads, vertical social versions and teasers, so a single production run works across TV, YouTube and paid social.</p>
+            <p>Many clients start with one hero commercial or brand film, then we cut it into shorter ads, vertical social versions and teasers, so a single production run works across TV, YouTube and paid social. <a href="never-make-a-video-to-make-a-video.html" class="bracket" style="font-size:0.85rem;">See how it worked for De Mode en Vogue</a></p>
           </div>
         </details>
 
@@ -461,6 +487,7 @@
               <li><a href="event-videography.html">Event Videography</a></li>
               <li><a href="corporate-video.html">Corporate Video</a></li>
               <li><a href="website-development.html">Websites &amp; Branding</a></li>
+              <li><a href="brand-alignment.html">Brand Alignment</a></li>
               <li><a href="work.html">Work</a></li>
               <li><a href="about.html">About</a></li>
               <li><a href="crew.html">The Crew</a></li>

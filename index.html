@@ -58,7 +58,232 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Inter+Tight:ital,wght@0,400..800;1,400..800&family=Fragment+Mono:ital@0;1&display=swap" rel="stylesheet">
   <link rel="icon" href="favicon.svg?v=2" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css?v=31">
+  <link rel="stylesheet" href="styles.css?v=32">
+  <style>
+    /* ---------- One team. No agency layers. ---------- */
+
+    .layers-head {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: clamp(1.5rem, 4vw, 4rem);
+      align-items: end;
+      margin-bottom: clamp(2.5rem, 5vw, 4rem);
+    }
+
+    .layers-head .eyebrow { margin-bottom: 1rem; }
+    .layers-head .lede { font-size: clamp(1.05rem, 1.5vw, 1.25rem); }
+
+    .layers-compare {
+      display: grid;
+      grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+      gap: clamp(1rem, 2.5vw, 2rem);
+    }
+
+    .layers-panel {
+      display: flex;
+      flex-direction: column;
+      border-radius: 1.25rem;
+      padding: clamp(1.4rem, 3vw, 2.25rem);
+    }
+
+    .layers-panel--usual { border: 2px dashed var(--line); }
+
+    .layers-panel--vm {
+      background: var(--bg-raised);
+      border: 1px solid var(--line);
+    }
+
+    .layers-label {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+    }
+
+    .layers-panel--vm .layers-label { color: var(--lilac); }
+
+    /* vertical chain with arrow connectors */
+    .chain {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex: 1;
+      justify-content: center;
+    }
+
+    .chain > li {
+      position: relative;
+      width: 100%;
+      max-width: 19rem;
+      padding: 0.62rem 1rem;
+      border: 1px solid var(--line);
+      border-radius: 0.7rem;
+      text-align: center;
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--muted);
+      background: var(--bg);
+    }
+
+    .chain > li + li { margin-top: 1.45rem; }
+
+    .chain > li + li::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: -1.4rem;
+      height: 0.95rem;
+      border-left: 2px solid var(--line);
+    }
+
+    .chain > li + li::after {
+      content: "";
+      position: absolute;
+      left: calc(50% - 0.3rem + 1px);
+      top: -0.5rem;
+      border-style: solid;
+      border-width: 0.4rem 0.3rem 0;
+      border-color: var(--line) transparent transparent;
+    }
+
+    /* the idea thins out as it passes through each layer */
+    .layers-panel--usual .chain > li:nth-child(3) { opacity: 0.88; }
+    .layers-panel--usual .chain > li:nth-child(4) { opacity: 0.76; }
+    .layers-panel--usual .chain > li:nth-child(5) { opacity: 0.64; }
+    .layers-panel--usual .chain > li:nth-child(6) { opacity: 0.52; }
+
+    .chain > li.chain-end {
+      border-color: color-mix(in srgb, var(--lilac) 60%, transparent);
+      background: color-mix(in srgb, var(--lilac) 12%, var(--bg));
+      color: var(--lilac);
+      font-weight: 600;
+      opacity: 1;
+    }
+
+    /* the vm. block: everything in one place, video at the centre */
+    .chain--vm > li.vm-core {
+      max-width: none;
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr);
+      gap: 1rem 1.5rem;
+      align-items: center;
+      padding: clamp(1rem, 2vw, 1.4rem);
+      border: 0;
+      border-radius: 1rem;
+      background: var(--volt);
+      color: var(--bg);
+      text-align: left;
+    }
+
+    .vm-core-mark {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 5vw, 4.5rem);
+      font-weight: 700;
+      letter-spacing: -0.05em;
+      line-height: 1;
+      padding: 0 0.25rem 0 0.5rem;
+    }
+
+    .vm-stack {
+      list-style: none;
+      display: grid;
+      gap: 0.45rem;
+    }
+
+    .vm-stack li {
+      position: relative;
+      display: grid;
+      grid-template-columns: 2.6rem minmax(0, 1fr);
+      column-gap: 0.4rem;
+      padding: 0.6rem 0.85rem;
+      border-radius: 0.65rem;
+      background: rgba(12, 13, 9, 0.07);
+    }
+
+    .vm-num {
+      grid-row: span 2;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      padding-top: 0.2rem;
+      opacity: 0.65;
+    }
+
+    .vm-stack b {
+      font-family: var(--font-display);
+      font-size: 1.08rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      padding-right: 6rem;
+    }
+
+    .vm-stack span:not(.vm-num) {
+      font-size: 0.875rem;
+      line-height: 1.45;
+      color: rgba(12, 13, 9, 0.72);
+    }
+
+    .vm-stack li.is-lead { background: var(--bg); color: #F4F3E8; }
+    .vm-stack li.is-lead span:not(.vm-num) { color: rgba(244, 243, 232, 0.74); }
+
+    .vm-tag {
+      position: absolute;
+      top: 0.6rem;
+      right: 0.7rem;
+      font-style: normal;
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      background: var(--volt);
+      color: var(--bg);
+      border-radius: 999px;
+      padding: 0.22rem 0.6rem;
+    }
+
+    .layers-note {
+      margin-top: 1.5rem;
+      text-align: center;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      letter-spacing: 0.04em;
+      color: var(--muted);
+    }
+
+    .layers-panel--vm .layers-note { color: var(--cream); }
+
+    /* featured work: three spots in a row */
+    @media (min-width: 56rem) {
+      .work-grid--featured { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(1.25rem, 2vw, 2rem); }
+    }
+
+    .vm-stack a { color: inherit; text-decoration: none; }
+    .vm-stack a::after { content: ""; position: absolute; inset: 0; border-radius: inherit; }
+    .vm-stack b a::before { content: "\2192"; position: absolute; right: 0.85rem; bottom: 0.65rem; font-size: 0.95rem; opacity: 0; transition: opacity 0.2s, transform 0.2s; transform: translateX(-4px); }
+    .vm-stack li { transition: background 0.2s; }
+    .vm-stack li:hover { background: rgba(12, 13, 9, 0.14); }
+    .vm-stack li.is-lead:hover { background: #1A1D13; }
+    .vm-stack li:hover b a::before { opacity: 1; transform: none; }
+    .vm-stack a:focus-visible { outline: none; }
+    .vm-stack li:focus-within { outline: 3px solid var(--bg); outline-offset: 2px; }
+
+    /* CTA support line */
+    .cta-sub { margin: 0 auto; max-width: 38rem; text-wrap: balance; }
+
+    @media (max-width: 56rem) {
+      .layers-head,
+      .layers-compare { grid-template-columns: minmax(0, 1fr); }
+    }
+
+    @media (max-width: 34rem) {
+      .chain--vm > li.vm-core { grid-template-columns: minmax(0, 1fr); }
+      .vm-core-mark { padding: 0 0.25rem; }
+      .vm-stack b { padding-right: 0; }
+      .vm-stack li.is-lead b { padding-right: 6rem; }
+    }
+  </style>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -104,6 +329,7 @@
             <a href="event-videography.html">Event Videography</a>
             <a href="corporate-video.html">Corporate Video</a>
             <a href="website-development.html">Websites &amp; Branding</a>
+            <a href="brand-alignment.html">Brand Alignment</a>
             <a href="agencies.html">Agencies</a>
           </div>
         </div>
@@ -126,9 +352,9 @@
       </video>
       <div class="hero-scrim" aria-hidden="true"></div>
       <div class="wrap">
-        <p class="eyebrow">Video production on Vancouver Island</p>
+        <p class="eyebrow">Video-first marketing on Vancouver Island</p>
         <h1 class="display-xl">Stories worth <span class="sweep"><em>sharing<span class="dot">.</span></em></span></h1>
-        <p class="lede">Full-service video production, based on Vancouver Island and working across British Columbia and Canada. Marketing videos that perform are our specialty, and we bring the same film craft to documentaries, music videos and film. From script to sound, our own in-house team handles every step, so you can hand it over knowing it's covered.</p>
+        <p class="lede">A video-first marketing company, based on Vancouver Island and working across BC and Canada. We plan the campaign, film it with our own crew, cut it for every platform and launch it, along with the website it lands on. Strategy, video production, ads and web under one roof, with no agency layers in between.</p>
         <div class="hero-foot">
           <div class="hero-actions">
             <a class="bracket" href="work.html">View Showreel</a>
@@ -142,8 +368,55 @@
     <!-- Client marquee -->
     <section class="marquee" aria-label="Clients">
       <div class="marquee-track">
-        <span>Harbour City Kitchens</span><span>Stratos Nutrition</span><span>Maxxam Insurance</span><span>De Mode en Vogue</span><span>Sixty Forty</span><span>VICA</span><span>Peninsula Gives</span><span>Tailgate Toolkit</span><span>Harris</span><span>White Wolf Homes</span><span>Gas 2 Go</span><span>West Haven Cabinetry</span><span>Oakcrest Estates</span><span>Centre Mountain Business Park</span><span>It's A Doodle Labradoodle</span><span>Adam ATM</span>
-        <span>Harbour City Kitchens</span><span>Stratos Nutrition</span><span>Maxxam Insurance</span><span>De Mode en Vogue</span><span>Sixty Forty</span><span>VICA</span><span>Peninsula Gives</span><span>Tailgate Toolkit</span><span>Harris</span><span>White Wolf Homes</span><span>Gas 2 Go</span><span>West Haven Cabinetry</span><span>Oakcrest Estates</span><span>Centre Mountain Business Park</span><span>It's A Doodle Labradoodle</span><span>Adam ATM</span>
+        <span>Harbour City Kitchens</span><span>Stratos Nutrition</span><span>Maxxam Insurance</span><span>De Mode en Vogue</span><span>Sixty Forty</span><span>VICA</span><span>Peninsula Gives</span><span>Tailgate Toolkit</span><span>Harris</span><span>White Wolf Homes</span><span>Gas 2 Go</span><span>West Haven Cabinetry</span><span>Oakcrest Estates</span><span>Centre Mountain Business Park</span><span>It's A Doodle K9 Service</span><span>Adam ATM</span>
+        <span>Harbour City Kitchens</span><span>Stratos Nutrition</span><span>Maxxam Insurance</span><span>De Mode en Vogue</span><span>Sixty Forty</span><span>VICA</span><span>Peninsula Gives</span><span>Tailgate Toolkit</span><span>Harris</span><span>White Wolf Homes</span><span>Gas 2 Go</span><span>West Haven Cabinetry</span><span>Oakcrest Estates</span><span>Centre Mountain Business Park</span><span>It's A Doodle K9 Service</span><span>Adam ATM</span>
+      </div>
+    </section>
+
+    <!-- Video-first marketing: one team, no agency layers -->
+    <section class="section layers grid-bleed grid-bleed--glow" aria-labelledby="layers-head">
+      <div class="wrap">
+        <div class="layers-head reveal">
+          <div>
+            <p class="eyebrow">Video first. Full marketing.</p>
+            <h2 id="layers-head" class="display-lg">One team<span class="dot">.</span><br>No agency <span class="sweep">layers<span class="dot">.</span></span></h2>
+          </div>
+          <p class="lede">Most campaigns pass through an agency, a production company, an edit house and a media buyer before your customers ever see them. Every hand-off adds cost and waters down the idea. We keep it all in-house with video at the centre, so the people who plan your campaign are the same people who film it and run it.</p>
+        </div>
+
+        <div class="layers-compare reveal">
+          <div class="layers-panel layers-panel--usual">
+            <p class="layers-label">The usual way</p>
+            <ol class="chain">
+              <li class="chain-end">You</li>
+              <li>Ad agency</li>
+              <li>Production company</li>
+              <li>Edit house</li>
+              <li>Media buyer</li>
+              <li>Web developer</li>
+              <li class="chain-end">Your customers</li>
+            </ol>
+            <p class="layers-note">Five companies between your idea and your customers.</p>
+          </div>
+
+          <div class="layers-panel layers-panel--vm">
+            <p class="layers-label">With Volare Media</p>
+            <ol class="chain chain--vm">
+              <li class="chain-end">You</li>
+              <li class="vm-core">
+                <span class="vm-core-mark">vm<span class="dot">.</span></span>
+                <ul class="vm-stack">
+                  <li><span class="vm-num">(01)</span><b><a href="creative-direction.html">Strategy &amp; creative</a></b><span>Who it's for, where it runs, what it has to do.</span></li>
+                  <li class="is-lead"><span class="vm-num">(02)</span><b><a href="services.html">Video production</a></b><span>Our own crew, from script to sound.</span><em class="vm-tag">Video first</em></li>
+                  <li><span class="vm-num">(03)</span><b><a href="website-development.html#campaigns">Ads &amp; social</a></b><span>Cut for every platform, launched on Meta, Google and YouTube.</span></li>
+                  <li><span class="vm-num">(04)</span><b><a href="website-development.html">Websites</a></b><span>Where the campaign lands, built and tracked by us.</span></li>
+                </ul>
+              </li>
+              <li class="chain-end">Your customers</li>
+            </ol>
+            <p class="layers-note">One team, one conversation, from the first idea to the last ad.</p>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -201,23 +474,6 @@
           </div>
         </div>
         </div>
-
-        <div class="bts-block reveal">
-          <div class="bts-copy">
-            <p class="eyebrow">Bonus: behind the scenes</p>
-            <h3 class="display-md">Your shoot day<br>is content too<span class="dot">.</span></h3>
-            <p>Every production comes with behind-the-scenes coverage. The cast, our crew and the partners on set all post it and tag you, which puts real people talking about your brand in front of their audiences days before launch. And you get the BTS package too: photos, clips and social cutdowns, ready to post.</p>
-          </div>
-          <ul class="bts-row">
-            <li><img src="assets/img/bts-strip-1.jpg" alt="Cinema camera rig on a Volare Media set" loading="lazy"></li>
-            <li><img src="assets/img/bts-strip-2.jpg" alt="Crew filming a kitchen scene, monitor in the foreground" loading="lazy"></li>
-            <li><img src="assets/img/bts-strip-3.jpg" alt="Director framing a shot with his hands" loading="lazy"></li>
-            <li><img src="assets/img/bts-strip-4.jpg" alt="Clapperboard in front of a spotlit talent" loading="lazy"></li>
-            <li><img src="assets/img/bts-strip-5.jpg" alt="Crew and client laughing between takes" loading="lazy"></li>
-          </ul>
-        </div>
-
-
       </div>
     </section>
 
@@ -279,7 +535,7 @@
     </section>
 
     <!-- Featured work -->
-    <section class="section featured-work" aria-labelledby="featured-head">
+    <section class="section featured-work grid-bleed grid-bleed--left grid-bleed--glow" aria-labelledby="featured-head">
       <div class="wrap">
         <div class="section-head reveal">
           <div>
@@ -305,6 +561,14 @@
             <h3>Stratos: Endurance</h3>
             <span class="work-tag">Commercial: fitness and performance nutrition</span>
           </article>
+          <article class="work-card">
+            <button class="video-thumb" data-youtube="DUAHFEBabnU" aria-label="Play: When Your Outfit Is Missing Something, De Mode en Vogue">
+              <img src="assets/img/dmev-outfit-missing-something.jpg" alt="Still from the De Mode en Vogue commercial: two friends laughing in a rose garden" loading="lazy">
+              <span class="play-btn" aria-hidden="true"></span>
+            </button>
+            <h3>De Mode en Vogue</h3>
+            <span class="work-tag">Campaign: When your outfit is missing something</span>
+          </article>
         </div>
       </div>
     </section>
@@ -314,6 +578,7 @@
       <div class="wrap reveal">
         <p class="eyebrow">Ready when you are</p>
         <h2 class="display-lg">Let's make something<br>worth sharing<span class="dot">.</span></h2>
+        <p class="lede cta-sub">Strategy, video, ads and your website, all with one team.</p>
         <a class="btn" href="contact.html">Start your project</a>
       </div>
     </section>
@@ -338,6 +603,7 @@
               <li><a href="event-videography.html">Event Videography</a></li>
               <li><a href="corporate-video.html">Corporate Video</a></li>
               <li><a href="website-development.html">Websites &amp; Branding</a></li>
+              <li><a href="brand-alignment.html">Brand Alignment</a></li>
               <li><a href="work.html">Work</a></li>
               <li><a href="about.html">About</a></li>
               <li><a href="crew.html">The Crew</a></li>

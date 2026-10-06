@@ -46,25 +46,25 @@
     });
   </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Website Development, Branding &amp; Marketing Campaigns | Volare Media</title>
-  <meta name="description" content="The full package from Volare Media: website development (new builds and full rebuilds), brand building, brand alignment and marketing campaigns, delivered by a support team of media and tech specialists on Vancouver Island, serving BC and Canada.">
+  <title>Website Design, Rebuilds &amp; Brand Alignment in BC | Volare Media</title>
+  <meta name="description" content="New websites, full rebuilds, Shopify online stores and brand alignment for businesses on Vancouver Island and across BC, built and managed by Volare Media's own team.">
   <link rel="canonical" href="https://www.volaremedia.net/website-development.html">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Websites, Branding &amp; Marketing Campaigns | Volare Media">
-  <meta property="og:description" content="One team for the whole thing: website builds and rebuilds, brand building, brand alignment and marketing campaigns, backed by media and tech specialists.">
+  <meta property="og:title" content="Website Design, Rebuilds &amp; Brand Alignment | Volare Media">
+  <meta property="og:description" content="New websites, full rebuilds, online stores and brand alignment, designed, built and managed by the same team that films your video.">
   <meta property="og:url" content="https://www.volaremedia.net/website-development.html">
   <meta property="og:image" content="https://www.volaremedia.net/assets/img/web-development-code-dark.jpg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Inter+Tight:ital,wght@0,400..800;1,400..800&family=Fragment+Mono:ital@0;1&display=swap" rel="stylesheet">
   <link rel="icon" href="favicon.svg?v=2" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css?v=31">
+  <link rel="stylesheet" href="styles.css?v=32">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "Service",
-    "name": "Website Development, Branding and Marketing Campaigns",
-    "serviceType": "Website design and development, brand building, brand alignment and marketing campaigns",
+    "name": "Website Design, Rebuilds, Branding and Marketing Campaigns",
+    "serviceType": "Website design and development, website rebuilds, e-commerce, brand building, brand alignment and marketing campaigns",
     "description": "Full-package digital services from Volare Media: new website builds and full rebuilds, brand building, brand alignment across every touchpoint, and marketing campaigns, delivered by one support team of media and tech specialists.",
     "provider": {
       "@type": "ProfessionalService",
@@ -75,7 +75,21 @@
       "address": { "@type": "PostalAddress", "addressLocality": "Victoria", "addressRegion": "BC", "addressCountry": "CA" }
     },
     "areaServed": ["Victoria BC", "Vancouver Island", "British Columbia", "Canada"],
-    "url": "https://www.volaremedia.net/website-development.html"
+    "url": "https://www.volaremedia.net/website-development.html",
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Websites and branding",
+      "itemListElement": [
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Website rebuild and redesign" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "New website design and development" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "E-commerce and Shopify online stores" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Corporate websites" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Campaign landing pages" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Brand building" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Brand alignment" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Marketing campaigns" } }
+      ]
+    }
   }
   </script>
   <script type="application/ld+json">
@@ -102,10 +116,57 @@
         "@type": "Question",
         "name": "Who actually does the work?",
         "acceptedAnswer": { "@type": "Answer", "text": "Our own support team of media and tech specialists: the filmmakers, editors, designers and developers behind Volare Media, supported by trusted production partners when a project needs extra hands. Your website, brand and campaigns are handled by people who already know your story." }
+      },
+      {
+        "@type": "Question",
+        "name": "Do you build online stores?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. We design and build Shopify stores with product pages, collections, wholesale and checkout, then help them grow with SEO, content and ads. De Mode en Vogue's store is one we revamped and now manage." }
+      },
+      {
+        "@type": "Question",
+        "name": "Will a website rebuild hurt our Google rankings?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Not when it's planned properly. Before launch we map every old page to its new address with redirects, keep the content that already ranks, and submit the new site to Google Search Console, so the search traffic you've earned follows you to the new site." }
       }
     ]
   }
   </script>
+  <style>
+    /* how it works */
+    .steps { list-style: none; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: clamp(1rem, 2vw, 1.75rem); position: relative; }
+    .steps::before { content: ""; position: absolute; left: 0; right: 0; top: 0.55rem; border-top: 1px dashed rgba(214, 255, 61, 0.45); }
+    .step { position: relative; padding-top: 2.25rem; }
+    .step::before { content: ""; position: absolute; top: 0.2rem; left: 0; width: 0.75rem; height: 0.75rem; border-radius: 50%; background: var(--volt); box-shadow: 0 0 0 5px var(--bg); }
+    .step-num { font-family: var(--font-mono); font-size: 0.78rem; color: var(--lilac); }
+    .step h3 { font-size: 1.35rem; margin: 0.4rem 0 0.6rem; }
+    .step p { color: var(--muted); font-size: 0.95rem; line-height: 1.55; }
+    .steps-cta { display: flex; flex-wrap: wrap; align-items: center; gap: 1.25rem 2rem; margin-top: clamp(2.5rem, 4vw, 3.5rem); }
+
+    /* website types + industries */
+    @media (min-width: 64rem) { .types-grid, .paths-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+    .types-grid .card p a { color: var(--cream); text-decoration-color: var(--volt); }
+    .industries { margin-top: clamp(2.5rem, 4vw, 3.5rem); }
+    .industries-label { font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--lilac); margin-bottom: 1rem; }
+    .industry-chips { list-style: none; display: flex; flex-wrap: wrap; gap: 0.6rem; }
+    .industry-chips li { font-size: 0.95rem; padding: 0.55rem 1rem; border: 1px solid var(--line); border-radius: 999px; background: rgba(12, 13, 9, 0.5); }
+    .industry-chips li:nth-child(4n+1) { border-color: rgba(214, 255, 61, 0.55); }
+
+    /* where are you starting */
+    @media (min-width: 64rem) { .paths-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+    .path-card { display: flex; flex-direction: column; }
+    .path-card p:not(.eyebrow) { margin-bottom: 1.5rem; }
+    .path-card .btn { margin-top: auto; align-self: flex-start; }
+    .path-card--lead { border-color: rgba(214, 255, 61, 0.6); }
+
+    /* faq: six cards, three across */
+    @media (min-width: 64rem) { #faq .card-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+
+    @media (max-width: 64rem) {
+      .steps { grid-template-columns: minmax(0, 1fr); gap: 1.75rem; padding-left: 1.75rem; }
+      .steps::before { left: 0.35rem; right: auto; top: 0.5rem; bottom: 0.5rem; border-top: 0; border-left: 1px dashed rgba(214, 255, 61, 0.45); }
+      .step { padding-top: 0; }
+      .step::before { left: -1.75rem; top: 0.3rem; }
+    }
+  </style>
 </head>
 <body>
 
@@ -131,6 +192,7 @@
             <a href="event-videography.html">Event Videography</a>
             <a href="corporate-video.html">Corporate Video</a>
             <a href="website-development.html" aria-current="page">Websites &amp; Branding</a>
+            <a href="brand-alignment.html">Brand Alignment</a>
             <a href="agencies.html">Agencies</a>
           </div>
         </div>
@@ -147,17 +209,17 @@
 
     <section class="hero photo-band photo-band--side" style="--photo: url('assets/img/web-development-code-dark.jpg'); --photo-pos: 60% 50%; --photo-opacity: 0.7;">
       <div class="wrap">
-        <p class="eyebrow">Websites &amp; branding</p>
+        <p class="eyebrow">Website design &amp; development</p>
         <h1 class="display-xl">The full <span class="sweep">package<span class="dot">.</span></span></h1>
-        <p class="lede">Video is where we started. It's not where we stop. Volare Media builds and rebuilds websites, shapes brands and runs marketing campaigns, with one support team of media and tech specialists behind it all.</p>
+        <p class="lede">Video is where we started. It's not where we stop. Volare Media designs, builds and rebuilds websites for businesses on Vancouver Island and across BC, shapes brands and runs marketing campaigns, with one support team of media and tech specialists behind it all.</p>
       </div>
     </section>
 
     <!-- Client marquee -->
     <section class="marquee" aria-label="Clients">
       <div class="marquee-track">
-        <span>Harbour City Kitchens</span><span>Stratos Nutrition</span><span>Maxxam Insurance</span><span>De Mode en Vogue</span><span>Sixty Forty</span><span>VICA</span><span>Peninsula Gives</span><span>Tailgate Toolkit</span><span>Harris</span><span>White Wolf Homes</span><span>Gas 2 Go</span><span>West Haven Cabinetry</span><span>Oakcrest Estates</span><span>Centre Mountain Business Park</span><span>It's A Doodle Labradoodle</span><span>Adam ATM</span>
-        <span>Harbour City Kitchens</span><span>Stratos Nutrition</span><span>Maxxam Insurance</span><span>De Mode en Vogue</span><span>Sixty Forty</span><span>VICA</span><span>Peninsula Gives</span><span>Tailgate Toolkit</span><span>Harris</span><span>White Wolf Homes</span><span>Gas 2 Go</span><span>West Haven Cabinetry</span><span>Oakcrest Estates</span><span>Centre Mountain Business Park</span><span>It's A Doodle Labradoodle</span><span>Adam ATM</span>
+        <span>Harbour City Kitchens</span><span>Stratos Nutrition</span><span>Maxxam Insurance</span><span>De Mode en Vogue</span><span>Sixty Forty</span><span>VICA</span><span>Peninsula Gives</span><span>Tailgate Toolkit</span><span>Harris</span><span>White Wolf Homes</span><span>Gas 2 Go</span><span>West Haven Cabinetry</span><span>Oakcrest Estates</span><span>Centre Mountain Business Park</span><span>It's A Doodle K9 Service</span><span>Adam ATM</span>
+        <span>Harbour City Kitchens</span><span>Stratos Nutrition</span><span>Maxxam Insurance</span><span>De Mode en Vogue</span><span>Sixty Forty</span><span>VICA</span><span>Peninsula Gives</span><span>Tailgate Toolkit</span><span>Harris</span><span>White Wolf Homes</span><span>Gas 2 Go</span><span>West Haven Cabinetry</span><span>Oakcrest Estates</span><span>Centre Mountain Business Park</span><span>It's A Doodle K9 Service</span><span>Adam ATM</span>
       </div>
     </section>
 
@@ -176,6 +238,7 @@
     <section class="section band--sky" id="in-the-works">
       <style>
         #in-the-works .site-shot {
+          display: block;
           margin: calc(-1 * clamp(1.5rem, 3vw, 2.25rem)) calc(-1 * clamp(1.5rem, 3vw, 2.25rem)) 1.5rem;
           position: relative;
           overflow: hidden;
@@ -183,6 +246,13 @@
         #in-the-works .site-shot img { display: block; width: 100%; aspect-ratio: 1152 / 648; object-fit: cover; object-position: top; opacity: 0.92; }
         #in-the-works .site-shot::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(12,13,9,0.08), rgba(20,22,15,0.5) 100%); }
         #in-the-works .card { overflow: hidden; }
+        #in-the-works .lede { margin-bottom: clamp(2rem, 4vw, 3rem); }
+        /* five projects: three across, then two wider */
+        @media (min-width: 64rem) {
+          #in-the-works .card-grid { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+          #in-the-works .card-grid > .card { grid-column: span 2; }
+          #in-the-works .card-grid > .card:nth-child(n+4) { grid-column: span 3; }
+        }
       </style>
       <div class="wrap">
         <div class="section-head reveal">
@@ -207,41 +277,107 @@
             <p>Full build for a Vancouver Island equipment dealer: product catalogue, financing, service and an SEO-ready news blog.</p>
             <span class="card-cue">Visit sviautomotive.com</span>
           </a>
+          <a class="card" href="https://demodeenvogue.ca" target="_blank" rel="noopener">
+            <span class="site-shot"><img src="assets/img/site-demodeenvogue.jpg" alt="The De Mode en Vogue online store homepage" loading="lazy"></span>
+            <p class="eyebrow">Live · Online store</p>
+            <h3>De Mode en Vogue</h3>
+            <p>A full revamp of their online store, with a video-led homepage built from the campaign we shot for them. We now manage the site, SEO, blog and ads.</p>
+            <span class="card-cue">Visit demodeenvogue.ca</span>
+          </a>
+          <a class="card" href="https://nine6teen.ca" target="_blank" rel="noopener">
+            <span class="site-shot"><img src="assets/img/site-ninesixteen.jpg" alt="The Nine Sixteen Entertainment website homepage" loading="lazy"></span>
+            <p class="eyebrow">Live · Studio website</p>
+            <h3>Nine Sixteen Entertainment</h3>
+            <p>A launch site for a Vancouver Island vertical-drama studio: the slate in development, how to partner with them and the team behind it.</p>
+            <span class="card-cue">Visit nine6teen.ca</span>
+          </a>
           <div class="card">
             <span class="site-shot"><img src="assets/img/site-itsadoodle.jpg" alt="The It's A Doodle Labradoodles website homepage, in development" loading="lazy"></span>
-            <p class="eyebrow">In development · Website</p>
-            <h3>It's A Doodle Labradoodles</h3>
-            <p>A full rebuild for this Sooke Labradoodle breeder: video-led homepage, Google reviews built in, and a look as warm as the puppies. Launching soon.</p>
+            <p class="eyebrow">In development · Rebrand &amp; website</p>
+            <h3>It's A Doodle K9 Service</h3>
+            <p>A full rebrand and rebuild for this Sooke Labradoodle breeder: all-new logos, a brand guide, realigned socials and a video-led website. <a href="brand-alignment.html#its-a-doodle">See the before</a>. Launching soon.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="wrap" style="padding-bottom: var(--section-gap);">
-      <div class="service-list">
-
-        <div class="service-row" id="websites">
-          <span class="service-num">(001)</span>
-          <h3>Website development</h3>
+    <!-- How it works -->
+    <section class="section how-it-works" id="how-it-works" aria-labelledby="how-head">
+      <div class="wrap">
+        <div class="section-head reveal">
           <div>
-            <p>A fast, modern, search-ready website, designed and built by the same team that tells your story on camera. New build or full rebuild of any website, we handle design, copy, development, launch and upkeep, so you're never chasing three vendors to change one page.</p>
-            <ul class="service-includes">
-              <li>New builds</li><li>Full rebuilds</li><li>Design &amp; copy</li><li>SEO foundations</li><li>Hosting &amp; upkeep</li>
-            </ul>
+            <p class="eyebrow">How it works</p>
+            <h2 id="how-head" class="display-lg">From first call<br>to <span class="sweep">launch day<span class="dot">.</span></span></h2>
           </div>
+          <p class="lede">A clear process, and the same people from the first call to long after the site goes live.</p>
         </div>
+        <ol class="steps reveal">
+          <li class="step"><span class="step-num">(01)</span><h3>Discovery call</h3><p>We look at your current website if you have one, your goals and who you need to reach, then give you a clear plan and price.</p></li>
+          <li class="step"><span class="step-num">(02)</span><h3>Plan &amp; design</h3><p>Sitemap, page designs and copy written for the searches your customers actually make, built around your brand and your video.</p></li>
+          <li class="step"><span class="step-num">(03)</span><h3>Build</h3><p>Fast, mobile-first, search-ready pages, with an online store, booking or lead forms wherever you need them.</p></li>
+          <li class="step"><span class="step-num">(04)</span><h3>Launch</h3><p>Redirects from your old pages, Google Search Console, analytics and ad tracking set up, so nothing gets lost in the switch.</p></li>
+          <li class="step"><span class="step-num">(05)</span><h3>Manage &amp; grow</h3><p>Updates, SEO, blog posts, ads and fresh video from the same team, so the site keeps working long after launch.</p></li>
+        </ol>
+        <div class="steps-cta reveal">
+          <a class="btn" href="contact.html?project=website">Start a website project</a>
+          <a class="bracket" href="#in-the-works">See the sites we've built</a>
+        </div>
+      </div>
+    </section>
 
-        <div class="service-row" id="brand-building">
-          <span class="service-num">(002)</span>
-          <h3>Brand building</h3>
+    <!-- Website types and industries -->
+    <section class="section band--sky grid-bleed grid-bleed--glow grid-bleed--left" id="website-types" aria-labelledby="types-head">
+      <div class="wrap">
+        <div class="section-head reveal">
           <div>
-            <p>For new companies, and for established ones that never got a real identity. We define how you look, how you sound and where you stand, positioning, identity and voice, so every video, page and post starts from the same place.</p>
-            <ul class="service-includes">
-              <li>Positioning</li><li>Visual identity</li><li>Brand voice</li><li>Launch assets</li>
-            </ul>
+            <p class="eyebrow">Website types</p>
+            <h2 id="types-head" class="display-lg">Websites for every<br>kind of <span class="sweep">business<span class="dot">.</span></span></h2>
           </div>
+          <p class="lede">Business websites, online stores, corporate sites and campaign landing pages, designed and built on Vancouver Island for companies across BC and Canada.</p>
         </div>
+        <div class="card-grid types-grid reveal">
+          <div class="card"><p class="eyebrow">Business</p><h3>Business websites</h3><p>Multi-page sites for service businesses: services, about, reviews, quote and contact forms, built to rank for what you do and where you do it.</p></div>
+          <div class="card"><p class="eyebrow">E-commerce</p><h3>E-commerce &amp; online stores</h3><p>Shopify stores with product pages, collections, wholesale and checkout, plus the ads and content that bring buyers in.</p></div>
+          <div class="card"><p class="eyebrow">Corporate</p><h3>Corporate websites</h3><p>Company sites with leadership, careers and partner pages, built to sit alongside your <a href="corporate-video.html">corporate video</a>.</p></div>
+          <div class="card"><p class="eyebrow">Property</p><h3>Real estate &amp; property websites</h3><p>Developments, listings and property managers: location, availability and enquiry forms, with drone and video front and centre.</p></div>
+          <div class="card"><p class="eyebrow">Portfolio</p><h3>Portfolio &amp; personal brand sites</h3><p>For filmmakers, artists, speakers and founders: your work, your story and an easy way to book you.</p></div>
+          <div class="card"><p class="eyebrow">Campaigns</p><h3>Campaign landing pages</h3><p>Single pages built for Google and Meta ads, with lead forms and conversion tracking set up from day one.</p></div>
+        </div>
+        <div class="industries reveal">
+          <p class="industries-label">Industries we build for</p>
+          <ul class="industry-chips"><li>Automotive &amp; equipment dealers</li><li>Retail &amp; fashion</li><li>Real estate &amp; property</li><li>Construction &amp; home builders</li><li>Trades &amp; home services</li><li>Hospitality, food &amp; drink</li><li>Professional &amp; corporate services</li><li>Film, music &amp; entertainment</li><li>Health &amp; wellness</li><li>Non-profits &amp; events</li><li>Pets &amp; breeders</li></ul>
+        </div>
+      </div>
+    </section>
 
+
+    <section class="grid-bleed grid-bleed--glow" style="padding-bottom: var(--section-gap);">
+      <div class="wrap">
+        <div class="service-list">
+
+          <div class="service-row" id="websites">
+            <span class="service-num">(001)</span>
+            <h3>Website development</h3>
+            <div>
+              <p>A fast, modern, search-ready website, designed and built by the same team that tells your story on camera. New build or full rebuild of any website, we handle design, copy, development, launch and upkeep, so you're never chasing three vendors to change one page.</p>
+              <ul class="service-includes">
+                <li>New builds</li><li>Full rebuilds</li><li>Design &amp; copy</li><li>SEO foundations</li><li>Hosting &amp; upkeep</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="service-row" id="brand-building">
+            <span class="service-num">(002)</span>
+            <h3>Brand building</h3>
+            <div>
+              <p>For new companies, and for established ones that never got a real identity. We define how you look, how you sound and where you stand, positioning, identity and voice, so every video, page and post starts from the same place.</p>
+              <ul class="service-includes">
+                <li>Positioning</li><li>Visual identity</li><li>Brand voice</li><li>Launch assets</li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
       </div>
     </section>
 
@@ -255,7 +391,7 @@
           <span class="service-num">(003)</span>
           <h3>Brand alignment</h3>
           <div>
-            <p>Your website says one thing, your socials say another, the sales deck says a third. We audit every touchpoint and bring them into line, one look, one voice, everywhere your audience finds you.</p>
+            <p>Your website says one thing, your socials say another, the sales deck says a third. We audit every touchpoint and bring them into line, one look, one voice, everywhere your audience finds you. <a href="brand-alignment.html">How brand alignment works</a>.</p>
             <ul class="service-includes">
               <li>Brand audits</li><li>Website &amp; social refresh</li><li>Guidelines &amp; templates</li><li>Rollout</li>
             </ul>
@@ -293,60 +429,37 @@
       <div class="wrap">
         <div class="section-head reveal">
           <div>
-            <p class="eyebrow">Why the full package</p>
-            <h2 class="display-lg">One team<span class="dot">.</span><br>One <span class="sweep">story<span class="dot">.</span></span></h2>
+            <p class="eyebrow">Pick your path</p>
+            <h2 class="display-lg">Where are you<br><span class="sweep">starting?</span></h2>
           </div>
+          <p class="lede">Pick the one that sounds like you. Every path starts with a conversation, not a contract.</p>
         </div>
-        <div class="card-grid reveal">
-
-          <details class="card">
-            <summary>
-              <p class="eyebrow">One roof</p>
-              <h3>No vendor juggling</h3>
-              <p>Website, brand, video and campaigns, one team and one thread instead of four vendors and a group chat.</p>
-              <span class="card-toggle" aria-hidden="true"></span>
-            </summary>
-            <div class="card-more">
-              <p>When the same people build your site and cut your videos, nothing gets lost in the handoff. The photography matches the film, the copy matches the script, and a change to one gets reflected in the other, without a week of email.</p>
-            </div>
-          </details>
-
-          <details class="card">
-            <summary>
-              <p class="eyebrow">Video-first</p>
-              <h3>Built around your film</h3>
-              <p>We design websites the way we design shots: around the story, with video front and centre.</p>
-              <span class="card-toggle" aria-hidden="true"></span>
-            </summary>
-            <div class="card-more">
-              <p>Most web designers treat video as an embed. We treat it as the point. Pages load fast, play smooth and put your best work where visitors actually see it, because we made that work too.</p>
-            </div>
-          </details>
-
-          <details class="card">
-            <summary>
-              <p class="eyebrow">Consistency</p>
-              <h3>Aligned everywhere</h3>
-              <p>Website, socials, print and video pulling in the same direction, one look, one voice.</p>
-              <span class="card-toggle" aria-hidden="true"></span>
-            </summary>
-            <div class="card-more">
-              <p>Trust is built on repetition. When every touchpoint looks and sounds like the same company, customers remember you, and campaigns work harder because every click lands somewhere that matches the ad.</p>
-            </div>
-          </details>
-
-          <details class="card">
-            <summary>
-              <p class="eyebrow">Ongoing</p>
-              <h3>Support on call</h3>
-              <p>Websites need updates and campaigns need tending. We stay on, a partner, not a one-off vendor.</p>
-              <span class="card-toggle" aria-hidden="true"></span>
-            </summary>
-            <div class="card-more">
-              <p>After launch, our support team keeps the site current, the content flowing and the campaigns measured, so your web presence keeps pace with your business instead of quietly going stale.</p>
-            </div>
-          </details>
-
+        <div class="card-grid paths-grid reveal">
+          <div class="card path-card path-card--lead">
+            <p class="eyebrow">I have a website</p>
+            <h3>Website rebuild &amp; redesign</h3>
+            <p>Slow, dated or hard to update? We rebuild it on a fast, modern, search-ready foundation, keep what works and carry your content and Google rankings across.</p>
+            <a class="btn" href="contact.html?project=rebuild">Rebuild my website</a>
+          </div>
+          <div class="card path-card">
+            <p class="eyebrow">I need a website</p>
+            <h3>New website design &amp; build</h3>
+            <p>Launching a business, a product or a fresh brand? We design, write and build it from a blank page, ready to be found in search from launch.</p>
+            <a class="btn" href="contact.html?project=new">Build my new website</a>
+          </div>
+          <div class="card path-card">
+            <p class="eyebrow">I sell online</p>
+            <h3>E-commerce &amp; online stores</h3>
+            <p>Shopify stores with product pages, collections and checkout, set up to take orders and to grow with SEO, content and ads.</p>
+            <a class="btn" href="contact.html?project=store">Start my online store</a>
+          </div>
+          <div class="card path-card">
+            <p class="eyebrow">My brand is all over the place</p>
+            <h3>Brand alignment</h3>
+            <p>Website, socials, print and video all saying different things? We audit every touchpoint and bring them into one look and one voice.</p>
+            <a class="btn" href="contact.html?project=brand">Align my brand</a>
+            <a class="bracket" href="brand-alignment.html" style="font-size:0.85rem;margin-top:1rem;">What's included</a>
+          </div>
         </div>
       </div>
     </section>
@@ -409,6 +522,30 @@
           </div>
         </details>
 
+        <details class="card">
+          <summary>
+            <p class="eyebrow">E-commerce</p>
+            <h3>Do you build online stores?</h3>
+            <p>Yes. Shopify stores, set up to sell and to grow.</p>
+            <span class="card-toggle" aria-hidden="true"></span>
+          </summary>
+          <div class="card-more">
+            <p>We design and build Shopify stores with product pages, collections, wholesale and checkout, then help them grow with SEO, content and ads. <a href="https://demodeenvogue.ca" target="_blank" rel="noopener">De Mode en Vogue</a>'s store is one we revamped and now manage.</p>
+          </div>
+        </details>
+
+        <details class="card">
+          <summary>
+            <p class="eyebrow">SEO</p>
+            <h3>Will a rebuild hurt our rankings?</h3>
+            <p>Not when it's planned properly.</p>
+            <span class="card-toggle" aria-hidden="true"></span>
+          </summary>
+          <div class="card-more">
+            <p>Before launch we map every old page to its new address with redirects, keep the content that already ranks, and submit the new site to Google Search Console, so the search traffic you've earned follows you to the new site.</p>
+          </div>
+        </details>
+
       </div>
       </div>
     </section>
@@ -441,6 +578,7 @@
               <li><a href="event-videography.html">Event Videography</a></li>
               <li><a href="corporate-video.html">Corporate Video</a></li>
               <li><a href="website-development.html">Websites &amp; Branding</a></li>
+              <li><a href="brand-alignment.html">Brand Alignment</a></li>
               <li><a href="work.html">Work</a></li>
               <li><a href="about.html">About</a></li>
               <li><a href="crew.html">The Crew</a></li>

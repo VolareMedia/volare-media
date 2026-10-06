@@ -58,7 +58,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Inter+Tight:ital,wght@0,400..800;1,400..800&family=Fragment+Mono:ital@0;1&display=swap" rel="stylesheet">
   <link rel="icon" href="favicon.svg?v=2" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css?v=31">
+  <link rel="stylesheet" href="styles.css?v=32">
   <style>
     .corp-cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(1.25rem, 2.5vw, 2rem); }
     .corp-card { overflow: hidden; }
@@ -160,6 +160,7 @@
             <a href="event-videography.html">Event Videography</a>
             <a href="corporate-video.html" aria-current="page">Corporate Video</a>
             <a href="website-development.html">Websites &amp; Branding</a>
+            <a href="brand-alignment.html">Brand Alignment</a>
             <a href="agencies.html">Agencies</a>
           </div>
         </div>
@@ -178,7 +179,7 @@
       <div class="wrap">
         <p class="eyebrow">Corporate video</p>
         <h1 class="display-xl" style="font-size:clamp(2.75rem,7vw,6.5rem);">Corporate videos<br>don't have to be <span class="sweep"><em>boring</em><span class="dot">.</span></span></h1>
-        <p class="lede">Corporate video is the work that lives on your website, inside your company and on LinkedIn. The film that shows how you actually work. The interview that introduces your team. The training your people finish. It isn't an ad and it isn't built for Instagram. It's the video that explains who you are to the people who need to know.</p>
+        <p class="lede">Corporate video is the work that lives on your website, inside your company and on LinkedIn. The film that shows how you actually work. <a href="how-we-film-interviews.html">The interview that introduces your team</a>. The training your people finish. It isn't an ad and it isn't built for Instagram. It's the video that explains who you are to the people who need to know.</p>
         <div style="margin-top:2rem;display:flex;flex-wrap:wrap;gap:1rem 1.75rem;align-items:center;">
           <a class="btn" href="contact.html">Start a project</a>
           <a class="bracket" href="#corporate-work">See two examples</a>
@@ -197,7 +198,7 @@
         </div>
         <div class="corp-cards reveal">
           <div class="card corp-card">
-            <span class="corp-shot"><img src="assets/img/home-interview-testimonial.jpg" alt="A client filmed for a website testimonial in her living room" loading="lazy"></span>
+            <span class="corp-shot"><img src="assets/img/corp-interview-backdrop.jpg" alt="Volare Media crew filming a seated interview against a grey backdrop, the shot on the monitor cart" loading="lazy"></span>
             <p class="eyebrow">Your website</p>
             <h3>The videos that do the explaining</h3>
             <p>The about film, the facility tour, the how-we-work piece, the customer testimonial. Answers to the questions people ask before they buy, so your sales team doesn't have to answer them one at a time.</p>
@@ -211,7 +212,7 @@
             <ul><li>Training</li><li>Onboarding</li><li>Safety</li><li>Executive messages</li></ul>
           </div>
           <div class="card corp-card">
-            <span class="corp-shot"><img src="assets/img/white-wolf-tailgate-interview.jpg" alt="A business owner interviewed on the tailgate of his truck at a job site" loading="lazy"></span>
+            <span class="corp-shot"><img src="assets/img/corp-interview-monitor.jpg" alt="Volare Media producer at the monitor cart during an on-camera interview" loading="lazy"></span>
             <p class="eyebrow">LinkedIn</p>
             <h3>Where corporate video gets seen</h3>
             <p>Leadership pieces, culture films, recruiting clips and milestone stories, cut to the length and shape LinkedIn rewards. This is where the people hiring you, and the people you want to hire, are already looking.</p>
@@ -299,53 +300,55 @@
     </section>
 
     <!-- What we make -->
-    <section class="wrap" style="padding-top: var(--section-gap); padding-bottom: var(--section-gap);">
-      <div class="section-head reveal">
-        <div>
-          <p class="eyebrow">Corporate video production</p>
-          <h2 class="display-lg">Corporate videos that keep<br>your business <span class="sweep">moving<span class="dot">.</span></span></h2>
-        </div>
-        <p class="lede" style="max-width:34rem;">Business video production for companies across Vancouver Island, BC and Canada: the films that explain what you do, train your people, recruit the next ones, cover your events and keep everyone connected. One crew, built for your website, your team and LinkedIn.</p>
-      </div>
-      <div class="service-list reveal">
-        <div class="service-row" id="story">
-          <span class="service-num">(001)</span>
-          <h3>Story &amp; facility films</h3>
+    <section class="grid-bleed grid-bleed--glow grid-bleed--left" style="padding-top: var(--section-gap); padding-bottom: var(--section-gap);">
+      <div class="wrap">
+        <div class="section-head reveal">
           <div>
-            <p>The about film, the facility tour, the how-we-work piece. Who you are, how you do it, and why it's worth trusting, for the homepage and the sales deck.</p>
-            <ul class="service-includes"><li>About films</li><li>Facility tours</li><li>Process films</li><li>Company history</li></ul>
+            <p class="eyebrow">Corporate video production</p>
+            <h2 class="display-lg">Corporate videos that keep<br>your business <span class="sweep">moving<span class="dot">.</span></span></h2>
           </div>
+          <p class="lede" style="max-width:34rem;">Business video production for companies across Vancouver Island, BC and Canada: the films that explain what you do, train your people, recruit the next ones, cover your events and keep everyone connected. One crew, built for your website, your team and LinkedIn.</p>
         </div>
-        <div class="service-row" id="interviews">
-          <span class="service-num">(002)</span>
-          <h3>Interviews &amp; testimonials</h3>
-          <div>
-            <p>Leaders, staff and customers on camera, interviewed rather than scripted, so they sound like themselves. The backbone of recruiting films, customer stories and culture pieces.</p>
-            <ul class="service-includes"><li>Customer stories</li><li>Recruiting films</li><li>Culture pieces</li><li>Leadership pieces</li></ul>
+        <div class="service-list reveal">
+          <div class="service-row" id="story">
+            <span class="service-num">(001)</span>
+            <h3>Story &amp; facility films</h3>
+            <div>
+              <p>The about film, the facility tour, the how-we-work piece. Who you are, how you do it, and why it's worth trusting, for the homepage and the sales deck.</p>
+              <ul class="service-includes"><li>About films</li><li>Facility tours</li><li>Process films</li><li>Company history</li></ul>
+            </div>
           </div>
-        </div>
-        <div class="service-row" id="training">
-          <span class="service-num">(003)</span>
-          <h3>Training &amp; onboarding</h3>
-          <div>
-            <p>Process walkthroughs, safety videos and onboarding modules that people finish. Clear, watchable, and identical every time they play.</p>
-            <ul class="service-includes"><li>Training modules</li><li>Safety videos</li><li>Onboarding series</li><li>Process walkthroughs</li></ul>
+          <div class="service-row" id="interviews">
+            <span class="service-num">(002)</span>
+            <h3>Interviews &amp; testimonials</h3>
+            <div>
+              <p>Leaders, staff and customers on camera, interviewed rather than scripted, so they sound like themselves. The backbone of recruiting films, customer stories and culture pieces.</p>
+              <ul class="service-includes"><li>Customer stories</li><li>Recruiting films</li><li>Culture pieces</li><li>Leadership pieces</li></ul>
+            </div>
           </div>
-        </div>
-        <div class="service-row" id="internal">
-          <span class="service-num">(004)</span>
-          <h3>Internal comms &amp; leadership</h3>
-          <div>
-            <p>Executive messages, announcements, town-hall recaps and milestone films. Internal video that carries tone as well as information.</p>
-            <ul class="service-includes"><li>Executive messages</li><li>Announcements</li><li>Town-hall recaps</li><li>Milestone films</li></ul>
+          <div class="service-row" id="training">
+            <span class="service-num">(003)</span>
+            <h3>Training &amp; onboarding</h3>
+            <div>
+              <p>Process walkthroughs, safety videos and onboarding modules that people finish. Clear, watchable, and identical every time they play.</p>
+              <ul class="service-includes"><li>Training modules</li><li>Safety videos</li><li>Onboarding series</li><li>Process walkthroughs</li></ul>
+            </div>
           </div>
-        </div>
-        <div class="service-row" id="events">
-          <span class="service-num">(005)</span>
-          <h3>Events, retreats &amp; seminars</h3>
-          <div>
-            <p>Conferences, corporate retreats, seminars, AGMs, galas and fundraisers. Covered on the day and cut into recap films, speaker clips and highlights your team can share while the room is still talking about it. <a href="event-videography.html">More on event videography</a>.</p>
-            <ul class="service-includes"><li>Event recaps</li><li>Retreat films</li><li>Seminar recordings</li><li>Fundraisers &amp; galas</li><li>Speaker clips</li></ul>
+          <div class="service-row" id="internal">
+            <span class="service-num">(004)</span>
+            <h3>Internal comms &amp; leadership</h3>
+            <div>
+              <p>Executive messages, announcements, town-hall recaps and milestone films. Internal video that carries tone as well as information.</p>
+              <ul class="service-includes"><li>Executive messages</li><li>Announcements</li><li>Town-hall recaps</li><li>Milestone films</li></ul>
+            </div>
+          </div>
+          <div class="service-row" id="events">
+            <span class="service-num">(005)</span>
+            <h3>Events, retreats &amp; seminars</h3>
+            <div>
+              <p>Conferences, corporate retreats, seminars, AGMs, galas and fundraisers. Covered on the day and cut into recap films, speaker clips and highlights your team can share while the room is still talking about it. <a href="event-videography.html">More on event videography</a>.</p>
+              <ul class="service-includes"><li>Event recaps</li><li>Retreat films</li><li>Seminar recordings</li><li>Fundraisers &amp; galas</li><li>Speaker clips</li></ul>
+            </div>
           </div>
         </div>
       </div>
@@ -416,6 +419,7 @@
               <li><a href="event-videography.html">Event Videography</a></li>
               <li><a href="corporate-video.html">Corporate Video</a></li>
               <li><a href="website-development.html">Websites &amp; Branding</a></li>
+              <li><a href="brand-alignment.html">Brand Alignment</a></li>
               <li><a href="work.html">Work</a></li>
               <li><a href="about.html">About</a></li>
               <li><a href="crew.html">The Crew</a></li>

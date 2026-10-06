@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <!-- Meta Pixel: Volare Media Marketing's Pixel (dataset 612504680491197) -->
+  <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '612504680491197');
+    fbq('track', 'PageView');
+    // Standard event: contact form sent (contact-form.php redirects to contact.html?sent=1)
+    if (/[?&]sent=1/.test(location.search)) fbq('track', 'Lead');
+    // Standard event: phone number tapped (tel: links anywhere on the page)
+    document.addEventListener('click', function (e) {
+      var a = e.target.closest && e.target.closest('a[href^="tel:"]');
+      if (a) fbq('track', 'Contact');
+    });
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=612504680491197&ev=PageView&noscript=1"/></noscript>
+  <!-- Google tag (gtag.js): Google Ads conversion tracking (AW-16968991307) + Google Analytics 4 (G-0VDTC0MJHJ) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-16968991307"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'AW-16968991307');
+    gtag('config', 'G-0VDTC0MJHJ');
+    // Contact form sent (contact-form.php redirects to contact.html?sent=1)
+    if (/[?&]sent=1/.test(location.search)) {
+      gtag('event', 'conversion', {'send_to': 'AW-16968991307/e1ijCNKw5YYdEMuEuZs_'});
+      gtag('event', 'generate_lead', {'method': 'contact_form'});
+    }
+    // Phone number tapped
+    document.addEventListener('click', function (e) {
+      if (e.target.closest && e.target.closest('a[href^="tel:"]')) {
+        gtag('event', 'conversion', {'send_to': 'AW-16968991307/qA6TCNWw5YYdEMuEuZs_'});
+        gtag('event', 'phone_tap');
+      }
+    });
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brand Alignment &amp; Rebranding on Vancouver Island | Volare Media</title>
+  <meta name="description" content="Brand alignment and rebranding for businesses on Vancouver Island and across BC: one logo, name, colour palette and message across your website, socials, Google profile and print, plus a brand guide your team can use.">
+  <link rel="canonical" href="https://www.volaremedia.net/brand-alignment.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Brand Alignment &amp; Rebranding | Volare Media">
+  <meta property="og:description" content="One brand, everywhere: your logo, name, colours and message matched across your website, socials, Google profile and print.">
+  <meta property="og:url" content="https://www.volaremedia.net/brand-alignment.html">
+  <meta property="og:image" content="https://www.volaremedia.net/assets/img/web-development-code-dark.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Inter+Tight:ital,wght@0,400..800;1,400..800&family=Fragment+Mono:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="icon" href="favicon.svg?v=2" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css?v=32">
+
+  <style>
+    .ba-hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 1.25rem 2rem; margin-top: 2rem; }
+    .symptoms { margin-top: 2rem; }
+    @media (min-width: 64rem) { .symptoms { grid-template-columns: repeat(3, minmax(0, 1fr)); } .ba-who { grid-template-columns: repeat(3, minmax(0, 1fr)); } #ba-faq .card-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    .symptoms .card h3 { font-size: 1.25rem; }
+    .steps { list-style: none; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: clamp(1rem, 2vw, 1.75rem); position: relative; }
+    .steps::before { content: ""; position: absolute; left: 0; right: 0; top: 0.55rem; border-top: 1px dashed rgba(214, 255, 61, 0.45); }
+    .step { position: relative; padding-top: 2.25rem; }
+    .step::before { content: ""; position: absolute; top: 0.2rem; left: 0; width: 0.75rem; height: 0.75rem; border-radius: 50%; background: var(--volt); box-shadow: 0 0 0 5px var(--bg); }
+    .step-num { font-family: var(--font-mono); font-size: 0.78rem; color: var(--lilac); }
+    .step h3 { font-size: 1.35rem; margin: 0.4rem 0 0.6rem; }
+    .step p { color: var(--muted); font-size: 0.95rem; line-height: 1.55; }
+    .steps-cta { display: flex; flex-wrap: wrap; align-items: center; gap: 1.25rem 2rem; margin-top: clamp(2.5rem, 4vw, 3.5rem); }
+    .compare-col { position: relative; }
+    .ba-case { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: clamp(2rem, 5vw, 4.5rem); align-items: start; }
+    .ba-case .eyebrow { margin-bottom: 1rem; }
+    .ba-changes { list-style: none; display: grid; gap: 0.85rem; margin-bottom: 1.75rem; }
+    .ba-changes li { position: relative; padding-left: 1.6rem; color: var(--muted); line-height: 1.55; }
+    .ba-changes li::before { content: ""; position: absolute; left: 0; top: 0.5rem; width: 0.6rem; height: 0.6rem; border-radius: 50%; background: var(--volt); }
+    .ba-changes b { color: var(--cream); font-weight: 600; }
+    .ba-after { border: 1px dashed rgba(214, 255, 61, 0.5); border-radius: 1rem; padding: 1.1rem 1.25rem; margin-bottom: 1.5rem; }
+    .ba-after p { color: var(--muted); margin-top: 0.6rem; }
+    @media (max-width: 64rem) {
+      .steps { grid-template-columns: minmax(0, 1fr); gap: 1.75rem; padding-left: 1.75rem; }
+      .steps::before { left: 0.35rem; right: auto; top: 0.5rem; bottom: 0.5rem; border-top: 0; border-left: 1px dashed rgba(214, 255, 61, 0.45); }
+      .step { padding-top: 0; }
+      .step::before { left: -1.75rem; top: 0.3rem; }
+      .ba-case { grid-template-columns: minmax(0, 1fr); }
+    }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "Brand Alignment and Rebranding",
+    "serviceType": "Brand alignment, rebranding, logo refresh, brand guidelines and brand rollout",
+    "description": "Brand alignment and rebranding for small and growing businesses: a full audit of every touchpoint, logo refresh or rebrand, colour and type, voice and core message, a practical brand guide, and a coordinated rollout across the website, social profiles, Google Business Profile, print and video.",
+    "provider": {
+      "@type": "ProfessionalService",
+      "name": "Volare Media",
+      "url": "https://www.volaremedia.net",
+      "telephone": "+1-250-589-4521",
+      "email": "video@volaremedia.net",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Victoria",
+        "addressRegion": "BC",
+        "addressCountry": "CA"
+      }
+    },
+    "areaServed": [
+      "Victoria BC",
+      "Vancouver Island",
+      "British Columbia",
+      "Canada"
+    ],
+    "url": "https://www.volaremedia.net/brand-alignment.html"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How long does brand alignment take?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "It depends on how many places your brand lives and whether a website rebuild is part of it. After the first audit we give you a clear timeline and price, and we roll everything out together at the end so nothing is left half-changed."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do we have to change our logo?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. If your logo works, we keep it and clean it up into a proper set of files: a main logo, a compact badge and a horizontal version. If it's holding you back, we can redesign it or take you through a full rebrand."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can you rebuild our website as part of it?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. The website is usually where a drifted brand shows most, and it's where your ads and videos send people. We refresh or rebuild it as part of the package, or work with your existing site if it's in good shape."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "We're a brand new business. Is this for us?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "It's the best time to do it. Building the name, logo, colours, message and brand guide together, then launching everywhere at once, means you never drift in the first place."
+        }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+  <div class="contact-bar">
+    <div class="wrap">
+      <span class="bar-note">Vancouver Island based, video production across BC &amp; Canada</span>
+      <span><a href="tel:+12505894521">250.589.4521</a> &nbsp;·&nbsp; <a href="mailto:video@volaremedia.net">video@volaremedia.net</a></span>
+    </div>
+  </div>
+
+  <header class="site-header">
+    <div class="wrap">
+      <a class="logo" href="index.html" aria-label="Volare Media, home"><img src="assets/vm-logo.png" alt="Volare Media logo"></a>
+      <button class="nav-toggle" aria-expanded="false" aria-controls="main-nav">Menu</button>
+      <nav class="main-nav" id="main-nav" aria-label="Main">
+        <a href="index.html">Home</a>
+        <div class="nav-drop">
+          <a class="nav-drop-trigger" href="services.html">Services<span class="caret" aria-hidden="true">▾</span></a>
+          <div class="nav-drop-menu">
+            <a href="services.html">All Services</a>
+            <a href="marketing-videos.html">Marketing Videos</a>
+            <a href="creative-direction.html">Creative Direction</a>
+            <a href="event-videography.html">Event Videography</a>
+            <a href="corporate-video.html">Corporate Video</a>
+            <a href="website-development.html">Websites &amp; Branding</a>
+            <a href="brand-alignment.html" aria-current="page">Brand Alignment</a>
+            <a href="agencies.html">Agencies</a>
+          </div>
+        </div>
+        <a href="work.html">Work</a>
+        <a href="about.html">About</a>
+        <a href="community.html">Community</a>
+        <a href="journal.html">Journal</a>
+        <a class="btn" href="contact.html">Start a project</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <section class="hero photo-band photo-band--side" style="--photo: url('assets/img/vm-production-notes.jpg'); --photo-pos: 55% 40%; --photo-opacity: 0.5;">
+      <div class="wrap">
+        <p class="eyebrow">Brand alignment &amp; rebranding</p>
+        <h1 class="display-xl">One brand<span class="dot">.</span><br><span class="sweep">Everywhere<span class="dot">.</span></span></h1>
+        <p class="lede">Your logo, name, colours and message, matched across your website, Facebook, Instagram, LinkedIn, Google and everything you print. Brand alignment and rebranding for businesses on Vancouver Island and across BC, from the team that makes your video.</p>
+        <div class="ba-hero-actions">
+          <a class="btn" href="contact.html?project=brand">Align my brand</a>
+          <a class="bracket" href="what-is-brand-alignment.html">What is brand alignment?</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="ba-signs">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div>
+            <p class="eyebrow">Sound familiar?</p>
+            <h2 id="ba-signs" class="display-lg">Signs your brand<br>has <span class="sweep">drifted<span class="dot">.</span></span></h2>
+          </div>
+          <p class="lede">It happens to most small businesses. A staff member here, a freelancer there, a family member helping out, and over the years every platform ends up looking a little different. It's nobody's fault, and it's very fixable.</p>
+        </div>
+        <div class="brand-drift reveal" role="img" aria-label="Illustration: the same business shown on its website, Facebook, Instagram and LinkedIn. In the drifted row each one has a different colour, logo shape and name. In the aligned row all four match.">
+          <div class="brand-drift-row brand-drift-row--drifted">
+            <span class="brand-drift-label">Drifted</span>
+            <div class="bd-card"><span class="bd-where">Website</span><span class="bd-mark"><span class="bd-dot"></span><span class="bd-name">Your Business Co.</span></span><span class="bd-bar"></span></div>
+            <div class="bd-card"><span class="bd-where">Facebook</span><span class="bd-mark"><span class="bd-dot"></span><span class="bd-name">YourBiz Services</span></span><span class="bd-bar"></span></div>
+            <div class="bd-card"><span class="bd-where">Instagram</span><span class="bd-mark"><span class="bd-dot"></span><span class="bd-name">@yourbiz.co</span></span><span class="bd-bar"></span></div>
+            <div class="bd-card"><span class="bd-where">LinkedIn</span><span class="bd-mark"><span class="bd-dot"></span><span class="bd-name">Your Business Ltd.</span></span><span class="bd-bar"></span></div>
+          </div>
+          <div class="brand-drift-row brand-drift-row--aligned">
+            <span class="brand-drift-label">Aligned</span>
+            <div class="bd-card"><span class="bd-where">Website</span><span class="bd-mark"><span class="bd-dot"></span><span class="bd-name">Your Business</span></span><span class="bd-bar"></span></div>
+            <div class="bd-card"><span class="bd-where">Facebook</span><span class="bd-mark"><span class="bd-dot"></span><span class="bd-name">Your Business</span></span><span class="bd-bar"></span></div>
+            <div class="bd-card"><span class="bd-where">Instagram</span><span class="bd-mark"><span class="bd-dot"></span><span class="bd-name">Your Business</span></span><span class="bd-bar"></span></div>
+            <div class="bd-card"><span class="bd-where">LinkedIn</span><span class="bd-mark"><span class="bd-dot"></span><span class="bd-name">Your Business</span></span><span class="bd-bar"></span></div>
+          </div>
+          <p class="brand-drift-note">Illustration. Same business, four places a customer might find it.</p>
+        </div>
+        <div class="card-grid symptoms reveal">
+          <div class="card"><p class="eyebrow">Logo</p><h3>Three versions of your logo</h3><p>A different one on the website, the Facebook page and the business cards, and nobody is sure which is current.</p></div>
+          <div class="card"><p class="eyebrow">Name</p><h3>A name that changes</h3><p>Written one way on Google, another on Instagram and a third on your invoices.</p></div>
+          <div class="card"><p class="eyebrow">Colour</p><h3>Colours that are almost the same</h3><p>Five shades of what is supposed to be your brand colour, depending on who made the graphic.</p></div>
+          <div class="card"><p class="eyebrow">Message</p><h3>A different story on every page</h3><p>Your homepage, your bios and your ads all describe the business differently.</p></div>
+          <div class="card"><p class="eyebrow">Socials</p><h3>Profiles that don't match</h3><p>Old cover images, an outdated bio, a profile picture from three years ago.</p></div>
+          <div class="card"><p class="eyebrow">Files</p><h3>No one can find the logo file</h3><p>Every new graphic starts with a screenshot, so it gets a little blurrier each time.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section band--sky" aria-labelledby="ba-why">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div>
+            <p class="eyebrow">Why it matters</p>
+            <h2 id="ba-why" class="display-lg">Your video buys the attention<span class="dot">.</span><br>Your brand <span class="sweep">keeps it<span class="dot">.</span></span></h2>
+          </div>
+        </div>
+        <p class="lede reveal">We kept seeing great <a href="marketing-videos.html">marketing videos</a> do their job, then lose people the moment they landed on a website or Instagram page that felt like a different company. When the ad, the landing page, your socials and your Google profile all look and sound the same, every touchpoint builds trust instead of breaking it, and every dollar you spend on marketing goes further.</p>
+      </div>
+    </section>
+
+    <section class="grid-bleed grid-bleed--glow grid-bleed--left" style="padding-top: var(--section-gap); padding-bottom: var(--section-gap);" aria-labelledby="ba-included">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div>
+            <p class="eyebrow">What's included</p>
+            <h2 id="ba-included" class="display-lg">A brand alignment<br><span class="sweep">package<span class="dot">.</span></span></h2>
+          </div>
+        </div>
+        <div class="service-list">
+
+        <div class="service-row">
+          <span class="service-num">(001)</span>
+          <h3>Brand audit</h3>
+          <div>
+            <p>We put every place your business appears side by side: website, Facebook, Instagram, LinkedIn, Google Business Profile, email, print and video, and show you exactly where it has drifted.</p>
+            <ul class="service-includes">
+              <li>Touchpoint audit</li><li>Competitor check</li><li>Customer questions</li><li>Priorities</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="service-row">
+          <span class="service-num">(002)</span>
+          <h3>Logo refresh or full rebrand</h3>
+          <div>
+            <p>Keep and clean up the logo you have, or design a new one. Either way you get a proper set: a main logo, a compact badge for profile pictures and a horizontal version for headers.</p>
+            <ul class="service-includes">
+              <li>Logo cleanup</li><li>Logo design</li><li>Badge &amp; icon</li><li>Full rebrand</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="service-row">
+          <span class="service-num">(003)</span>
+          <h3>Colour, type &amp; visual style</h3>
+          <div>
+            <p>One palette and one type style that work on screen, in print and in video, plus the photo and graphic style that goes with them.</p>
+            <ul class="service-includes">
+              <li>Colour palette</li><li>Typography</li><li>Photo style</li><li>Graphic elements</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="service-row">
+          <span class="service-num">(004)</span>
+          <h3>Voice &amp; core message</h3>
+          <div>
+            <p>Who you are and why customers choose you, written once and used everywhere, from your homepage to your Instagram bio to your ads.</p>
+            <ul class="service-includes">
+              <li>Core message</li><li>Tagline</li><li>Tone of voice</li><li>Bios &amp; boilerplate</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="service-row">
+          <span class="service-num">(005)</span>
+          <h3>Brand guide</h3>
+          <div>
+            <p>A short, practical guide that shows staff, family or any future freelancer exactly how to use the brand, so it stays aligned after we hand it back.</p>
+            <ul class="service-includes">
+              <li>Brand guidelines</li><li>Logo files</li><li>Templates</li><li>Do &amp; don't examples</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="service-row">
+          <span class="service-num">(006)</span>
+          <h3>Rollout everywhere</h3>
+          <div>
+            <p>The website, social profiles, Google Business Profile, email signatures and print all updated together, so nothing old is left behind. Plus video and photo shot to match.</p>
+            <ul class="service-includes">
+              <li>Website refresh</li><li>Social profiles</li><li>Google Business Profile</li><li>Print &amp; signage</li>
+            </ul>
+          </div>
+        </div>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="section band--sky" aria-labelledby="ba-who">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div>
+            <p class="eyebrow">Who it's for</p>
+            <h2 id="ba-who" class="display-lg">Drifted, new<br>or <span class="sweep">rebranding<span class="dot">.</span></span></h2>
+          </div>
+        </div>
+        <div class="card-grid ba-who reveal">
+          <div class="card"><p class="eyebrow">Drifted</p><h3>Brands that have drifted</h3><p>Years of different people helping out have left your website, socials and print all looking a little different. We bring it back together.</p></div>
+          <div class="card"><p class="eyebrow">New</p><h3>New businesses</h3><p>Launching something new? Build the name, logo, colours, message and guide together, and start aligned from day one.</p></div>
+          <div class="card"><p class="eyebrow">Rebrand</p><h3>Rebrands</h3><p>New name, new colours or a new logo, rolled out everywhere at once so the old look doesn't linger on Facebook and the van for years.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="ba-how">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div>
+            <p class="eyebrow">How it works</p>
+            <h2 id="ba-how" class="display-lg">From first meeting<br>to <span class="sweep">rollout<span class="dot">.</span></span></h2>
+          </div>
+        </div>
+        <ol class="steps reveal">
+          <li class="step"><span class="step-num">(01)</span><h3>Sit down &amp; audit</h3><p>We meet with you, talk through the business and the customers, and audit every touchpoint together.</p></li>
+          <li class="step"><span class="step-num">(02)</span><h3>Define</h3><p>Name, core message, voice and priorities, agreed before anything is designed.</p></li>
+          <li class="step"><span class="step-num">(03)</span><h3>Design</h3><p>Logo set, palette, type and visual style, refined with you until it feels right.</p></li>
+          <li class="step"><span class="step-num">(04)</span><h3>Roll out</h3><p>Website, socials, Google profile, templates and print, all updated together.</p></li>
+          <li class="step"><span class="step-num">(05)</span><h3>Keep it aligned</h3><p>A brand guide for your team, plus ongoing content, video and support from us if you want it.</p></li>
+        </ol>
+        <div class="steps-cta reveal">
+          <a class="btn" href="contact.html?project=brand">Start with an audit</a>
+          <a class="bracket" href="website-development.html">Need a new website too?</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section band--sky grid-bleed grid-bleed--glow" id="its-a-doodle" aria-labelledby="ba-case">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div>
+            <p class="eyebrow">Case study · In progress</p>
+            <h2 id="ba-case" class="display-lg">It's A Doodle<br><span class="sweep">K9 Service<span class="dot">.</span></span></h2>
+          </div>
+          <p class="lede">A much-loved Labradoodle breeder in Sooke, a brand video that was already working, and a brand that had grown in layers. Everything on the left is getting an upgrade, and the new homepage on the right shows where it's going.</p>
+        </div>
+        <div class="reveal">
+          <div class="site-compare">
+          <figure class="compare-col">
+            <div class="compare-frame" tabindex="0" aria-label="Scrollable capture of the current It's A Doodle homepage">
+              <img src="assets/img/doodle-before-full.jpg" alt="The full current It's A Doodle homepage: a busy, older layout with mixed logos, bullet-point copy and coloured blocks" loading="lazy">
+            </div>
+            <span class="before-stamp">Before</span>
+            <figcaption>The current homepage. Two names, three logos, and a layout that has grown in layers.</figcaption>
+          </figure>
+          <figure class="compare-col compare-col--after">
+            <div class="compare-frame" tabindex="0" aria-label="Scrollable capture of the new It's A Doodle homepage design">
+              <img src="assets/img/doodle-after-full.jpg" alt="The new It's A Doodle homepage design: a video hero, three clear paths, Google reviews, video testimonials and a note from the owner" loading="lazy">
+            </div>
+            <span class="before-stamp">After</span>
+            <figcaption>The new homepage design, in progress. The name and logos update to It's A Doodle K9 Service with the new brand.</figcaption>
+          </figure>
+        </div>
+        <p class="compare-hint">Hover over each page to scroll it</p>
+        </div>
+        <div class="ba-case reveal" style="margin-top:clamp(2.5rem,5vw,4rem);">
+          <div class="ba-before">
+            <p class="eyebrow">Where it started</p>
+            <div class="logo-chips">
+              <figure class="logo-chip"><img src="assets/img/doodle-logo-bone.png" alt="Current It's A Doodle Labradoodles bone logo" loading="lazy"></figure>
+              <figure class="logo-chip"><img src="assets/img/doodle-logo-paw.png" alt="Current It's A Doodle Labradoodles paw badge logo" loading="lazy"></figure>
+              <figure class="logo-chip"><img src="assets/img/doodle-logo-wordmark.jpg" alt="Current Doodle Labradoodles wordmark logo" loading="lazy"></figure>
+            </div>
+            <p class="before-caption">Three logo versions in use today. All of them are being replaced.</p>
+            <p class="before-caption" style="margin-top:1.25rem;">Two names in use: It's A Doodle Labradoodles on the logos, It's A Doodle K9 Service in the website's top bar.</p>
+          </div>
+          <div>
+            <p class="eyebrow">What's changing</p>
+            <h3 class="display-md" style="margin-bottom:1.25rem;">One name. One brand. Everywhere<span class="dot">.</span></h3>
+            <ul class="ba-changes">
+              <li><b>The name.</b> Back to the original: It's A Doodle K9 Service, used the same way everywhere.</li>
+              <li><b>All-new logos and design.</b> A fresh logo set and visual style, developed with the owners and approved together.</li>
+              <li><b>A full brand guide.</b> Logos, colours, type, voice and templates, so it stays aligned for years.</li>
+              <li><b>A rebuilt website,</b> centred on the brand video we made for them.</li>
+              <li><b>Instagram and Facebook,</b> rebuilt and realigned: profile images, covers, bios and highlights.</li>
+              <li><b>Google, upgraded and connected.</b> Their Google Business Profile refreshed and linked to every social platform.</li>
+            </ul>
+            <div class="ba-after">
+              <span class="before-stamp" style="position:static;display:inline-block;">After</span>
+              <p>The finished brand and website launch in 2027, with the new name and logos in place. We'll update this page when they go live.</p>
+            </div>
+            <a class="bracket" href="what-is-brand-alignment.html">Read the full story</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="ba-faq" aria-labelledby="ba-faq-head">
+      <div class="wrap">
+      <div class="section-head reveal">
+        <div>
+          <p class="eyebrow">Common questions</p>
+          <h2 id="ba-faq-head" class="display-lg">Asked, <span class="sweep">answered</span><span class="dot">.</span></h2>
+        </div>
+      </div>
+      <div class="card-grid reveal">
+
+        <details class="card">
+          <summary>
+            <p class="eyebrow">Timing</p>
+            <h3>How long does brand alignment take?</h3>
+            <span class="card-toggle" aria-hidden="true"></span>
+          </summary>
+          <div class="card-more">
+            <p>It depends on how many places your brand lives and whether a website rebuild is part of it. After the first audit we give you a clear timeline and price, and we roll everything out together at the end so nothing is left half-changed.</p>
+          </div>
+        </details>
+
+        <details class="card">
+          <summary>
+            <p class="eyebrow">Logo</p>
+            <h3>Do we have to change our logo?</h3>
+            <span class="card-toggle" aria-hidden="true"></span>
+          </summary>
+          <div class="card-more">
+            <p>No. If your logo works, we keep it and clean it up into a proper set of files: a main logo, a compact badge and a horizontal version. If it's holding you back, we can redesign it or take you through a full rebrand.</p>
+          </div>
+        </details>
+
+        <details class="card">
+          <summary>
+            <p class="eyebrow">Website</p>
+            <h3>Can you rebuild our website as part of it?</h3>
+            <span class="card-toggle" aria-hidden="true"></span>
+          </summary>
+          <div class="card-more">
+            <p>Yes. The website is usually where a drifted brand shows most, and it's where your ads and videos send people. We refresh or rebuild it as part of the package, or work with your existing site if it's in good shape.</p>
+          </div>
+        </details>
+
+        <details class="card">
+          <summary>
+            <p class="eyebrow">New brands</p>
+            <h3>We're a brand new business. Is this for us?</h3>
+            <span class="card-toggle" aria-hidden="true"></span>
+          </summary>
+          <div class="card-more">
+            <p>It's the best time to do it. Building the name, logo, colours, message and brand guide together, then launching everywhere at once, means you never drift in the first place.</p>
+          </div>
+        </details>
+
+      </div>
+      </div>
+    </section>
+
+    <section class="cta band--volt">
+      <div class="wrap reveal">
+        <p class="eyebrow">Ready to line it up?</p>
+        <h2 class="display-lg">One brand,<br>everywhere<span class="dot">.</span></h2>
+        <a class="btn" href="contact.html?project=brand">Align my brand</a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer photo-band" style="--photo: url('assets/img/footer-crew-cinema.jpg'); --photo-pos: 60% 42%; --photo-opacity: 0.4;">
+    <div class="wrap">
+      <div class="footer-top">
+        <div>
+          <p class="footer-mark"><img src="assets/vm-logo.png" alt="Volare Media logo"></p>
+          <p class="footer-tag">Stories worth <em>sharing</em><span class="dot">.</span></p>
+        </div>
+        <div class="footer-cols">
+          <div>
+            <h4>Pages</h4>
+            <ul>
+              <li><a href="services.html">Services</a></li>
+              <li><a href="marketing-videos.html">Marketing Videos</a></li>
+              <li><a href="creative-direction.html">Creative Direction</a></li>
+              <li><a href="agencies.html">Agencies &amp; Brands</a></li>
+              <li><a href="event-videography.html">Event Videography</a></li>
+              <li><a href="corporate-video.html">Corporate Video</a></li>
+              <li><a href="website-development.html">Websites &amp; Branding</a></li>
+              <li><a href="brand-alignment.html">Brand Alignment</a></li>
+              <li><a href="work.html">Work</a></li>
+              <li><a href="about.html">About</a></li>
+              <li><a href="crew.html">The Crew</a></li>
+              <li><a href="crew.html#partners">Production Partners</a></li>
+              <li><a href="community.html">Community</a></li>
+              <li><a href="journal.html">Journal</a></li>
+              <li><a href="contact.html">Contact</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Contact</h4>
+            <ul>
+              <li><a href="mailto:video@volaremedia.net">video@volaremedia.net</a></li>
+              <li><a href="tel:+12505894521">250.589.4521</a></li>
+              <li>Victoria, BC, Canada</li>
+            </ul>
+          </div>
+          <div>
+            <h4>Follow</h4>
+            <ul>
+              <li><a href="https://www.instagram.com/volare.media" rel="noopener">Instagram</a></li>
+              <li><a href="https://www.facebook.com/VolareMedia.net" rel="noopener">Facebook</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer-base">
+        <span>© 2026 Volare Media. All rights reserved. · <a href="privacy-policy.html">Privacy policy</a></span>
+        <span>Video production across Vancouver Island, BC &amp; Canada</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js?v=30"></script>
+</body>
+</html>

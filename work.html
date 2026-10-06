@@ -47,7 +47,7 @@
   </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Our Work: Video Production Portfolio | Volare Media, Victoria BC</title>
-  <meta name="description" content="Video production portfolio from Volare Media in Victoria, BC: TV commercials, brand films, music videos and social content for Barnes Powersports, Sixty Forty, Maxxam Insurance and more.">
+  <meta name="description" content="Video production portfolio from Volare Media in Victoria, BC: TV commercials, brand films, music videos and social content for De Mode en Vogue, Sixty Forty, Maxxam Insurance and more.">
   <link rel="canonical" href="https://www.volaremedia.net/work.html">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Our Work | Volare Media">
@@ -57,7 +57,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Inter+Tight:ital,wght@0,400..800;1,400..800&family=Fragment+Mono:ital@0;1&display=swap" rel="stylesheet">
   <link rel="icon" href="favicon.svg?v=2" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css?v=31">
+  <link rel="stylesheet" href="styles.css?v=32">
   <script type="application/ld+json">
   [
     {
@@ -85,12 +85,12 @@
     {
       "@context": "https://schema.org",
       "@type": "VideoObject",
-      "name": "Barnes Powersports",
-      "description": "Motorsports commercial produced by Volare Media for Barnes Powersports in Victoria, BC.",
-      "thumbnailUrl": "https://i.vimeocdn.com/video/1602140906-3a2bbe45d08975a98760f07d059fb95bd4dc7585d757ec62879c1c5272872b92-d_1280x720?region=us",
-      "uploadDate": "2023-02-02",
-      "duration": "PT59S",
-      "embedUrl": "https://player.vimeo.com/video/795449073",
+      "name": "When Your Outfit Is Missing Something | De Mode en Vogue",
+      "description": "Campaign commercial produced by Volare Media for De Mode en Vogue's Italian tights: the first spot in the \"When your outfit is missing something\" campaign.",
+      "thumbnailUrl": "https://www.volaremedia.net/assets/img/dmev-outfit-missing-something.jpg",
+      "uploadDate": "2026-09-08",
+      "duration": "PT33S",
+      "embedUrl": "https://www.youtube.com/embed/DUAHFEBabnU",
       "publisher": { "@type": "Organization", "name": "Volare Media", "url": "https://www.volaremedia.net" }
     },
     {
@@ -150,6 +150,135 @@
     }
   ]
   </script>
+  <style>
+    /* teaser card in the work grid */
+    .more-card .more-thumb {
+      aspect-ratio: 16 / 9;
+      margin-bottom: 1.1rem;
+      border-radius: 0.9rem;
+      border: 1px solid var(--line);
+      display: flex;
+      flex-wrap: wrap;
+      align-content: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 1.5rem;
+      background:
+        radial-gradient(60% 70% at 85% 20%, rgba(201, 186, 244, 0.22), transparent 70%),
+        radial-gradient(50% 60% at 10% 90%, rgba(214, 255, 61, 0.12), transparent 70%),
+        linear-gradient(rgba(244, 243, 232, 0.08) 1px, transparent 1px) 0 0 / 28px 28px,
+        linear-gradient(90deg, rgba(244, 243, 232, 0.08) 1px, transparent 1px) 0 0 / 28px 28px,
+        var(--bg-raised);
+      transition: border-color 0.25s, transform 0.25s;
+    }
+    .more-card .more-thumb span {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 0.4rem 0.8rem;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      color: var(--cream);
+      background: rgba(12, 13, 9, 0.6);
+    }
+    .more-card .more-thumb span:nth-child(3n+1) { background: var(--volt); color: var(--bg); border-color: var(--volt); transform: rotate(-3deg); }
+    .more-card .more-thumb span:nth-child(3n+2) { border-color: var(--lilac); color: var(--lilac); transform: rotate(2deg); }
+    .more-card:hover .more-thumb { border-color: var(--volt); transform: scale(1.02); }
+
+    /* beyond the reel: phone with service links floating around it */
+    .beyond-head {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: clamp(1.5rem, 4vw, 4rem);
+      align-items: end;
+      margin-bottom: clamp(2.5rem, 5vw, 4rem);
+    }
+    .beyond-head .eyebrow { margin-bottom: 1rem; }
+    .beyond-head .lede { font-size: clamp(1.05rem, 1.5vw, 1.25rem); }
+    .beyond-head .lede a { color: var(--cream); text-decoration-color: var(--volt); text-underline-offset: 0.2em; }
+
+    .beyond-stage {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) clamp(12rem, 18vw, 15rem) minmax(0, 1fr);
+      gap: clamp(2rem, 5vw, 4.5rem);
+      align-items: center;
+    }
+
+    .beyond-phone { position: relative; animation: float-b 7s ease-in-out infinite; }
+    .beyond-phone::before {
+      content: "";
+      position: absolute;
+      inset: -30% -60%;
+      z-index: -1;
+      background:
+        radial-gradient(closest-side, rgba(201, 186, 244, 0.28), transparent),
+        radial-gradient(40% 30% at 50% 80%, rgba(214, 255, 61, 0.14), transparent 70%);
+      filter: blur(10px);
+    }
+    .beyond-phone .phone { transform: rotate(-2deg); }
+    .beyond-phone video { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+    .beyond-links { list-style: none; display: grid; gap: 1rem; }
+    .beyond-links li { position: relative; animation: float-a 8s ease-in-out infinite; }
+    .beyond-links li:nth-child(2) { animation-delay: -2s; }
+    .beyond-links li:nth-child(3) { animation-delay: -4s; }
+    .beyond-links li:nth-child(4) { animation-delay: -6s; }
+    .beyond-links--right li { animation-name: float-b; animation-duration: 9s; }
+
+    /* scattered, not a rigid column: alternate rows step toward the phone */
+    .beyond-links--left li:nth-child(odd) { margin-right: clamp(1.5rem, 3vw, 3rem); }
+    .beyond-links--right li:nth-child(even) { margin-left: clamp(1.5rem, 3vw, 3rem); }
+
+    /* a dashed lead from each tile to the phone */
+    .beyond-links li::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      width: var(--reach, clamp(2rem, 5vw, 4.5rem));
+      border-top: 1px dashed rgba(214, 255, 61, 0.4);
+      pointer-events: none;
+    }
+    .beyond-links--left li::after { left: 100%; }
+    .beyond-links--right li::after { right: 100%; }
+    .beyond-links--left li:nth-child(odd),
+    .beyond-links--right li:nth-child(even) { --reach: calc(clamp(2rem, 5vw, 4.5rem) + clamp(1.5rem, 3vw, 3rem)); }
+
+    .beyond-links a {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr);
+      column-gap: 0.75rem;
+      align-items: baseline;
+      padding: 0.95rem 1.15rem;
+      border: 1px solid var(--line);
+      border-radius: 1rem;
+      background: rgba(20, 22, 15, 0.82);
+      backdrop-filter: blur(6px);
+      text-decoration: none;
+      transition: border-color 0.2s, transform 0.2s, background 0.2s;
+    }
+    .beyond-links .bl-num { grid-row: span 2; font-family: var(--font-mono); font-size: 0.72rem; color: var(--lilac); }
+    .beyond-links b { font-family: var(--font-display); font-size: 1.1rem; font-weight: 600; letter-spacing: -0.02em; }
+    .beyond-links b::after { content: " \2192"; color: var(--volt); opacity: 0; transition: opacity 0.2s; }
+    .beyond-links .bl-desc { font-size: 0.85rem; line-height: 1.4; color: var(--muted); }
+    .beyond-links a:hover,
+    .beyond-links a:focus-visible { border-color: var(--volt); transform: translateY(-3px); background: rgba(26, 29, 19, 0.95); }
+    .beyond-links a:hover b::after,
+    .beyond-links a:focus-visible b::after { opacity: 1; }
+
+    @media (max-width: 56rem) {
+      .beyond-head { grid-template-columns: minmax(0, 1fr); }
+      .beyond-stage { grid-template-columns: minmax(0, 1fr); gap: 1rem; }
+      .beyond-phone { order: -1; width: min(13rem, 55vw); margin: 0 auto 2rem; }
+      .beyond-links { grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); }
+      .beyond-links li { animation: none; margin: 0 !important; }
+      .beyond-links li::after { display: none; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .beyond-phone, .beyond-links li { animation: none; }
+    }
+  </style>
 </head>
 <body>
 
@@ -175,6 +304,7 @@
             <a href="event-videography.html">Event Videography</a>
             <a href="corporate-video.html">Corporate Video</a>
             <a href="website-development.html">Websites &amp; Branding</a>
+            <a href="brand-alignment.html">Brand Alignment</a>
             <a href="agencies.html">Agencies</a>
           </div>
         </div>
@@ -189,10 +319,12 @@
 
   <main>
 
-    <section class="hero wrap">
-      <p class="eyebrow">Work</p>
-      <h1 class="display-xl">The work <span class="sweep">speaks<span class="dot">.</span></span> <span class="count">(8)</span></h1>
-      <p class="lede">Marketing videos, commercials, brand films and music videos, made for brands across BC and Canada. Behind every one is the full process: preproduction and planning, location scouting, permits and insurance, directing and cinematography, right through to the final edit. Press play on any of them.</p>
+    <section class="hero grid-bleed grid-bleed--glow">
+      <div class="wrap">
+        <p class="eyebrow">Work</p>
+        <h1 class="display-xl">The work <span class="sweep">speaks<span class="dot">.</span></span> <span class="count">(8)</span></h1>
+        <p class="lede">Marketing videos, commercials, brand films and music videos, made for brands across BC and Canada. Behind every one is the full process: preproduction and planning, location scouting, permits and insurance, directing and cinematography, right through to the final edit. Press play on any of them.</p>
+      </div>
     </section>
 
     <section class="wrap" style="padding-bottom: var(--section-gap);">
@@ -214,12 +346,12 @@
           <span class="work-tag">Brand Film: farm &amp; dining experience with Chef Paul Moran</span>
         </article>
         <article class="work-card">
-          <button class="video-thumb" data-vimeo="795449073" aria-label="Play: Barnes Powersports Victoria commercial">
-            <img src="https://i.vimeocdn.com/video/1602140906-3a2bbe45d08975a98760f07d059fb95bd4dc7585d757ec62879c1c5272872b92-d_1280x720?region=us" alt="Still from the Barnes Powersports Victoria commercial" loading="lazy">
+          <button class="video-thumb" data-youtube="DUAHFEBabnU" aria-label="Play: When Your Outfit Is Missing Something, De Mode en Vogue">
+            <img src="assets/img/dmev-outfit-missing-something.jpg" alt="Still from the De Mode en Vogue commercial: two friends laughing in a rose garden" loading="lazy">
             <span class="play-btn" aria-hidden="true"></span>
           </button>
-          <h3>Barnes Powersports</h3>
-          <span class="work-tag">Commercial: motorsports</span>
+          <h3>De Mode en Vogue</h3>
+          <span class="work-tag">Campaign: When your outfit is missing something</span>
         </article>
         <article class="work-card">
           <button class="video-thumb" data-youtube="G6EoryyEAEs" aria-label="Play: White Wolf Homes brand film, Building a Legacy">
@@ -261,12 +393,64 @@
           <h3>Making of The Model K</h3>
           <span class="work-tag">Brand Film: a one-of-a-kind handcrafted automobile by Moorhouse Design</span>
         </article>
-        <a class="work-card" href="contact.html">
-          <div class="work-thumb work-thumb--butter">More on the way</div>
-          <h3>Maxxam, De Mode en Vogue &amp; more</h3>
-          <span class="work-tag">Fresh cuts landing here soon</span>
+        <a class="work-card more-card" href="#beyond-the-reel">
+          <div class="more-thumb" aria-hidden="true">
+            <span>Marketing</span><span>Websites</span><span>Brand design</span><span>Corporate</span><span>Events</span><span>Documentaries</span>
+          </div>
+          <h3>Video-led. Not video-only.</h3>
+          <span class="work-tag">See everything else we do</span>
         </a>
       </div>
+    </section>
+
+    <!-- Beyond the reel: links out to everything else we do -->
+    <section class="section grid-bleed grid-bleed--glow beyond" id="beyond-the-reel" aria-labelledby="beyond-head">
+      <div class="wrap">
+        <div class="beyond-head reveal">
+          <div>
+            <p class="eyebrow">Beyond the reel</p>
+            <h2 id="beyond-head" class="display-lg">Video-led<span class="dot">.</span><br>Not video-<span class="sweep">only<span class="dot">.</span></span></h2>
+          </div>
+          <p class="lede">Every project on this page started with a camera, but most of them didn't stop there. From <a href="creative-direction.html">creative direction</a> to the website it lands on, the same team plans the marketing, shapes the brand and keeps it consistent everywhere it shows up.</p>
+        </div>
+
+        <div class="beyond-stage reveal">
+          <ul class="beyond-links beyond-links--left">
+            <li><a href="marketing-videos.html"><span class="bl-num">(01)</span><b>Marketing videos</b><span class="bl-desc">Commercials and ads cut for every platform</span></a></li>
+            <li><a href="website-development.html#campaigns"><span class="bl-num">(02)</span><b>Marketing campaigns</b><span class="bl-desc">Strategy, paid ads and reporting, run by us</span></a></li>
+            <li><a href="corporate-video.html"><span class="bl-num">(03)</span><b>Corporate video</b><span class="bl-desc">Website films, training and LinkedIn</span></a></li>
+            <li><a href="event-videography.html"><span class="bl-num">(04)</span><b>Event videography</b><span class="bl-desc">Galas, conferences and launches</span></a></li>
+          </ul>
+          <div class="beyond-phone" aria-hidden="true">
+            <div class="phone">
+              <span class="phone-btn phone-btn--mute"></span>
+              <span class="phone-btn phone-btn--vol"></span>
+              <span class="phone-btn phone-btn--power"></span>
+              <div class="phone-screen">
+                <video muted loop playsinline preload="none" poster="assets/img/phone-dmev-poster.jpg" data-src="assets/phone-dmev-vertical.mp4"></video>
+              </div>
+            </div>
+          </div>
+          <ul class="beyond-links beyond-links--right">
+            <li><a href="community.html"><span class="bl-num">(05)</span><b>Documentaries</b><span class="bl-desc">Short films for the causes we back</span></a></li>
+            <li><a href="website-development.html#websites"><span class="bl-num">(06)</span><b>Websites</b><span class="bl-desc">New builds and full rebuilds</span></a></li>
+            <li><a href="website-development.html#brand-building"><span class="bl-num">(07)</span><b>Brand design</b><span class="bl-desc">Identity, voice and positioning</span></a></li>
+            <li><a href="brand-alignment.html"><span class="bl-num">(08)</span><b>Brand alignment</b><span class="bl-desc">One look and one voice, everywhere</span></a></li>
+          </ul>
+        </div>
+      </div>
+      <script>
+        // Load and play the phone clip only when the section comes into view
+        (function () {
+          var v = document.querySelector('#beyond-the-reel video');
+          if (!v) return;
+          function start() { if (!v.src) { v.src = v.dataset.src; } var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+          if (!('IntersectionObserver' in window)) { start(); return; }
+          new IntersectionObserver(function (entries) {
+            entries.forEach(function (e) { if (e.isIntersecting) start(); else v.pause(); });
+          }, { rootMargin: '200px' }).observe(v);
+        })();
+      </script>
     </section>
 
     <section class="social-strip" aria-label="Follow Volare Media">
@@ -314,6 +498,7 @@
               <li><a href="event-videography.html">Event Videography</a></li>
               <li><a href="corporate-video.html">Corporate Video</a></li>
               <li><a href="website-development.html">Websites &amp; Branding</a></li>
+              <li><a href="brand-alignment.html">Brand Alignment</a></li>
               <li><a href="work.html">Work</a></li>
               <li><a href="about.html">About</a></li>
               <li><a href="crew.html">The Crew</a></li>

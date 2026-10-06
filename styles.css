@@ -1977,3 +1977,163 @@ a:focus-visible, button:focus-visible {
 @media (prefers-reduced-motion: reduce) {
   .device, .stage-backdrop { animation: none; }
 }
+
+/* ---------- grid-line texture for flat black sections ---------- */
+
+/* grid-line texture: a 28px grid strongest on one side, easing off across
+   the section with soft top/bottom edges. Breaks up flat black sections.
+   Usage: <section class="grid-bleed grid-bleed--glow [grid-bleed--left]">
+   with a .wrap INSIDE it so the lines run full-bleed. */
+.grid-bleed { position: relative; isolation: isolate; }
+
+.grid-bleed::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(244, 243, 232, 0.14) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(244, 243, 232, 0.14) 1px, transparent 1px);
+  background-size: 28px 28px;
+  background-position: right -1px top -1px;
+  -webkit-mask-image:
+    linear-gradient(to left, #000 0%, #000 38%, rgba(0, 0, 0, 0.4) 72%, rgba(0, 0, 0, 0.22) 100%),
+    linear-gradient(to bottom, transparent, #000 14%, #000 86%, transparent);
+  -webkit-mask-composite: source-in;
+  mask-image:
+    linear-gradient(to left, #000 0%, #000 38%, rgba(0, 0, 0, 0.4) 72%, rgba(0, 0, 0, 0.22) 100%),
+    linear-gradient(to bottom, transparent, #000 14%, #000 86%, transparent);
+  mask-composite: intersect;
+}
+
+.grid-bleed--left::before {
+  background-position: left -1px top -1px;
+  -webkit-mask-image:
+    linear-gradient(to right, #000 0%, #000 38%, rgba(0, 0, 0, 0.4) 72%, rgba(0, 0, 0, 0.22) 100%),
+    linear-gradient(to bottom, transparent, #000 14%, #000 86%, transparent);
+  mask-image:
+    linear-gradient(to right, #000 0%, #000 38%, rgba(0, 0, 0, 0.4) 72%, rgba(0, 0, 0, 0.22) 100%),
+    linear-gradient(to bottom, transparent, #000 14%, #000 86%, transparent);
+}
+
+/* optional soft brand-colour bleed under the lines */
+.grid-bleed--glow::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 18%, #000 80%, transparent);
+  mask-image: linear-gradient(to bottom, transparent, #000 18%, #000 80%, transparent);
+  background:
+    radial-gradient(ellipse 40% 55% at 100% 40%, rgba(201, 186, 244, 0.17), transparent 70%),
+    radial-gradient(ellipse 28% 34% at 96% 88%, rgba(214, 255, 61, 0.06), transparent 70%);
+}
+
+.grid-bleed--left.grid-bleed--glow::after {
+  background:
+    radial-gradient(ellipse 40% 55% at 0% 58%, rgba(201, 186, 244, 0.17), transparent 70%),
+    radial-gradient(ellipse 28% 34% at 4% 12%, rgba(214, 255, 61, 0.06), transparent 70%);
+}
+
+/* ---------- brand drift illustration (brand alignment page + journal) ---------- */
+
+.brand-drift {
+  display: grid;
+  gap: 1.25rem;
+  margin: 2.5rem 0;
+  padding: clamp(1.25rem, 3vw, 2rem);
+  border: 1px solid var(--line);
+  border-radius: 1.25rem;
+  background: var(--bg-raised);
+}
+
+.brand-drift-row { display: grid; grid-template-columns: 6.5rem repeat(4, minmax(0, 1fr)); gap: 0.75rem; align-items: center; }
+
+.brand-drift-label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.brand-drift-row--aligned .brand-drift-label { color: var(--volt); }
+
+.bd-card {
+  border: 1px solid var(--line);
+  border-radius: 0.8rem;
+  padding: 0.75rem;
+  background: var(--bg);
+  min-width: 0;
+}
+
+.bd-where { display: block; font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.55rem; }
+.bd-mark { display: flex; align-items: center; gap: 0.5rem; }
+.bd-dot { flex: none; width: 1.6rem; height: 1.6rem; border-radius: 50%; background: var(--c, #888); }
+.bd-name { font-size: 0.82rem; line-height: 1.2; color: var(--cream); overflow-wrap: anywhere; }
+.bd-bar { display: block; height: 0.3rem; border-radius: 99px; margin-top: 0.65rem; background: var(--c, #888); opacity: 0.85; }
+
+/* drifted: every touchpoint a little different */
+.brand-drift-row--drifted .bd-card:nth-child(2) { --c: #E0533D; }
+.brand-drift-row--drifted .bd-card:nth-child(2) .bd-name { font-family: Georgia, serif; font-style: italic; }
+.brand-drift-row--drifted .bd-card:nth-child(3) { --c: #2FA4A9; }
+.brand-drift-row--drifted .bd-card:nth-child(3) .bd-name { font-family: var(--font-mono); text-transform: uppercase; font-size: 0.72rem; }
+.brand-drift-row--drifted .bd-card:nth-child(3) .bd-dot { border-radius: 0.3rem; }
+.brand-drift-row--drifted .bd-card:nth-child(4) { --c: #8E6BD1; }
+.brand-drift-row--drifted .bd-card:nth-child(4) .bd-name { font-weight: 700; letter-spacing: -0.02em; }
+.brand-drift-row--drifted .bd-card:nth-child(5) { --c: #C9A227; }
+.brand-drift-row--drifted .bd-card:nth-child(5) .bd-dot { border-radius: 30% 70% 60% 40%; }
+.brand-drift-row--drifted .bd-card:nth-child(5) .bd-name { font-size: 0.76rem; }
+
+/* aligned: one mark, one name, one colour */
+.brand-drift-row--aligned .bd-card { --c: var(--volt); border-color: rgba(214, 255, 61, 0.35); }
+.brand-drift-row--aligned .bd-name { font-family: var(--font-display); font-weight: 600; letter-spacing: -0.02em; }
+
+.brand-drift p.brand-drift-note { font-family: var(--font-mono); font-size: 0.7rem; line-height: 1.5; letter-spacing: 0.06em; color: var(--muted); margin: 0; }
+
+@media (max-width: 44rem) {
+  .brand-drift-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .brand-drift-label { grid-column: 1 / -1; }
+}
+
+/* current-logo chips + "before" board (brand alignment case study) */
+.logo-chips { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.75rem; }
+.logo-chip { margin: 0; display: flex; align-items: center; justify-content: center; height: clamp(5.5rem, 8vw, 7.5rem); padding: 0.9rem; border-radius: 0.8rem; background: #fff; border: 1px solid var(--line); }
+.logo-chip img { display: block; max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; }
+.before-shot { position: relative; margin: 0; border-radius: 1rem; overflow: hidden; border: 1px solid var(--line); background: var(--bg-raised); }
+.before-shot img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; object-position: top; }
+.before-stamp { position: absolute; top: 0.8rem; left: 0.8rem; font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; padding: 0.35rem 0.7rem; border-radius: 999px; background: var(--bg); color: var(--cream); border: 1px solid var(--line); }
+.before-caption, .article p.before-caption { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.04em; line-height: 1.5; color: var(--muted); margin-top: 0.6rem; }
+@media (max-width: 40rem) { .logo-chips { grid-template-columns: minmax(0, 1fr); } }
+
+/* logo chips and "before" shots inside journal articles: undo the article photo styling */
+.article .logo-chips { margin-top: 2.75rem; }
+.article .logo-chip { margin: 0; }
+.article .logo-chip img { width: auto; height: auto; max-width: 100%; max-height: 100%; aspect-ratio: auto; object-fit: contain; border-radius: 0; border: 0; }
+.article figure img.shot-top { aspect-ratio: 16 / 9; object-fit: cover; object-position: top; }
+
+/* before / after website compare: full-page captures that scroll on hover */
+.site-compare { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(1rem, 2.5vw, 2rem); }
+.compare-col { margin: 0; min-width: 0; }
+.compare-frame { --fh: clamp(20rem, 34vw, 32rem); position: relative; height: var(--fh); overflow: hidden; border-radius: 1rem; border: 1px solid var(--line); background: #fff; }
+.compare-frame::before { content: ""; position: absolute; inset: 0 0 auto; height: 1.6rem; z-index: 2; background: #E8E7D9; border-bottom: 1px solid rgba(12, 13, 9, 0.12); }
+.compare-frame::after { content: ""; position: absolute; top: 0.55rem; left: 0.7rem; width: 0.5rem; height: 0.5rem; z-index: 3; border-radius: 50%; background: #CFCEBE; box-shadow: 0.8rem 0 0 #CFCEBE, 1.6rem 0 0 #CFCEBE; }
+.compare-frame img { display: block; width: 100%; height: auto; margin-top: 1.6rem; transition: transform 7s cubic-bezier(0.45, 0, 0.25, 1); }
+.compare-col:hover .compare-frame img,
+.compare-frame:focus-within img { transform: translateY(calc(-100% + var(--fh) - 1.6rem)); }
+.compare-col .before-stamp { top: 2.3rem; z-index: 4; }
+.compare-col--after .before-stamp { background: var(--volt); color: var(--bg); border-color: var(--volt); }
+.compare-col figcaption { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.04em; line-height: 1.5; color: var(--muted); margin-top: 0.6rem; }
+.compare-hint, .article p.compare-hint { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-top: 1rem; }
+.compare-hint::before { content: "\2195  "; color: var(--volt); }
+@media (hover: none) {
+  .compare-frame { overflow-y: auto; -webkit-overflow-scrolling: touch; }
+  .compare-col:hover .compare-frame img { transform: none; }
+}
+@media (max-width: 40rem) { .site-compare { grid-template-columns: minmax(0, 1fr); } }
+@media (prefers-reduced-motion: reduce) { .compare-frame { overflow-y: auto; } .compare-col:hover .compare-frame img { transform: none; } }
+/* inside journal articles, keep the captures uncropped */
+.article .compare-frame img { width: 100%; aspect-ratio: auto; object-fit: initial; border: 0; border-radius: 0; }
+.article .compare-col { margin: 0; }
