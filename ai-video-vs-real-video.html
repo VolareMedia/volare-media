@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <!-- Meta Pixel: Volare Media Marketing's Pixel (dataset 612504680491197) -->
+  <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '612504680491197');
+    fbq('track', 'PageView');
+    // Standard event: contact form sent (contact-form.php redirects to contact.html?sent=1)
+    if (/[?&]sent=1/.test(location.search)) fbq('track', 'Lead');
+    // Standard event: phone number tapped (tel: links anywhere on the page)
+    document.addEventListener('click', function (e) {
+      var a = e.target.closest && e.target.closest('a[href^="tel:"]');
+      if (a) fbq('track', 'Contact');
+    });
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=612504680491197&ev=PageView&noscript=1"/></noscript>
+  <!-- Google tag (gtag.js): Google Ads conversion tracking (AW-16968991307) + Google Analytics 4 (G-0VDTC0MJHJ) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-16968991307"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'AW-16968991307');
+    gtag('config', 'G-0VDTC0MJHJ');
+    // Contact form sent (contact-form.php redirects to contact.html?sent=1)
+    if (/[?&]sent=1/.test(location.search)) {
+      gtag('event', 'conversion', {'send_to': 'AW-16968991307/e1ijCNKw5YYdEMuEuZs_'});
+      gtag('event', 'generate_lead', {'method': 'contact_form'});
+    }
+    // Phone number tapped
+    document.addEventListener('click', function (e) {
+      if (e.target.closest && e.target.closest('a[href^="tel:"]')) {
+        gtag('event', 'conversion', {'send_to': 'AW-16968991307/qA6TCNWw5YYdEMuEuZs_'});
+        gtag('event', 'phone_tap');
+      }
+    });
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Video vs Real Video for Business: What Builds Trust | Volare Media</title>
+  <meta name="description" content="AI commercial or real video? An honest, audience-first look at AI-generated video for business: what it does well, why McDonald's pulled its AI ad, where AI costs you trust, and how to choose.">
+  <link rel="canonical" href="https://www.volaremedia.net/ai-video-vs-real-video.html">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="AI video, or real people on camera?">
+  <meta property="og:description" content="An honest look at AI-generated video for business: what it's good at, where it quietly costs you trust, and why we keep coming back to real people, real places and real ideas.">
+  <meta property="og:url" content="https://www.volaremedia.net/ai-video-vs-real-video.html">
+  <meta property="og:image" content="https://www.volaremedia.net/assets/img/corp-interview-monitor.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Inter+Tight:ital,wght@0,400..800;1,400..800&family=Fragment+Mono:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="icon" href="favicon.svg?v=2" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css?v=32">
+  <style>
+    .package-list { padding-left: 1.3rem; }
+    .package-list li + li { margin-top: 0.6rem; }
+    .check-list { list-style: none; padding: 0; counter-reset: chk; }
+    .check-list li { position: relative; padding-left: 2.4rem; margin-top: 0.9rem; counter-increment: chk; }
+    .check-list li::before { content: counter(chk); position: absolute; left: 0; top: 0.05rem; width: 1.6rem; height: 1.6rem; border-radius: 50%; background: var(--volt); color: var(--bg); font-family: var(--font-mono); font-size: 0.78rem; display: grid; place-items: center; }
+    .ai-compare-wrap { margin: 1.75rem 0 0; overflow-x: auto; -webkit-overflow-scrolling: touch; border: 1px solid var(--line); border-radius: 0.75rem; }
+    .ai-compare { width: 100%; min-width: 34rem; border-collapse: collapse; font-size: 0.95rem; line-height: 1.45; }
+    .ai-compare th, .ai-compare td { padding: 0.85rem 1rem; text-align: left; vertical-align: top; border-bottom: 1px solid var(--line); }
+    .ai-compare tbody tr:last-child th, .ai-compare tbody tr:last-child td { border-bottom: 0; }
+    .ai-compare thead th { font-family: var(--font-mono); font-size: 0.74rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--cream); background: rgba(255,255,255,0.03); }
+    .ai-compare thead th:nth-child(2) { color: var(--volt); }
+    .ai-compare tbody th { font-weight: 600; color: var(--cream); width: 30%; }
+    .ai-compare td:nth-child(2) { color: var(--cream); }
+  </style>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "AI video or real people on camera? What actually builds trust for your business",
+  "description": "AI commercial or real video? An honest, audience-first look at AI-generated video for business: what it does well, why McDonald's pulled its AI ad, where AI costs you trust, and how to choose.",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "image": "https://www.volaremedia.net/assets/img/corp-interview-monitor.jpg",
+  "author": {
+    "@type": "Person",
+    "name": "Chris Chisholm"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Volare Media",
+    "url": "https://www.volaremedia.net"
+  },
+  "mainEntityOfPage": "https://www.volaremedia.net/ai-video-vs-real-video.html",
+  "keywords": "AI video for business, AI-generated video, AI video vs real video, AI video marketing, authentic video marketing, AI avatars, video production BC",
+  "about": [
+    {
+      "@type": "Thing",
+      "name": "AI-generated video"
+    },
+    {
+      "@type": "Thing",
+      "name": "Video marketing"
+    }
+  ]
+}
+  </script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is AI video cheaper than hiring a video production company?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Upfront, usually yes. But the better comparison is cost per result. A video that doesn't build trust, or that customers can tell is fake, is expensive at any price. Real footage also keeps paying you back as a library of content you can reuse for years."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Have big brands pulled AI-generated ads?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. In December 2025, McDonald's Netherlands removed its fully AI-generated Christmas ad within days after viewers called it creepy and soulless. Others, like Coca-Cola, kept their AI holiday ads running despite heavy criticism. Reactions vary, which is exactly why your audience should drive the decision."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can AI replace a videographer?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "For simple product visuals and quick internal updates, sometimes. For videos that need to earn trust, show your real business or tell a real story, such as testimonials, brand films and recruitment videos, no. Those depend on real people, and that's the part AI can't fake well."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Will customers know my video was made with AI?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Often, yes. Many viewers notice even when they can't say why, and platforms like YouTube, Meta and TikTok now label realistic AI-generated content. It's safest to assume your audience will find out."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Should I disclose AI-generated content in my marketing?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We recommend it whenever AI creates realistic people, places or events. And never present an AI-generated person as a real customer, staff member or testimonial. That isn't just a trust problem, it can be a misleading-advertising problem too."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can you combine real footage with AI?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, and that's how most of our projects use it. Real people and real footage carry the story, while AI helps with transcripts, captions, audio clean-up, vertical reframing and planning, so more of the budget goes into what the camera sees."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does Volare Media make AI videos?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We lead with real people and real footage, and we use AI throughout our production process. We're also open to AI-generated elements when they truly make sense for the project, like simple, clean product videos or a tight budget with a simple goal. We'll always tell you honestly which approach we'd recommend, and why."
+      }
+    }
+  ]
+}
+  </script>
+</head>
+<body>
+
+  <div class="contact-bar">
+    <div class="wrap">
+      <span class="bar-note">Vancouver Island based, video production across BC &amp; Canada</span>
+      <span><a href="tel:+12505894521">250.589.4521</a> &nbsp;·&nbsp; <a href="mailto:video@volaremedia.net">video@volaremedia.net</a></span>
+    </div>
+  </div>
+
+  <header class="site-header">
+    <div class="wrap">
+      <a class="logo" href="index.html" aria-label="Volare Media, home"><img src="assets/vm-logo.png" alt="Volare Media logo"></a>
+      <button class="nav-toggle" aria-expanded="false" aria-controls="main-nav">Menu</button>
+      <nav class="main-nav" id="main-nav" aria-label="Main">
+        <a href="index.html">Home</a>
+        <div class="nav-drop">
+          <a class="nav-drop-trigger" href="services.html">Services<span class="caret" aria-hidden="true">▾</span></a>
+          <div class="nav-drop-menu">
+            <a href="services.html">All Services</a>
+            <a href="marketing-videos.html">Marketing Videos</a>
+            <a href="creative-direction.html">Creative Direction</a>
+            <a href="event-videography.html">Event Videography</a>
+            <a href="corporate-video.html">Corporate Video</a>
+            <a href="website-development.html">Websites &amp; Branding</a>
+            <a href="brand-alignment.html">Brand Alignment</a>
+            <a href="agencies.html">Agencies</a>
+          </div>
+        </div>
+        <a href="work.html">Work</a>
+        <a href="about.html">About</a>
+        <a href="community.html">Community</a>
+        <a href="journal.html" aria-current="page">Journal</a>
+        <a class="btn" href="contact.html">Start a project</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <section class="hero photo-band photo-band--side" style="--photo: url('assets/img/corp-interview-monitor.jpg'); --photo-pos: 50% 40%; --photo-opacity: 0.5;">
+      <div class="wrap">
+      <p class="eyebrow">Journal: Marketing</p>
+      <h1 class="display-lg">AI video, or real people<br>on camera<span class="dot">?</span></h1>
+      <p class="post-meta">Chris Chisholm · October 2026 · 14 min read</p>
+      </div>
+    </section>
+
+    <article class="article wrap">
+
+      <p>Should your next commercial be made with AI, or with real people and a real crew? It's the question almost every business owner we talk to is asking right now. Why pay for a film crew when an app can make a video in five minutes? Why book a shoot when you can type a prompt and get a spokesperson, a voiceover and a polished-looking ad by lunch?</p>
+
+      <p>The honest answer is the same one we give for every video we make: <strong>it depends on your audience.</strong></p>
+
+      <p>Every project we take on starts with the same questions. Who is this video for? What do we need it to do? What are your goals, and what would success actually look like for your business? They're the heart of our approach, and we wrote a whole article about them called <a href="never-make-a-video-to-make-a-video.html">never make a video just to make a video</a>. AI versus real is simply one more decision those questions answer.</p>
+
+      <p>If an AI-made video would reach the same people, make them feel the same thing and get you the same result, and you're comfortable with how it was made, then it's a legitimate choice. As filmmakers, we'll always have a soft spot for real cameras, real light and real people. But how we feel about it as filmmakers is neither here nor there. With marketing video, what matters is how your audience feels and what they do next.</p>
+
+      <p>And right now, the evidence says audiences don't feel the same way about AI video, especially when a video is meant to make them feel something.</p>
+
+      <p>To be clear, this isn't an anti-AI article. We use AI every day. It helps us transcribe interviews, caption videos, clean up audio, sort through hours of footage, plan shoots and keep the business side of a production company running. AI is brilliant at tasks: sorting, calculating, organising and figuring things out. Creating a feeling between people is a different job entirely.</p>
+
+      <p>So this is our honest take on <strong>AI-generated video versus real video for business</strong>: what AI is genuinely good at, what happened when some of the world's biggest brands tried it, where it quietly costs you, when we'd recommend it ourselves, and why, for most of the videos that matter to a small business, we keep coming back to real people, real places and real ideas.</p>
+
+      <h2>What "AI video" actually means in 2026</h2>
+
+      <p>"AI video" has become a catch-all, and it covers some very different things. It helps to separate them before deciding anything:</p>
+
+      <ul class="package-list">
+        <li><strong>Fully generated video.</strong> You describe a scene and the software creates it from scratch: people, places and products that never existed.</li>
+        <li><strong>AI avatars and digital presenters.</strong> A synthetic person, or a digital copy of a real one, reads your script on camera.</li>
+        <li><strong>AI voices.</strong> Synthetic voiceovers, or a clone of a real person's voice.</li>
+        <li><strong>AI-assisted production.</strong> Real footage, made faster or better with AI tools: transcripts, captions, noise removal, colour matching, reframing a wide shot into a vertical one, or finding the best ten seconds in two hours of interviews.</li>
+      </ul>
+
+      <p>The first three replace the camera. The last one helps the people behind it. Most of the debate, and most of this article, is about the first three.</p>
+
+      <h2>The case for AI video (and it's a real one)</h2>
+
+      <p>We'd be doing you a disservice if we pretended AI video has no place. It does, it's improving quickly, and for some jobs it's the right tool.</p>
+
+      <ul class="package-list">
+        <li><strong>Speed.</strong> A draft in minutes instead of weeks. When the deadline is tomorrow and the video only needs to explain something simple, that matters.</li>
+        <li><strong>Cost.</strong> No crew, no locations, no gear, no talent fees. For some businesses, that's the difference between having a video and having nothing at all.</li>
+        <li><strong>Volume and versions.</strong> Ten variations of an ad for testing, the same message in several languages, or an internal training module updated without a reshoot.</li>
+        <li><strong>Things a camera can't easily capture.</strong> Abstract ideas, impossible camera moves, a product that doesn't exist yet, or a space that hasn't been built.</li>
+        <li><strong>Simple, clean product visuals.</strong> A product turning on a plain background, a tidy packshot, a quick look at a feature. Nobody needs to trust a face to understand what a product looks like.</li>
+        <li><strong>Planning.</strong> Storyboards, mood frames and rough previews help everyone see an idea before a single crew member is booked.</li>
+      </ul>
+
+      <p>If your video's only job is to show something simple, quickly and cheaply, AI can absolutely do that job. The question is how many of your videos really have only that job.</p>
+
+    </article>
+
+    <!-- Full-bleed divider: a real family shoot seen on the monitor -->
+    <div class="photo-strip" role="img" aria-label="On set with Volare Media: a real family at their kitchen island, seen on the camera monitor in the foreground" style="background-image: linear-gradient(rgba(12,13,9,0.3), rgba(12,13,9,0.3)), url('assets/img/bts-kitchen-shoot.jpg'); background-position: center 45%;"></div>
+
+    <article class="article wrap">
+
+      <h2>What happened when big brands tried it</h2>
+
+      <p>You don't have to take our word for any of this. Some of the biggest advertisers in the world have released fully AI-generated commercials in public, and their audiences told them exactly how they felt.</p>
+
+      <ul class="package-list">
+        <li><strong>McDonald's Netherlands, December 2025.</strong> A 45-second, fully AI-generated Christmas ad called "The most terrible time of the year." Viewers called it creepy, unsettling and soulless, and within days McDonald's Netherlands <a href="https://www.nbcnews.com/world/europe/mcdonalds-ai-generated-christmas-advert-social-media-backlash-rcna248590" rel="noopener">pulled it</a>, calling the moment an important learning.</li>
+        <li><strong>Coca-Cola, 2024 and 2025.</strong> Coca-Cola remade its classic "Holidays Are Coming" truck ad with AI in 2024. Online, people called it soulless and creepy and pointed out the glitches, <a href="https://www.adweek.com/creativity/how-coca-colas-ai-holiday-ad-went-from-praise-to-rage/" rel="noopener">even though early testing had scored it well</a>. Coca-Cola kept it running, said engagement was high, and released another AI holiday ad in 2025, which <a href="https://www.techradar.com/ai-platforms-assistants/coca-cola-faces-backlash-again-for-missing-the-spirit-of-the-holidays-with-another-ai-slop-ad" rel="noopener">drew the same kind of backlash</a>.</li>
+        <li><strong>Valentino, December 2025.</strong> An AI-generated handbag video on Instagram, clearly labelled as AI. Followers <a href="https://www.eweek.com/news/valentino-ai-misfire/" rel="noopener">called it cheap and unsettling</a> for a fashion house built on craftsmanship.</li>
+        <li><strong>The research.</strong> In a <a href="https://nielseniq.com/global/en/news-center/2024/niq-research-uncovers-hidden-consumer-attitudes-toward-ai-generated-ads/" rel="noopener">NielsenIQ study</a> released in December 2024, more than 2,000 people watched AI-generated ads, and about 150 had their brain activity measured. People spotted most of the AI ads on their own, and described them as more annoying, boring and confusing than traditional ads. Even the high-quality ones produced weaker memory activation, and the researchers warned of a negative halo effect on the brand itself.</li>
+      </ul>
+
+      <p>Notice who these are. Brands with enormous budgets, top agencies and the best AI tools money can buy. Coca-Cola has decades of goodwill to absorb a wave of bad comments. A local business doesn't have that cushion. When your audience decides your video feels fake, they aren't just judging the ad. They're judging you.</p>
+
+      <h2>Where AI video quietly costs you</h2>
+
+      <p>The problems with AI video rarely show up in the first five seconds. They show up in what the viewer feels, and in what they do next.</p>
+
+      <p><strong>People can tell, and it changes how they feel.</strong> Even when they can't say exactly why, viewers notice. Skin that's a little too smooth. A voice that never takes a breath. Hands, eyes, light that doesn't quite behave. The reaction usually isn't "wow." It's a small step back. And trust is built, or lost, in exactly those small steps.</p>
+
+      <p><strong>It starts to look like everyone else.</strong> When thousands of businesses use the same tools with similar prompts, the results drift toward the same look, the same faces and the same polished emptiness. Your video is supposed to make you memorable. Generic is the opposite of memorable.</p>
+
+      <p><strong>It can't show what's actually yours.</strong> AI can generate a beautiful bakery. It can't generate <em>your</em> bakery: your staff, your regulars, the light through your front window at seven in the morning. For a local business on Vancouver Island or anywhere in BC, the real place is often the whole point. People recognise the corner you're on. They recognise you.</p>
+
+      <p><strong>It can promise things your business can't deliver.</strong> A generated video can show a bigger team, a cleaner shop or a product that looks a little better than the one that arrives. When customers notice the gap between the video and reality, they don't blame the software. They blame you.</p>
+
+      <p><strong>Fake people are a trust problem, and can be a legal one.</strong> An AI "customer" giving a testimonial isn't a testimonial. Advertising rules in Canada don't allow misleading claims, and a customer who doesn't exist is about as misleading as it gets. We're not lawyers, and this isn't legal advice, but we'd never put a synthetic person in front of an audience and let them believe it was real.</p>
+
+      <p><strong>The rules are still being written.</strong> Platforms like YouTube, Meta and TikTok now ask creators to label realistic AI-generated content, and they add labels of their own. Questions about who owns AI-generated material, whose work and likeness it was trained on, and how it can be used commercially are still being worked out. That's a lot of uncertainty to put behind your brand.</p>
+
+      <p><strong>It rarely becomes an asset.</strong> A real shoot keeps paying you back: b-roll for next year's ads, stills for the website, clips for social, a library of your own business at its best. Generated output is usually a one-off.</p>
+
+      <div class="callout">
+        <p>AI can make a video look real. It can't make it true.</p>
+      </div>
+
+    </article>
+
+    <!-- Full-bleed video band: real footage from Tailgate Toolkit -->
+    <section class="video-band" aria-label="The Tailgate Toolkit campaign film, playing">
+      <iframe src="https://player.vimeo.com/video/1071293680?background=1&amp;autoplay=1&amp;loop=1&amp;muted=1&amp;autopause=0&amp;dnt=1" allow="autoplay" title="Tailgate Toolkit campaign film, looping in the background" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:100vw;height:56.25vw;min-width:177.78vh;min-height:100%;border:0;pointer-events:none;z-index:-2;opacity:0.5;"></iframe>
+      <div class="wrap" style="text-align:center;padding-top:clamp(4.5rem,11vw,8rem);padding-bottom:clamp(4.5rem,11vw,8rem);">
+        <p class="eyebrow" style="justify-content:center;text-shadow:0 2px 18px rgba(12,13,9,0.8);">From the Tailgate Toolkit campaign</p>
+        <h2 class="display-md" style="color:var(--cream);max-width:22ch;margin:1rem auto 0;text-shadow:0 2px 26px rgba(12,13,9,0.85);">Real people. Real stakes. Real trust<span class="dot">.</span></h2>
+      </div>
+    </section>
+
+    <article class="article wrap">
+
+      <h2>Why real people still build more trust</h2>
+
+      <p>Our team brings more than fifteen years of combined experience across marketing, the film industry and social media, and we've delivered more than 250 marketing assets for businesses and organisations across BC and Canada. If there's one thing all of that has taught us, it's that people buy from people.</p>
+
+      <p><strong>Real faces and voices are proof.</strong> An owner who stumbles over a word and laughs at herself is more convincing than a flawless avatar. Those small imperfections are evidence: they tell the viewer there's a real person standing behind this business, and that person is willing to show up.</p>
+
+      <p><strong>The video keeps working after someone meets you.</strong> When a customer walks into your shop and recognises the person from the video, the video just earned its money a second time. That moment can't happen with someone who doesn't exist.</p>
+
+      <p><strong>Real stories carry real stakes.</strong> Our <a href="tailgate-toolkit-61-stations.html">Tailgate Toolkit campaign</a> is a mental health message for BC's construction community. We shot it on real Vancouver Island job sites, in real homes and real morning light, with direction focused on quiet, genuine emotion. The brief was simple: no actors in hardhats pretending to care. Make that with AI and the whole message collapses. The same goes for <a href="sixty-forty-farm-to-table-film.html">Chef Paul Moran at Sixty Forty</a>: you can't generate the farm, the food or the person who grows it. And the <a href="what-is-brand-alignment.html">brand video we made for It's A Doodle</a> connects because it shows real puppies and the real people who raise them in Sooke.</p>
+
+      <p><strong>Real takes real work, and it shows.</strong> A lot of what makes real video feel different happens before the camera even rolls: the pre-interview calls, the questions written for one specific person, the time spent making someone comfortable enough to be themselves. We wrote about that process in <a href="how-we-film-interviews.html">how we film interviews</a>, and none of it can be prompted.</p>
+
+      <p><strong>Real is about to become more valuable, not less.</strong> As AI video gets cheaper and more common, audiences will see more of it every day. When anything can be generated, proof that you're real is what stands out. Being the business that shows its actual people, its actual place and its actual work is becoming a competitive advantage.</p>
+
+    </article>
+
+    <!-- Faded side band: when AI makes sense -->
+    <section class="photo-band photo-band--side" style="--photo: url('assets/img/corp-bts-1.jpg'); --photo-pos: 50% 50%; --photo-opacity: 0.5;">
+      <div class="wrap" style="padding-top:clamp(3.5rem,9vw,6rem);padding-bottom:clamp(3.5rem,9vw,6rem);">
+        <p class="eyebrow">An honest answer</p>
+        <h2 class="display-md" style="max-width:22ch;">When we'd say yes to AI<span class="dot">.</span></h2>
+        <p class="lede" style="max-width:44rem;margin-top:1.25rem;">We lead with real people. We're also not here to talk anyone out of a tool that genuinely fits the job.</p>
+      </div>
+    </section>
+
+    <article class="article wrap">
+
+      <p>If a client comes to us wanting AI in the mix, we're always open to the conversation. Sometimes, after talking it through, it really is the right call:</p>
+
+      <ul class="package-list">
+        <li><strong>Simple, clean product videos.</strong> A product rotating on a plain background, close-ups of the details, a quick look at how a feature works. When the product is the star and nobody needs to trust a face, AI-generated or AI-assisted visuals can do the job well.</li>
+        <li><strong>When the budget truly only allows it, and the goal is simple.</strong> We'd rather help you make a good, honest AI-assisted video you can afford than talk you into a production you can't. That's the same budget-first thinking behind our guide to <a href="video-production-cost-bc.html">what video production costs in BC</a>.</li>
+        <li><strong>Things that can't be filmed.</strong> Motion graphics, a look inside a machine, a building that doesn't exist yet, a process too small or too fast for a camera.</li>
+        <li><strong>Versions of real work.</strong> Subtitles, translated captions and alternate cuts of footage we filmed for real.</li>
+        <li><strong>Planning before a real shoot.</strong> Storyboards and mood frames that help everyone agree on the idea before the crew arrives.</li>
+      </ul>
+
+      <p>What we won't do is make a synthetic person pretend to be your customer, your staff or you. That's the line, and we think it's a line every business should draw for itself.</p>
+
+      <h2>How we use AI behind the camera</h2>
+
+      <p>Real people stay in front of the camera. Behind it, AI is one of our tools, the same way a gimbal or a colour grading suite is. In a typical project it might help us:</p>
+
+      <ul class="package-list">
+        <li>Transcribe interviews so we can search every word and find the moments that matter.</li>
+        <li>Caption and subtitle videos for social, where most people watch with the sound off.</li>
+        <li>Clean up audio, from wind on a job site to hum in an office.</li>
+        <li>Log and organise footage on busy multi-day shoots.</li>
+        <li>Reframe horizontal footage into vertical cuts for Reels, Shorts and TikTok.</li>
+        <li>Plan shots and sketch storyboards before we arrive.</li>
+      </ul>
+
+      <p>All of that makes us faster, which means more of your budget goes into what the camera actually sees: your people, your place and your story.</p>
+
+      <h2>Real, AI or hybrid? A quick comparison</h2>
+
+      <div class="ai-compare-wrap">
+        <table class="ai-compare">
+          <thead>
+            <tr><th scope="col"></th><th scope="col">Real video</th><th scope="col">AI-generated video</th><th scope="col">Hybrid</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">Builds trust</th><td>Strongest</td><td>Weakest</td><td>Strong</td></tr>
+            <tr><th scope="row">Shows your real people and place</th><td>Yes</td><td>No</td><td>Yes</td></tr>
+            <tr><th scope="row">Unique to your business</th><td>Yes</td><td>Often generic</td><td>Yes</td></tr>
+            <tr><th scope="row">Turnaround</th><td>Days to weeks</td><td>Minutes to hours</td><td>Days</td></tr>
+            <tr><th scope="row">Upfront cost</th><td>Higher</td><td>Lowest</td><td>Moderate</td></tr>
+            <tr><th scope="row">Footage you can reuse</th><td>Yes, for years</td><td>Rarely</td><td>Yes</td></tr>
+            <tr><th scope="row">Best for</th><td>Testimonials, brand films, about-us, recruitment, events</td><td>Simple product visuals, concepts, quick internal updates</td><td>Most marketing: real people, made efficiently</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>For most small businesses, the hybrid column is where the smart money goes: real people and real footage at the heart of the video, with AI doing the repetitive work behind the scenes.</p>
+
+    </article>
+
+    <!-- Full-bleed divider: Volare Media crew behind the camera -->
+    <div class="photo-strip" role="img" aria-label="The Volare Media crew checking a shot together behind the camera on set" style="background-image: linear-gradient(rgba(12,13,9,0.3), rgba(12,13,9,0.3)), url('assets/img/corp-bts-4.jpg'); background-position: center 35%;"></div>
+
+    <article class="article wrap">
+
+      <h2>Six questions to ask before you choose</h2>
+
+      <p>Before you decide how your next video gets made, run it through these:</p>
+
+      <ol class="check-list">
+        <li>Is this video asking someone to trust me, my team or my results?</li>
+        <li>Does it need to show my real place, my real people or my real product?</li>
+        <li>Will my customers ever meet the people in it?</li>
+        <li>Would I be uncomfortable if a customer found out how it was made?</li>
+        <li>Will I want to reuse this footage next month, or next year?</li>
+        <li>What is this video actually worth to my business?</li>
+      </ol>
+
+      <p>If you said yes to any of the first three, real footage is almost always worth it. If you said yes to the fourth, don't make it that way. And if you're not sure about the sixth, start there. It's the first thing we work out with every client, before anyone talks about cameras, crews or AI.</p>
+
+      <h2>Our take</h2>
+
+      <p>So, AI or real? Our answer is the one we started with: look to your audience. Who are they, what do they care about, what will make them trust you, and how will they feel when they watch?</p>
+
+      <p>If the answer is a simple product, shown cleanly, to people who just need to see what it looks like, AI may do the job, and we'll happily talk it through with you, especially when the budget is tight and the goal is simple. If the answer involves trust, emotion, your people, your place or your story, real wins. And right now, judging by how audiences have reacted to even the biggest AI commercials, it isn't close.</p>
+
+      <p>AI is a powerful tool, it's here to stay, and we'll keep using it. But feelings come from people. The businesses that earn trust over the next few years won't be the ones with the most generated content. They'll be the ones their audience can see are real: real owners, real staff, real customers, real places and real ideas. That's the kind of video we love making, and it's the kind we'll keep recommending, because it's what audiences respond to.</p>
+
+      <p>Don't make a video just to make a video. And don't make a fake one just because it's easy.</p>
+
+      <div class="callout">
+        <p>Thinking about your next video? <a href="contact.html">Tell us what it needs to do</a>. Your first creative session is always free, and we'll give you an honest answer about the best way to make it, real, AI or a bit of both.</p>
+      </div>
+
+      <section class="faq" aria-label="Frequently asked questions">
+        <h2>Quick answers</h2>
+
+        <h3>Is AI video cheaper than hiring a video production company?</h3>
+        <p>Upfront, usually yes. But the better comparison is cost per result. A video that doesn't build trust, or that customers can tell is fake, is expensive at any price. Real footage also keeps paying you back as a library of content you can reuse for years.</p>
+
+        <h3>Have big brands pulled AI-generated ads?</h3>
+        <p>Yes. In December 2025, McDonald's Netherlands removed its fully AI-generated Christmas ad within days after viewers called it creepy and soulless. Others, like Coca-Cola, kept their AI holiday ads running despite heavy criticism. Reactions vary, which is exactly why your audience should drive the decision.</p>
+
+        <h3>Can AI replace a videographer?</h3>
+        <p>For simple product visuals and quick internal updates, sometimes. For videos that need to earn trust, show your real business or tell a real story, such as testimonials, brand films and recruitment videos, no. Those depend on real people, and that's the part AI can't fake well.</p>
+
+        <h3>Will customers know my video was made with AI?</h3>
+        <p>Often, yes. Many viewers notice even when they can't say why, and platforms like YouTube, Meta and TikTok now label realistic AI-generated content. It's safest to assume your audience will find out.</p>
+
+        <h3>Should I disclose AI-generated content in my marketing?</h3>
+        <p>We recommend it whenever AI creates realistic people, places or events. And never present an AI-generated person as a real customer, staff member or testimonial. That isn't just a trust problem, it can be a misleading-advertising problem too.</p>
+
+        <h3>Can you combine real footage with AI?</h3>
+        <p>Yes, and that's how most of our projects use it. Real people and real footage carry the story, while AI helps with transcripts, captions, audio clean-up, vertical reframing and planning, so more of the budget goes into what the camera sees.</p>
+
+        <h3>Does Volare Media make AI videos?</h3>
+        <p>We lead with real people and real footage, and we use AI throughout our production process. We're also open to AI-generated elements when they truly make sense for the project, like simple, clean product videos or a tight budget with a simple goal. We'll always tell you honestly which approach we'd recommend, and why.</p>
+      </section>
+
+      <p><strong>More from the journal:</strong> <a href="never-make-a-video-to-make-a-video.html">Never make a video just to make a video</a> · <a href="how-we-film-interviews.html">How we film interviews</a></p>
+
+    </article>
+
+    <section class="social-strip" aria-label="Follow Volare Media">
+      <div class="wrap social-strip-inner">
+        <p class="social-strip-label">Follow the work<span class="dot">.</span></p>
+        <div class="social-strip-links">
+          <a href="https://www.instagram.com/volare.media" rel="noopener" aria-label="Volare Media on Instagram">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M12 2.2c3.2 0 3.6 0 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.26.07 1.64.07 4.85s0 3.6-.07 4.85c-.05 1.17-.25 1.8-.41 2.23a3.7 3.7 0 0 1-.9 1.38c-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.26.06-1.64.07-4.85.07s-3.6 0-4.85-.07c-1.17-.05-1.8-.25-2.23-.41a3.7 3.7 0 0 1-1.38-.9 3.7 3.7 0 0 1-.9-1.38c-.16-.42-.36-1.06-.41-2.23C2.2 15.6 2.2 15.2 2.2 12s0-3.6.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.4 2.2 8.8 2.2 12 2.2Zm0 1.76c-3.15 0-3.52.01-4.77.07-1.08.05-1.66.23-2.05.38-.51.2-.88.44-1.26.82-.38.38-.62.75-.82 1.26-.15.39-.33.97-.38 2.05-.06 1.25-.07 1.62-.07 4.77s.01 3.52.07 4.77c.05 1.08.23 1.66.38 2.05.2.51.44.88.82 1.26.38.38.75.62 1.26.82.39.15.97.33 2.05.38 1.25.06 1.62.07 4.77.07s3.52-.01 4.77-.07c1.08-.05 1.66-.23 2.05-.38.51-.2.88-.44 1.26-.82.38-.38.62-.75.82-1.26.15-.39.33-.97.38-2.05.06-1.25.07-1.62.07-4.77s-.01-3.52-.07-4.77c-.05-1.08-.23-1.66-.38-2.05-.2-.51-.44-.88-.82-1.26a3.4 3.4 0 0 0-1.26-.82c-.39-.15-.97-.33-2.05-.38-1.25-.06-1.62-.07-4.77-.07Zm0 3.01a5.03 5.03 0 1 1 0 10.06 5.03 5.03 0 0 1 0-10.06Zm0 1.76a3.27 3.27 0 1 0 0 6.54 3.27 3.27 0 0 0 0-6.54Zm5.23-3.13a1.18 1.18 0 1 1 0 2.35 1.18 1.18 0 0 1 0-2.35Z"/></svg>
+          </a>
+          <a href="https://www.facebook.com/VolareMedia.net" rel="noopener" aria-label="Volare Media on Facebook">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06c0 5.02 3.66 9.19 8.44 9.94v-7.03H7.9v-2.9h2.54V9.85c0-2.52 1.5-3.91 3.77-3.91 1.09 0 2.23.2 2.23.2v2.46h-1.26c-1.24 0-1.62.77-1.62 1.57v1.88h2.76l-.44 2.9h-2.32V22c4.78-.75 8.44-4.92 8.44-9.94Z"/></svg>
+          </a>
+          <a href="https://www.linkedin.com/company/volare-media" rel="noopener" aria-label="Volare Media on LinkedIn">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.12 20.45H3.56V9h3.56v11.45Z"/></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta band--volt">
+      <div class="wrap reveal">
+        <p class="eyebrow">Real people, real video</p>
+        <h2 class="display-lg">Let's make something true<span class="dot">.</span></h2>
+        <a class="btn" href="contact.html">Start a project</a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer photo-band" style="--photo: url('assets/img/footer-crew-cinema.jpg'); --photo-pos: 60% 42%; --photo-opacity: 0.4;">
+    <div class="wrap">
+      <div class="footer-top">
+        <div>
+          <p class="footer-mark"><img src="assets/vm-logo.png" alt="Volare Media logo"></p>
+          <p class="footer-tag">Stories worth <em>sharing</em><span class="dot">.</span></p>
+        </div>
+        <div class="footer-cols">
+          <div>
+            <h4>Pages</h4>
+            <ul>
+              <li><a href="services.html">Services</a></li>
+              <li><a href="marketing-videos.html">Marketing Videos</a></li>
+              <li><a href="creative-direction.html">Creative Direction</a></li>
+              <li><a href="agencies.html">Agencies &amp; Brands</a></li>
+              <li><a href="event-videography.html">Event Videography</a></li>
+              <li><a href="corporate-video.html">Corporate Video</a></li>
+              <li><a href="website-development.html">Websites &amp; Branding</a></li>
+              <li><a href="brand-alignment.html">Brand Alignment</a></li>
+              <li><a href="work.html">Work</a></li>
+              <li><a href="about.html">About</a></li>
+              <li><a href="crew.html">The Crew</a></li>
+              <li><a href="crew.html#partners">Production Partners</a></li>
+              <li><a href="community.html">Community</a></li>
+              <li><a href="journal.html">Journal</a></li>
+              <li><a href="contact.html">Contact</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Contact</h4>
+            <ul>
+              <li><a href="mailto:video@volaremedia.net">video@volaremedia.net</a></li>
+              <li><a href="tel:+12505894521">250.589.4521</a></li>
+              <li>Victoria, BC, Canada</li>
+            </ul>
+          </div>
+          <div>
+            <h4>Follow</h4>
+            <ul>
+              <li><a href="https://www.instagram.com/volare.media" rel="noopener">Instagram</a></li>
+              <li><a href="https://www.facebook.com/VolareMedia.net" rel="noopener">Facebook</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer-base">
+        <span>© 2026 Volare Media. All rights reserved. · <a href="privacy-policy.html">Privacy policy</a></span>
+        <span>Video production across Vancouver Island, BC &amp; Canada</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js?v=30"></script>
+</body>
+</html>
