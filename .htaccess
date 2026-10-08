@@ -16,3 +16,7 @@ RedirectMatch 301 ^/contact/?$                   /contact.html
 RedirectMatch 301 ^/about/?$                     /about.html
 RedirectMatch 301 ^/privacy-policy/?$            /privacy-policy.html
 RedirectMatch 301 ^/terms-and-conditions/?$      /
+# Old Zyrosite blog/service URLs flagged in Search Console (2026-10-07)
+RedirectMatch 301 ^/digital-marketing/?$         /marketing-videos.html
+RedirectMatch 301 ^/non-skippable-youtube-video-ad/?$  /never-make-a-video-to-make-a-video.html
+RedirectMatch 301 ^/local-filmmakers-bring-powerful-mental-health-message-to-bcs-construction-community(-copy)?/?$  /tailgate-toolkit-61-stations.html
