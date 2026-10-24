@@ -3,10 +3,18 @@ const toggle = document.querySelector(".nav-toggle");
 const nav = document.querySelector(".main-nav");
 
 if (toggle && nav) {
-  toggle.addEventListener("click", () => {
-    const open = nav.classList.toggle("is-open");
+  const setOpen = (open) => {
+    nav.classList.toggle("is-open", open);
     toggle.setAttribute("aria-expanded", open ? "true" : "false");
     toggle.textContent = open ? "Close" : "Menu";
+  };
+  toggle.addEventListener("click", () => setOpen(!nav.classList.contains("is-open")));
+  // Escape closes the mobile menu and hands focus back to the toggle
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && nav.classList.contains("is-open")) {
+      setOpen(false);
+      toggle.focus();
+    }
   });
 }
 

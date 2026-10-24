@@ -57,7 +57,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Inter+Tight:ital,wght@0,400..800;1,400..800&family=Fragment+Mono:ital@0;1&display=swap" rel="stylesheet">
   <link rel="icon" href="favicon.svg?v=2" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css?v=32">
+  <link rel="stylesheet" href="styles.css?v=35">
   <script type="application/ld+json">
   [
     {
@@ -163,12 +163,7 @@
       justify-content: center;
       gap: 0.5rem;
       padding: 1.5rem;
-      background:
-        radial-gradient(60% 70% at 85% 20%, rgba(201, 186, 244, 0.22), transparent 70%),
-        radial-gradient(50% 60% at 10% 90%, rgba(214, 255, 61, 0.12), transparent 70%),
-        linear-gradient(rgba(244, 243, 232, 0.08) 1px, transparent 1px) 0 0 / 28px 28px,
-        linear-gradient(90deg, rgba(244, 243, 232, 0.08) 1px, transparent 1px) 0 0 / 28px 28px,
-        var(--bg-raised);
+      background: var(--bg-raised);
       transition: border-color 0.25s, transform 0.25s;
     }
     .more-card .more-thumb span {
@@ -246,9 +241,8 @@
 
     .beyond-links a {
       display: grid;
-      grid-template-columns: auto minmax(0, 1fr);
-      column-gap: 0.75rem;
-      align-items: baseline;
+      grid-template-columns: minmax(0, 1fr);
+      row-gap: 0.2rem;
       padding: 0.95rem 1.15rem;
       border: 1px solid var(--line);
       border-radius: 1rem;
@@ -257,7 +251,6 @@
       text-decoration: none;
       transition: border-color 0.2s, transform 0.2s, background 0.2s;
     }
-    .beyond-links .bl-num { grid-row: span 2; font-family: var(--font-mono); font-size: 0.72rem; color: var(--lilac); }
     .beyond-links b { font-family: var(--font-display); font-size: 1.1rem; font-weight: 600; letter-spacing: -0.02em; }
     .beyond-links b::after { content: " \2192"; color: var(--volt); opacity: 0; transition: opacity 0.2s; }
     .beyond-links .bl-desc { font-size: 0.85rem; line-height: 1.4; color: var(--muted); }
@@ -319,9 +312,8 @@
 
   <main>
 
-    <section class="hero grid-bleed grid-bleed--glow">
+    <section class="hero">
       <div class="wrap">
-        <p class="eyebrow">Work</p>
         <h1 class="display-xl">The work <span class="sweep">speaks<span class="dot">.</span></span> <span class="count">(8)</span></h1>
         <p class="lede">Marketing videos, commercials, brand films and music videos, made for brands across BC and Canada. Behind every one is the full process: preproduction and planning, location scouting, permits and insurance, directing and cinematography, right through to the final edit. Press play on any of them.</p>
       </div>
@@ -404,7 +396,7 @@
     </section>
 
     <!-- Beyond the reel: links out to everything else we do -->
-    <section class="section grid-bleed grid-bleed--glow beyond" id="beyond-the-reel" aria-labelledby="beyond-head">
+    <section class="section beyond" id="beyond-the-reel" aria-labelledby="beyond-head">
       <div class="wrap">
         <div class="beyond-head reveal">
           <div>
@@ -416,10 +408,10 @@
 
         <div class="beyond-stage reveal">
           <ul class="beyond-links beyond-links--left">
-            <li><a href="marketing-videos.html"><span class="bl-num">(01)</span><b>Marketing videos</b><span class="bl-desc">Commercials and ads cut for every platform</span></a></li>
-            <li><a href="website-development.html#campaigns"><span class="bl-num">(02)</span><b>Marketing campaigns</b><span class="bl-desc">Strategy, paid ads and reporting, run by us</span></a></li>
-            <li><a href="corporate-video.html"><span class="bl-num">(03)</span><b>Corporate video</b><span class="bl-desc">Website films, training and LinkedIn</span></a></li>
-            <li><a href="event-videography.html"><span class="bl-num">(04)</span><b>Event videography</b><span class="bl-desc">Galas, conferences and launches</span></a></li>
+            <li><a href="marketing-videos.html"><b>Marketing videos</b><span class="bl-desc">Commercials and ads cut for every platform</span></a></li>
+            <li><a href="website-development.html#campaigns"><b>Marketing campaigns</b><span class="bl-desc">Strategy, paid ads and reporting, run by us</span></a></li>
+            <li><a href="corporate-video.html"><b>Corporate video</b><span class="bl-desc">Website films, training and LinkedIn</span></a></li>
+            <li><a href="event-videography.html"><b>Event videography</b><span class="bl-desc">Galas, conferences and launches</span></a></li>
           </ul>
           <div class="beyond-phone" aria-hidden="true">
             <div class="phone">
@@ -432,10 +424,10 @@
             </div>
           </div>
           <ul class="beyond-links beyond-links--right">
-            <li><a href="community.html"><span class="bl-num">(05)</span><b>Documentaries</b><span class="bl-desc">Short films for the causes we back</span></a></li>
-            <li><a href="website-development.html#websites"><span class="bl-num">(06)</span><b>Websites</b><span class="bl-desc">New builds and full rebuilds</span></a></li>
-            <li><a href="website-development.html#brand-building"><span class="bl-num">(07)</span><b>Brand design</b><span class="bl-desc">Identity, voice and positioning</span></a></li>
-            <li><a href="brand-alignment.html"><span class="bl-num">(08)</span><b>Brand alignment</b><span class="bl-desc">One look and one voice, everywhere</span></a></li>
+            <li><a href="community.html"><b>Documentaries</b><span class="bl-desc">Short films for the causes we back</span></a></li>
+            <li><a href="website-development.html#websites"><b>Websites</b><span class="bl-desc">New builds and full rebuilds</span></a></li>
+            <li><a href="website-development.html#brand-building"><b>Brand design</b><span class="bl-desc">Identity, voice and positioning</span></a></li>
+            <li><a href="brand-alignment.html"><b>Brand alignment</b><span class="bl-desc">One look and one voice, everywhere</span></a></li>
           </ul>
         </div>
       </div>
@@ -532,6 +524,6 @@
     </div>
   </footer>
 
-  <script src="script.js?v=30"></script>
+  <script src="script.js?v=31"></script>
 </body>
 </html>

@@ -58,7 +58,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Inter+Tight:ital,wght@0,400..800;1,400..800&family=Fragment+Mono:ital@0;1&display=swap" rel="stylesheet">
   <link rel="icon" href="favicon.svg?v=2" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css?v=32">
+  <link rel="stylesheet" href="styles.css?v=35">
 
   <style>
     .ba-hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 1.25rem 2rem; margin-top: 2rem; }
@@ -69,7 +69,7 @@
     .steps::before { content: ""; position: absolute; left: 0; right: 0; top: 0.55rem; border-top: 1px dashed rgba(214, 255, 61, 0.45); }
     .step { position: relative; padding-top: 2.25rem; }
     .step::before { content: ""; position: absolute; top: 0.2rem; left: 0; width: 0.75rem; height: 0.75rem; border-radius: 50%; background: var(--volt); box-shadow: 0 0 0 5px var(--bg); }
-    .step-num { font-family: var(--font-mono); font-size: 0.78rem; color: var(--lilac); }
+    .step-num { font-family: var(--font-display); font-size: 1rem; font-weight: 600; color: var(--lilac); }
     .step h3 { font-size: 1.35rem; margin: 0.4rem 0 0.6rem; }
     .step p { color: var(--muted); font-size: 0.95rem; line-height: 1.55; }
     .steps-cta { display: flex; flex-wrap: wrap; align-items: center; gap: 1.25rem 2rem; margin-top: clamp(2.5rem, 4vw, 3.5rem); }
@@ -215,7 +215,6 @@
       <div class="wrap">
         <div class="section-head reveal">
           <div>
-            <p class="eyebrow">Sound familiar?</p>
             <h2 id="ba-signs" class="display-lg">Signs your brand<br>has <span class="sweep">drifted<span class="dot">.</span></span></h2>
           </div>
           <p class="lede">It happens to most small businesses. A staff member here, a freelancer there, a family member helping out, and over the years every platform ends up looking a little different. It's nobody's fault, and it's very fixable.</p>
@@ -238,12 +237,12 @@
           <p class="brand-drift-note">Illustration. Same business, four places a customer might find it.</p>
         </div>
         <div class="card-grid symptoms reveal">
-          <div class="card"><p class="eyebrow">Logo</p><h3>Three versions of your logo</h3><p>A different one on the website, the Facebook page and the business cards, and nobody is sure which is current.</p></div>
-          <div class="card"><p class="eyebrow">Name</p><h3>A name that changes</h3><p>Written one way on Google, another on Instagram and a third on your invoices.</p></div>
-          <div class="card"><p class="eyebrow">Colour</p><h3>Colours that are almost the same</h3><p>Five shades of what is supposed to be your brand colour, depending on who made the graphic.</p></div>
-          <div class="card"><p class="eyebrow">Message</p><h3>A different story on every page</h3><p>Your homepage, your bios and your ads all describe the business differently.</p></div>
-          <div class="card"><p class="eyebrow">Socials</p><h3>Profiles that don't match</h3><p>Old cover images, an outdated bio, a profile picture from three years ago.</p></div>
-          <div class="card"><p class="eyebrow">Files</p><h3>No one can find the logo file</h3><p>Every new graphic starts with a screenshot, so it gets a little blurrier each time.</p></div>
+          <div class="card"><h3>Three versions of your logo</h3><p>A different one on the website, the Facebook page and the business cards, and nobody is sure which is current.</p></div>
+          <div class="card"><h3>A name that changes</h3><p>Written one way on Google, another on Instagram and a third on your invoices.</p></div>
+          <div class="card"><h3>Colours that are almost the same</h3><p>Five shades of what is supposed to be your brand colour, depending on who made the graphic.</p></div>
+          <div class="card"><h3>A different story on every page</h3><p>Your homepage, your bios and your ads all describe the business differently.</p></div>
+          <div class="card"><h3>Profiles that don't match</h3><p>Old cover images, an outdated bio, a profile picture from three years ago.</p></div>
+          <div class="card"><h3>No one can find the logo file</h3><p>Every new graphic starts with a screenshot, so it gets a little blurrier each time.</p></div>
         </div>
       </div>
     </section>
@@ -252,7 +251,6 @@
       <div class="wrap">
         <div class="section-head reveal">
           <div>
-            <p class="eyebrow">Why it matters</p>
             <h2 id="ba-why" class="display-lg">Your video buys the attention<span class="dot">.</span><br>Your brand <span class="sweep">keeps it<span class="dot">.</span></span></h2>
           </div>
         </div>
@@ -260,18 +258,16 @@
       </div>
     </section>
 
-    <section class="grid-bleed grid-bleed--glow grid-bleed--left" style="padding-top: var(--section-gap); padding-bottom: var(--section-gap);" aria-labelledby="ba-included">
+    <section class="" style="padding-top: var(--section-gap); padding-bottom: var(--section-gap);" aria-labelledby="ba-included">
       <div class="wrap">
         <div class="section-head reveal">
           <div>
-            <p class="eyebrow">What's included</p>
             <h2 id="ba-included" class="display-lg">A brand alignment<br><span class="sweep">package<span class="dot">.</span></span></h2>
           </div>
         </div>
         <div class="service-list">
 
         <div class="service-row">
-          <span class="service-num">(001)</span>
           <h3>Brand audit</h3>
           <div>
             <p>We put every place your business appears side by side: website, Facebook, Instagram, LinkedIn, Google Business Profile, email, print and video, and show you exactly where it has drifted.</p>
@@ -282,7 +278,6 @@
         </div>
 
         <div class="service-row">
-          <span class="service-num">(002)</span>
           <h3>Logo refresh or full rebrand</h3>
           <div>
             <p>Keep and clean up the logo you have, or design a new one. Either way you get a proper set: a main logo, a compact badge for profile pictures and a horizontal version for headers.</p>
@@ -293,7 +288,6 @@
         </div>
 
         <div class="service-row">
-          <span class="service-num">(003)</span>
           <h3>Colour, type &amp; visual style</h3>
           <div>
             <p>One palette and one type style that work on screen, in print and in video, plus the photo and graphic style that goes with them.</p>
@@ -304,7 +298,6 @@
         </div>
 
         <div class="service-row">
-          <span class="service-num">(004)</span>
           <h3>Voice &amp; core message</h3>
           <div>
             <p>Who you are and why customers choose you, written once and used everywhere, from your homepage to your Instagram bio to your ads.</p>
@@ -315,7 +308,6 @@
         </div>
 
         <div class="service-row">
-          <span class="service-num">(005)</span>
           <h3>Brand guide</h3>
           <div>
             <p>A short, practical guide that shows staff, family or any future freelancer exactly how to use the brand, so it stays aligned after we hand it back.</p>
@@ -326,7 +318,6 @@
         </div>
 
         <div class="service-row">
-          <span class="service-num">(006)</span>
           <h3>Rollout everywhere</h3>
           <div>
             <p>The website, social profiles, Google Business Profile, email signatures and print all updated together, so nothing old is left behind. Plus video and photo shot to match.</p>
@@ -349,9 +340,9 @@
           </div>
         </div>
         <div class="card-grid ba-who reveal">
-          <div class="card"><p class="eyebrow">Drifted</p><h3>Brands that have drifted</h3><p>Years of different people helping out have left your website, socials and print all looking a little different. We bring it back together.</p></div>
-          <div class="card"><p class="eyebrow">New</p><h3>New businesses</h3><p>Launching something new? Build the name, logo, colours, message and guide together, and start aligned from day one.</p></div>
-          <div class="card"><p class="eyebrow">Rebrand</p><h3>Rebrands</h3><p>New name, new colours or a new logo, rolled out everywhere at once so the old look doesn't linger on Facebook and the van for years.</p></div>
+          <div class="card"><h3>Brands that have drifted</h3><p>Years of different people helping out have left your website, socials and print all looking a little different. We bring it back together.</p></div>
+          <div class="card"><h3>New businesses</h3><p>Launching something new? Build the name, logo, colours, message and guide together, and start aligned from day one.</p></div>
+          <div class="card"><h3>Rebrands</h3><p>New name, new colours or a new logo, rolled out everywhere at once so the old look doesn't linger on Facebook and the van for years.</p></div>
         </div>
       </div>
     </section>
@@ -360,16 +351,15 @@
       <div class="wrap">
         <div class="section-head reveal">
           <div>
-            <p class="eyebrow">How it works</p>
             <h2 id="ba-how" class="display-lg">From first meeting<br>to <span class="sweep">rollout<span class="dot">.</span></span></h2>
           </div>
         </div>
         <ol class="steps reveal">
-          <li class="step"><span class="step-num">(01)</span><h3>Sit down &amp; audit</h3><p>We meet with you, talk through the business and the customers, and audit every touchpoint together.</p></li>
-          <li class="step"><span class="step-num">(02)</span><h3>Define</h3><p>Name, core message, voice and priorities, agreed before anything is designed.</p></li>
-          <li class="step"><span class="step-num">(03)</span><h3>Design</h3><p>Logo set, palette, type and visual style, refined with you until it feels right.</p></li>
-          <li class="step"><span class="step-num">(04)</span><h3>Roll out</h3><p>Website, socials, Google profile, templates and print, all updated together.</p></li>
-          <li class="step"><span class="step-num">(05)</span><h3>Keep it aligned</h3><p>A brand guide for your team, plus ongoing content, video and support from us if you want it.</p></li>
+          <li class="step"><span class="step-num">1</span><h3>Sit down &amp; audit</h3><p>We meet with you, talk through the business and the customers, and audit every touchpoint together.</p></li>
+          <li class="step"><span class="step-num">2</span><h3>Define</h3><p>Name, core message, voice and priorities, agreed before anything is designed.</p></li>
+          <li class="step"><span class="step-num">3</span><h3>Design</h3><p>Logo set, palette, type and visual style, refined with you until it feels right.</p></li>
+          <li class="step"><span class="step-num">4</span><h3>Roll out</h3><p>Website, socials, Google profile, templates and print, all updated together.</p></li>
+          <li class="step"><span class="step-num">5</span><h3>Keep it aligned</h3><p>A brand guide for your team, plus ongoing content, video and support from us if you want it.</p></li>
         </ol>
         <div class="steps-cta reveal">
           <a class="btn" href="contact.html?project=brand">Start with an audit</a>
@@ -378,7 +368,7 @@
       </div>
     </section>
 
-    <section class="section band--sky grid-bleed grid-bleed--glow" id="its-a-doodle" aria-labelledby="ba-case">
+    <section class="section band--sky" id="its-a-doodle" aria-labelledby="ba-case">
       <div class="wrap">
         <div class="section-head reveal">
           <div>
@@ -449,7 +439,6 @@
 
         <details class="card">
           <summary>
-            <p class="eyebrow">Timing</p>
             <h3>How long does brand alignment take?</h3>
             <span class="card-toggle" aria-hidden="true"></span>
           </summary>
@@ -460,7 +449,6 @@
 
         <details class="card">
           <summary>
-            <p class="eyebrow">Logo</p>
             <h3>Do we have to change our logo?</h3>
             <span class="card-toggle" aria-hidden="true"></span>
           </summary>
@@ -471,7 +459,6 @@
 
         <details class="card">
           <summary>
-            <p class="eyebrow">Website</p>
             <h3>Can you rebuild our website as part of it?</h3>
             <span class="card-toggle" aria-hidden="true"></span>
           </summary>
@@ -482,7 +469,6 @@
 
         <details class="card">
           <summary>
-            <p class="eyebrow">New brands</p>
             <h3>We're a brand new business. Is this for us?</h3>
             <span class="card-toggle" aria-hidden="true"></span>
           </summary>
@@ -497,7 +483,6 @@
 
     <section class="cta band--volt">
       <div class="wrap reveal">
-        <p class="eyebrow">Ready to line it up?</p>
         <h2 class="display-lg">One brand,<br>everywhere<span class="dot">.</span></h2>
         <a class="btn" href="contact.html?project=brand">Align my brand</a>
       </div>
@@ -571,6 +556,6 @@
     </div>
   </footer>
 
-  <script src="script.js?v=30"></script>
+  <script src="script.js?v=31"></script>
 </body>
 </html>

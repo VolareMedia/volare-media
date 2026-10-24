@@ -55,14 +55,18 @@ a { color: inherit; }
 h1, h2, h3 {
   font-family: var(--font-display);
   font-weight: 600;
-  letter-spacing: -0.04em;
-  line-height: 0.98;
+  letter-spacing: -0.03em;
+  line-height: 1.04;
   text-wrap: balance;
 }
 
-.display-xl { font-size: clamp(3rem, 10.5vw, 8.75rem); }
-.display-lg { font-size: clamp(2.5rem, 7vw, 5.5rem); }
-.display-md { font-size: clamp(1.9rem, 4.5vw, 3.5rem); }
+/* smaller headings get looser tracking and leading; only true display
+   statements run tight */
+h3 { letter-spacing: -0.015em; line-height: 1.18; }
+
+.display-xl { font-size: clamp(2.9rem, 7.6vw, 6rem); letter-spacing: -0.04em; line-height: 0.98; }
+.display-lg { font-size: clamp(2.2rem, 4.8vw, 4rem); letter-spacing: -0.035em; line-height: 1.02; }
+.display-md { font-size: clamp(1.75rem, 3vw, 2.6rem); letter-spacing: -0.025em; line-height: 1.08; }
 
 .lede {
   font-size: clamp(1.125rem, 1.8vw, 1.375rem);
@@ -71,34 +75,19 @@ h1, h2, h3 {
   max-width: 42rem;
 }
 
+/* quiet metadata line (client, year, place, category). Not a slogan slot:
+   a heading that reads clearly on its own gets no label above it. */
 .eyebrow {
-  font-family: var(--font-mono);
-  font-size: 0.8125rem;
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
-  margin-bottom: 1.5rem;
-  color: var(--volt);
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  letter-spacing: 0;
+  display: block;
+  margin-bottom: 1rem;
+  color: var(--muted);
 }
 
-.eyebrow::before {
-  content: "";
-  width: 0.55rem;
-  height: 0.55rem;
-  background: var(--volt);
-  border-radius: 50%;
-  flex: none;
-}
-
-/* subtle secondary brand colour: lilac dots inside cards and raised bands */
-.card .eyebrow::before,
-.band--sky .section-head .eyebrow::before,
-.band--mint .section-head .eyebrow::before,
-.band--peach .section-head .eyebrow::before {
-  background: var(--lilac);
-}
+.eyebrow::before { content: none; }
 
 /* mono counter — the "(27)" device */
 .count {
@@ -112,17 +101,20 @@ h1, h2, h3 {
 /* brand dot — the period in VM. is always lilac */
 .dot { color: var(--lilac); }
 
-/* Signature: volt marker sweep on key words.
+/* Signature: volt marker sweep. Reserved for the brand line ("Stories worth
+   sharing") via .sweep--mark; a plain .sweep reads as ordinary heading text
+   so the highlight stays rare enough to mean something.
    isolation keeps the z-index:-1 highlight from dropping behind
    section backgrounds once the reveal transition ends. */
-.sweep {
+.sweep { white-space: nowrap; }
+
+.sweep--mark {
   position: relative;
-  white-space: nowrap;
   color: var(--bg);
   isolation: isolate;
 }
 
-.sweep::before {
+.sweep--mark::before {
   content: "";
   position: absolute;
   inset: 0.08em -0.12em -0.02em;
@@ -386,57 +378,56 @@ em {
 }
 
 .hero-aside {
-  font-family: var(--font-mono);
-  font-size: 0.78rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font-size: 0.9375rem;
   color: var(--muted);
 }
 
 .hero-aside a { color: var(--volt); }
 
-/* ---------- client marquee ---------- */
+/* ---------- client list ---------- */
 
-.marquee {
-  overflow: hidden;
+.clients {
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
-  padding: 1.6rem 0;
+  padding: 1.75rem 0;
 }
 
-.marquee-track {
+.clients .wrap {
   display: flex;
-  gap: 3.5rem;
-  width: max-content;
-  animation: marquee 36s linear infinite;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.75rem 2.5rem;
 }
 
-.marquee-track span {
+.clients-label {
+  flex: none;
+  font-size: 0.9375rem;
+  color: var(--muted);
+}
+
+.clients-list {
+  list-style: none;
+  flex: 1 1 36rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.6rem;
   font-family: var(--font-display);
-  font-size: clamp(1.5rem, 3vw, 2.4rem);
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  white-space: nowrap;
-  color: transparent;
-  -webkit-text-stroke: 1px rgba(244, 243, 232, 0.5);
+  font-size: clamp(1.05rem, 1.4vw, 1.2rem);
+  font-weight: 500;
+  letter-spacing: -0.01em;
 }
 
-/* mostly brand colours, with a few outlined names kept in the mix */
-.marquee-track span:nth-child(8n+1),
-.marquee-track span:nth-child(8n+4),
-.marquee-track span:nth-child(8n+6) {
-  color: var(--volt);
-  -webkit-text-stroke: 0;
-}
+.clients-list li { white-space: nowrap; }
 
-.marquee-track span:nth-child(8n+3),
-.marquee-track span:nth-child(8n+7) {
-  color: var(--lilac);
-  -webkit-text-stroke: 0;
-}
-
-@keyframes marquee {
-  to { transform: translateX(-50%); }
+/* a lilac dot leads each name, so wrapped lines never end on a stray dot */
+.clients-list li::before {
+  content: "";
+  display: inline-block;
+  width: 0.32rem;
+  height: 0.32rem;
+  margin: 0 0.6rem 0.2rem 0;
+  border-radius: 50%;
+  background: var(--lilac);
 }
 
 /* ---------- social strip (thin divider between sections) ---------- */
@@ -534,8 +525,11 @@ em {
 .band--ink { background: var(--bg-panel); border-top: 1px solid var(--line); }
 
 .band--volt { background: var(--volt); color: var(--bg); }
-.band--volt .eyebrow { color: var(--bg); }
-.band--volt .eyebrow::before { background: var(--bg); }
+.band--volt .eyebrow { color: rgba(12, 13, 9, 0.72); }
+
+/* on volt the brand mark inverts: dark marker, volt letters */
+.band--volt .sweep--mark { color: var(--volt); }
+.band--volt .sweep--mark::before { background: var(--bg); }
 .band--volt .lede { color: rgba(12, 13, 9, 0.72); }
 .band--volt .btn { background: var(--bg); color: var(--volt); border-color: var(--bg); }
 .band--volt .btn:hover { background: transparent; color: var(--bg); }
@@ -546,7 +540,7 @@ em {
 
 .service-row {
   display: grid;
-  grid-template-columns: minmax(5rem, 10rem) 1.2fr 2fr;
+  grid-template-columns: 1.2fr 2fr;
   gap: clamp(1rem, 3vw, 3rem);
   padding: clamp(2rem, 4vw, 3.5rem) 0;
   border-bottom: 1px solid var(--line);
@@ -557,9 +551,13 @@ a.service-row { transition: background 0.2s; }
 a.service-row:hover { background: rgba(214, 255, 61, 0.06); }
 a.service-row:hover .service-num { color: var(--volt); }
 
+/* only real sequences (the six production phases) keep a number */
+.service-row:has(.service-num) { grid-template-columns: 2.5rem 1.2fr 2fr; }
+
 .service-num {
-  font-family: var(--font-mono);
-  font-size: clamp(1.1rem, 2vw, 1.5rem);
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 600;
   color: var(--muted);
   transition: color 0.2s;
 }
@@ -608,8 +606,18 @@ a.service-row:hover .service-num { color: var(--volt); }
 
 .work-grid--featured { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 
+/* lead film large on the left, two supporting films stacked beside it */
+.work-grid--lead {
+  grid-template-columns: minmax(0, 1.75fr) minmax(0, 1fr);
+  align-items: start;
+}
+.work-grid--lead .work-card:first-child { grid-row: span 2; }
+.work-grid--lead .work-card:first-child h3 { font-size: clamp(1.5rem, 2.2vw, 1.9rem); }
+
 @media (max-width: 56rem) {
-  .work-grid--featured { grid-template-columns: minmax(0, 1fr); }
+  .work-grid--featured,
+  .work-grid--lead { grid-template-columns: minmax(0, 1fr); }
+  .work-grid--lead .work-card:first-child { grid-row: auto; }
 }
 
 .work-thumb {
@@ -645,10 +653,8 @@ a.service-row:hover .service-num { color: var(--volt); }
 .work-card h3 { font-size: 1.4rem; margin-bottom: 0.3rem; }
 
 .work-tag {
-  font-family: var(--font-mono);
-  font-size: 0.78rem;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
+  font-size: 0.9375rem;
+  line-height: 1.45;
   color: var(--muted);
 }
 
@@ -825,10 +831,15 @@ a.card:hover .card-cue { color: var(--volt); }
 .g-badge svg { width: 2rem; height: 2rem; }
 
 .g-badge .g-label {
-  font-family: var(--font-mono);
-  font-size: 0.8125rem;
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--muted);
+}
+
+/* verified facts, said once in a sentence instead of a stat dashboard */
+.proof-line {
+  margin-top: clamp(1.5rem, 3vw, 2.25rem);
+  max-width: 52rem;
   color: var(--muted);
 }
 
@@ -1299,23 +1310,14 @@ details.card summary:focus-visible {
   font-family: var(--font-mono);
 }
 
-/* ---------- reveal animation ---------- */
+/* ---------- motion ---------- */
 
-.reveal {
-  opacity: 0;
-  transform: translateY(1.5rem);
-  transition: opacity 0.7s ease, transform 0.7s ease;
-}
-
-.reveal.is-visible {
-  opacity: 1;
-  transform: none;
-}
+/* .reveal no longer animates: content is visible from the first paint and
+   the film footage carries the motion. The class stays in the markup as a
+   harmless hook. */
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .reveal { opacity: 1; transform: none; transition: none; }
-  .marquee-track { animation: none; flex-wrap: wrap; }
 }
 
 /* ---------- focus ---------- */
@@ -1357,8 +1359,13 @@ a:focus-visible, button:focus-visible {
     align-items: flex-start;
     background: var(--bg);
     border-bottom: 1px solid var(--line);
-    padding: 1.5rem var(--gutter) 2rem;
-    gap: 1.1rem;
+    padding: 1.25rem var(--gutter) 1.75rem;
+    gap: 0.95rem;
+    /* the panel scrolls on its own so short phones can reach every link;
+       the allowance covers the header plus the contact bar above it */
+    max-height: calc(100dvh - 7rem);
+    overflow-y: auto;
+    overscroll-behavior: contain;
   }
 
   .main-nav.is-open { display: flex; }
@@ -1385,7 +1392,8 @@ a:focus-visible, button:focus-visible {
   .main-nav .nav-drop-menu a:hover,
   .main-nav .nav-drop-menu a[aria-current="page"] { background: none; }
 
-  .service-row {
+  .service-row,
+  .service-row:has(.service-num) {
     grid-template-columns: 1fr;
     gap: 0.6rem;
   }
@@ -1576,7 +1584,7 @@ a:focus-visible, button:focus-visible {
   align-items: center;
 }
 
-.packages-title { font-size: clamp(2.75rem, 8vw, 7.5rem); }
+.packages-title { font-size: clamp(2.1rem, 4.4vw, 3.75rem); letter-spacing: -0.035em; line-height: 1.02; max-width: 20ch; }
 
 .packages-copy .lede { max-width: 36rem; }
 
@@ -1589,33 +1597,6 @@ a:focus-visible, button:focus-visible {
 }
 
 /* "We make ads for" platform line under the package CTA */
-.pkg-platforms {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.5rem 0.55rem;
-  margin-top: 1.6rem;
-}
-
-.pkg-platforms-label {
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--volt);
-  margin-right: 0.4rem;
-}
-
-.pkg-platforms span:not(.pkg-platforms-label) {
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  letter-spacing: 0.04em;
-  padding: 0.3rem 0.7rem;
-  border: 1px solid rgba(214, 255, 61, 0.5);
-  border-radius: 999px;
-  color: var(--cream);
-}
-
 /* blurred variant of the side photo band: sits behind the top block only,
    sized to the width so a tall section doesn't stretch it into streaks */
 .photo-band--blur::before {
@@ -1644,42 +1625,6 @@ a:focus-visible, button:focus-visible {
 }
 
 /* blurred backdrop the devices float in front of */
-.stage-backdrop {
-  position: absolute;
-  inset: -14%;
-  z-index: 0;
-  border-radius: 40%;
-  overflow: hidden;
-  opacity: 0.9;
-  mask-image: radial-gradient(ellipse 70% 66% at 50% 50%, #000 15%, transparent 78%);
-  -webkit-mask-image: radial-gradient(ellipse 70% 66% at 50% 50%, #000 15%, transparent 78%);
-  will-change: transform;
-  animation: backdrop-drift 26s ease-in-out infinite alternate;
-}
-
-.stage-backdrop img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: 50% 32%;
-  filter: blur(20px) saturate(1.7) brightness(1.6);
-  transform: scale(1.2);
-}
-
-.stage-backdrop::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(circle at 20% 28%, rgba(214, 255, 61, 0.28), transparent 42%),
-    radial-gradient(circle at 80% 72%, rgba(201, 186, 244, 0.42), transparent 46%);
-}
-
-@keyframes backdrop-drift {
-  from { transform: translate3d(-2%, 1%, 0) scale(1); }
-  to   { transform: translate3d(2%, -2%, 0) scale(1.06); }
-}
-
 .device {
   position: absolute;
   will-change: transform;
@@ -1697,7 +1642,6 @@ a:focus-visible, button:focus-visible {
   top: 0;
   width: 75%;
   z-index: 2;
-  animation: float-a 8s ease-in-out infinite;
 }
 
 .laptop {
@@ -1782,7 +1726,6 @@ a:focus-visible, button:focus-visible {
   bottom: 4%;
   width: 27%;
   z-index: 3;
-  animation: float-b 7s ease-in-out infinite;
   animation-delay: -2.5s;
 }
 
@@ -1841,7 +1784,6 @@ a:focus-visible, button:focus-visible {
   bottom: 0;
   width: 68%;
   z-index: 4;
-  animation: float-a 9s ease-in-out infinite;
   animation-delay: -4s;
 }
 
@@ -1872,16 +1814,6 @@ a:focus-visible, button:focus-visible {
 .print:nth-child(2) { left: 22%; transform: rotate(-3deg) translateY(-4%); z-index: 2; }
 .print:nth-child(3) { left: 44%; transform: rotate(3deg) translateY(-4%); z-index: 3; }
 .print:nth-child(4) { left: 66%; transform: rotate(9deg); z-index: 4; }
-
-@keyframes float-a {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-0.7rem); }
-}
-
-@keyframes float-b {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-1rem); }
-}
 
 /* behind the scenes block */
 .bts-block {
@@ -1945,10 +1877,7 @@ a:focus-visible, button:focus-visible {
 
 .review-mini cite {
   font-style: normal;
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font-size: 0.875rem;
   color: var(--muted);
 }
 
@@ -1972,69 +1901,6 @@ a:focus-visible, button:focus-visible {
   }
   .bts-row::-webkit-scrollbar { display: none; }
   .bts-row li { flex: 0 0 66%; scroll-snap-align: start; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .device, .stage-backdrop { animation: none; }
-}
-
-/* ---------- grid-line texture for flat black sections ---------- */
-
-/* grid-line texture: a 28px grid strongest on one side, easing off across
-   the section with soft top/bottom edges. Breaks up flat black sections.
-   Usage: <section class="grid-bleed grid-bleed--glow [grid-bleed--left]">
-   with a .wrap INSIDE it so the lines run full-bleed. */
-.grid-bleed { position: relative; isolation: isolate; }
-
-.grid-bleed::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  background-image:
-    linear-gradient(rgba(244, 243, 232, 0.14) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(244, 243, 232, 0.14) 1px, transparent 1px);
-  background-size: 28px 28px;
-  background-position: right -1px top -1px;
-  -webkit-mask-image:
-    linear-gradient(to left, #000 0%, #000 38%, rgba(0, 0, 0, 0.4) 72%, rgba(0, 0, 0, 0.22) 100%),
-    linear-gradient(to bottom, transparent, #000 14%, #000 86%, transparent);
-  -webkit-mask-composite: source-in;
-  mask-image:
-    linear-gradient(to left, #000 0%, #000 38%, rgba(0, 0, 0, 0.4) 72%, rgba(0, 0, 0, 0.22) 100%),
-    linear-gradient(to bottom, transparent, #000 14%, #000 86%, transparent);
-  mask-composite: intersect;
-}
-
-.grid-bleed--left::before {
-  background-position: left -1px top -1px;
-  -webkit-mask-image:
-    linear-gradient(to right, #000 0%, #000 38%, rgba(0, 0, 0, 0.4) 72%, rgba(0, 0, 0, 0.22) 100%),
-    linear-gradient(to bottom, transparent, #000 14%, #000 86%, transparent);
-  mask-image:
-    linear-gradient(to right, #000 0%, #000 38%, rgba(0, 0, 0, 0.4) 72%, rgba(0, 0, 0, 0.22) 100%),
-    linear-gradient(to bottom, transparent, #000 14%, #000 86%, transparent);
-}
-
-/* optional soft brand-colour bleed under the lines */
-.grid-bleed--glow::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: -2;
-  pointer-events: none;
-  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 18%, #000 80%, transparent);
-  mask-image: linear-gradient(to bottom, transparent, #000 18%, #000 80%, transparent);
-  background:
-    radial-gradient(ellipse 40% 55% at 100% 40%, rgba(201, 186, 244, 0.17), transparent 70%),
-    radial-gradient(ellipse 28% 34% at 96% 88%, rgba(214, 255, 61, 0.06), transparent 70%);
-}
-
-.grid-bleed--left.grid-bleed--glow::after {
-  background:
-    radial-gradient(ellipse 40% 55% at 0% 58%, rgba(201, 186, 244, 0.17), transparent 70%),
-    radial-gradient(ellipse 28% 34% at 4% 12%, rgba(214, 255, 61, 0.06), transparent 70%);
 }
 
 /* ---------- brand drift illustration (brand alignment page + journal) ---------- */

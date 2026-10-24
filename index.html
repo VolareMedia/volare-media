@@ -47,20 +47,20 @@
   </script>
   <meta name="facebook-domain-verification" content="3vx90std0sarqosonhh6awvs3yn0hi" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Volare Media | Video Production on Vancouver Island</title>
-  <meta name="description" content="Stories worth sharing. Volare Media is a full-service video production company based on Vancouver Island, working across BC and Canada: marketing videos, commercials, documentaries, music videos and film.">
+  <title>Vancouver Island Video Production for Agencies &amp; Brands | Volare Media</title>
+  <meta name="description" content="Video production for agencies and brands across BC and Canada, based on Vancouver Island. Commercials, brand films and campaign content, from brief to delivery.">
   <link rel="canonical" href="https://www.volaremedia.net/">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Volare Media | Video Production on Vancouver Island">
-  <meta property="og:description" content="Stories worth sharing. Full-service video production on Vancouver Island: commercials, brand films, music videos and social content.">
+  <meta property="og:title" content="Volare Media | Video Production for Agencies &amp; Brands">
+  <meta property="og:description" content="Commercials, brand films and campaign content for agencies, brands and local businesses, produced on Vancouver Island and across BC and Canada.">
   <meta property="og:url" content="https://www.volaremedia.net/">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Inter+Tight:ital,wght@0,400..800;1,400..800&family=Fragment+Mono:ital@0;1&display=swap" rel="stylesheet">
   <link rel="icon" href="favicon.svg?v=2" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css?v=32">
+  <link rel="stylesheet" href="styles.css?v=35">
   <style>
-    /* ---------- One team. No agency layers. ---------- */
+    /* ---------- From the brief to delivery: agency route + direct route ---------- */
 
     .layers-head {
       display: grid;
@@ -70,12 +70,11 @@
       margin-bottom: clamp(2.5rem, 5vw, 4rem);
     }
 
-    .layers-head .eyebrow { margin-bottom: 1rem; }
     .layers-head .lede { font-size: clamp(1.05rem, 1.5vw, 1.25rem); }
 
     .layers-compare {
       display: grid;
-      grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
       gap: clamp(1rem, 2.5vw, 2rem);
     }
 
@@ -86,7 +85,7 @@
       padding: clamp(1.4rem, 3vw, 2.25rem);
     }
 
-    .layers-panel--usual { border: 2px dashed var(--line); }
+    .layers-panel--direct { border: 1px solid var(--line); }
 
     .layers-panel--vm {
       background: var(--bg-raised);
@@ -94,10 +93,10 @@
     }
 
     .layers-label {
-      font-family: var(--font-mono);
-      font-size: 0.78rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
       color: var(--muted);
       margin-bottom: 1.5rem;
     }
@@ -149,11 +148,38 @@
       border-color: var(--line) transparent transparent;
     }
 
-    /* the idea thins out as it passes through each layer */
-    .layers-panel--usual .chain > li:nth-child(3) { opacity: 0.88; }
-    .layers-panel--usual .chain > li:nth-child(4) { opacity: 0.76; }
-    .layers-panel--usual .chain > li:nth-child(5) { opacity: 0.64; }
-    .layers-panel--usual .chain > li:nth-child(6) { opacity: 0.52; }
+    /* who owns each step: the agency's own stages read in cream */
+    .chain > li.chain-owner {
+      display: grid;
+      gap: 0.15rem;
+      color: var(--cream);
+      background: var(--bg-panel);
+    }
+    .chain-owner b { font-family: var(--font-display); font-weight: 600; letter-spacing: -0.01em; }
+    .chain-owner span { font-size: 0.85rem; font-weight: 400; color: var(--muted); }
+
+    /* direct route: the same team, drawn quieter than the agency route */
+    .chain > li.direct-core {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr);
+      gap: 0.5rem 1.1rem;
+      align-items: center;
+      padding: 1rem 1.15rem;
+      text-align: left;
+      color: var(--cream);
+      border-color: color-mix(in srgb, var(--lilac) 45%, transparent);
+    }
+    .direct-mark {
+      font-family: var(--font-display);
+      font-size: 2.4rem;
+      font-weight: 700;
+      letter-spacing: -0.05em;
+      line-height: 1;
+      color: var(--volt);
+    }
+    .direct-stack { list-style: none; display: grid; gap: 0.3rem; }
+    .direct-stack a { text-decoration: none; transition: color 0.2s; }
+    .direct-stack a:hover, .direct-stack a:focus-visible { color: var(--volt); }
 
     .chain > li.chain-end {
       border-color: color-mix(in srgb, var(--lilac) 60%, transparent);
@@ -196,19 +222,10 @@
     .vm-stack li {
       position: relative;
       display: grid;
-      grid-template-columns: 2.6rem minmax(0, 1fr);
-      column-gap: 0.4rem;
+      grid-template-columns: minmax(0, 1fr);
       padding: 0.6rem 0.85rem;
       border-radius: 0.65rem;
       background: rgba(12, 13, 9, 0.07);
-    }
-
-    .vm-num {
-      grid-row: span 2;
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      padding-top: 0.2rem;
-      opacity: 0.65;
     }
 
     .vm-stack b {
@@ -216,48 +233,26 @@
       font-size: 1.08rem;
       font-weight: 600;
       letter-spacing: -0.02em;
-      padding-right: 6rem;
+      padding-right: 1.5rem;
     }
 
-    .vm-stack span:not(.vm-num) {
+    .vm-stack span {
       font-size: 0.875rem;
       line-height: 1.45;
       color: rgba(12, 13, 9, 0.72);
     }
 
     .vm-stack li.is-lead { background: var(--bg); color: #F4F3E8; }
-    .vm-stack li.is-lead span:not(.vm-num) { color: rgba(244, 243, 232, 0.74); }
-
-    .vm-tag {
-      position: absolute;
-      top: 0.6rem;
-      right: 0.7rem;
-      font-style: normal;
-      font-family: var(--font-mono);
-      font-size: 0.68rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      background: var(--volt);
-      color: var(--bg);
-      border-radius: 999px;
-      padding: 0.22rem 0.6rem;
-    }
+    .vm-stack li.is-lead span { color: rgba(244, 243, 232, 0.74); }
 
     .layers-note {
       margin-top: 1.5rem;
       text-align: center;
-      font-family: var(--font-mono);
-      font-size: 0.8rem;
-      letter-spacing: 0.04em;
+      font-size: 0.9375rem;
       color: var(--muted);
     }
 
     .layers-panel--vm .layers-note { color: var(--cream); }
-
-    /* featured work: three spots in a row */
-    @media (min-width: 56rem) {
-      .work-grid--featured { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(1.25rem, 2vw, 2rem); }
-    }
 
     .vm-stack a { color: inherit; text-decoration: none; }
     .vm-stack a::after { content: ""; position: absolute; inset: 0; border-radius: inherit; }
@@ -281,7 +276,6 @@
       .chain--vm > li.vm-core { grid-template-columns: minmax(0, 1fr); }
       .vm-core-mark { padding: 0 0.25rem; }
       .vm-stack b { padding-right: 0; }
-      .vm-stack li.is-lead b { padding-right: 6rem; }
     }
   </style>
   <script type="application/ld+json">
@@ -290,7 +284,7 @@
     "@type": "ProfessionalService",
     "name": "Volare Media",
     "slogan": "Stories worth sharing",
-    "description": "Full-service video production company in Victoria, British Columbia. Commercials, brand films, music videos, corporate video and social media content.",
+    "description": "Video production company on Vancouver Island working with agencies, brands and local businesses across BC and Canada: commercials, brand films, campaign content, corporate video and music videos.",
     "url": "https://www.volaremedia.net",
     "email": "video@volaremedia.net",
     "telephone": "+1-250-589-4521",
@@ -352,96 +346,132 @@
       </video>
       <div class="hero-scrim" aria-hidden="true"></div>
       <div class="wrap">
-        <p class="eyebrow">Video-first marketing on Vancouver Island</p>
-        <h1 class="display-xl">Stories worth <span class="sweep"><em>sharing<span class="dot">.</span></em></span></h1>
-        <p class="lede">A video-first marketing company, based on Vancouver Island and working across BC and Canada. We plan the campaign, film it with our own crew, cut it for every platform and launch it, along with the website it lands on. Strategy, video production, ads and web under one roof, with no agency layers in between.</p>
+        <p class="eyebrow">Vancouver Island · Working across BC and Canada</p>
+        <h1 class="display-xl">Video production for agencies and brands<span class="dot">.</span></h1>
+        <p class="lede">We develop and produce commercials, brand films and campaign content. Bring us an approved brief, or involve us while the idea is still taking shape. Local businesses can also work with us directly, from the first plan to the final cut.</p>
         <div class="hero-foot">
           <div class="hero-actions">
-            <a class="bracket" href="work.html">View Showreel</a>
-            <a class="bracket" href="contact.html">Start Your Project</a>
+            <a class="bracket" href="work.html">View selected work</a>
+            <a class="bracket" href="contact.html">Discuss a brief</a>
           </div>
           <p class="hero-aside">Prefer to speak directly? <a href="tel:+12505894521">Call 250.589.4521</a></p>
         </div>
       </div>
     </section>
 
-    <!-- Client marquee -->
-    <section class="marquee" aria-label="Clients">
-      <div class="marquee-track">
-        <span>Harbour City Kitchens</span><span>Stratos Nutrition</span><span>Maxxam Insurance</span><span>De Mode en Vogue</span><span>Sixty Forty</span><span>VICA</span><span>Peninsula Gives</span><span>Tailgate Toolkit</span><span>Harris</span><span>White Wolf Homes</span><span>Gas 2 Go</span><span>West Haven Cabinetry</span><span>Oakcrest Estates</span><span>Centre Mountain Business Park</span><span>It's A Doodle K9 Service</span><span>Adam ATM</span>
-        <span>Harbour City Kitchens</span><span>Stratos Nutrition</span><span>Maxxam Insurance</span><span>De Mode en Vogue</span><span>Sixty Forty</span><span>VICA</span><span>Peninsula Gives</span><span>Tailgate Toolkit</span><span>Harris</span><span>White Wolf Homes</span><span>Gas 2 Go</span><span>West Haven Cabinetry</span><span>Oakcrest Estates</span><span>Centre Mountain Business Park</span><span>It's A Doodle K9 Service</span><span>Adam ATM</span>
+    <!-- Client list -->
+    <section class="clients" aria-label="Clients">
+      <div class="wrap">
+        <p class="clients-label">Clients include</p>
+        <ul class="clients-list"><li>Harbour City Kitchens</li><li>Stratos Nutrition</li><li>Maxxam Insurance</li><li>De Mode en Vogue</li><li>Sixty Forty</li><li>VICA</li><li>Peninsula Gives</li><li>Tailgate Toolkit</li><li>Harris</li><li>White Wolf Homes</li><li>Gas 2 Go</li><li>West Haven Cabinetry</li><li>Oakcrest Estates</li><li>Centre Mountain Business Park</li><li>It's A Doodle K9 Service</li><li>Adam ATM</li></ul>
       </div>
     </section>
 
-    <!-- Video-first marketing: one team, no agency layers -->
-    <section class="section layers grid-bleed grid-bleed--glow" aria-labelledby="layers-head">
+    <!-- Featured work -->
+    <section class="section featured-work" aria-labelledby="featured-head">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div>
+            <h2 id="featured-head" class="display-lg">Selected campaigns<span class="dot">.</span></h2>
+          </div>
+          <a class="bracket" href="work.html">View all work</a>
+        </div>
+        <div class="work-grid work-grid--lead reveal">
+          <article class="work-card">
+            <button class="video-thumb" data-vimeo="1071293680" aria-label="Play: Tailgate Toolkit Commercial, Director's Cut">
+              <img src="https://i.vimeocdn.com/video/1999999503-d06fd3a64afb9f18253bed85e27137c1bfe5eba9c9d5d4aa1d1b1d19d97e236f-d_1280x720?region=us" alt="Still from the Tailgate Toolkit TV commercial" loading="lazy">
+              <span class="play-btn" aria-hidden="true"></span>
+            </button>
+            <h3>Tailgate Toolkit</h3>
+            <span class="work-tag">TV commercial for a mental health campaign in BC’s construction community. The campaign ran for a year on 61 radio and TV stations across BC.</span>
+          </article>
+          <article class="work-card">
+            <button class="video-thumb" data-vimeo="851929284" aria-label="Play: Stratos Performance Nutrition Endurance commercial">
+              <img src="https://i.vimeocdn.com/video/1706807741-6a3e7635fec993fb2322debbd8606ab47086d3398619d252eb2a977cb60d90aa-d_1280x720?region=us" alt="Still from the Stratos Endurance commercial" loading="lazy">
+              <span class="play-btn" aria-hidden="true"></span>
+            </button>
+            <h3>Stratos: Endurance</h3>
+            <span class="work-tag">Commercial for Stratos Performance Nutrition.</span>
+          </article>
+          <article class="work-card">
+            <button class="video-thumb" data-youtube="DUAHFEBabnU" aria-label="Play: When Your Outfit Is Missing Something, De Mode en Vogue">
+              <img src="assets/img/dmev-outfit-missing-something.jpg" alt="Still from the De Mode en Vogue commercial: two friends laughing in a rose garden" loading="lazy">
+              <span class="play-btn" aria-hidden="true"></span>
+            </button>
+            <h3>De Mode en Vogue</h3>
+            <span class="work-tag">Fashion campaign shot in one day: a website film, 30 and 15-second YouTube pre-roll, and vertical cuts for social.</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- How we work: agency productions first, direct projects second -->
+    <section class="section layers" aria-labelledby="layers-head">
       <div class="wrap">
         <div class="layers-head reveal">
-          <div>
-            <p class="eyebrow">Video first. Full marketing.</p>
-            <h2 id="layers-head" class="display-lg">One team<span class="dot">.</span><br>No agency <span class="sweep">layers<span class="dot">.</span></span></h2>
-          </div>
-          <p class="lede">Most campaigns pass through an agency, a production company, an edit house and a media buyer before your customers ever see them. Every hand-off adds cost and waters down the idea. We keep it all in-house with video at the centre, so the people who plan your campaign are the same people who film it and run it.</p>
+          <h2 id="layers-head" class="display-lg">From the brief to delivery<span class="dot">.</span></h2>
+          <p class="lede">When a project comes through an agency, your team keeps the creative and the client relationship, and we take on the production: treatment and pre-production, the shoot, the edit and every agreed version. We can work under your agency’s banner. Businesses without an agency can come to us directly, and we plan and run the whole project with them.</p>
         </div>
 
         <div class="layers-compare reveal">
-          <div class="layers-panel layers-panel--usual">
-            <p class="layers-label">The usual way</p>
-            <ol class="chain">
-              <li class="chain-end">You</li>
-              <li>Ad agency</li>
-              <li>Production company</li>
-              <li>Edit house</li>
-              <li>Media buyer</li>
-              <li>Web developer</li>
-              <li class="chain-end">Your customers</li>
-            </ol>
-            <p class="layers-note">Five companies between your idea and your customers.</p>
-          </div>
-
           <div class="layers-panel layers-panel--vm">
-            <p class="layers-label">With Volare Media</p>
+            <p class="layers-label">With your agency</p>
             <ol class="chain chain--vm">
-              <li class="chain-end">You</li>
+              <li class="chain-end">Your client</li>
+              <li class="chain-owner"><b>Your agency</b><span>Brief, creative and the client relationship</span></li>
               <li class="vm-core">
                 <span class="vm-core-mark">vm<span class="dot">.</span></span>
                 <ul class="vm-stack">
-                  <li><span class="vm-num">(01)</span><b><a href="creative-direction.html">Strategy &amp; creative</a></b><span>Who it's for, where it runs, what it has to do.</span></li>
-                  <li class="is-lead"><span class="vm-num">(02)</span><b><a href="services.html">Video production</a></b><span>Our own crew, from script to sound.</span><em class="vm-tag">Video first</em></li>
-                  <li><span class="vm-num">(03)</span><b><a href="website-development.html#campaigns">Ads &amp; social</a></b><span>Cut for every platform, launched on Meta, Google and YouTube.</span></li>
-                  <li><span class="vm-num">(04)</span><b><a href="website-development.html">Websites</a></b><span>Where the campaign lands, built and tracked by us.</span></li>
+                  <li><b><a href="creative-direction.html">Treatment &amp; pre-production</a></b><span>Approach, casting, locations, schedule and crew.</span></li>
+                  <li class="is-lead"><b><a href="crew.html">Production</a></b><span>Our core crew, with specialist partners when the brief calls for them.</span></li>
+                  <li><b><a href="marketing-videos.html">Post-production</a></b><span>Edit, colour, sound and the cutdowns in the media plan.</span></li>
+                </ul>
+              </li>
+              <li class="chain-owner"><b>Your agency</b><span>Reviews each cut and presents it to the client</span></li>
+              <li class="chain-end">Delivered to your client</li>
+            </ol>
+            <p class="layers-note"><a class="bracket" href="agencies.html">Working with agencies</a></p>
+          </div>
+
+          <div class="layers-panel layers-panel--direct">
+            <p class="layers-label">Working with us directly</p>
+            <ol class="chain">
+              <li class="chain-end">Your business</li>
+              <li class="direct-core">
+                <span class="direct-mark">vm<span class="dot">.</span></span>
+                <ul class="direct-stack">
+                  <li><a href="creative-direction.html">Planning &amp; creative</a></li>
+                  <li><a href="services.html">Video production</a></li>
+                  <li><a href="website-development.html#campaigns">Ads &amp; social</a></li>
+                  <li><a href="website-development.html">Your website</a></li>
                 </ul>
               </li>
               <li class="chain-end">Your customers</li>
             </ol>
-            <p class="layers-note">One team, one conversation, from the first idea to the last ad.</p>
+            <p class="layers-note">For local businesses without an agency, one team plans, films and launches the work.</p>
           </div>
         </div>
       </div>
     </section>
 
     <!-- Marketing packages -->
-    <section class="section packages photo-band photo-band--side photo-band--blur" id="packages" aria-labelledby="packages-head" style="--photo: url('assets/img/event-concert-lilac-crowd.jpg'); --photo-pos: 50% 38%; --photo-opacity: 0.6;">
+    <section class="section packages" id="packages" aria-labelledby="packages-head">
       <div class="wrap">
 
         <div class="packages-head reveal">
-          <p class="eyebrow">We build marketing packages</p>
-          <h2 id="packages-head" class="packages-title">Not one video<span class="dot">.</span><br>A whole <span class="sweep">campaign<span class="dot">.</span></span></h2>
+          <h2 id="packages-head" class="packages-title">Planning one production around the whole campaign<span class="dot">.</span></h2>
         </div>
 
         <div class="packages-grid">
           <div class="packages-copy reveal">
-            <p class="lede">A single video doesn't work everywhere. Facebook, Instagram, YouTube, TikTok, your website and TV each need their own crop, length and cut, so we build the whole package from one production. And we start from the marketing, not the camera: every piece is planned for where it runs and what it has to do for your business before we shoot a frame.</p>
+            <p class="lede">A campaign rarely needs a single film. The media plan usually calls for a main spot, shorter cutdowns, vertical edits and stills, each with its own length and frame. We work through those deliverables with your team before the shoot, so one production covers the full set and every version is framed for where it will run.</p>
             <div class="pkg-actions">
-              <a class="btn" href="contact.html">Build my package</a>
-              <a class="bracket" href="marketing-videos.html">How it works</a>
+              <a class="btn" href="contact.html">Discuss a campaign</a>
+              <a class="bracket" href="marketing-videos.html">Marketing video production</a>
             </div>
-            <p class="pkg-platforms"><span class="pkg-platforms-label">We make ads for</span><span>TikTok</span><span>Instagram</span><span>Facebook</span><span>YouTube</span><span>LinkedIn</span></p>
           </div>
 
         <div class="packages-stage reveal" aria-hidden="true">
-          <div class="stage-backdrop"><img src="assets/img/stage-backdrop.jpg" alt="" loading="lazy"></div>
-
           <div class="device device--laptop">
             <div class="laptop">
               <div class="laptop-lid">
@@ -477,24 +507,6 @@
       </div>
     </section>
 
-    <!-- Stats -->
-    <section class="section band--ink photo-band photo-band--side" style="--photo: url('assets/img/bts-camera-slider.jpg'); --photo-pos: 55% 45%; --photo-opacity: 0.55;">
-      <div class="wrap">
-        <div class="section-head reveal">
-          <div>
-            <p class="eyebrow">Why clients trust us</p>
-            <h2 class="display-lg">Trusted by brands<span class="dot">.</span><br>Proven on every <span class="sweep">screen<span class="dot">.</span></span></h2>
-          </div>
-        </div>
-        <div class="stat-grid reveal">
-          <div class="stat"><h3>5.0&#9733;</h3><p>average rating across 16 Google reviews from clients we’ve worked with</p></div>
-          <div class="stat"><h3>250+</h3><p>marketing assets delivered, from TV commercials and social cutdowns to photos and websites</p></div>
-          <div class="stat"><h3>20K+</h3><p>followers across Volare Media’s social channels</p></div>
-          <div class="stat"><h3>15+</h3><p>years of combined experience across marketing, the film industry and social media</p></div>
-        </div>
-      </div>
-    </section>
-
     <!-- Google reviews -->
     <section class="section section--tight band--peach reviews-compact" aria-labelledby="reviews-head">
       <div class="wrap">
@@ -510,7 +522,7 @@
               </svg>
               <a class="g-label" href="https://share.google/SHgZDnW8Q4ltIST9U" rel="noopener" target="_blank">16 five-star reviews <span class="stars">★★★★★</span></a>
             </span>
-            <h2 id="reviews-head" class="display-md">Five stars,<br>on <span class="sweep">repeat<span class="dot">.</span></span></h2>
+            <h2 id="reviews-head" class="display-md">Reviews from clients and cast<span class="dot">.</span></h2>
           </div>
           <a class="bracket" href="https://share.google/SHgZDnW8Q4ltIST9U" rel="noopener" target="_blank">Read all reviews on Google</a>
         </div>
@@ -531,55 +543,16 @@
             <cite>Sheila, It's A Doodle</cite>
           </blockquote>
         </div>
-      </div>
-    </section>
-
-    <!-- Featured work -->
-    <section class="section featured-work grid-bleed grid-bleed--left grid-bleed--glow" aria-labelledby="featured-head">
-      <div class="wrap">
-        <div class="section-head reveal">
-          <div>
-            <p class="eyebrow">Recent campaigns</p>
-            <h2 id="featured-head" class="display-lg">Ads that did<br>their <span class="sweep">job<span class="dot">.</span></span></h2>
-          </div>
-          <a class="bracket" href="work.html">See all work</a>
-        </div>
-        <div class="work-grid work-grid--featured reveal">
-          <article class="work-card">
-            <button class="video-thumb" data-vimeo="1071293680" aria-label="Play: Tailgate Toolkit Commercial, Director's Cut">
-              <img src="https://i.vimeocdn.com/video/1999999503-d06fd3a64afb9f18253bed85e27137c1bfe5eba9c9d5d4aa1d1b1d19d97e236f-d_1280x720?region=us" alt="Still from the Tailgate Toolkit TV commercial" loading="lazy">
-              <span class="play-btn" aria-hidden="true"></span>
-            </button>
-            <h3>Tailgate Toolkit</h3>
-            <span class="work-tag">TV Commercial: broadcast on 61 stations across BC</span>
-          </article>
-          <article class="work-card">
-            <button class="video-thumb" data-vimeo="851929284" aria-label="Play: Stratos Performance Nutrition Endurance commercial">
-              <img src="https://i.vimeocdn.com/video/1706807741-6a3e7635fec993fb2322debbd8606ab47086d3398619d252eb2a977cb60d90aa-d_1280x720?region=us" alt="Still from the Stratos Endurance commercial" loading="lazy">
-              <span class="play-btn" aria-hidden="true"></span>
-            </button>
-            <h3>Stratos: Endurance</h3>
-            <span class="work-tag">Commercial: fitness and performance nutrition</span>
-          </article>
-          <article class="work-card">
-            <button class="video-thumb" data-youtube="DUAHFEBabnU" aria-label="Play: When Your Outfit Is Missing Something, De Mode en Vogue">
-              <img src="assets/img/dmev-outfit-missing-something.jpg" alt="Still from the De Mode en Vogue commercial: two friends laughing in a rose garden" loading="lazy">
-              <span class="play-btn" aria-hidden="true"></span>
-            </button>
-            <h3>De Mode en Vogue</h3>
-            <span class="work-tag">Campaign: When your outfit is missing something</span>
-          </article>
-        </div>
+        <p class="proof-line reveal">Rated 5.0 across 16 Google reviews. 250+ marketing assets delivered, from TV commercials and social cutdowns to photos and websites. 15+ years of combined experience across marketing, film and social media.</p>
       </div>
     </section>
 
     <!-- CTA -->
     <section class="cta band--volt">
       <div class="wrap reveal">
-        <p class="eyebrow">Ready when you are</p>
-        <h2 class="display-lg">Let's make something<br>worth sharing<span class="dot">.</span></h2>
-        <p class="lede cta-sub">Strategy, video, ads and your website, all with one team.</p>
-        <a class="btn" href="contact.html">Start your project</a>
+        <h2 class="display-lg">Let's make something worth <span class="sweep sweep--mark">sharing<span class="dot">.</span></span></h2>
+        <p class="lede cta-sub">Tell us about the brief, the timing and anything already agreed. If you have a budget range, include it and we’ll suggest a scope that fits.</p>
+        <a class="btn" href="contact.html">Discuss a brief</a>
       </div>
     </section>
 
@@ -637,6 +610,6 @@
     </div>
   </footer>
 
-  <script src="script.js?v=30"></script>
+  <script src="script.js?v=31"></script>
 </body>
 </html>
