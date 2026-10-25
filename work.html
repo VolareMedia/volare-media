@@ -57,7 +57,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Inter+Tight:ital,wght@0,400..800;1,400..800&family=Fragment+Mono:ital@0;1&display=swap" rel="stylesheet">
   <link rel="icon" href="favicon.svg?v=2" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css?v=32">
+  <link rel="stylesheet" href="styles.css?v=38">
   <script type="application/ld+json">
   [
     {
@@ -246,9 +246,8 @@
 
     .beyond-links a {
       display: grid;
-      grid-template-columns: auto minmax(0, 1fr);
-      column-gap: 0.75rem;
-      align-items: baseline;
+      grid-template-columns: minmax(0, 1fr);
+      row-gap: 0.2rem;
       padding: 0.95rem 1.15rem;
       border: 1px solid var(--line);
       border-radius: 1rem;
@@ -322,7 +321,7 @@
     <section class="hero grid-bleed grid-bleed--glow">
       <div class="wrap">
         <p class="eyebrow">Work</p>
-        <h1 class="display-xl">The work <span class="sweep">speaks<span class="dot">.</span></span> <span class="count">(8)</span></h1>
+        <h1 class="display-xl">The work speaks <span class="sweep">for itself</span><span class="dot">.</span></h1>
         <p class="lede">Marketing videos, commercials, brand films and music videos, made for brands across BC and Canada. Behind every one is the full process: preproduction and planning, location scouting, permits and insurance, directing and cinematography, right through to the final edit. Press play on any of them.</p>
       </div>
     </section>
@@ -397,7 +396,7 @@
           <div class="more-thumb" aria-hidden="true">
             <span>Marketing</span><span>Websites</span><span>Brand design</span><span>Corporate</span><span>Events</span><span>Documentaries</span>
           </div>
-          <h3>Video-led. Not video-only.</h3>
+          <h3>We start with video, but we don't stop there.</h3>
           <span class="work-tag">See everything else we do</span>
         </a>
       </div>
@@ -409,17 +408,17 @@
         <div class="beyond-head reveal">
           <div>
             <p class="eyebrow">Beyond the reel</p>
-            <h2 id="beyond-head" class="display-lg">Video-led<span class="dot">.</span><br>Not video-<span class="sweep">only<span class="dot">.</span></span></h2>
+            <h2 id="beyond-head" class="display-lg">We start with video,<br>but we don't <span class="mark-line">stop there</span><span class="dot">.</span></h2>
           </div>
           <p class="lede">Every project on this page started with a camera, but most of them didn't stop there. From <a href="creative-direction.html">creative direction</a> to the website it lands on, the same team plans the marketing, shapes the brand and keeps it consistent everywhere it shows up.</p>
         </div>
 
         <div class="beyond-stage reveal">
           <ul class="beyond-links beyond-links--left">
-            <li><a href="marketing-videos.html"><span class="bl-num">(01)</span><b>Marketing videos</b><span class="bl-desc">Commercials and ads cut for every platform</span></a></li>
-            <li><a href="website-development.html#campaigns"><span class="bl-num">(02)</span><b>Marketing campaigns</b><span class="bl-desc">Strategy, paid ads and reporting, run by us</span></a></li>
-            <li><a href="corporate-video.html"><span class="bl-num">(03)</span><b>Corporate video</b><span class="bl-desc">Website films, training and LinkedIn</span></a></li>
-            <li><a href="event-videography.html"><span class="bl-num">(04)</span><b>Event videography</b><span class="bl-desc">Galas, conferences and launches</span></a></li>
+            <li><a href="marketing-videos.html"><b>Marketing videos</b><span class="bl-desc">Commercials and ads cut for every platform</span></a></li>
+            <li><a href="website-development.html#campaigns"><b>Marketing campaigns</b><span class="bl-desc">Strategy, paid ads and reporting, run by us</span></a></li>
+            <li><a href="corporate-video.html"><b>Corporate video</b><span class="bl-desc">Website films, training and LinkedIn</span></a></li>
+            <li><a href="event-videography.html"><b>Event videography</b><span class="bl-desc">Galas, conferences and launches</span></a></li>
           </ul>
           <div class="beyond-phone" aria-hidden="true">
             <div class="phone">
@@ -432,10 +431,10 @@
             </div>
           </div>
           <ul class="beyond-links beyond-links--right">
-            <li><a href="community.html"><span class="bl-num">(05)</span><b>Documentaries</b><span class="bl-desc">Short films for the causes we back</span></a></li>
-            <li><a href="website-development.html#websites"><span class="bl-num">(06)</span><b>Websites</b><span class="bl-desc">New builds and full rebuilds</span></a></li>
-            <li><a href="website-development.html#brand-building"><span class="bl-num">(07)</span><b>Brand design</b><span class="bl-desc">Identity, voice and positioning</span></a></li>
-            <li><a href="brand-alignment.html"><span class="bl-num">(08)</span><b>Brand alignment</b><span class="bl-desc">One look and one voice, everywhere</span></a></li>
+            <li><a href="community.html"><b>Documentaries</b><span class="bl-desc">Short films for the causes we back</span></a></li>
+            <li><a href="website-development.html#websites"><b>Websites</b><span class="bl-desc">New builds and full rebuilds</span></a></li>
+            <li><a href="website-development.html#brand-building"><b>Brand design</b><span class="bl-desc">Identity, voice and positioning</span></a></li>
+            <li><a href="brand-alignment.html"><b>Brand alignment</b><span class="bl-desc">One look and one voice, everywhere</span></a></li>
           </ul>
         </div>
       </div>
@@ -473,7 +472,7 @@
     <section class="cta band--volt">
       <div class="wrap reveal">
         <p class="eyebrow">Your project here</p>
-        <h2 class="display-lg">The next thumbnail<br>could be yours<span class="dot">.</span></h2>
+        <h2 class="display-lg">Your project<br>could be <span class="sweep">next</span><span class="dot">.</span></h2>
         <a class="btn" href="contact.html">Start your project</a>
       </div>
     </section>
