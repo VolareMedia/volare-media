@@ -58,7 +58,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Inter+Tight:ital,wght@0,400..800;1,400..800&family=Fragment+Mono:ital@0;1&display=swap" rel="stylesheet">
   <link rel="icon" href="favicon.svg?v=2" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css?v=35">
+  <link rel="stylesheet" href="styles.css?v=32">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -136,7 +136,7 @@
     .steps::before { content: ""; position: absolute; left: 0; right: 0; top: 0.55rem; border-top: 1px dashed rgba(214, 255, 61, 0.45); }
     .step { position: relative; padding-top: 2.25rem; }
     .step::before { content: ""; position: absolute; top: 0.2rem; left: 0; width: 0.75rem; height: 0.75rem; border-radius: 50%; background: var(--volt); box-shadow: 0 0 0 5px var(--bg); }
-    .step-num { font-family: var(--font-display); font-size: 1rem; font-weight: 600; color: var(--lilac); }
+    .step-num { font-family: var(--font-mono); font-size: 0.78rem; color: var(--lilac); }
     .step h3 { font-size: 1.35rem; margin: 0.4rem 0 0.6rem; }
     .step p { color: var(--muted); font-size: 0.95rem; line-height: 1.55; }
     .steps-cta { display: flex; flex-wrap: wrap; align-items: center; gap: 1.25rem 2rem; margin-top: clamp(2.5rem, 4vw, 3.5rem); }
@@ -215,11 +215,11 @@
       </div>
     </section>
 
-    <!-- Client list -->
-    <section class="clients" aria-label="Clients">
-      <div class="wrap">
-        <p class="clients-label">Clients include</p>
-        <ul class="clients-list"><li>Harbour City Kitchens</li><li>Stratos Nutrition</li><li>Maxxam Insurance</li><li>De Mode en Vogue</li><li>Sixty Forty</li><li>VICA</li><li>Peninsula Gives</li><li>Tailgate Toolkit</li><li>Harris</li><li>White Wolf Homes</li><li>Gas 2 Go</li><li>West Haven Cabinetry</li><li>Oakcrest Estates</li><li>Centre Mountain Business Park</li><li>It's A Doodle K9 Service</li><li>Adam ATM</li></ul>
+    <!-- Client marquee -->
+    <section class="marquee" aria-label="Clients">
+      <div class="marquee-track">
+        <span>Harbour City Kitchens</span><span>Stratos Nutrition</span><span>Maxxam Insurance</span><span>De Mode en Vogue</span><span>Sixty Forty</span><span>VICA</span><span>Peninsula Gives</span><span>Tailgate Toolkit</span><span>Harris</span><span>White Wolf Homes</span><span>Gas 2 Go</span><span>West Haven Cabinetry</span><span>Oakcrest Estates</span><span>Centre Mountain Business Park</span><span>It's A Doodle K9 Service</span><span>Adam ATM</span>
+        <span>Harbour City Kitchens</span><span>Stratos Nutrition</span><span>Maxxam Insurance</span><span>De Mode en Vogue</span><span>Sixty Forty</span><span>VICA</span><span>Peninsula Gives</span><span>Tailgate Toolkit</span><span>Harris</span><span>White Wolf Homes</span><span>Gas 2 Go</span><span>West Haven Cabinetry</span><span>Oakcrest Estates</span><span>Centre Mountain Business Park</span><span>It's A Doodle K9 Service</span><span>Adam ATM</span>
       </div>
     </section>
 
@@ -227,6 +227,7 @@
       <div class="wrap">
         <div class="section-head reveal">
           <div>
+            <p class="eyebrow">Where it starts</p>
             <h2 class="display-lg">Start with the <span class="sweep">website<span class="dot">.</span></span></h2>
           </div>
         </div>
@@ -305,16 +306,17 @@
       <div class="wrap">
         <div class="section-head reveal">
           <div>
+            <p class="eyebrow">How it works</p>
             <h2 id="how-head" class="display-lg">From first call<br>to <span class="sweep">launch day<span class="dot">.</span></span></h2>
           </div>
           <p class="lede">A clear process, and the same people from the first call to long after the site goes live.</p>
         </div>
         <ol class="steps reveal">
-          <li class="step"><span class="step-num">1</span><h3>Discovery call</h3><p>We look at your current website if you have one, your goals and who you need to reach, then give you a clear plan and price.</p></li>
-          <li class="step"><span class="step-num">2</span><h3>Plan &amp; design</h3><p>Sitemap, page designs and copy written for the searches your customers actually make, built around your brand and your video.</p></li>
-          <li class="step"><span class="step-num">3</span><h3>Build</h3><p>Fast, mobile-first, search-ready pages, with an online store, booking or lead forms wherever you need them.</p></li>
-          <li class="step"><span class="step-num">4</span><h3>Launch</h3><p>Redirects from your old pages, Google Search Console, analytics and ad tracking set up, so nothing gets lost in the switch.</p></li>
-          <li class="step"><span class="step-num">5</span><h3>Manage &amp; grow</h3><p>Updates, SEO, blog posts, ads and fresh video from the same team, so the site keeps working long after launch.</p></li>
+          <li class="step"><span class="step-num">(01)</span><h3>Discovery call</h3><p>We look at your current website if you have one, your goals and who you need to reach, then give you a clear plan and price.</p></li>
+          <li class="step"><span class="step-num">(02)</span><h3>Plan &amp; design</h3><p>Sitemap, page designs and copy written for the searches your customers actually make, built around your brand and your video.</p></li>
+          <li class="step"><span class="step-num">(03)</span><h3>Build</h3><p>Fast, mobile-first, search-ready pages, with an online store, booking or lead forms wherever you need them.</p></li>
+          <li class="step"><span class="step-num">(04)</span><h3>Launch</h3><p>Redirects from your old pages, Google Search Console, analytics and ad tracking set up, so nothing gets lost in the switch.</p></li>
+          <li class="step"><span class="step-num">(05)</span><h3>Manage &amp; grow</h3><p>Updates, SEO, blog posts, ads and fresh video from the same team, so the site keeps working long after launch.</p></li>
         </ol>
         <div class="steps-cta reveal">
           <a class="btn" href="contact.html?project=website">Start a website project</a>
@@ -324,21 +326,22 @@
     </section>
 
     <!-- Website types and industries -->
-    <section class="section band--sky" id="website-types" aria-labelledby="types-head">
+    <section class="section band--sky grid-bleed grid-bleed--glow grid-bleed--left" id="website-types" aria-labelledby="types-head">
       <div class="wrap">
         <div class="section-head reveal">
           <div>
+            <p class="eyebrow">Website types</p>
             <h2 id="types-head" class="display-lg">Websites for every<br>kind of <span class="sweep">business<span class="dot">.</span></span></h2>
           </div>
           <p class="lede">Business websites, online stores, corporate sites and campaign landing pages, designed and built on Vancouver Island for companies across BC and Canada.</p>
         </div>
         <div class="card-grid types-grid reveal">
-          <div class="card"><h3>Business websites</h3><p>Multi-page sites for service businesses: services, about, reviews, quote and contact forms, built to rank for what you do and where you do it.</p></div>
-          <div class="card"><h3>E-commerce &amp; online stores</h3><p>Shopify stores with product pages, collections, wholesale and checkout, plus the ads and content that bring buyers in.</p></div>
-          <div class="card"><h3>Corporate websites</h3><p>Company sites with leadership, careers and partner pages, built to sit alongside your <a href="corporate-video.html">corporate video</a>.</p></div>
-          <div class="card"><h3>Real estate &amp; property websites</h3><p>Developments, listings and property managers: location, availability and enquiry forms, with drone and video front and centre.</p></div>
-          <div class="card"><h3>Portfolio &amp; personal brand sites</h3><p>For filmmakers, artists, speakers and founders: your work, your story and an easy way to book you.</p></div>
-          <div class="card"><h3>Campaign landing pages</h3><p>Single pages built for Google and Meta ads, with lead forms and conversion tracking set up from day one.</p></div>
+          <div class="card"><p class="eyebrow">Business</p><h3>Business websites</h3><p>Multi-page sites for service businesses: services, about, reviews, quote and contact forms, built to rank for what you do and where you do it.</p></div>
+          <div class="card"><p class="eyebrow">E-commerce</p><h3>E-commerce &amp; online stores</h3><p>Shopify stores with product pages, collections, wholesale and checkout, plus the ads and content that bring buyers in.</p></div>
+          <div class="card"><p class="eyebrow">Corporate</p><h3>Corporate websites</h3><p>Company sites with leadership, careers and partner pages, built to sit alongside your <a href="corporate-video.html">corporate video</a>.</p></div>
+          <div class="card"><p class="eyebrow">Property</p><h3>Real estate &amp; property websites</h3><p>Developments, listings and property managers: location, availability and enquiry forms, with drone and video front and centre.</p></div>
+          <div class="card"><p class="eyebrow">Portfolio</p><h3>Portfolio &amp; personal brand sites</h3><p>For filmmakers, artists, speakers and founders: your work, your story and an easy way to book you.</p></div>
+          <div class="card"><p class="eyebrow">Campaigns</p><h3>Campaign landing pages</h3><p>Single pages built for Google and Meta ads, with lead forms and conversion tracking set up from day one.</p></div>
         </div>
         <div class="industries reveal">
           <p class="industries-label">Industries we build for</p>
@@ -348,11 +351,12 @@
     </section>
 
 
-    <section class="" style="padding-bottom: var(--section-gap);">
+    <section class="grid-bleed grid-bleed--glow" style="padding-bottom: var(--section-gap);">
       <div class="wrap">
         <div class="service-list">
 
           <div class="service-row" id="websites">
+            <span class="service-num">(001)</span>
             <h3>Website development</h3>
             <div>
               <p>A fast, modern, search-ready website, designed and built by the same team that tells your story on camera. New build or full rebuild of any website, we handle design, copy, development, launch and upkeep, so you're never chasing three vendors to change one page.</p>
@@ -363,6 +367,7 @@
           </div>
 
           <div class="service-row" id="brand-building">
+            <span class="service-num">(002)</span>
             <h3>Brand building</h3>
             <div>
               <p>For new companies, and for established ones that never got a real identity. We define how you look, how you sound and where you stand, positioning, identity and voice, so every video, page and post starts from the same place.</p>
@@ -383,6 +388,7 @@
       <div class="service-list">
 
         <div class="service-row" id="brand-alignment">
+          <span class="service-num">(003)</span>
           <h3>Brand alignment</h3>
           <div>
             <p>Your website says one thing, your socials say another, the sales deck says a third. We audit every touchpoint and bring them into line, one look, one voice, everywhere your audience finds you. <a href="brand-alignment.html">How brand alignment works</a>.</p>
@@ -393,6 +399,7 @@
         </div>
 
         <div class="service-row" id="campaigns">
+          <span class="service-num">(004)</span>
           <h3>Marketing campaigns</h3>
           <div>
             <p>Campaigns that tie it all together. We plan, produce and run marketing built around your video: social content, paid ads on Google, Meta and YouTube, landing pages and reporting, launched on a calendar and measured against a goal.</p>
@@ -409,6 +416,7 @@
       <div class="wrap">
         <div class="section-head reveal">
           <div>
+            <p class="eyebrow">The support team</p>
             <h2 class="display-lg">Media and tech specialists,<br>one call away<span class="dot">.</span></h2>
           </div>
         </div>
@@ -421,6 +429,7 @@
       <div class="wrap">
         <div class="section-head reveal">
           <div>
+            <p class="eyebrow">Pick your path</p>
             <h2 class="display-lg">Where are you<br><span class="sweep">starting?</span></h2>
           </div>
           <p class="lede">Pick the one that sounds like you. Every path starts with a conversation, not a contract.</p>
@@ -467,6 +476,7 @@
 
         <details class="card">
           <summary>
+            <p class="eyebrow">Scope</p>
             <h3>New build or rebuild?</h3>
             <p>Both. Blank page or aging site, we take it from there.</p>
             <span class="card-toggle" aria-hidden="true"></span>
@@ -478,6 +488,7 @@
 
         <details class="card">
           <summary>
+            <p class="eyebrow">Starting point</p>
             <h3>Just a website?</h3>
             <p>Yes. Plenty of clients start there on its own.</p>
             <span class="card-toggle" aria-hidden="true"></span>
@@ -489,6 +500,7 @@
 
         <details class="card">
           <summary>
+            <p class="eyebrow">Brand</p>
             <h3>What about our existing brand?</h3>
             <p>Solid? We align to it. Scattered? We fix it. New? We build it.</p>
             <span class="card-toggle" aria-hidden="true"></span>
@@ -500,6 +512,7 @@
 
         <details class="card">
           <summary>
+            <p class="eyebrow">Team</p>
             <h3>Who does the work?</h3>
             <p>Our own support team of media and tech specialists.</p>
             <span class="card-toggle" aria-hidden="true"></span>
@@ -511,6 +524,7 @@
 
         <details class="card">
           <summary>
+            <p class="eyebrow">E-commerce</p>
             <h3>Do you build online stores?</h3>
             <p>Yes. Shopify stores, set up to sell and to grow.</p>
             <span class="card-toggle" aria-hidden="true"></span>
@@ -522,6 +536,7 @@
 
         <details class="card">
           <summary>
+            <p class="eyebrow">SEO</p>
             <h3>Will a rebuild hurt our rankings?</h3>
             <p>Not when it's planned properly.</p>
             <span class="card-toggle" aria-hidden="true"></span>
@@ -537,6 +552,7 @@
 
     <section class="cta band--volt">
       <div class="wrap reveal">
+        <p class="eyebrow">Ready for the full package?</p>
         <h2 class="display-lg">One team for<br>the whole thing<span class="dot">.</span></h2>
         <a class="btn" href="contact.html">Start the conversation</a>
       </div>
@@ -596,6 +612,6 @@
     </div>
   </footer>
 
-  <script src="script.js?v=31"></script>
+  <script src="script.js?v=30"></script>
 </body>
 </html>
