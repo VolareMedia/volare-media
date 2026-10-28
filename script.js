@@ -26,8 +26,10 @@ if (heroVideo) {
       heroVideo.autoplay = true;
       heroVideo.play().catch(() => {});
     };
-    if (document.readyState === "complete") start();
-    else window.addEventListener("load", start, { once: true });
+    // Phones: give the poster a moment to count as the first big paint, then roll.
+    const go = () => (wide ? start() : setTimeout(start, 2500));
+    if (document.readyState === "complete") go();
+    else window.addEventListener("load", go, { once: true });
   }
 }
 
