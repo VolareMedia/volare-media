@@ -1295,7 +1295,8 @@ details.card summary:focus-visible {
   gap: 2.5rem;
 }
 
-.footer-cols h4 {
+.footer-cols h4,
+.footer-cols .footer-heading {
   font-family: var(--font-mono);
   font-size: 0.78rem;
   text-transform: uppercase;

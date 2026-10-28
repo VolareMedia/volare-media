@@ -14,9 +14,22 @@ if (toggle && nav) {
 const reveals = document.querySelectorAll(".reveal");
 const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-// Respect reduced motion for the hero loop
-const heroVideo = document.querySelector(".hero-video");
-if (heroVideo && reduced) heroVideo.pause();
+// Hero loop: the poster paints first, then the 30 MB loop loads once the page is
+// ready. Set HERO_VIDEO_ON_MOBILE to false to keep the still image on phones.
+const HERO_VIDEO_ON_MOBILE = true;
+const heroVideo = document.querySelector(".hero-video[data-src]");
+if (heroVideo) {
+  const wide = window.matchMedia("(min-width: 768px)").matches;
+  if (!reduced && (wide || HERO_VIDEO_ON_MOBILE)) {
+    const start = () => {
+      heroVideo.src = heroVideo.dataset.src;
+      heroVideo.autoplay = true;
+      heroVideo.play().catch(() => {});
+    };
+    if (document.readyState === "complete") start();
+    else window.addEventListener("load", start, { once: true });
+  }
+}
 
 // Contact form result notices (?sent=1 / ?error=1)
 const params = new URLSearchParams(window.location.search);
