@@ -2192,6 +2192,11 @@ a:focus-visible, button:focus-visible {
       gap: clamp(2rem, 5vw, 4.5rem);
       align-items: center;
     }
+.beyond-rail { display: contents; }
+.beyond-rail-hint { display: none; }
+.beyond-links--left { order: 1; }
+.beyond-phone { order: 2; }
+.beyond-links--right { order: 3; }
 .beyond-phone { position: relative; animation: float-b 7s ease-in-out infinite; }
 .beyond-phone::before {
       content: "";
@@ -2250,11 +2255,28 @@ a:focus-visible, button:focus-visible {
 @media (max-width: 56rem) {
 
       .beyond-head { grid-template-columns: minmax(0, 1fr); }
-      .beyond-stage { grid-template-columns: minmax(0, 1fr); gap: 1rem; }
-      .beyond-phone { order: -1; width: min(13rem, 55vw); margin: 0 auto 2rem; }
-      .beyond-links { grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); }
-      .beyond-links li { animation: none; margin: 0 !important; }
+      /* Phones: a shorter phone, then the eight services as one swipe row. */
+      .beyond-stage { display: flex; flex-direction: column; align-items: stretch; gap: 1.5rem; }
+      .beyond-phone { order: -1; width: min(11rem, 46vw); margin: 0 auto 0.5rem; }
+      .beyond-rail {
+        display: flex;
+        width: 100%;
+        min-width: 0;
+        gap: 0.75rem;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scroll-padding-inline: 0;
+        margin: 0;
+        padding: 0.25rem 0 1rem;
+        scrollbar-width: none;
+        -webkit-overflow-scrolling: touch;
+      }
+      .beyond-rail::-webkit-scrollbar { display: none; }
+      .beyond-links { display: contents; }
+      .beyond-links li { flex: 0 0 74%; max-width: 18rem; scroll-snap-align: start; animation: none; margin: 0 !important; }
       .beyond-links li::after { display: none; }
+      .beyond-links a { height: 100%; }
+      .beyond-rail-hint { display: block; margin: 0 0 0.25rem; font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
 }
 @media (prefers-reduced-motion: reduce) {
 
