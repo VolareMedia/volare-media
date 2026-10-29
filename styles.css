@@ -2173,3 +2173,90 @@ a:focus-visible, button:focus-visible {
 .site-compare--static .compare-frame img { transition: none; }
 .site-compare--static .compare-col:hover .compare-frame img { transform: none; }
 .compare-frame video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: cover; margin-top: 1.6rem; background: #231b1e; }
+
+/* ---- Beyond the reel: phone with service links (shared by index + work, moved 2026-10-28) ---- */
+/* beyond the reel: phone with service links floating around it */
+    .beyond-head {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: clamp(1.5rem, 4vw, 4rem);
+      align-items: end;
+      margin-bottom: clamp(2.5rem, 5vw, 4rem);
+    }
+.beyond-head .eyebrow { margin-bottom: 1rem; }
+.beyond-head .lede { font-size: clamp(1.05rem, 1.5vw, 1.25rem); }
+.beyond-head .lede a { color: var(--cream); text-decoration-color: var(--volt); text-underline-offset: 0.2em; }
+.beyond-stage {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) clamp(12rem, 18vw, 15rem) minmax(0, 1fr);
+      gap: clamp(2rem, 5vw, 4.5rem);
+      align-items: center;
+    }
+.beyond-phone { position: relative; animation: float-b 7s ease-in-out infinite; }
+.beyond-phone::before {
+      content: "";
+      position: absolute;
+      inset: -30% -60%;
+      z-index: -1;
+      background:
+        radial-gradient(closest-side, rgba(201, 186, 244, 0.28), transparent),
+        radial-gradient(40% 30% at 50% 80%, rgba(214, 255, 61, 0.14), transparent 70%);
+      filter: blur(10px);
+    }
+.beyond-phone .phone { transform: rotate(-2deg); }
+.beyond-phone video { display: block; width: 100%; height: 100%; object-fit: cover; }
+.beyond-links { list-style: none; display: grid; gap: 1rem; }
+.beyond-links li { position: relative; animation: float-a 8s ease-in-out infinite; }
+.beyond-links li:nth-child(2) { animation-delay: -2s; }
+.beyond-links li:nth-child(3) { animation-delay: -4s; }
+.beyond-links li:nth-child(4) { animation-delay: -6s; }
+.beyond-links--right li { animation-name: float-b; animation-duration: 9s; }
+/* scattered, not a rigid column: alternate rows step toward the phone */
+    .beyond-links--left li:nth-child(odd) { margin-right: clamp(1.5rem, 3vw, 3rem); }
+.beyond-links--right li:nth-child(even) { margin-left: clamp(1.5rem, 3vw, 3rem); }
+/* a dashed lead from each tile to the phone */
+    .beyond-links li::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      width: var(--reach, clamp(2rem, 5vw, 4.5rem));
+      border-top: 1px dashed rgba(214, 255, 61, 0.4);
+      pointer-events: none;
+    }
+.beyond-links--left li::after { left: 100%; }
+.beyond-links--right li::after { right: 100%; }
+.beyond-links--left li:nth-child(odd),
+    .beyond-links--right li:nth-child(even) { --reach: calc(clamp(2rem, 5vw, 4.5rem) + clamp(1.5rem, 3vw, 3rem)); }
+.beyond-links a {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      row-gap: 0.2rem;
+      padding: 0.95rem 1.15rem;
+      border: 1px solid var(--line);
+      border-radius: 1rem;
+      background: rgba(20, 22, 15, 0.82);
+      backdrop-filter: blur(6px);
+      text-decoration: none;
+      transition: border-color 0.2s, transform 0.2s, background 0.2s;
+    }
+.beyond-links .bl-num { grid-row: span 2; font-family: var(--font-mono); font-size: 0.72rem; color: var(--lilac); }
+.beyond-links b { font-family: var(--font-display); font-size: 1.1rem; font-weight: 600; letter-spacing: -0.02em; }
+.beyond-links b::after { content: " \2192"; color: var(--volt); opacity: 0; transition: opacity 0.2s; }
+.beyond-links .bl-desc { font-size: 0.85rem; line-height: 1.4; color: var(--muted); }
+.beyond-links a:hover,
+    .beyond-links a:focus-visible { border-color: var(--volt); transform: translateY(-3px); background: rgba(26, 29, 19, 0.95); }
+.beyond-links a:hover b::after,
+    .beyond-links a:focus-visible b::after { opacity: 1; }
+@media (max-width: 56rem) {
+
+      .beyond-head { grid-template-columns: minmax(0, 1fr); }
+      .beyond-stage { grid-template-columns: minmax(0, 1fr); gap: 1rem; }
+      .beyond-phone { order: -1; width: min(13rem, 55vw); margin: 0 auto 2rem; }
+      .beyond-links { grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); }
+      .beyond-links li { animation: none; margin: 0 !important; }
+      .beyond-links li::after { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+
+      .beyond-phone, .beyond-links li { animation: none; }
+}

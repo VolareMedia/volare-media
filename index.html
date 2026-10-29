@@ -21,7 +21,7 @@
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Inter+Tight:ital,wght@0,400..800;1,400..800&family=Fragment+Mono:ital@0;1&display=swap" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Inter+Tight:ital,wght@0,400..800;1,400..800&family=Fragment+Mono:ital@0;1&display=swap"></noscript>
   <link rel="icon" href="favicon.svg?v=2" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css?v=39">
+  <link rel="stylesheet" href="styles.css?v=40">
   <style>
     /* ---------- One team. No agency layers. ---------- */
 
@@ -440,22 +440,53 @@
     </section>
 
     <!-- Stats -->
-    <section class="section band--sky photo-band photo-band--side" id="websites-branding" aria-labelledby="web-brand-head" style="--photo: url('assets/img/marketing-strategy-whiteboard.jpg'); --photo-pos: 70% 40%; --photo-opacity: 0.45;">
+    <section class="section grid-bleed grid-bleed--glow beyond" id="beyond-the-reel" aria-labelledby="beyond-head">
       <div class="wrap">
-        <div class="section-head reveal">
+        <div class="beyond-head reveal">
           <div>
-            <p class="eyebrow">Websites and branding</p>
-            <h2 id="web-brand-head" class="display-lg">Need the website and brand to match the video? <span class="sweep">We do that too</span><span class="dot">.</span></h2>
+            <p class="eyebrow">Beyond the reel</p>
+            <h2 id="beyond-head" class="display-lg">We start with video,<br>but we don't <span class="mark-line">stop there</span><span class="dot">.</span></h2>
           </div>
+          <p class="lede">Every project we take on starts with a camera, but most of them don't stop there. From <a href="creative-direction.html">creative direction</a> to the website it lands on, the same team plans the marketing, shapes the brand and keeps it consistent everywhere it shows up.</p>
         </div>
-        <div class="reveal" style="max-width: 46rem;">
-          <p class="lede">Video is what we do most. But a great video gets wasted when it lands on a tired website or a brand that doesn't match it, so when you need them, we also build the website, the online store and the landing page, and we line up your logo, colours and message so the campaign and the business look like they belong together.</p>
-          <p style="display:flex; flex-wrap:wrap; gap: 0.75rem; margin-top: 1.5rem;">
-            <a class="btn" href="website-development.html">Websites &amp; online stores</a>
-            <a class="btn btn--ghost" href="brand-alignment.html">Brand alignment</a>
-          </p>
+
+        <div class="beyond-stage reveal">
+          <ul class="beyond-links beyond-links--left">
+            <li><a href="marketing-videos.html"><b>Marketing videos</b><span class="bl-desc">Commercials and ads cut for every platform</span></a></li>
+            <li><a href="website-development.html#campaigns"><b>Marketing campaigns</b><span class="bl-desc">Strategy, paid ads and reporting, run by us</span></a></li>
+            <li><a href="corporate-video.html"><b>Corporate video</b><span class="bl-desc">Website films, training and LinkedIn</span></a></li>
+            <li><a href="event-videography.html"><b>Event videography</b><span class="bl-desc">Galas, conferences and launches</span></a></li>
+          </ul>
+          <div class="beyond-phone" aria-hidden="true">
+            <div class="phone">
+              <span class="phone-btn phone-btn--mute"></span>
+              <span class="phone-btn phone-btn--vol"></span>
+              <span class="phone-btn phone-btn--power"></span>
+              <div class="phone-screen">
+                <video muted loop playsinline preload="none" poster="assets/img/phone-dmev-poster.jpg" data-src="assets/phone-dmev-vertical.mp4"></video>
+              </div>
+            </div>
+          </div>
+          <ul class="beyond-links beyond-links--right">
+            <li><a href="community.html"><b>Documentaries</b><span class="bl-desc">Short films for the causes we back</span></a></li>
+            <li><a href="website-development.html#websites"><b>Websites</b><span class="bl-desc">New builds and full rebuilds</span></a></li>
+            <li><a href="website-development.html#brand-building"><b>Brand design</b><span class="bl-desc">Identity, voice and positioning</span></a></li>
+            <li><a href="brand-alignment.html"><b>Brand alignment</b><span class="bl-desc">One look and one voice, everywhere</span></a></li>
+          </ul>
         </div>
       </div>
+      <script>
+        // Load and play the phone clip only when the section comes into view
+        (function () {
+          var v = document.querySelector('#beyond-the-reel video');
+          if (!v) return;
+          function start() { if (!v.src) { v.src = v.dataset.src; } var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+          if (!('IntersectionObserver' in window)) { start(); return; }
+          new IntersectionObserver(function (entries) {
+            entries.forEach(function (e) { if (e.isIntersecting) start(); else v.pause(); });
+          }, { rootMargin: '200px' }).observe(v);
+        })();
+      </script>
     </section>
 
     <section class="section band--ink photo-band photo-band--side" style="--photo: url('assets/img/bts-camera-slider.jpg'); --photo-pos: 55% 45%; --photo-opacity: 0.55;">
