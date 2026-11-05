@@ -236,6 +236,14 @@ em {
   border-bottom-color: var(--volt);
 }
 
+/* 8 nav items since Partnerships (2026-11-05): keep them on one line on narrow desktops */
+.main-nav a, .nav-drop-trigger { white-space: nowrap; }
+@media (min-width: 861px) and (max-width: 1100px) {
+  .main-nav { gap: 1.1rem; }
+  .main-nav a { font-size: 0.875rem; }
+  .main-nav a.btn { padding: 0.6rem 1.1rem; }
+}
+
 .btn {
   display: inline-block;
   font-family: var(--font-body);
