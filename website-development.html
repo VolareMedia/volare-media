@@ -21,7 +21,7 @@
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Inter+Tight:ital,wght@0,400..800;1,400..800&family=Fragment+Mono:ital@0;1&display=swap" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Inter+Tight:ital,wght@0,400..800;1,400..800&family=Fragment+Mono:ital@0;1&display=swap"></noscript>
   <link rel="icon" href="favicon.svg?v=2" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css?v=42">
+  <link rel="stylesheet" href="styles.css?v=43">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -108,7 +108,7 @@
     @media (min-width: 64rem) { .types-grid, .paths-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
     .types-grid .card p a { color: var(--cream); text-decoration-color: var(--volt); }
     .industries { margin-top: clamp(2.5rem, 4vw, 3.5rem); }
-    .industries-label { font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--lilac); margin-bottom: 1rem; }
+    .industries-label { font-family: var(--font-display); font-size: 1.35rem; font-weight: 600; letter-spacing: -0.02em; color: var(--cream); margin-bottom: 1rem; }
     .industry-chips { list-style: none; display: flex; flex-wrap: wrap; gap: 0.6rem; }
     .industry-chips li { font-size: 0.95rem; padding: 0.55rem 1rem; border: 1px solid var(--line); border-radius: 999px; background: rgba(12, 13, 9, 0.5); }
     .industry-chips li:nth-child(4n+1) { border-color: rgba(214, 255, 61, 0.55); }
@@ -173,7 +173,6 @@
 
     <section class="hero photo-band photo-band--side" style="--photo: url('assets/img/web-development-code-dark.jpg'); --photo-pos: 60% 50%; --photo-opacity: 0.7;">
       <div class="wrap">
-        <p class="eyebrow">Website design &amp; development</p>
         <h1 class="display-xl">Websites and branding,<br>built around <span class="sweep">your video</span><span class="dot">.</span></h1>
         <p class="lede">Video is where we started. It's not where we stop. Volare Media designs, builds and rebuilds websites for businesses on Vancouver Island and across BC, shapes brands and runs marketing campaigns, with one support team of media and tech specialists behind it all.</p>
       </div>
@@ -191,7 +190,6 @@
       <div class="wrap">
         <div class="section-head reveal">
           <div>
-            <p class="eyebrow">The foundation</p>
             <h2 class="display-lg">Everything starts with<br>your <span class="mark-line">website</span><span class="dot">.</span></h2>
           </div>
         </div>
@@ -221,7 +219,6 @@
       <div class="wrap">
         <div class="section-head reveal">
           <div>
-            <p class="eyebrow">Recent builds</p>
             <h2 class="display-lg">Websites we've built,<br>and some <span class="ink-volt">on the way</span><span class="dot">.</span></h2>
           </div>
         </div>
@@ -229,35 +226,30 @@
         <div class="card-grid reveal">
           <a class="card" href="https://jackietaylor.ca" target="_blank" rel="noopener">
             <span class="site-shot"><img src="assets/img/site-jackietaylor.jpg" alt="The Jackie Taylor website homepage" loading="lazy"></span>
-            <p class="eyebrow">Live · Portfolio site</p>
             <h3>Jackie Taylor</h3>
             <p>A writer-director's portfolio, bio, filmography and press, designed around her films.</p>
             <span class="card-cue">Visit jackietaylor.ca</span>
           </a>
           <a class="card" href="https://sviautomotive.com" target="_blank" rel="noopener">
             <span class="site-shot"><img src="assets/img/site-sviautomotive.jpg" alt="The SVI Automotive Equipment website homepage" loading="lazy"></span>
-            <p class="eyebrow">Live · Business site</p>
             <h3>SVI Automotive</h3>
             <p>Full build for a Vancouver Island equipment dealer: product catalogue, financing, service and an SEO-ready news blog.</p>
             <span class="card-cue">Visit sviautomotive.com</span>
           </a>
           <a class="card" href="https://demodeenvogue.ca" target="_blank" rel="noopener">
             <span class="site-shot"><img src="assets/img/site-demodeenvogue.jpg" alt="The De Mode en Vogue online store homepage" loading="lazy"></span>
-            <p class="eyebrow">Live · Online store</p>
             <h3>De Mode en Vogue</h3>
             <p>A full revamp of their online store, with a video-led homepage built from the campaign we shot for them. We now manage the site, SEO, blog and ads.</p>
             <span class="card-cue">Visit demodeenvogue.ca</span>
           </a>
           <a class="card" href="https://nine6teen.ca" target="_blank" rel="noopener">
             <span class="site-shot"><img src="assets/img/site-ninesixteen.jpg" alt="The Nine Sixteen Entertainment website homepage" loading="lazy"></span>
-            <p class="eyebrow">Live · Studio website</p>
             <h3>Nine Sixteen Entertainment</h3>
             <p>A launch site for a Vancouver Island vertical-drama studio: the slate in development, how to partner with them and the team behind it.</p>
             <span class="card-cue">Visit nine6teen.ca</span>
           </a>
           <div class="card">
             <span class="site-shot"><img src="assets/img/site-itsadoodle.jpg" alt="The It's A Doodle Labradoodles website homepage, in development" loading="lazy"></span>
-            <p class="eyebrow">In development · Rebrand &amp; website</p>
             <h3>It's A Doodle K9 Service</h3>
             <p>A full rebrand and rebuild for this Sooke Labradoodle breeder: all-new logos, a brand guide, realigned socials and a video-led website. <a href="brand-alignment.html#its-a-doodle">See the before</a>. Launching soon.</p>
           </div>
@@ -270,7 +262,6 @@
       <div class="wrap">
         <div class="section-head reveal">
           <div>
-            <p class="eyebrow">How it works</p>
             <h2 id="how-head" class="display-lg">From first call<br>to <span class="sweep sweep--volt">launch day</span><span class="dot">.</span></h2>
           </div>
           <p class="lede">A clear process, and the same people from the first call to long after the site goes live.</p>
@@ -294,18 +285,17 @@
       <div class="wrap">
         <div class="section-head reveal">
           <div>
-            <p class="eyebrow">Who we build for</p>
             <h2 id="types-head" class="display-lg">Websites for every<br>kind of <span class="ink-lilac">business</span><span class="dot dot--volt">.</span></h2>
           </div>
           <p class="lede">Business websites, online stores, corporate sites and campaign landing pages, designed and built on Vancouver Island for companies across BC and Canada.</p>
         </div>
         <div class="card-grid types-grid reveal">
-          <div class="card"><p class="eyebrow">Business</p><h3>Business websites</h3><p>Multi-page sites for service businesses: services, about, reviews, quote and contact forms, built to rank for what you do and where you do it.</p></div>
-          <div class="card"><p class="eyebrow">E-commerce</p><h3>E-commerce &amp; online stores</h3><p>Shopify stores with product pages, collections, wholesale and checkout, plus the ads and content that bring buyers in.</p></div>
-          <div class="card"><p class="eyebrow">Corporate</p><h3>Corporate websites</h3><p>Company sites with leadership, careers and partner pages, built to sit alongside your <a href="corporate-video.html">corporate video</a>.</p></div>
-          <div class="card"><p class="eyebrow">Property</p><h3>Real estate &amp; property websites</h3><p>Developments, listings and property managers: location, availability and enquiry forms, with drone and video front and centre.</p></div>
-          <div class="card"><p class="eyebrow">Portfolio</p><h3>Portfolio &amp; personal brand sites</h3><p>For filmmakers, artists, speakers and founders: your work, your story and an easy way to book you.</p></div>
-          <div class="card"><p class="eyebrow">Campaigns</p><h3>Campaign landing pages</h3><p>Single pages built for Google and Meta ads, with lead forms and conversion tracking set up from day one.</p></div>
+          <div class="card"><h3>Business websites</h3><p>Multi-page sites for service businesses: services, about, reviews, quote and contact forms, built to rank for what you do and where you do it.</p></div>
+          <div class="card"><h3>E-commerce &amp; online stores</h3><p>Shopify stores with product pages, collections, wholesale and checkout, plus the ads and content that bring buyers in.</p></div>
+          <div class="card"><h3>Corporate websites</h3><p>Company sites with leadership, careers and partner pages, built to sit alongside your <a href="corporate-video.html">corporate video</a>.</p></div>
+          <div class="card"><h3>Real estate &amp; property websites</h3><p>Developments, listings and property managers: location, availability and enquiry forms, with drone and video front and centre.</p></div>
+          <div class="card"><h3>Portfolio &amp; personal brand sites</h3><p>For filmmakers, artists, speakers and founders: your work, your story and an easy way to book you.</p></div>
+          <div class="card"><h3>Campaign landing pages</h3><p>Single pages built for Google and Meta ads, with lead forms and conversion tracking set up from day one.</p></div>
         </div>
         <div class="industries reveal">
           <p class="industries-label">Industries we build for</p>
@@ -376,7 +366,6 @@
       <div class="wrap">
         <div class="section-head reveal">
           <div>
-            <p class="eyebrow">The support team</p>
             <h2 class="display-lg">Video and web experts,<br><span class="sweep">one call away</span><span class="dot">.</span></h2>
           </div>
         </div>
@@ -389,32 +378,27 @@
       <div class="wrap">
         <div class="section-head reveal">
           <div>
-            <p class="eyebrow">Pick your path</p>
             <h2 class="display-lg">Where are you<br><span class="mark-line">starting?</span></h2>
           </div>
           <p class="lede">Pick the one that sounds like you. Every path starts with a conversation, not a contract.</p>
         </div>
         <div class="card-grid paths-grid reveal">
           <div class="card path-card path-card--lead">
-            <p class="eyebrow">I have a website</p>
             <h3>Website rebuild &amp; redesign</h3>
             <p>Slow, dated or hard to update? We rebuild it on a fast, modern, search-ready foundation, keep what works and carry your content and Google rankings across.</p>
             <a class="btn" href="contact.html?project=rebuild">Rebuild my website</a>
           </div>
           <div class="card path-card">
-            <p class="eyebrow">I need a website</p>
             <h3>New website design &amp; build</h3>
             <p>Launching a business, a product or a fresh brand? We design, write and build it from a blank page, ready to be found in search from launch.</p>
             <a class="btn" href="contact.html?project=new">Build my new website</a>
           </div>
           <div class="card path-card">
-            <p class="eyebrow">I sell online</p>
             <h3>E-commerce &amp; online stores</h3>
             <p>Shopify stores with product pages, collections and checkout, set up to take orders and to grow with SEO, content and ads.</p>
             <a class="btn" href="contact.html?project=store">Start my online store</a>
           </div>
           <div class="card path-card">
-            <p class="eyebrow">My brand is all over the place</p>
             <h3>Brand alignment</h3>
             <p>Website, socials, print and video all saying different things? We audit every touchpoint and bring them into one look and one voice.</p>
             <a class="btn" href="contact.html?project=brand">Align my brand</a>
@@ -428,7 +412,6 @@
       <div class="wrap">
       <div class="section-head reveal">
         <div>
-          <p class="eyebrow">Good to know</p>
           <h2 class="display-lg">Common <span class="ink-volt">questions</span><span class="dot">.</span></h2>
         </div>
       </div>
@@ -436,7 +419,6 @@
 
         <details class="card">
           <summary>
-            <p class="eyebrow">Scope</p>
             <h3>New build or rebuild?</h3>
             <p>Both. Blank page or aging site, we take it from there.</p>
             <span class="card-toggle" aria-hidden="true"></span>
@@ -448,7 +430,6 @@
 
         <details class="card">
           <summary>
-            <p class="eyebrow">Starting point</p>
             <h3>Just a website?</h3>
             <p>Yes. Plenty of clients start there on its own.</p>
             <span class="card-toggle" aria-hidden="true"></span>
@@ -460,7 +441,6 @@
 
         <details class="card">
           <summary>
-            <p class="eyebrow">Brand</p>
             <h3>What about our existing brand?</h3>
             <p>Solid? We align to it. Scattered? We fix it. New? We build it.</p>
             <span class="card-toggle" aria-hidden="true"></span>
@@ -472,7 +452,6 @@
 
         <details class="card">
           <summary>
-            <p class="eyebrow">Team</p>
             <h3>Who does the work?</h3>
             <p>Our own support team of media and tech specialists.</p>
             <span class="card-toggle" aria-hidden="true"></span>
@@ -484,7 +463,6 @@
 
         <details class="card">
           <summary>
-            <p class="eyebrow">E-commerce</p>
             <h3>Do you build online stores?</h3>
             <p>Yes. Shopify stores, set up to sell and to grow.</p>
             <span class="card-toggle" aria-hidden="true"></span>
@@ -496,7 +474,6 @@
 
         <details class="card">
           <summary>
-            <p class="eyebrow">SEO</p>
             <h3>Will a rebuild hurt our rankings?</h3>
             <p>Not when it's planned properly.</p>
             <span class="card-toggle" aria-hidden="true"></span>
@@ -512,7 +489,6 @@
 
     <section class="cta band--volt">
       <div class="wrap reveal">
-        <p class="eyebrow">Ready for the full package?</p>
         <h2 class="display-lg">One team for your video,<br>website and <span class="sweep">brand</span><span class="dot">.</span></h2>
         <a class="btn" href="contact.html">Start the conversation</a>
       </div>

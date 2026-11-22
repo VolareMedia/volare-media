@@ -613,18 +613,6 @@ a.service-row:hover .service-num { color: var(--volt); }
   gap: 0.5rem;
 }
 
-.service-includes::before {
-  content: "What this includes";
-  display: block;
-  width: 100%;
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
-  color: var(--lilac);
-  margin-bottom: 0.35rem;
-}
-
 .service-includes li {
   font-size: 0.85rem;
   color: var(--cream);
