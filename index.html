@@ -79,13 +79,6 @@
     .text-link:hover { color: var(--volt); border-color: var(--volt); }
     .text-link:hover::after { transform: translateX(4px); }
 
-    /* client logos */
-    .logos-sec { padding: clamp(3.5rem, 7vw, 6rem) 0; }
-    .logos-sec h2 { font-size: clamp(1.5rem, 2.6vw, 2.2rem); letter-spacing: -0.03em; margin-bottom: clamp(1.5rem, 3vw, 2.5rem); max-width: 30ch; }
-    .logo-row { list-style: none; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: clamp(0.5rem, 1vw, 0.9rem); }
-    .logo-row li { aspect-ratio: 16 / 9; display: grid; place-items: center; padding: 14% 16%; border-radius: 1rem; background: rgba(244, 243, 232, 0.05); border: 1px solid var(--line); }
-    .logo-row img { max-width: 100%; max-height: 100%; object-fit: contain; filter: brightness(0) invert(1); opacity: 0.82; }
-    .logo-row img.logo-onwhite { filter: grayscale(1) invert(1) contrast(1.6) brightness(1.3); mix-blend-mode: screen; opacity: 0.9; }
 
     /* statement that lights up word by word */
     .lit { color: var(--cream); }
@@ -199,7 +192,6 @@
     @media (max-width: 56rem) {
       .home-v2 .v2-header .btn { display: none; }
       .v2-menu .wrap { grid-template-columns: minmax(0, 1fr); }
-      .logo-row { grid-template-columns: repeat(3, minmax(0, 1fr)); }
       .why-body, .do-grid, .crew-head, .contact-v2, .footer-v2 .footer-top { grid-template-columns: minmax(0, 1fr); }
       .stat-cards { grid-template-columns: minmax(0, 1fr); }
       .stat-cards li { min-height: 0; flex-direction: row; align-items: baseline; justify-content: flex-start; gap: 1rem; }
@@ -302,18 +294,11 @@
       </div>
     </section>
 
-    <!-- Client logos -->
-    <section class="logos-sec" aria-labelledby="logos-head">
-      <div class="wrap reveal">
-        <h2 id="logos-head">Some of the businesses and events we've made videos for.</h2>
-        <ul class="logo-row">
-          <li><img src="assets/img/partnerships/dmev-logo.png" alt="De Mode en Vogue" loading="lazy"></li>
-          <li><img src="assets/img/partnerships/svi-logo.png" alt="SVI Automotive" loading="lazy"></li>
-          <li><img src="assets/img/partnerships/white-wolf-logo.svg" alt="White Wolf Homes" loading="lazy"></li>
-          <li><img class="logo-onwhite" src="assets/img/doodle-logo-wordmark.jpg" alt="It's A Doodle K9 Service" loading="lazy"></li>
-          <li><img src="assets/img/peninsula-gives-logo.png" alt="Peninsula Gives" loading="lazy"></li>
-          <li><img src="assets/img/shine-gala-logo.png" alt="Shine Gala" loading="lazy"></li>
-        </ul>
+    <!-- Client marquee -->
+    <section class="marquee" aria-label="Clients">
+      <div class="marquee-track">
+        <span>Harbour City Kitchens</span><span>Stratos Nutrition</span><span>Maxxam Insurance</span><span>De Mode en Vogue</span><span>Sixty Forty</span><span>VICA</span><span>Peninsula Gives</span><span>Tailgate Toolkit</span><span>Harris</span><span>White Wolf Homes</span><span>Gas 2 Go</span><span>West Haven Cabinetry</span><span>Oakcrest Estates</span><span>Centre Mountain Business Park</span><span>It's A Doodle K9 Service</span><span>Adam ATM</span>
+        <span>Harbour City Kitchens</span><span>Stratos Nutrition</span><span>Maxxam Insurance</span><span>De Mode en Vogue</span><span>Sixty Forty</span><span>VICA</span><span>Peninsula Gives</span><span>Tailgate Toolkit</span><span>Harris</span><span>White Wolf Homes</span><span>Gas 2 Go</span><span>West Haven Cabinetry</span><span>Oakcrest Estates</span><span>Centre Mountain Business Park</span><span>It's A Doodle K9 Service</span><span>Adam ATM</span>
       </div>
     </section>
 
