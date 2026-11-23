@@ -307,7 +307,7 @@ function frame(now) {
   const t = now / 1000;
 
   if (!reduce) {
-    const speed = current === "credits" && !roll.hover ? innerHeight * 0.046 : 0;
+    const speed = current === "credits" && !roll.hover ? innerHeight * 0.092 : 0;
     roll.y += follow(roll.v, speed, dt, 0.6, 0.4) * dt;
     if (roll.max > 0 && roll.y >= roll.max) roll.y = 0;      // both ends of the roll are empty, so the loop is invisible
     roll.el.style.transform = `translate3d(0, ${-roll.y.toFixed(2)}px, 0)`;
