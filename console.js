@@ -294,8 +294,20 @@ function resize() {
 }
 
 /* ---------------- credits roll ---------------- */
-const roll = { box: $(".roll"), el: $(".roll-inner"), y: 0, max: 0, hover: false, v: spring() };
-const measureRoll = () => (roll.max = roll.el.offsetHeight - roll.box.clientHeight);
+// The roll runs by itself, but it never makes you wait: it opens with the first names already on screen,
+// and the wheel, a trackpad or a finger moves it at your own pace (it carries on by itself a moment after you stop).
+const roll = { box: $(".roll"), el: $(".roll-inner"), y: 0, max: 0, start: 0, kick: 0, heldUntil: 0, hover: false, v: spring() };
+const measureRoll = () => {
+  roll.max = roll.el.offsetHeight - roll.box.clientHeight;
+  roll.start = Math.max(0, parseFloat(getComputedStyle(roll.el).paddingTop) - roll.box.clientHeight * 0.4);
+};
+// move the roll by hand; returns how much of the movement did not fit (you were already at one end)
+function nudgeRoll(d, eased) {
+  const pos = roll.y + roll.kick, to = Math.min(roll.max - 1, Math.max(0, pos + d));
+  if (eased) roll.kick += to - pos; else roll.y += to - pos;
+  roll.heldUntil = performance.now() + 2500;
+  return pos + d - to;
+}
 roll.box.addEventListener("pointerenter", () => (roll.hover = true));
 roll.box.addEventListener("pointerleave", () => (roll.hover = false));
 addEventListener("resize", measureRoll);
@@ -307,8 +319,10 @@ function frame(now) {
   const t = now / 1000;
 
   if (!reduce) {
-    const speed = current === "credits" && !roll.hover ? innerHeight * 0.092 : 0;
+    const speed = current === "credits" && !roll.hover && now > roll.heldUntil ? innerHeight * 0.092 : 0;
     roll.y += follow(roll.v, speed, dt, 0.6, 0.4) * dt;
+    const k = roll.kick * (1 - Math.exp(-dt * 14));          // your own scrolling, eased out
+    roll.y += k; roll.kick -= k;
     if (roll.max > 0 && roll.y >= roll.max) roll.y = 0;      // both ends of the roll are empty, so the loop is invisible
     roll.el.style.transform = `translate3d(0, ${-roll.y.toFixed(2)}px, 0)`;
   }
@@ -472,7 +486,7 @@ async function go(id, from) {
   const cut = cutTo(id, origin);
   await leaving;
   current = id;
-  if (id === "credits") { roll.y = 0; next.hidden = false; measureRoll(); }
+  if (id === "credits") { next.hidden = false; measureRoll(); roll.y = roll.start; roll.kick = 0; roll.heldUntil = 0; }
   history.replaceState(null, "", id === "home" ? location.pathname : `#${id}`);
   await showChapter(next, 260);
   await cut;
@@ -494,17 +508,27 @@ addEventListener("keydown", (e) => {
   if (e.key === "Escape") go("home", $(".logo"));
 });
 let wheelAcc = 0, wheelT = 0;
+const rollInHand = () => current === "credits" && !reduce && roll.max > 0;
 addEventListener("wheel", (e) => {
+  let d = e.deltaMode === 1 ? e.deltaY * 32 : e.deltaY;
+  // on Credits the wheel moves the roll; only what is left over at either end goes on to the next chapter
+  if (rollInHand()) { d = nudgeRoll(d, true); if (!d) return; }
   if (busy) return;
-  wheelAcc += e.deltaY;
+  wheelAcc += d;
   clearTimeout(wheelT); wheelT = setTimeout(() => (wheelAcc = 0), 220);
-  if (Math.abs(wheelAcc) > 80) { step(wheelAcc > 0 ? 1 : -1); wheelAcc = 0; }
+  if (Math.abs(wheelAcc) > (rollInHand() ? 220 : 80)) { step(wheelAcc > 0 ? 1 : -1); wheelAcc = 0; }
 }, { passive: true });
-let touchY = null;
-addEventListener("touchstart", (e) => (touchY = e.touches[0].clientY), { passive: true });
+let touchY = null, touchLast = null, touchRolled = false;
+addEventListener("touchstart", (e) => { touchY = touchLast = e.touches[0].clientY; touchRolled = false; }, { passive: true });
+addEventListener("touchmove", (e) => {
+  if (touchLast == null || !rollInHand()) return;
+  const y = e.touches[0].clientY, d = touchLast - y; touchLast = y;
+  if (Math.abs(d - nudgeRoll(d, false)) > 0.5) touchRolled = true;      // the roll follows the finger
+}, { passive: true });
 addEventListener("touchend", (e) => {
   if (touchY == null) return;
-  const dy = touchY - e.changedTouches[0].clientY; touchY = null;
+  const dy = touchY - e.changedTouches[0].clientY; touchY = touchLast = null;
+  if (touchRolled) return;                                              // that swipe moved the credits, not the chapter
   if (Math.abs(dy) > 60) step(dy > 0 ? 1 : -1);
 }, { passive: true });
 
