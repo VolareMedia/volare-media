@@ -307,3 +307,20 @@
 /* any other lime band becomes the same quiet rounded panel */
 .v2 .section.band--volt { background: var(--bg-raised); color: var(--cream); margin: 0 var(--inset); border-radius: var(--radius); }
 .v2 .section.band--volt h2, .v2 .section.band--volt h3 { color: var(--cream); }
+
+/* big-word list (same look as the menu links) */
+.big-list-head { font-size: clamp(1.6rem, 2.6vw, 2.3rem); max-width: 24ch; margin-bottom: clamp(2rem, 5vw, 3.5rem); color: var(--muted); }
+.big-list-grid { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: clamp(2rem, 6vw, 6rem); align-items: center; }
+.big-list { list-style: none; margin: 0; padding: 0; }
+.big-list a { display: inline-block; font-family: var(--font-display); font-weight: 600; letter-spacing: -0.04em; font-size: clamp(2.3rem, 5.6vw, 5rem); line-height: 1.06; color: var(--cream); text-decoration: none; transition: color 0.2s; }
+.big-list a:hover, .big-list a:focus-visible { color: var(--volt); }
+.big-list-shot { border-radius: var(--radius); overflow: hidden; aspect-ratio: 5 / 4; margin-bottom: 1.5rem; }
+.big-list-shot img { width: 100%; height: 100%; object-fit: cover; object-position: 45% 50%; display: block; }
+.big-list-side p { color: var(--muted); font-size: clamp(1.05rem, 1.4vw, 1.2rem); max-width: 26rem; margin: 0 0 1rem; }
+.big-list-call { display: flex; flex-wrap: wrap; gap: 0.4rem 1.5rem; }
+.big-list-call a { color: var(--cream); text-decoration: underline; text-underline-offset: 0.25em; }
+.big-list-call a:hover { color: var(--volt); }
+@media (max-width: 56rem) {
+  .big-list-grid { grid-template-columns: minmax(0, 1fr); }
+  .big-list-shot { aspect-ratio: 16 / 10; }
+}
