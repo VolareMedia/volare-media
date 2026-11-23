@@ -136,10 +136,6 @@
     .crew-head p { color: var(--muted); font-size: clamp(1.05rem, 1.5vw, 1.25rem); max-width: 30rem; }
     .crew-shot { position: relative; border-radius: var(--radius); overflow: hidden; aspect-ratio: 21 / 9; isolation: isolate; }
     .crew-shot img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; }
-    .crew-shot::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(to bottom, rgba(12, 13, 9, 0.75), rgba(12, 13, 9, 0.1) 55%, rgba(12, 13, 9, 0.55)); }
-    .crew-names { list-style: none; padding: clamp(1.25rem, 3vw, 2.25rem); display: grid; gap: 0.15rem; max-width: 40rem; }
-    .crew-names li { display: flex; justify-content: space-between; gap: 2rem; font-size: clamp(1rem, 1.4vw, 1.2rem); padding: 0.4rem 0; border-bottom: 1px solid rgba(244, 243, 232, 0.18); }
-    .crew-names span { color: rgba(244, 243, 232, 0.72); text-align: right; }
     .crew-link { margin-top: 1.75rem; }
 
     /* reviews */
@@ -218,10 +214,6 @@
       .review-card { scroll-snap-align: start; min-height: 15rem; }
       .crew-shot { aspect-ratio: auto; overflow: visible; border-radius: 0; }
       .crew-shot img { position: static; width: 100%; height: auto; aspect-ratio: 4 / 3; border-radius: var(--radius); }
-      .crew-shot::after { display: none; }
-      .crew-names { padding: 1.25rem 0 0; }
-      .crew-names li { flex-direction: column; gap: 0; }
-      .crew-names span { text-align: left; font-size: 0.92rem; }
     }
   </style>
   <script type="application/ld+json">
@@ -439,13 +431,6 @@
         </div>
         <div class="crew-shot reveal">
           <img class="bw" src="assets/img/bts-crew-smiles.jpg" alt="A Volare Media crew on set" loading="lazy">
-          <ul class="crew-names">
-            <li>Directors <span>Chosen for the story and the style</span></li>
-            <li>Directors of photography <span>Cinematic camera and lighting</span></li>
-            <li>Producers <span>Planning, budgets and scheduling</span></li>
-            <li>Editors and colourists <span>Post-production and finishing</span></li>
-            <li>Sound <span>Recording, mixing and voice-over</span></li>
-          </ul>
         </div>
         <p class="crew-link reveal"><a class="text-link" href="crew.html">Meet our crew and production partners</a></p>
       </div>
