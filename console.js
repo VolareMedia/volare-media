@@ -1,8 +1,9 @@
 // Volare Media console concept.
 // One WebGL canvas shows the footage in black and white. Every clip plays at normal speed.
-// Picking a chapter cuts to its clip in angled shards that sit at different depths, while
-// mauve glass panes glide across at their own speeds, the menu words shrink into a rail
-// and the headline wipes in behind a mauve bar.
+// At rest the footage is one flat plane that leans very slightly toward the pointer.
+// Picking a chapter turns it into slanted panes of glass on two depth layers: each pane
+// tilts toward or away from the camera, bends and colour-splits the picture near its edges,
+// and carries the cut from the old clip to the new one. Then the panes settle flat again.
 // Every movement runs on one curve (smootherstep): it starts and stops with no speed and
 // no sudden change of acceleration.
 
@@ -79,97 +80,152 @@ const FRAG = `
 precision highp float;
 varying vec2 vUv;
 uniform sampler2D uA, uB;
-uniform float uProg, uTime, uAspA, uAspB, uScreen, uDim, uStrips, uAngle, uSweep, uZoom, uPx, uSeed;
+uniform float uProg, uTime, uAspA, uAspB, uScreen, uDim, uStrips, uAngle, uZoom, uPx, uSeed, uSwing;
 uniform vec2 uOrigin, uPar;
 
 const vec3 VOLT = vec3(0.839, 1.0, 0.239);
 const vec3 LILAC = vec3(0.788, 0.729, 0.957);
+const vec3 DARK = vec3(0.047, 0.051, 0.035);     // the brand's near-black
+const vec3 CREAM = vec3(0.957, 0.953, 0.91);     // and its cream
+const float K = 0.35;                             // how strongly a tilted pane shows perspective
 
 float ss(float t) { t = clamp(t, 0.0, 1.0); return t * t * t * (t * (t * 6.0 - 15.0) + 10.0); }
+float bump(float t) { return ss(t / 0.5) * (1.0 - ss((t - 0.5) / 0.5)); }   // 0 -> 1 -> 0, soft at every point
 vec2 cover(vec2 uv, float asp) {
   vec2 s = vec2(1.0);
   if (uScreen > asp) s.y = asp / uScreen; else s.x = uScreen / asp;
   return (uv - 0.5) * s + 0.5;
 }
-vec2 zoomed(vec2 uv, float z) { return (uv - 0.5) / z + 0.5; }
 vec2 rot(vec2 p, float a) { float c = cos(a), s = sin(a); return vec2(c * p.x - s * p.y, s * p.x + c * p.y); }
 float luma(vec3 c) { return dot(c, vec3(0.2126, 0.7152, 0.0722)); }
 float tone(float l) { l = smoothstep(0.03, 0.97, l); return pow(l, 1.12); }
-// black and white: the brand's near-black to its cream
-vec3 grade(float l) { return mix(vec3(0.047, 0.051, 0.035), vec3(0.957, 0.953, 0.91), l); }
-// the same picture seen through mauve glass
-vec3 gradeM(float l) { return mix(vec3(0.05, 0.036, 0.085), vec3(0.86, 0.80, 1.0), l); }
+vec3 grade(float l) { return mix(DARK, CREAM, l); }
+vec3 gradeM(float l) { return mix(vec3(0.05, 0.036, 0.085), vec3(0.86, 0.80, 1.0), l); }   // seen through mauve
 float hash(vec2 p) { return fract(sin(dot(p, vec2(12.9898, 78.233))) * 43758.5453); }
-float wrap(float x, float r) { return mod(x + r * 0.5, r) - r * 0.5; }
-// strips of uneven width, so the cut reads as shards, not blinds
-float stripCoord(float y, float span) { float s = (y / span + 0.5) * uStrips; return s + 0.32 * sin(s * 1.9 + uSeed); }
-// a slanted pane: x = how far inside it, y = its edge line
-vec2 pane(vec2 p, float ang, float pos, float w) {
-  float d = dot(p, vec2(sin(ang), cos(ang))) - pos;
-  float aa = uPx * 1.5;
-  return vec2(1.0 - smoothstep(w * 0.5 - aa, w * 0.5 + aa, abs(d)), 1.0 - smoothstep(0.0, aa * 1.3, abs(abs(d) - w * 0.5)));
+// strips of uneven width, so the cut reads as panes, not blinds
+float warp(float s) { return s + 0.32 * sin(s * 1.9 + uSeed); }
+float warpD(float s) { return 1.0 + 0.608 * cos(s * 1.9 + uSeed); }
+// brightness of each clip at a point on the flat picture plane (centre 0,0; height 1)
+float sampA(vec2 q) { return tone(luma(texture2D(uA, (cover(vec2(q.x / uScreen + 0.5, q.y + 0.5), uAspA) - 0.5) / uZoom + 0.5).rgb)); }
+float sampB(vec2 q) { return tone(luma(texture2D(uB, (cover(vec2(q.x / uScreen + 0.5, q.y + 0.5), uAspB) - 0.5) / uZoom + 0.5).rgb)); }
+
+struct Pane { float hit; vec2 q; float s; float id; float sn; float g; float lp; float dir; float t; };
+
+// Which pane of this depth layer covers the pixel, and where on that (tilted) pane are we?
+Pane paneAt(vec2 pc, float front, float lift) {
+  Pane P;
+  float z = front > 0.5 ? 0.05 : -0.022;                       // front panes come closer, back panes drop away
+  vec2 pl = (pc - uPar * z * lift * 0.6) / (1.0 + z * lift);
+  float span = uScreen + 1.0;
+  vec2 r = rot(pl, uAngle);
+  float S = (r.y / span + 0.5) * uStrips;
+  float sy = warp(S);
+  float id = floor(sy);
+  float v = fract(sy) - 0.5;                                    // across the pane, as seen on screen
+  float even = mod(id, 2.0) < 1.0 ? 1.0 : 0.0;
+  float mine = front > 0.5 ? even : 1.0 - even;                 // the two layers take alternate panes
+
+  // panes nearest the word you picked move first
+  vec2 ro = rot(vec2((uOrigin.x - 0.5) * uScreen, uOrigin.y - 0.5), uAngle);
+  float oId = floor(warp((ro.y / span + 0.5) * uStrips));
+  float t = clamp((uProg - min(abs(id - oId) / uStrips, 1.0) * 0.38) / 0.62, 0.0, 1.0);   // each pane's turn overlaps its neighbours'
+  float g = bump(t);                                            // this pane's swell: its tilt and its glass
+  float dir = even > 0.5 ? 1.0 : -1.0;
+  float th = g * dir * (0.20 + 0.20 * hash(vec2(id, uSeed)));  // tilt about the pane's long axis
+  float sn = sin(th), cs = cos(th);
+  // one end of the pane also swings away from the camera, so the gap beside it opens as a wedge
+  float Y = g * 0.11 * (0.4 + 0.6 * hash(vec2(id + 7.0, uSeed))) * (0.5 + dir * r.x / span);
+  float s = v * (1.0 + Y) / (cs - v * sn * K);                  // undo the tilt: where on the flat pane is this pixel
+  float d = 1.0 + Y + s * sn * K;                               // how far that point sits from the camera
+
+  float aa = uPx * uStrips / span * 2.0;
+  float inside = 1.0 - smoothstep(0.5 - aa, 0.5, abs(s));
+  P.hit = mine * mix(1.0, inside, ss(g * 6.0));                 // a flat pane fills its strip, so no seams at rest
+  float yFlat = r.y + (s - v) / warpD(S) * span / uStrips;
+  P.q = rot(vec2(r.x * d, yFlat), -uAngle);
+  P.s = s; P.id = id; P.sn = sn; P.g = g; P.lp = ss(t); P.dir = dir; P.t = t;
+  return P;
+}
+
+vec3 shade(Pane P) {
+  float span = uScreen + 1.0;
+  float ax = rot(P.q, uAngle).x / span + 0.5;
+  if (P.dir < 0.0) ax = 1.0 - ax;
+  float env = ss(P.lp / 0.2) * (1.0 - ss((P.lp - 0.8) / 0.2));
+  float edge = ax - (P.lp * 1.14 - 0.07);          // above 0: old clip, below 0: new clip
+  float aa = uPx * 1.5 / span;
+  float showB = 1.0 - smoothstep(-aa, aa, edge);
+  float near = 1.0 - smoothstep(0.0, 0.1, abs(edge));
+
+  vec2 alongV = vec2(cos(uAngle), -sin(uAngle)) * P.dir;
+  vec2 acrossV = vec2(sin(uAngle), cos(uAngle));
+  float depth = 0.5 + hash(vec2(P.id, uSeed));
+
+  // glass: the bevel along each long edge bends the picture, and the tilt shifts it sideways
+  float bev = smoothstep(0.27, 0.5, abs(P.s)) * sign(P.s);
+  vec2 refr = acrossV * (bev * abs(bev) * 0.05 + P.sn * 0.04) * P.g;
+  vec2 qa = (P.q + alongV * (0.05 * depth * P.lp + near * 0.03 * env) + refr) / (1.0 + 0.10 * depth * P.lp);
+  vec2 qb = (P.q - alongV * (0.05 * depth * (1.0 - P.lp) + near * 0.025 * env) + refr) / (1.0 + 0.12 * depth * (1.0 - P.lp));
+
+  // colour split: three samples spread across the pane, wider toward the bevel
+  vec2 ab = acrossV * (0.006 + 0.03 * abs(bev)) * P.g;
+  float l0 = mix(sampA(qa), sampB(qb), showB), l1, l2;
+  if (showB > 0.5) { l1 = sampB(qb + ab); l2 = sampB(qb - ab); }
+  else { l1 = sampA(qa + ab); l2 = sampA(qa - ab); }
+  // one sample feeds mauve, one cream, one volt. Where the three agree the result is plain black and white.
+  vec3 W = CREAM - DARK;
+  vec3 cM = W * vec3(0.40, 0.36, 0.50), cV = W * vec3(0.30, 0.36, 0.08);
+  vec3 col = DARK + cM * l1 + (W - cM - cV) * l0 + cV * l2;
+
+  // mauve trails each cut edge; volt leads it, with a mauve echo just behind
+  col = mix(col, gradeM(l0), smoothstep(-0.18, 0.0, edge) * showB * env * 0.5);
+  col = mix(col, LILAC, (1.0 - smoothstep(0.0, 0.002, abs(edge + 0.045))) * env * 0.6);
+  col = mix(col, VOLT, (1.0 - smoothstep(0.0, 0.003, abs(edge))) * env);
+  col += VOLT * (1.0 - smoothstep(0.0, 0.03, abs(edge))) * env * 0.14;
+
+  // light on the glass: the side tipped toward the camera is brighter, and each long edge catches a rim
+  col *= 1.0 - P.sn * P.s * 1.1;
+  float rimW = uPx * uStrips / span * 3.0, as = abs(P.s);
+  float rim = smoothstep(0.5 - rimW * 2.2, 0.5 - rimW * 0.6, as)                 // the outer edge
+            + 0.45 * (1.0 - smoothstep(0.0, rimW * 1.2, abs(as - 0.455)));        // and a fainter inner one: the glass has thickness
+  col += mix(CREAM, LILAC, 0.55) * rim * P.g * 0.5;
+  // a glint slides across the pane as it tilts
+  float gl = (P.s - (P.t * 1.6 - 0.8) * P.dir) / 0.09;
+  col += mix(CREAM, LILAC, 0.4) * exp(-gl * gl) * P.g * 0.16;
+  return col;
 }
 
 void main() {
   vec2 uv = vUv;
   vec2 p = vec2((uv.x - 0.5) * uScreen, uv.y - 0.5);
-  float span = uScreen + 1.0;
-  vec2 r = rot(p, uAngle);
-  float sy = stripCoord(r.y, span);
-  float idx = floor(sy);
-  float dir = mod(idx, 2.0) < 1.0 ? 1.0 : -1.0;
 
-  // shards nearest the word you picked move first
-  vec2 ro = rot(vec2((uOrigin.x - 0.5) * uScreen, uOrigin.y - 0.5), uAngle);
-  float oIdx = floor(stripCoord(ro.y, span));
-  float delay = min(abs(idx - oIdx) / uStrips, 1.0) * 0.5;
-  float lp = ss((uProg - delay) / 0.5);
-  float env = ss(lp / 0.2) * (1.0 - ss((lp - 0.8) / 0.2));   // fades the cut's own marks in and out
-  float depth = 0.5 + hash(vec2(idx, uSeed));                 // each shard sits at its own depth
+  // camera: the whole picture leans a little toward the pointer, and swings on every cut
+  float lift = bump(uProg);
+  vec2 lean = vec2(uPar.x * 0.028 + uSwing * lift * 0.07, uPar.y * 0.028);
+  vec2 pc = p * (1.0 + dot(p, lean)) + uPar * 0.008;
 
-  float ax = r.x / span + 0.5;
-  if (dir < 0.0) ax = 1.0 - ax;
-  float edge = ax - (lp * 1.14 - 0.07);        // above 0: old clip, below 0: new clip
-  float aa = uPx * 1.5 / span;
-  float showB = 1.0 - smoothstep(-aa, aa, edge);
-  float near = 1.0 - smoothstep(0.0, 0.1, abs(edge));
-
-  // depth: the old picture pushes away as it leaves, the new one settles in from closer
-  vec2 along = vec2(cos(uAngle) / uScreen, -sin(uAngle)) * dir;
-  vec2 drift = uPar * 0.010;
-  vec2 offA = along * (0.05 * depth * lp + near * 0.03 * env);
-  vec2 offB = -along * (0.05 * depth * (1.0 - lp) + near * 0.025 * env);
-  vec2 ua = zoomed(cover(uv + offA + drift, uAspA), uZoom * (1.0 + 0.10 * depth * lp));
-  vec2 ub = zoomed(cover(uv + offB + drift, uAspB), uZoom * (1.0 + 0.12 * depth * (1.0 - lp)));
-  float l = tone(mix(luma(texture2D(uA, ua).rgb), luma(texture2D(uB, ub).rgb), showB));
-
-  // mauve glass panes at three depths: they drift slowly, lean with the pointer, and glide on every cut
-  vec2 q1 = pane(p, -0.42, wrap(-0.50 + uSweep * 0.47 + 0.04 * sin(uTime * 0.13) + uPar.x * 0.035, 2.4), 0.26);
-  vec2 q2 = pane(p, 1.15, wrap(0.45 + uSweep * 0.61 + 0.05 * sin(uTime * 0.09 + 2.0) - uPar.x * 0.06, 3.0), 0.13);
-  vec2 q3 = pane(p, 0.42, wrap(0.15 - uSweep * 0.71 + 0.03 * sin(uTime * 0.17 + 4.0) + uPar.y * 0.05, 2.4), 0.012);
-  float tint = 1.0 - (1.0 - q1.x * 0.5) * (1.0 - q2.x * 0.38);
-  float wash = smoothstep(-0.18, 0.0, edge) * showB * env * 0.5;    // mauve trails each cut edge
-  vec3 col = mix(grade(l), gradeM(l), clamp(tint + wash, 0.0, 0.85));
-
-  // shard seams while the cut is moving
-  float f = fract(sy);
-  col *= mix(1.0, smoothstep(0.0, 0.03, f) * smoothstep(1.0, 0.97, f), env * 0.6);
-
-  // the cut edge: volt in front, a mauve echo just behind it
-  float line = (1.0 - smoothstep(0.0, 0.003, abs(edge))) * env;
-  float echo = (1.0 - smoothstep(0.0, 0.002, abs(edge + 0.045))) * env;
-  col = mix(col, LILAC, echo * 0.6);
-  col = mix(col, VOLT, line);
-  col += VOLT * (1.0 - smoothstep(0.0, 0.03, abs(edge))) * env * 0.14;
+  vec3 col;
+  if (uProg <= 0.0) {
+    col = grade(sampA(pc));                        // at rest: one flat pane, no glass
+  } else {
+    Pane F = paneAt(pc, 1.0, lift);
+    vec3 cf = vec3(0.0), cb = vec3(0.0);
+    float hb = 0.0;
+    if (F.hit > 0.001) cf = shade(F);
+    if (F.hit < 0.999) {
+      Pane Bk = paneAt(pc, 0.0, lift);
+      hb = Bk.hit;
+      if (hb > 0.001) cb = shade(Bk) * (1.0 - 0.18 * lift);        // the back layer sits in a little shade
+    }
+    vec3 deep = grade(sampB(pc * 1.02)) * 0.30;                     // between the panes: the new clip, further back and in shade
+    col = mix(mix(deep, cb, hb), cf, F.hit);
+  }
 
   // keep the type readable
   col *= uDim;
   col *= 1.0 - 0.38 * smoothstep(0.62, 0.0, uv.y);
   vec2 q = (uv - 0.5) * vec2(uScreen / max(uScreen, 1.0), 1.0);
   col *= 1.0 - dot(q, q) * 0.9;
-
-  // pane edges stay crisp over the dimmed picture
-  col += LILAC * (q1.y * 0.20 + q2.y * 0.28 + q3.y * 0.34 + tint * 0.05);
 
   // fine grain
   col *= 0.985 + 0.015 * sin(gl_FragCoord.y * 1.6);
@@ -178,7 +234,7 @@ void main() {
 }`;
 
 let stage = null;
-const UNIFORMS = ["uA", "uB", "uProg", "uTime", "uAspA", "uAspB", "uScreen", "uDim", "uStrips", "uAngle", "uOrigin", "uSweep", "uZoom", "uPx", "uSeed", "uPar"];
+const UNIFORMS = ["uA", "uB", "uProg", "uTime", "uAspA", "uAspB", "uScreen", "uDim", "uStrips", "uAngle", "uOrigin", "uZoom", "uPx", "uSeed", "uSwing", "uPar"];
 if (gl) {
   const sh = (type, src) => { const s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s);
     if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) throw new Error(gl.getShaderInfoLog(s)); return s; };
@@ -199,7 +255,7 @@ if (gl) {
     const texA = mkTex(0), texB = mkTex(1);
     gl.uniform1i(U.uA, 0); gl.uniform1i(U.uB, 1);
     gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
-    stage = { gl, U, texA, texB, a: null, b: null, prog: 0, dim: 0, sweep: 0, strips: 9, angle: -0.42, seed: 0, origin: [0.2, 0.3] };
+    stage = { gl, U, texA, texB, a: null, b: null, prog: 0, dim: 0, strips: 9, angle: -0.42, seed: 0, swing: 1, origin: [0.2, 0.3] };
   } catch (e) { console.warn("Console stage fell back to plain video:", e); }
 }
 if (!stage) body.classList.add("no-gl");
@@ -215,7 +271,7 @@ function resize() {
   if (canvas.width !== w || canvas.height !== h) { canvas.width = w; canvas.height = h; }
 }
 
-/* ---------------- pointer parallax: footage, panes and type sit at different depths ---------------- */
+/* ---------------- pointer: the picture and the type sit at different depths ---------------- */
 const pointer = { x: 0, y: 0 };
 const parX = spring(), parY = spring();
 addEventListener("pointermove", (e) => {
@@ -253,20 +309,20 @@ function frame(now) {
   resize();
   const { U } = stage;
   upload(stage.texA, 0, stage.a);
-  if (stage.prog > 0) upload(stage.texB, 1, stage.b);
+  if (stage.prog > 0 || stage.hold != null) upload(stage.texB, 1, stage.b);
   gl.viewport(0, 0, canvas.width, canvas.height);
-  gl.uniform1f(U.uProg, stage.prog);
+  gl.uniform1f(U.uProg, stage.hold ?? stage.prog);
   gl.uniform1f(U.uTime, t);
   gl.uniform1f(U.uScreen, canvas.width / canvas.height);
   gl.uniform1f(U.uPx, 1 / canvas.height);
   gl.uniform1f(U.uAspA, stage.a && stage.a.videoWidth ? stage.a.videoWidth / stage.a.videoHeight : 16 / 9);
   gl.uniform1f(U.uAspB, stage.b && stage.b.videoWidth ? stage.b.videoWidth / stage.b.videoHeight : 16 / 9);
   gl.uniform1f(U.uDim, stage.dim);
-  gl.uniform1f(U.uSweep, stage.sweep);
-  gl.uniform1f(U.uZoom, reduce ? 1.05 : 1.06 + 0.02 * Math.sin(t * 0.1));   // a slow breathing push on the footage
+  gl.uniform1f(U.uZoom, reduce ? 1.08 : 1.085 + 0.015 * Math.sin(t * 0.1));   // a slow breathing push on the footage
   gl.uniform1f(U.uStrips, stage.strips);
   gl.uniform1f(U.uAngle, stage.angle);
   gl.uniform1f(U.uSeed, stage.seed);
+  gl.uniform1f(U.uSwing, stage.swing);
   gl.uniform2f(U.uOrigin, stage.origin[0], stage.origin[1]);
   gl.uniform2f(U.uPar, px, py);
   gl.drawArrays(gl.TRIANGLES, 0, 3);
@@ -291,13 +347,13 @@ async function cutTo(id, origin) {
   stage.b = v;
   stage.origin = origin;
   stage.angle = cutNo % 2 ? -0.42 : 0.42;          // the slant flips on every cut
+  stage.swing = cutNo % 2 ? 1 : -1;                // and so does the way the camera swings
   stage.strips = [9, 7, 11, 8][cutNo % 4];
   stage.seed = cutNo * 1.7;
   upload(stage.texB, 1, v);
-  glide(stage, "dim", DIM[id] ?? 0.46, reduce ? 300 : 1600);
-  glide(stage, "sweep", cutNo, reduce ? 300 : 2300);    // the panes glide on, past the end of the cut
+  glide(stage, "dim", DIM[id] ?? 0.46, reduce ? 300 : 1300);
   sweeps();
-  await tween(reduce ? 350 : 1450, (k) => (stage.prog = k));
+  await tween(reduce ? 350 : 1250, (k) => (stage.prog = k));
   // the new clip becomes the base layer
   const old = stage.a;
   [stage.texA, stage.texB] = [stage.texB, stage.texA];
@@ -320,8 +376,8 @@ function sweeps() {
       { transform: `translateX(${x1}px) skewX(${sk}deg)`, opacity: 0 },
     ], { duration: ms, delay, easing: EASE, fill: "backwards" });
   };
-  run($(".sweep--volt"), innerWidth * 0.2, 1300, 0);
-  run($(".sweep--mauve"), innerWidth * 0.35, 1900, 80);
+  run($(".sweep--volt"), innerWidth * 0.2, 1100, 0);
+  run($(".sweep--mauve"), innerWidth * 0.35, 1500, 60);
 }
 
 /* ---------------- type: slanted wipes ---------------- */
@@ -337,11 +393,11 @@ const CLIP_HIDDEN_L = `polygon(-0.4em ${T}, -0.4em ${T}, -1.02em ${B}, -1.02em $
 const CLIP_SHOWN = `polygon(-0.4em ${T}, ${R0} ${T}, ${R1} ${B}, -1.02em ${B})`;
 const CLIP_HIDDEN_R = `polygon(${R0} ${T}, ${R0} ${T}, ${R1} ${B}, ${R1} ${B})`;
 
-function wipeIn(el, delay = 0, ms = 900) {
+function wipeIn(el, delay = 0, ms = 820) {
   if (reduce) return el.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 300, delay, fill: "backwards" }).finished;
   const title = el.classList.contains("ln-t");
   const a = el.animate([
-    { clipPath: CLIP_HIDDEN_L, transform: title ? "translateX(-0.5em) scale(1.05)" : "translateX(-0.4em)" },
+    { clipPath: CLIP_HIDDEN_L, transform: "translateX(-0.4em)" },
     { clipPath: CLIP_SHOWN, transform: "none" },
   ], { duration: ms, delay, easing: EASE, fill: "both" });
   if (title) el.nextElementSibling.animate([
@@ -357,32 +413,33 @@ function wipeOut(el, delay = 0) {
   return el.animate([
     { clipPath: CLIP_SHOWN, transform: "none" },
     { clipPath: CLIP_HIDDEN_R, transform: "translateX(0.4em)" },
-  ], { duration: 620, delay, easing: EASE, fill: "both" }).finished;
+  ], { duration: 520, delay, easing: EASE, fill: "both" }).finished;
 }
 const parts = (ch) => [...$$(".title .ln-t", ch), ...$$(".sub, .more, .contact-big a, .roll", ch)];
 
 async function showChapter(ch, d0 = 0) {
   ch.hidden = false; ch.classList.add("is-on");
-  await Promise.all(parts(ch).map((el, i) => wipeIn(el, d0 + i * 90)));
+  await Promise.all(parts(ch).map((el, i) => wipeIn(el, d0 + i * 80)));
 }
 async function hideChapter(ch) {
-  await Promise.all(parts(ch).map((el, i) => wipeOut(el, i * 50)));
+  await Promise.all(parts(ch).map((el, i) => wipeOut(el, i * 45)));
   ch.classList.remove("is-on"); ch.hidden = true;
   parts(ch).forEach((el) => el.getAnimations().forEach((a) => a.cancel()));
 }
 
-/* ---------------- menu: big words <-> rail, animated as one piece ---------------- */
-function flipMenu(toRail) {
-  const before = menuButtons.map((b) => b.getBoundingClientRect());
-  body.classList.toggle("is-rail", toRail);
-  const after = menuButtons.map((b) => b.getBoundingClientRect());
+// Move a set of elements from where they are to where a layout change puts them, as one smooth motion.
+// The elements must keep the same proportions in both layouts, so each one scales evenly with nothing shifting inside it.
+function morph(els, change, ms, delayOf = () => 0) {
+  const before = els.map((el) => el.getBoundingClientRect());
+  change();
   if (reduce) return;
-  menuButtons.forEach((b, i) => {
-    const a = before[i], z = after[i];
-    b.animate([
+  els.forEach((el, i) => {
+    const a = before[i], z = el.getBoundingClientRect();
+    if (!z.width || !z.height) return;
+    el.animate([
       { transform: `translate(${a.left - z.left}px, ${a.top - z.top}px) scale(${a.width / z.width}, ${a.height / z.height})` },
       { transform: "none" },
-    ], { duration: 1100, delay: (toRail ? i : menuButtons.length - 1 - i) * 26, easing: EASE, fill: "backwards" });
+    ], { duration: ms, delay: delayOf(i), easing: EASE, fill: "backwards" });
   });
 }
 
@@ -398,15 +455,20 @@ async function go(id, from) {
   if (busy || id === current || !byId[id]) return;
   busy = true;
   const prev = byId[current], next = byId[id];
+  const origin = originOf(from);
   menuButtons.forEach((b) => b.setAttribute("aria-current", String(b.dataset.go === id)));
+  // big words <-> rail, starting on the click itself
+  if ((current === "home") !== (id === "home")) {
+    const toRail = id !== "home", n = menuButtons.length;
+    morph(menuButtons, () => body.classList.toggle("is-rail", toRail), 900, (i) => (toRail ? i : n - 1 - i) * 22);
+  }
   const leaving = hideChapter(prev);
-  if ((current === "home") !== (id === "home")) setTimeout(() => flipMenu(id !== "home"), 140);
-  const cut = cutTo(id, originOf(from));
+  const cut = cutTo(id, origin);
   await leaving;
   current = id;
   if (id === "credits") { roll.y = 0; next.hidden = false; measureRoll(); }
   history.replaceState(null, "", id === "home" ? location.pathname : `#${id}`);
-  await showChapter(next, 200);
+  await showChapter(next, 260);
   await cut;
   busy = false;
   // warm up the neighbours so the next cut starts at once
@@ -440,6 +502,17 @@ addEventListener("touchend", (e) => {
   if (Math.abs(dy) > 60) step(dy > 0 ? 1 : -1);
 }, { passive: true });
 
+// For checking the cut by eye: console.html?debug, then __vm.freeze("production", 0.5) holds a cut halfway; __vm.freeze() lets go.
+if (new URLSearchParams(location.search).has("debug")) window.__vm = {
+  async freeze(id, at) {
+    if (!stage) return;
+    if (id == null) { stage.hold = null; stage.b = null; return; }
+    const v = videoFor(id); play(v); await whenReady(v);
+    stage.b = v; upload(stage.texB, 1, v); stage.hold = at;
+  },
+  set(k, val) { stage[k] = val; },
+};
+
 /* ---------------- intro: title card, then the console ---------------- */
 async function intro() {
   requestAnimationFrame(frame);
@@ -447,27 +520,20 @@ async function intro() {
   play(v);
   // the title card starts straight away; the footage fades up behind it as soon as it has a frame
   whenReady(v, 6000).then(() => {
-    if (stage) { stage.a = v; glide(stage, "dim", body.classList.contains("is-intro") ? 0.5 : DIM.home, 1800); }
+    if (stage) { stage.a = v; glide(stage, "dim", body.classList.contains("is-intro") ? 0.5 : DIM.home, 1600); }
     else $$(".stage-fallback video").forEach((x) => x.classList.toggle("on", x === v));
   });
-  if (stage) glide(stage, "sweep", 0.6, 2600);
   const home = byId.home;
   home.classList.add("is-on");
-  await Promise.all($$(".title .ln-t", home).map((el, i) => wipeIn(el, 400 + i * 160, 1100)));
-  await wait(reduce ? 200 : 1100);
+  await Promise.all($$(".title .ln-t", home).map((el, i) => wipeIn(el, 300 + i * 140)));
+  await wait(reduce ? 200 : 1300);
 
-  // the title card settles into the corner and the menu wipes in
-  const t = $(".title", home);
-  const a = t.getBoundingClientRect();
-  body.classList.remove("is-intro");
-  const z = t.getBoundingClientRect();
-  if (stage && stage.a) glide(stage, "dim", DIM.home, 1600);
-  if (!reduce) t.animate([
-    { transform: `translate(${a.left - z.left}px, ${a.top - z.top}px) scale(${a.width / z.width}, ${a.height / z.height})`, transformOrigin: "0 0" },
-    { transform: "none", transformOrigin: "0 0" },
-  ], { duration: 1300, easing: EASE });
-  wipeIn($(".sub", home), 700);
-  await Promise.all(menuButtons.map((b, i) => wipeIn(b, 450 + i * 80)));
+  // The title card leaves the centre for its corner, one line at a time, and the menu starts in the same moment.
+  // Each line is moved on its own: the card is centred and the corner is not, so moving the block as a whole made the lines jump.
+  morph($$(".ln-w", home), () => body.classList.remove("is-intro"), 1000);
+  if (stage && stage.a) glide(stage, "dim", DIM.home, 1300);
+  wipeIn($(".sub", home), 500);
+  await Promise.all(menuButtons.map((b, i) => wipeIn(b, i * 70)));
   busy = false;
 
   // open a chapter straight from the address bar (#production etc.)

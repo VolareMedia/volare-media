@@ -8,7 +8,6 @@
   --faint: rgba(244, 243, 232, 0.32);
   --font-display: "Inter Tight", "Inter", system-ui, sans-serif;
   --font-body: "Inter", system-ui, sans-serif;
-  --font-mono: "Fragment Mono", ui-monospace, monospace;
   --inset: clamp(12px, 1.8vw, 28px);
   --gutter: clamp(22px, 4.2vw, 72px);
   --slant: 0.32em;
@@ -46,11 +45,9 @@ img { display: block; max-width: 100%; }
 .sweep--volt { width: 2px; background: var(--volt); box-shadow: 0 0 18px rgba(214, 255, 61, 0.5); }
 .sweep--mauve { width: clamp(70px, 12vw, 200px); margin-left: calc(clamp(70px, 12vw, 200px) / -2); background: rgba(201, 186, 244, 0.12); border-right: 1px solid rgba(201, 186, 244, 0.6); mix-blend-mode: screen; }
 
-/* ---------- logo and phone ---------- */
-.hud-top { position: fixed; z-index: 20; top: clamp(18px, 2.6vw, 40px); left: var(--gutter); right: var(--gutter); display: flex; align-items: center; justify-content: space-between; }
+/* ---------- logo ---------- */
+.hud-top { position: fixed; z-index: 20; top: clamp(18px, 2.6vw, 40px); left: var(--gutter); }
 .logo img { height: clamp(24px, 2.4vw, 32px); width: auto; }
-.hud-call { font-family: var(--font-mono); font-size: 0.82rem; letter-spacing: 0.02em; text-decoration: none; color: var(--cream); padding: 0.35rem 0; border-bottom: 1px solid var(--lilac); transition: color 0.4s var(--ease), border-color 0.4s var(--ease); }
-.hud-call:hover { color: var(--volt); border-color: var(--volt); }
 
 /* ---------- menu ---------- */
 .menu { position: fixed; z-index: 15; left: var(--gutter); bottom: clamp(4.5rem, 12vh, 8rem); translate: calc(var(--px, 0) * -5px) calc(var(--py, 0) * 5px); }
@@ -58,7 +55,7 @@ img { display: block; max-width: 100%; }
 .menu li { line-height: 1; }
 .menu button {
   position: relative; display: inline-block; transform-origin: 0 0;
-  font-family: var(--font-display); font-weight: 600; letter-spacing: -0.04em;
+  font-family: var(--font-display); font-weight: 600; letter-spacing: -0.035em;
   font-size: clamp(2.2rem, 5vw, 4.4rem); line-height: 1.06; color: var(--cream);
   transition: color 0.45s var(--ease);
 }
@@ -75,9 +72,10 @@ img { display: block; max-width: 100%; }
 
 /* rail: once a chapter is open the same words shrink to a slim list down the left */
 .is-rail .menu { bottom: auto; top: 50%; transform: translateY(-50%); }
-.is-rail .menu li + li { margin-top: 0.55rem; }
-.is-rail .menu button { letter-spacing: -0.02em; font-size: 0.98rem; line-height: 1.2; color: var(--muted); }
-.is-rail .menu button::before { left: -1.1em; width: 0.5em; height: 0.8em; margin-top: -0.4em; }
+/* the rail keeps the big menu's exact proportions (same spacing, line height and marker), only smaller,
+   so each word shrinks into place without its letters shifting */
+.is-rail .menu li + li { margin-top: 0.72rem; }
+.is-rail .menu button { font-size: 0.98rem; color: var(--muted); }
 .is-rail .menu button:hover { color: var(--lilac); }
 .is-rail .menu button[aria-current="true"] { color: var(--volt); }
 
@@ -89,7 +87,7 @@ img { display: block; max-width: 100%; }
 .chapter > * { pointer-events: auto; }
 .title { font-family: var(--font-display); font-weight: 600; letter-spacing: -0.045em; line-height: 0.98; }
 .title .ln { display: block; padding-bottom: 0.06em; }
-.ln-w { position: relative; display: inline-block; }
+.ln-w { position: relative; display: inline-block; transform-origin: 0 0; }
 .ln-t { display: inline-block; transform-origin: 0 60%; }
 .bar { position: absolute; top: 0.02em; bottom: 0.06em; left: -0.6em; width: 0.14em; background: var(--lilac); transform: skewX(-24deg); opacity: 0; pointer-events: none; }
 /* a very slow push on the open headline, like a title card */
@@ -97,7 +95,7 @@ img { display: block; max-width: 100%; }
 @keyframes push { from { scale: 1; } to { scale: 1.03; } }
 .dot { color: var(--lilac); }
 .sub { color: var(--muted); font-size: clamp(1rem, 1.25vw, 1.15rem); line-height: 1.5; max-width: 32rem; }
-.more { display: inline-flex; align-items: center; gap: 0.7rem; margin-top: 1.5rem; font-family: var(--font-mono); font-size: 0.82rem; text-decoration: none; color: var(--cream); }
+.more { display: inline-flex; align-items: center; gap: 0.7rem; margin-top: 1.5rem; font-family: var(--font-display); font-weight: 600; letter-spacing: -0.02em; font-size: 1.05rem; text-decoration: none; color: var(--cream); }
 .more { transition: color 0.4s var(--ease); }
 .more::after { content: ""; width: 2.2rem; height: 1px; background: var(--lilac); transition: width 0.5s var(--ease), background-color 0.4s var(--ease); }
 .more:hover::after { background: var(--volt); }
@@ -106,7 +104,7 @@ img { display: block; max-width: 100%; }
 
 /* home title: a centred title card during the intro, then it settles bottom right */
 .chapter[data-id="home"] .title { position: absolute; right: var(--gutter); bottom: clamp(5.5rem, 14vh, 9rem); text-align: right; font-size: clamp(1.9rem, 3.6vw, 3.6rem); transform-origin: 100% 100%; }
-.chapter[data-id="home"] .sub { position: absolute; right: var(--gutter); bottom: clamp(3.4rem, 9vh, 5.6rem); text-align: right; font-family: var(--font-mono); font-size: 0.8rem; }
+.chapter[data-id="home"] .sub { position: absolute; right: var(--gutter); bottom: clamp(3.4rem, 9vh, 5.6rem); text-align: right; font-size: 0.95rem; }
 .is-intro .chapter[data-id="home"] .title { right: 50%; bottom: 50%; transform: translate(50%, 50%); text-align: center; font-size: clamp(2.8rem, 7.4vw, 7.4rem); }
 .is-intro .chapter[data-id="home"] .sub { opacity: 0; }
 
@@ -129,10 +127,10 @@ img { display: block; max-width: 100%; }
 .chapter--credits .roll { position: absolute; top: 12vh; bottom: 12vh; left: var(--left); right: var(--gutter); overflow: hidden;
   -webkit-mask-image: linear-gradient(transparent, #000 18%, #000 82%, transparent); mask-image: linear-gradient(transparent, #000 18%, #000 82%, transparent); }
 .roll-inner { padding: 76vh 0; text-align: center; will-change: transform; }
-.roll-head { font-family: var(--font-mono); font-size: 0.78rem; color: var(--lilac); margin: 4.5rem 0 1.6rem; }
+.roll-head { font-size: 0.9rem; color: var(--lilac); margin: 4.5rem 0 1.6rem; }
 .roll-head:first-child { margin-top: 0; }
 .credits div { display: grid; grid-template-columns: 1fr 1fr; gap: 1.6rem; align-items: baseline; margin-bottom: 1rem; }
-.credits dt { text-align: right; font-family: var(--font-mono); font-size: 0.8rem; color: var(--muted); }
+.credits dt { text-align: right; font-size: 0.92rem; color: var(--muted); }
 .credits dd { text-align: left; font-family: var(--font-display); font-weight: 600; font-size: clamp(1.3rem, 2vw, 1.9rem); letter-spacing: -0.03em; }
 .credit-list { list-style: none; font-family: var(--font-display); font-weight: 600; font-size: clamp(1.2rem, 1.8vw, 1.7rem); letter-spacing: -0.03em; line-height: 1.55; }
 .credit-list--cols { columns: 2; column-gap: 3rem; }
