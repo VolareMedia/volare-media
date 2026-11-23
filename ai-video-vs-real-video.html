@@ -22,6 +22,7 @@
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Inter+Tight:ital,wght@0,400..800;1,400..800&family=Fragment+Mono:ital@0;1&display=swap"></noscript>
   <link rel="icon" href="favicon.svg?v=2" type="image/svg+xml">
   <link rel="stylesheet" href="styles.css?v=43">
+  <link rel="stylesheet" href="clean.css?v=1">
   <style>
     .package-list { padding-left: 1.3rem; }
     .package-list li + li { margin-top: 0.6rem; }
@@ -134,49 +135,55 @@
 }
   </script>
 </head>
-<body>
+<body class="v2">
 
-  <div class="contact-bar">
-    <div class="wrap">
-      <span class="bar-note">Vancouver Island based, video production across BC &amp; Canada</span>
-      <span><a href="tel:+12505894521">250.589.4521</a> &nbsp;·&nbsp; <a href="mailto:video@volaremedia.net">video@volaremedia.net</a></span>
-    </div>
-  </div>
-
-  <header class="site-header">
+  <header class="v2-header">
     <div class="wrap">
       <a class="logo" href="index.html" aria-label="Volare Media, home"><img src="assets/vm-logo.png" alt="Volare Media logo"></a>
-      <button class="nav-toggle" aria-expanded="false" aria-controls="main-nav">Menu</button>
-      <nav class="main-nav" id="main-nav" aria-label="Main">
-        <a href="index.html">Home</a>
-        <div class="nav-drop">
-          <a class="nav-drop-trigger" href="services.html">Services<span class="caret" aria-hidden="true">▾</span></a>
-          <div class="nav-drop-menu">
-            <a href="services.html">All Services</a>
-            <a href="marketing-videos.html">Marketing Videos</a>
-            <a href="creative-direction.html">Creative Direction</a>
-            <a href="event-videography.html">Event Videography</a>
-            <a href="corporate-video.html">Corporate Video</a>
-            <a href="website-development.html">Websites &amp; Branding</a>
-            <a href="brand-alignment.html">Brand Alignment</a>
-            <a href="agencies.html">Agencies</a>
-          </div>
-        </div>
-        <a href="work.html">Work</a>
-        <a href="partnerships.html">Partnerships</a>
-        <a href="about.html">About</a>
-        <a href="community.html">Community</a>
-        <a href="journal.html" aria-current="page">Journal</a>
+      <div class="v2-header-right">
         <a class="btn" href="contact.html">Start a project</a>
-      </nav>
+        <button class="menu-btn" aria-expanded="false" aria-controls="site-menu">Menu <span class="menu-lines" aria-hidden="true"></span></button>
+      </div>
     </div>
   </header>
+
+  <nav class="v2-menu photo-band" id="site-menu" aria-label="Main" style="--photo: url('assets/img/footer-crew-cinema.jpg'); --photo-pos: 60% 40%;">
+    <div class="wrap">
+      <ul class="v2-menu-links">
+        <li><a href="services.html">Services</a></li>
+        <li><a href="work.html">Work</a></li>
+        <li><a href="partnerships.html">Partnerships</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="crew.html">The Crew</a></li>
+        <li><a href="community.html">Community</a></li>
+        <li><a href="journal.html">Journal</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <div class="v2-menu-side">
+        <h3>What we make</h3>
+        <ul>
+          <li><a href="marketing-videos.html">Marketing videos</a></li>
+          <li><a href="creative-direction.html">Creative direction</a></li>
+          <li><a href="corporate-video.html">Corporate video</a></li>
+          <li><a href="event-videography.html">Event videography</a></li>
+          <li><a href="website-development.html">Websites and branding</a></li>
+          <li><a href="brand-alignment.html">Brand alignment</a></li>
+          <li><a href="agencies.html">For agencies</a></li>
+        </ul>
+        <h3>Say hello</h3>
+        <ul>
+          <li><a href="mailto:video@volaremedia.net">video@volaremedia.net</a></li>
+          <li><a href="tel:+12505894521">250.589.4521</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
 
   <main>
 
     <section class="hero photo-band photo-band--side" style="--photo: url('assets/img/corp-interview-monitor.jpg'); --photo-pos: 50% 40%; --photo-opacity: 0.5;">
       <div class="wrap">
-      <h1 class="display-lg">AI video, or real people<br>on camera<span class="dot">?</span></h1>
+      <h1 class="display-lg">AI video, or real people on camera<span class="dot">?</span></h1>
       <p class="post-meta">Chris Chisholm · October 2026 · 14 min read</p>
       </div>
     </section>
@@ -228,48 +235,6 @@
     </article>
 
     <!-- Full-bleed divider: a real family shoot seen on the monitor -->
-    <div class="photo-strip" role="img" aria-label="On set with Volare Media: a real family at their kitchen island, seen on the camera monitor in the foreground" style="background-image: linear-gradient(rgba(12,13,9,0.3), rgba(12,13,9,0.3)), url('assets/img/bts-kitchen-shoot.jpg'); background-position: center 45%;"></div>
-
-    <article class="article wrap">
-
-      <h2>What happened when big brands tried it</h2>
-
-      <p>You don't have to take our word for any of this. Some of the biggest advertisers in the world have released fully AI-generated commercials in public, and their audiences told them exactly how they felt.</p>
-
-      <ul class="package-list">
-        <li><strong>McDonald's Netherlands, December 2025.</strong> A 45-second, fully AI-generated Christmas ad called "The most terrible time of the year." Viewers called it creepy, unsettling and soulless, and within days McDonald's Netherlands <a href="https://www.nbcnews.com/world/europe/mcdonalds-ai-generated-christmas-advert-social-media-backlash-rcna248590" rel="noopener">pulled it</a>, calling the moment an important learning.</li>
-        <li><strong>Coca-Cola, 2024 and 2025.</strong> Coca-Cola remade its classic "Holidays Are Coming" truck ad with AI in 2024. Online, people called it soulless and creepy and pointed out the glitches, <a href="https://www.adweek.com/creativity/how-coca-colas-ai-holiday-ad-went-from-praise-to-rage/" rel="noopener">even though early testing had scored it well</a>. Coca-Cola kept it running, said engagement was high, and released another AI holiday ad in 2025, which <a href="https://www.techradar.com/ai-platforms-assistants/coca-cola-faces-backlash-again-for-missing-the-spirit-of-the-holidays-with-another-ai-slop-ad" rel="noopener">drew the same kind of backlash</a>.</li>
-        <li><strong>Valentino, December 2025.</strong> An AI-generated handbag video on Instagram, clearly labelled as AI. Followers <a href="https://www.eweek.com/news/valentino-ai-misfire/" rel="noopener">called it cheap and unsettling</a> for a fashion house built on craftsmanship.</li>
-        <li><strong>The research.</strong> In a <a href="https://nielseniq.com/global/en/news-center/2024/niq-research-uncovers-hidden-consumer-attitudes-toward-ai-generated-ads/" rel="noopener">NielsenIQ study</a> released in December 2024, more than 2,000 people watched AI-generated ads, and about 150 had their brain activity measured. People spotted most of the AI ads on their own, and described them as more annoying, boring and confusing than traditional ads. Even the high-quality ones produced weaker memory activation, and the researchers warned of a negative halo effect on the brand itself.</li>
-      </ul>
-
-      <p>Notice who these are. Brands with enormous budgets, top agencies and the best AI tools money can buy. Coca-Cola has decades of goodwill to absorb a wave of bad comments. A local business doesn't have that cushion. When your audience decides your video feels fake, they aren't just judging the ad. They're judging you.</p>
-
-      <h2>Where AI video quietly costs you</h2>
-
-      <p>The problems with AI video rarely show up in the first five seconds. They show up in what the viewer feels, and in what they do next.</p>
-
-      <p><strong>People can tell, and it changes how they feel.</strong> Even when they can't say exactly why, viewers notice. Skin that's a little too smooth. A voice that never takes a breath. Hands, eyes, light that doesn't quite behave. The reaction usually isn't "wow." It's a small step back. And trust is built, or lost, in exactly those small steps.</p>
-
-      <p><strong>It starts to look like everyone else.</strong> When thousands of businesses use the same tools with similar prompts, the results drift toward the same look, the same faces and the same polished emptiness. Your video is supposed to make you memorable. Generic is the opposite of memorable.</p>
-
-      <p><strong>It can't show what's actually yours.</strong> AI can generate a beautiful bakery. It can't generate <em>your</em> bakery: your staff, your regulars, the light through your front window at seven in the morning. For a local business on Vancouver Island or anywhere in BC, the real place is often the whole point. People recognise the corner you're on. They recognise you.</p>
-
-      <p><strong>It can promise things your business can't deliver.</strong> A generated video can show a bigger team, a cleaner shop or a product that looks a little better than the one that arrives. When customers notice the gap between the video and reality, they don't blame the software. They blame you.</p>
-
-      <p><strong>Fake people are a trust problem, and can be a legal one.</strong> An AI "customer" giving a testimonial isn't a testimonial. Advertising rules in Canada don't allow misleading claims, and a customer who doesn't exist is about as misleading as it gets. We're not lawyers, and this isn't legal advice, but we'd never put a synthetic person in front of an audience and let them believe it was real.</p>
-
-      <p><strong>The rules are still being written.</strong> Platforms like YouTube, Meta and TikTok now ask creators to label realistic AI-generated content, and they add labels of their own. Questions about who owns AI-generated material, whose work and likeness it was trained on, and how it can be used commercially are still being worked out. That's a lot of uncertainty to put behind your brand.</p>
-
-      <p><strong>It rarely becomes an asset.</strong> A real shoot keeps paying you back: b-roll for next year's ads, stills for the website, clips for social, a library of your own business at its best. Generated output is usually a one-off.</p>
-
-      <div class="callout">
-        <p>AI can make a video look real. It can't make it true.</p>
-      </div>
-
-    </article>
-
-    <!-- Full-bleed video band: real footage from Tailgate Toolkit -->
     <section class="video-band" aria-label="The Tailgate Toolkit campaign film, playing">
       <iframe src="https://player.vimeo.com/video/1071293680?background=1&amp;autoplay=1&amp;loop=1&amp;muted=1&amp;autopause=0&amp;dnt=1" allow="autoplay" title="Tailgate Toolkit campaign film, looping in the background" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:100vw;height:56.25vw;min-width:177.78vh;min-height:100%;border:0;pointer-events:none;z-index:-2;opacity:0.5;"></iframe>
       <div class="wrap" style="text-align:center;padding-top:clamp(4.5rem,11vw,8rem);padding-bottom:clamp(4.5rem,11vw,8rem);">
@@ -296,7 +261,7 @@
     </article>
 
     <!-- Faded side band: when AI makes sense -->
-    <section class="photo-band photo-band--side" style="--photo: url('assets/img/corp-bts-1.jpg'); --photo-pos: 50% 50%; --photo-opacity: 0.5;">
+    <section class="">
       <div class="wrap" style="padding-top:clamp(3.5rem,9vw,6rem);padding-bottom:clamp(3.5rem,9vw,6rem);">
         <h2 class="display-md" style="max-width:22ch;">When we'd say yes to AI<span class="dot">.</span></h2>
         <p class="lede" style="max-width:44rem;margin-top:1.25rem;">We lead with real people. We're also not here to talk anyone out of a tool that genuinely fits the job.</p>
@@ -418,23 +383,6 @@
 
     </article>
 
-    <section class="social-strip" aria-label="Follow Volare Media">
-      <div class="wrap social-strip-inner">
-        <p class="social-strip-label">Follow the work<span class="dot">.</span></p>
-        <div class="social-strip-links">
-          <a href="https://www.instagram.com/volare.media" rel="noopener" aria-label="Volare Media on Instagram">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M12 2.2c3.2 0 3.6 0 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.26.07 1.64.07 4.85s0 3.6-.07 4.85c-.05 1.17-.25 1.8-.41 2.23a3.7 3.7 0 0 1-.9 1.38c-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.26.06-1.64.07-4.85.07s-3.6 0-4.85-.07c-1.17-.05-1.8-.25-2.23-.41a3.7 3.7 0 0 1-1.38-.9 3.7 3.7 0 0 1-.9-1.38c-.16-.42-.36-1.06-.41-2.23C2.2 15.6 2.2 15.2 2.2 12s0-3.6.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.4 2.2 8.8 2.2 12 2.2Zm0 1.76c-3.15 0-3.52.01-4.77.07-1.08.05-1.66.23-2.05.38-.51.2-.88.44-1.26.82-.38.38-.62.75-.82 1.26-.15.39-.33.97-.38 2.05-.06 1.25-.07 1.62-.07 4.77s.01 3.52.07 4.77c.05 1.08.23 1.66.38 2.05.2.51.44.88.82 1.26.38.38.75.62 1.26.82.39.15.97.33 2.05.38 1.25.06 1.62.07 4.77.07s3.52-.01 4.77-.07c1.08-.05 1.66-.23 2.05-.38.51-.2.88-.44 1.26-.82.38-.38.62-.75.82-1.26.15-.39.33-.97.38-2.05.06-1.25.07-1.62.07-4.77s-.01-3.52-.07-4.77c-.05-1.08-.23-1.66-.38-2.05-.2-.51-.44-.88-.82-1.26a3.4 3.4 0 0 0-1.26-.82c-.39-.15-.97-.33-2.05-.38-1.25-.06-1.62-.07-4.77-.07Zm0 3.01a5.03 5.03 0 1 1 0 10.06 5.03 5.03 0 0 1 0-10.06Zm0 1.76a3.27 3.27 0 1 0 0 6.54 3.27 3.27 0 0 0 0-6.54Zm5.23-3.13a1.18 1.18 0 1 1 0 2.35 1.18 1.18 0 0 1 0-2.35Z"/></svg>
-          </a>
-          <a href="https://www.facebook.com/VolareMedia.net" rel="noopener" aria-label="Volare Media on Facebook">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06c0 5.02 3.66 9.19 8.44 9.94v-7.03H7.9v-2.9h2.54V9.85c0-2.52 1.5-3.91 3.77-3.91 1.09 0 2.23.2 2.23.2v2.46h-1.26c-1.24 0-1.62.77-1.62 1.57v1.88h2.76l-.44 2.9h-2.32V22c4.78-.75 8.44-4.92 8.44-9.94Z"/></svg>
-          </a>
-          <a href="https://www.linkedin.com/company/volare-media" rel="noopener" aria-label="Volare Media on LinkedIn">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.12 20.45H3.56V9h3.56v11.45Z"/></svg>
-          </a>
-        </div>
-      </div>
-    </section>
-
     <section class="cta band--volt">
       <div class="wrap reveal">
         <h2 class="display-lg">Let's make something true<span class="dot">.</span></h2>
@@ -444,59 +392,34 @@
 
   </main>
 
-  <footer class="site-footer photo-band" style="--photo: url('assets/img/footer-crew-cinema.jpg'); --photo-pos: 60% 42%; --photo-opacity: 0.4;">
+  <footer class="site-footer footer-v2 photo-band" style="--photo: url('assets/img/footer-crew-cinema.jpg'); --photo-pos: 60% 42%; --photo-opacity: 0.4;">
     <div class="wrap">
       <div class="footer-top">
         <div>
           <p class="footer-mark"><img src="assets/vm-logo.png" alt="Volare Media logo"></p>
           <p class="footer-tag">Stories worth <em>sharing</em><span class="dot">.</span></p>
         </div>
-        <div class="footer-cols">
-          <div>
-            <h3 class="footer-heading">Pages</h3>
-            <ul>
-              <li><a href="services.html">Services</a></li>
-              <li><a href="marketing-videos.html">Marketing Videos</a></li>
-              <li><a href="creative-direction.html">Creative Direction</a></li>
-              <li><a href="agencies.html">Agencies &amp; Brands</a></li>
-              <li><a href="event-videography.html">Event Videography</a></li>
-              <li><a href="corporate-video.html">Corporate Video</a></li>
-              <li><a href="website-development.html">Websites &amp; Branding</a></li>
-              <li><a href="brand-alignment.html">Brand Alignment</a></li>
-              <li><a href="work.html">Work</a></li>
-              <li><a href="partnerships.html">Partnerships</a></li>
-              <li><a href="about.html">About</a></li>
-              <li><a href="crew.html">The Crew</a></li>
-              <li><a href="crew.html#partners">Production Partners</a></li>
-              <li><a href="community.html">Community</a></li>
-              <li><a href="journal.html">Journal</a></li>
-              <li><a href="contact.html">Contact</a></li>
-            </ul>
-          </div>
-          <div>
-            <h3 class="footer-heading">Contact</h3>
-            <ul>
-              <li><a href="mailto:video@volaremedia.net">video@volaremedia.net</a></li>
-              <li><a href="tel:+12505894521">250.589.4521</a></li>
-              <li>Victoria, BC, Canada</li>
-            </ul>
-          </div>
-          <div>
-            <h3 class="footer-heading">Follow</h3>
-            <ul>
-              <li><a href="https://www.instagram.com/volare.media" rel="noopener">Instagram</a></li>
-              <li><a href="https://www.facebook.com/VolareMedia.net" rel="noopener">Facebook</a></li>
-            </ul>
-          </div>
-        </div>
+        <ul class="footer-links">
+          <li><a href="services.html">Services</a></li>
+          <li><a href="work.html">Work</a></li>
+          <li><a href="partnerships.html">Partnerships</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="crew.html">The Crew</a></li>
+          <li><a href="community.html">Community</a></li>
+          <li><a href="journal.html">Journal</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="https://www.instagram.com/volare.media" rel="noopener">Instagram</a></li>
+          <li><a href="https://www.facebook.com/VolareMedia.net" rel="noopener">Facebook</a></li>
+        </ul>
       </div>
       <div class="footer-base">
-        <span>© 2026 Volare Media. All rights reserved. · <a href="privacy-policy.html">Privacy policy</a></span>
+        <span>© 2026 Volare Media · <a href="privacy-policy.html">Privacy policy</a></span>
         <span>Video production across Vancouver Island, BC &amp; Canada</span>
       </div>
     </div>
   </footer>
 
   <script src="script.js?v=33"></script>
+  <script src="clean.js?v=1"></script>
 </body>
 </html>

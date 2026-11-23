@@ -196,3 +196,110 @@
   .crew-shot { aspect-ratio: auto; overflow: visible; border-radius: 0; }
   .crew-shot img { position: static; width: 100%; height: auto; aspect-ratio: 4 / 3; border-radius: var(--radius); }
 }
+
+/* ======================================================================
+   Inner pages in the clean style
+   ====================================================================== */
+
+/* the old top bar and the social strip are gone; the footer carries both */
+.v2 .contact-bar, .v2 .social-strip { display: none; }
+
+/* page hero: rounded inset block, black-and-white photo, big plain headline */
+.v2 main > .hero:first-child {
+  margin: 0 var(--inset);
+  border-radius: var(--radius);
+  overflow: hidden;
+  min-height: min(76svh, 48rem);
+  display: flex;
+  align-items: flex-end;
+  padding-top: clamp(7rem, 16vw, 11rem);
+  padding-bottom: clamp(3rem, 6vw, 5rem);
+}
+.v2 main > .hero:first-child > .wrap { width: 100%; }
+.v2 .hero h1 { max-width: 18ch; margin-bottom: 1.5rem; }
+.v2 main > .hero:first-child h1.display-xl { font-size: clamp(2.8rem, 7vw, 6.25rem); }
+.v2 .hero .lede { max-width: 44rem; }
+.v2 main > .hero:first-child:not(.photo-band):not(.video-band) { min-height: 0; background: var(--bg-raised); }
+
+/* sections: more air, nothing in the background unless it's real footage */
+.v2 .section { padding-top: clamp(5rem, 10vw, 9rem); padding-bottom: clamp(5rem, 10vw, 9rem); }
+.v2 .section--tight { padding-top: clamp(3rem, 6vw, 5rem); padding-bottom: clamp(3rem, 6vw, 5rem); }
+.v2 .band--sky, .v2 .band--mint, .v2 .band--peach, .v2 .band--ink { background: transparent; border: 0; }
+.v2 .grid-bleed::before, .v2 .grid-bleed::after { display: none; }
+.v2 .tex::before, .v2 .tex::after { display: none; }
+
+/* photos behind sections: full width, black and white, same fade as the homepage footage */
+.v2 .photo-band::before { filter: grayscale(1) contrast(1.08); opacity: var(--photo-opacity, 0.5); }
+.v2 .photo-band--side::before { left: 0; mask-image: none; -webkit-mask-image: none; opacity: var(--photo-opacity, 0.5); }
+.v2 .photo-band::after, .v2 .photo-band--side::after, .v2 .video-band::after {
+  background:
+    linear-gradient(to bottom, var(--bg), rgba(12, 13, 9, 0.12) 20%, rgba(12, 13, 9, 0.12) 80%, var(--bg)),
+    linear-gradient(to right, rgba(12, 13, 9, 0.75), rgba(12, 13, 9, 0.3) 60%, rgba(12, 13, 9, 0.45));
+}
+.v2 main > .hero:first-child.photo-band::after {
+  background: linear-gradient(to top, rgba(12, 13, 9, 0.85), rgba(12, 13, 9, 0.25) 55%, rgba(12, 13, 9, 0.35));
+}
+.v2 .video-band > .band-video { filter: grayscale(1) contrast(1.08); }
+.v2 .photo-strip { margin: 0 var(--inset); border-radius: var(--radius); filter: grayscale(1) contrast(1.08); }
+
+/* headings: big and plain, like the homepage; highlights only in the page hero */
+.v2 .display-lg { font-size: clamp(2.4rem, 6.2vw, 5.4rem); line-height: 0.98; }
+.v2 main > section:not(.hero) h2 .sweep { color: inherit; white-space: normal; }
+.v2 main > section:not(.hero) h2 .sweep::before { display: none; }
+.v2 main > section:not(.hero) h2 .mark-line { box-shadow: none; padding: 0; }
+.v2 main > section:not(.hero) h2 .ink-volt, .v2 main > section:not(.hero) h2 .ink-lilac { color: inherit; }
+.v2 .section-head { margin-bottom: clamp(2rem, 4vw, 3.25rem); }
+.v2 .lede { color: var(--muted); }
+
+/* cards: quiet rounded tiles */
+.v2 .card { background: rgba(12, 13, 9, 0.55); border: 1px solid var(--line); border-radius: 1.25rem; backdrop-filter: blur(6px); }
+.v2 a.card:hover { transform: none; }
+.v2 a.card .card-cue { font-family: var(--font-body); font-weight: 600; font-size: 0.95rem; letter-spacing: 0; color: var(--cream); }
+.v2 a.card .card-cue::before { content: none; }
+.v2 a.card .card-cue::after { content: " \2192"; color: var(--volt); }
+.v2 a.card:hover .card-cue { color: var(--volt); }
+
+/* closing call to action: a rounded dark panel, not a bright slab */
+.v2 .cta.band--volt { background: var(--bg-raised); color: var(--cream); margin: clamp(3rem, 6vw, 5rem) var(--inset) 0; border-radius: var(--radius); }
+.v2 .cta { padding: 0; }
+.v2 .cta .wrap { padding-top: clamp(4.5rem, 9vw, 8rem); padding-bottom: clamp(4.5rem, 9vw, 8rem); }
+.v2 .cta h2 { max-width: 18ch; margin: 0 auto 2rem; }
+.v2 .cta .lede { margin-left: auto; margin-right: auto; }
+.v2 .band--volt .lede, .v2 .band--volt p { color: var(--muted); }
+.v2 .band--volt .btn { background: var(--volt); color: var(--bg); border-color: var(--volt); }
+.v2 .band--volt .btn:hover { background: transparent; color: var(--volt); }
+.v2 .band--volt .sweep { color: inherit; }
+.v2 .band--volt .sweep::before { display: none; }
+.v2 .band--volt .card { background: rgba(12, 13, 9, 0.55); border-color: var(--line); }
+.v2 .band--volt .card p { color: var(--muted); }
+.v2 .band--volt a { color: var(--cream); }
+.v2 .band--volt .btn { color: var(--bg); }
+.v2 .band--volt .eyebrow { color: var(--muted); }
+
+.v2 main { padding-bottom: clamp(3rem, 6vw, 5rem); }
+
+/* no typewriter labels: everything in the body font, sentence case, like the homepage */
+.v2 { --font-mono: var(--font-body); }
+.v2 .work-tag, .v2 .post-meta, .v2 .form-field span, .v2 .form-small, .v2 .contact-note,
+.v2 .crew-role, .v2 .crew-links a, .v2 .reviewer-note, .v2 .review-mini cite, .v2 .article figcaption,
+.v2 .pkg-platforms span, .v2 .before-stamp, .v2 .compare-hint, .v2 .bl-num, .v2 .footer-heading {
+  text-transform: none; letter-spacing: 0;
+}
+.v2 .work-tag { font-size: 0.9rem; color: var(--muted); }
+.v2 .contact-note, .v2 .form-field span { font-size: 0.9rem; color: var(--muted); }
+.v2 .form-field span em { color: var(--muted); font-style: normal; }
+.v2 .crew-role { font-size: 0.9rem; color: var(--muted); }
+
+/* no eyebrows, no decorative numbers, no brackets, no pill tags */
+.v2 .eyebrow, .v2 .crew-num, .v2 .service-num { display: none; }
+.v2 .service-row:has(.service-num) { grid-template-columns: 1.2fr 2fr; }
+.v2 .crew-links a::before, .v2 .crew-links a::after { content: none; }
+.v2 .crew-links a { font-size: 0.9rem; text-decoration: underline; text-underline-offset: 0.2em; }
+.v2 .crew-photo--tbd { color: transparent; }
+.v2 .service-includes { gap: 0.35rem 0; }
+.v2 .service-includes li { border: 0; border-radius: 0; padding: 0; color: var(--muted); font-size: 0.92rem; }
+.v2 .service-includes li:not(:last-child)::after { content: ","; margin-right: 0.35em; }
+
+@media (max-width: 860px) {
+  .v2 .service-row:has(.service-num) { grid-template-columns: 1fr; }
+}

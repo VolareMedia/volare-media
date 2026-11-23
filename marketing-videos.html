@@ -22,6 +22,7 @@
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Inter+Tight:ital,wght@0,400..800;1,400..800&family=Fragment+Mono:ital@0;1&display=swap"></noscript>
   <link rel="icon" href="favicon.svg?v=2" type="image/svg+xml">
   <link rel="stylesheet" href="styles.css?v=43">
+  <link rel="stylesheet" href="clean.css?v=1">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -76,66 +77,65 @@
     @media (max-width: 56rem) { .mv-brand { grid-template-columns: minmax(0, 1fr); } }
   </style>
 </head>
-<body>
+<body class="v2">
 
-  <div class="contact-bar">
-    <div class="wrap">
-      <span class="bar-note">Vancouver Island based, video production across BC &amp; Canada</span>
-      <span><a href="tel:+12505894521">250.589.4521</a> &nbsp;·&nbsp; <a href="mailto:video@volaremedia.net">video@volaremedia.net</a></span>
-    </div>
-  </div>
-
-  <header class="site-header">
+  <header class="v2-header">
     <div class="wrap">
       <a class="logo" href="index.html" aria-label="Volare Media, home"><img src="assets/vm-logo.png" alt="Volare Media logo"></a>
-      <button class="nav-toggle" aria-expanded="false" aria-controls="main-nav">Menu</button>
-      <nav class="main-nav" id="main-nav" aria-label="Main">
-        <a href="index.html">Home</a>
-        <div class="nav-drop">
-          <a class="nav-drop-trigger" href="services.html">Services<span class="caret" aria-hidden="true">▾</span></a>
-          <div class="nav-drop-menu">
-            <a href="services.html">All Services</a>
-            <a href="marketing-videos.html" aria-current="page">Marketing Videos</a>
-            <a href="creative-direction.html">Creative Direction</a>
-            <a href="event-videography.html">Event Videography</a>
-            <a href="corporate-video.html">Corporate Video</a>
-            <a href="website-development.html">Websites &amp; Branding</a>
-            <a href="brand-alignment.html">Brand Alignment</a>
-            <a href="agencies.html">Agencies</a>
-          </div>
-        </div>
-        <a href="work.html">Work</a>
-        <a href="partnerships.html">Partnerships</a>
-        <a href="about.html">About</a>
-        <a href="community.html">Community</a>
-        <a href="journal.html">Journal</a>
+      <div class="v2-header-right">
         <a class="btn" href="contact.html">Start a project</a>
-      </nav>
+        <button class="menu-btn" aria-expanded="false" aria-controls="site-menu">Menu <span class="menu-lines" aria-hidden="true"></span></button>
+      </div>
     </div>
   </header>
+
+  <nav class="v2-menu photo-band" id="site-menu" aria-label="Main" style="--photo: url('assets/img/footer-crew-cinema.jpg'); --photo-pos: 60% 40%;">
+    <div class="wrap">
+      <ul class="v2-menu-links">
+        <li><a href="services.html">Services</a></li>
+        <li><a href="work.html">Work</a></li>
+        <li><a href="partnerships.html">Partnerships</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="crew.html">The Crew</a></li>
+        <li><a href="community.html">Community</a></li>
+        <li><a href="journal.html">Journal</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <div class="v2-menu-side">
+        <h3>What we make</h3>
+        <ul>
+          <li><a href="marketing-videos.html" aria-current="page">Marketing videos</a></li>
+          <li><a href="creative-direction.html">Creative direction</a></li>
+          <li><a href="corporate-video.html">Corporate video</a></li>
+          <li><a href="event-videography.html">Event videography</a></li>
+          <li><a href="website-development.html">Websites and branding</a></li>
+          <li><a href="brand-alignment.html">Brand alignment</a></li>
+          <li><a href="agencies.html">For agencies</a></li>
+        </ul>
+        <h3>Say hello</h3>
+        <ul>
+          <li><a href="mailto:video@volaremedia.net">video@volaremedia.net</a></li>
+          <li><a href="tel:+12505894521">250.589.4521</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
 
   <main>
 
     <section class="hero photo-band photo-band--side" style="--photo: url('assets/img/bts-camera-slider.jpg'); --photo-pos: 55% 40%; --photo-opacity: 0.5;">
       <div class="wrap">
-        <h1 class="display-xl">Marketing videos that get<br>your business <span class="sweep"><em>noticed</em></span><span class="dot">.</span></h1>
+        <h1 class="display-xl">Marketing videos that get your business <span class="sweep"><em>noticed</em></span><span class="dot">.</span></h1>
         <p class="lede">Commercials, brand films, product videos and social ads, built to be watched and built to perform. Volare Media brings film-industry craft together with marketing strategy for brands across BC and Canada.</p>
       </div>
     </section>
 
-    <!-- Full-bleed divider: a commercial, looping muted in the background -->
-    <section class="video-band" aria-label="Volare Media commercial, playing">
-      <iframe src="https://player.vimeo.com/video/1071293680?background=1&amp;autoplay=1&amp;loop=1&amp;muted=1&amp;autopause=0&amp;dnt=1" allow="autoplay" title="A Volare Media commercial, looping in the background" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:100vw;height:56.25vw;min-width:177.78vh;min-height:100%;border:0;pointer-events:none;z-index:-2;opacity:0.72;"></iframe>
-      <div class="wrap" style="text-align:center;padding-top:clamp(4.5rem,11vw,8rem);padding-bottom:clamp(4.5rem,11vw,8rem);">
-        <h2 class="display-md" style="color:var(--cream);max-width:24ch;margin:1rem auto 0;text-shadow:0 2px 26px rgba(12,13,9,0.85);">First, people have to <span class="ink-volt">notice you</span><span class="dot">.</span></h2>
-      </div>
-    </section>
 
-    <section class="section photo-band photo-band--side" style="--photo: url('assets/img/bts-camera-rig-cool.jpg'); --photo-pos: 55% 40%; --photo-opacity: 0.42;">
+    <section class="section">
       <div class="wrap">
         <div class="section-head reveal">
           <div>
-            <h2 class="display-lg">Every kind of ad,<br>made by <span class="mark-line">one team</span><span class="dot">.</span></h2>
+            <h2 class="display-lg">Every kind of ad, made by <span class="mark-line">one team</span><span class="dot">.</span></h2>
           </div>
         </div>
         <p class="lede reveal">From a single 30-second commercial to a full campaign of brand films, product videos and social ads, Volare Media plans, films and edits marketing video that earns attention and drives results, for brands, agencies and businesses across Vancouver Island, BC and Canada. Different formats, one goal: video people actually watch, built to move them to act.</p>
@@ -213,9 +213,9 @@
       <div class="wrap">
         <div class="section-head reveal">
           <div>
-            <h2 class="display-lg">Marketing videos<br>we've <span class="sweep sweep--volt">made</span><span class="dot">.</span></h2>
+            <h2 class="display-lg">Marketing videos we've <span class="sweep sweep--volt">made</span><span class="dot">.</span></h2>
           </div>
-          <a class="bracket" href="work.html">See all work</a>
+          <a class="text-link" href="work.html">See all work</a>
         </div>
         <div class="work-grid reveal">
           <article class="work-card">
@@ -258,7 +258,7 @@
       <div class="wrap">
         <div class="section-head reveal">
           <div>
-            <h2 class="display-lg">Looking good isn't enough<span class="dot">.</span><br>Your video has to <span class="ink-lilac">work</span><span class="dot dot--volt">.</span></h2>
+            <h2 class="display-lg">Looking good isn't enough<span class="dot">.</span> Your video has to <span class="ink-lilac">work</span><span class="dot dot--volt">.</span></h2>
           </div>
         </div>
         <div class="card-grid reveal">
@@ -271,7 +271,7 @@
             </summary>
             <div class="card-more">
               <p>A beautiful video that doesn't sell anything is an expensive art project. Before we talk shots, we get clear on who you're trying to reach, what you want them to do, and where they'll see it. Every creative choice ladders back to that.</p>
-              <p>It starts with our <a href="creative-direction.html" class="bracket" style="font-size:0.85rem;">creative direction</a>: concept and script first.</p>
+              <p>It starts with our <a href="creative-direction.html" class="text-link" style="font-size:0.85rem;">creative direction</a>: concept and script first.</p>
             </div>
           </details>
 
@@ -305,7 +305,7 @@
             </summary>
             <div class="card-more">
               <p>The most thoughtful commercial in the world does nothing sitting on a hard drive. We help you think through placement and reach, the same way our Tailgate Toolkit campaign ran for a full year on 61 stations across BC.</p>
-              <p>Read that story in the <a href="tailgate-toolkit-61-stations.html" class="bracket" style="font-size:0.85rem;">journal</a>.</p>
+              <p>Read that story in the <a href="tailgate-toolkit-61-stations.html" class="text-link" style="font-size:0.85rem;">journal</a>.</p>
             </div>
           </details>
 
@@ -323,7 +323,7 @@
           <p class="lede">A video can win the click and still lose the customer, when they land on a website or Instagram page that looks like a different company. Our brand alignment packages line up your logo, name, colours and message everywhere people find you, so the attention your video earns turns into trust.</p>
           <div class="mv-brand-links">
             <a class="btn" href="brand-alignment.html">Brand alignment</a>
-            <a class="bracket" href="what-is-brand-alignment.html">Read: why brands drift</a>
+            <a class="text-link" href="what-is-brand-alignment.html">Read: why brands drift</a>
           </div>
         </div>
       </div>
@@ -345,7 +345,7 @@
             <span class="card-toggle" aria-hidden="true"></span>
           </summary>
           <div class="card-more">
-            <p>A single social ad and a full TV campaign are very different budgets. We scope every project before you commit, and we break down where the money goes in our <a href="video-production-cost-bc.html" class="bracket" style="font-size:0.85rem;">cost guide</a>.</p>
+            <p>A single social ad and a full TV campaign are very different budgets. We scope every project before you commit, and we break down where the money goes in our <a href="video-production-cost-bc.html" class="text-link" style="font-size:0.85rem;">cost guide</a>.</p>
           </div>
         </details>
 
@@ -356,7 +356,7 @@
             <span class="card-toggle" aria-hidden="true"></span>
           </summary>
           <div class="card-more">
-            <p>Many clients start with one hero commercial or brand film, then we cut it into shorter ads, vertical social versions and teasers, so a single production run works across TV, YouTube and paid social. <a href="never-make-a-video-to-make-a-video.html" class="bracket" style="font-size:0.85rem;">See how it worked for De Mode en Vogue</a></p>
+            <p>Many clients start with one hero commercial or brand film, then we cut it into shorter ads, vertical social versions and teasers, so a single production run works across TV, YouTube and paid social. <a href="never-make-a-video-to-make-a-video.html" class="text-link" style="font-size:0.85rem;">See how it worked for De Mode en Vogue</a></p>
           </div>
         </details>
 
@@ -367,7 +367,7 @@
             <span class="card-toggle" aria-hidden="true"></span>
           </summary>
           <div class="card-more">
-            <p>Most projects start with our creative direction, so the idea is right before we roll. Bring a brief or a blank page, either works. See <a href="creative-direction.html" class="bracket" style="font-size:0.85rem;">creative direction</a>.</p>
+            <p>Most projects start with our creative direction, so the idea is right before we roll. Bring a brief or a blank page, either works. See <a href="creative-direction.html" class="text-link" style="font-size:0.85rem;">creative direction</a>.</p>
           </div>
         </details>
 
@@ -386,85 +386,43 @@
       </div>
     </section>
 
-    <section class="social-strip" aria-label="Follow Volare Media">
-      <div class="wrap social-strip-inner">
-        <p class="social-strip-label">Follow the work<span class="dot">.</span></p>
-        <div class="social-strip-links">
-          <a href="https://www.instagram.com/volare.media" rel="noopener" aria-label="Volare Media on Instagram">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M12 2.2c3.2 0 3.6 0 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.26.07 1.64.07 4.85s0 3.6-.07 4.85c-.05 1.17-.25 1.8-.41 2.23a3.7 3.7 0 0 1-.9 1.38c-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.26.06-1.64.07-4.85.07s-3.6 0-4.85-.07c-1.17-.05-1.8-.25-2.23-.41a3.7 3.7 0 0 1-1.38-.9 3.7 3.7 0 0 1-.9-1.38c-.16-.42-.36-1.06-.41-2.23C2.2 15.6 2.2 15.2 2.2 12s0-3.6.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.4 2.2 8.8 2.2 12 2.2Zm0 1.76c-3.15 0-3.52.01-4.77.07-1.08.05-1.66.23-2.05.38-.51.2-.88.44-1.26.82-.38.38-.62.75-.82 1.26-.15.39-.33.97-.38 2.05-.06 1.25-.07 1.62-.07 4.77s.01 3.52.07 4.77c.05 1.08.23 1.66.38 2.05.2.51.44.88.82 1.26.38.38.75.62 1.26.82.39.15.97.33 2.05.38 1.25.06 1.62.07 4.77.07s3.52-.01 4.77-.07c1.08-.05 1.66-.23 2.05-.38.51-.2.88-.44 1.26-.82.38-.38.62-.75.82-1.26.15-.39.33-.97.38-2.05.06-1.25.07-1.62.07-4.77s-.01-3.52-.07-4.77c-.05-1.08-.23-1.66-.38-2.05-.2-.51-.44-.88-.82-1.26a3.4 3.4 0 0 0-1.26-.82c-.39-.15-.97-.33-2.05-.38-1.25-.06-1.62-.07-4.77-.07Zm0 3.01a5.03 5.03 0 1 1 0 10.06 5.03 5.03 0 0 1 0-10.06Zm0 1.76a3.27 3.27 0 1 0 0 6.54 3.27 3.27 0 0 0 0-6.54Zm5.23-3.13a1.18 1.18 0 1 1 0 2.35 1.18 1.18 0 0 1 0-2.35Z"/></svg>
-          </a>
-          <a href="https://www.facebook.com/VolareMedia.net" rel="noopener" aria-label="Volare Media on Facebook">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06c0 5.02 3.66 9.19 8.44 9.94v-7.03H7.9v-2.9h2.54V9.85c0-2.52 1.5-3.91 3.77-3.91 1.09 0 2.23.2 2.23.2v2.46h-1.26c-1.24 0-1.62.77-1.62 1.57v1.88h2.76l-.44 2.9h-2.32V22c4.78-.75 8.44-4.92 8.44-9.94Z"/></svg>
-          </a>
-          <a href="https://www.linkedin.com/company/volare-media" rel="noopener" aria-label="Volare Media on LinkedIn">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.12 20.45H3.56V9h3.56v11.45Z"/></svg>
-          </a>
-        </div>
-      </div>
-    </section>
-
     <section class="cta band--volt">
       <div class="wrap reveal">
-        <h2 class="display-lg">Let's make something<br>people can't <span class="sweep">scroll past</span><span class="dot">.</span></h2>
+        <h2 class="display-lg">Let's make something people can't <span class="sweep">scroll past</span><span class="dot">.</span></h2>
         <a class="btn" href="contact.html">Start the conversation</a>
       </div>
     </section>
 
   </main>
 
-  <footer class="site-footer photo-band" style="--photo: url('assets/img/footer-crew-cinema.jpg'); --photo-pos: 60% 42%; --photo-opacity: 0.4;">
+  <footer class="site-footer footer-v2 photo-band" style="--photo: url('assets/img/footer-crew-cinema.jpg'); --photo-pos: 60% 42%; --photo-opacity: 0.4;">
     <div class="wrap">
       <div class="footer-top">
         <div>
           <p class="footer-mark"><img src="assets/vm-logo.png" alt="Volare Media logo"></p>
           <p class="footer-tag">Stories worth <em>sharing</em><span class="dot">.</span></p>
         </div>
-        <div class="footer-cols">
-          <div>
-            <h3 class="footer-heading">Pages</h3>
-            <ul>
-              <li><a href="services.html">Services</a></li>
-              <li><a href="marketing-videos.html">Marketing Videos</a></li>
-              <li><a href="creative-direction.html">Creative Direction</a></li>
-              <li><a href="agencies.html">Agencies &amp; Brands</a></li>
-              <li><a href="event-videography.html">Event Videography</a></li>
-              <li><a href="corporate-video.html">Corporate Video</a></li>
-              <li><a href="website-development.html">Websites &amp; Branding</a></li>
-              <li><a href="brand-alignment.html">Brand Alignment</a></li>
-              <li><a href="work.html">Work</a></li>
-              <li><a href="partnerships.html">Partnerships</a></li>
-              <li><a href="about.html">About</a></li>
-              <li><a href="crew.html">The Crew</a></li>
-              <li><a href="crew.html#partners">Production Partners</a></li>
-              <li><a href="community.html">Community</a></li>
-              <li><a href="journal.html">Journal</a></li>
-              <li><a href="contact.html">Contact</a></li>
-            </ul>
-          </div>
-          <div>
-            <h3 class="footer-heading">Contact</h3>
-            <ul>
-              <li><a href="mailto:video@volaremedia.net">video@volaremedia.net</a></li>
-              <li><a href="tel:+12505894521">250.589.4521</a></li>
-              <li>Victoria, BC, Canada</li>
-            </ul>
-          </div>
-          <div>
-            <h3 class="footer-heading">Follow</h3>
-            <ul>
-              <li><a href="https://www.instagram.com/volare.media" rel="noopener">Instagram</a></li>
-              <li><a href="https://www.facebook.com/VolareMedia.net" rel="noopener">Facebook</a></li>
-            </ul>
-          </div>
-        </div>
+        <ul class="footer-links">
+          <li><a href="services.html">Services</a></li>
+          <li><a href="work.html">Work</a></li>
+          <li><a href="partnerships.html">Partnerships</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="crew.html">The Crew</a></li>
+          <li><a href="community.html">Community</a></li>
+          <li><a href="journal.html">Journal</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="https://www.instagram.com/volare.media" rel="noopener">Instagram</a></li>
+          <li><a href="https://www.facebook.com/VolareMedia.net" rel="noopener">Facebook</a></li>
+        </ul>
       </div>
       <div class="footer-base">
-        <span>© 2026 Volare Media. All rights reserved. · <a href="privacy-policy.html">Privacy policy</a></span>
+        <span>© 2026 Volare Media · <a href="privacy-policy.html">Privacy policy</a></span>
         <span>Video production across Vancouver Island, BC &amp; Canada</span>
       </div>
     </div>
   </footer>
 
   <script src="script.js?v=33"></script>
+  <script src="clean.js?v=1"></script>
 </body>
 </html>
