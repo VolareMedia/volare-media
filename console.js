@@ -1,8 +1,10 @@
 // Volare Media console concept.
 // One WebGL canvas shows the footage in black and white. Every clip plays at normal speed.
-// Picking a chapter cuts to its clip with angled strips that sweep in alternate directions,
-// starting from the word you picked, while the menu words shrink into a rail and the
-// headline wipes in on a slant.
+// Picking a chapter cuts to its clip in angled shards that sit at different depths, while
+// mauve glass panes glide across at their own speeds, the menu words shrink into a rail
+// and the headline wipes in behind a mauve bar.
+// Every movement runs on one curve (smootherstep): it starts and stops with no speed and
+// no sudden change of acceleration.
 
 const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
 const $ = (s, r = document) => r.querySelector(s);
@@ -12,10 +14,39 @@ const chapters = $$(".chapter");
 const order = chapters.map((c) => c.dataset.id);
 const byId = Object.fromEntries(chapters.map((c) => [c.dataset.id, c]));
 const menuButtons = $$(".menu button");
-const credit = $(".hud-credit");
-const clock = $(".hud-time");
-const slash = $(".slash");
-const ease = "cubic-bezier(0.7, 0, 0.2, 1)";
+
+/* ---------------- one easing curve for everything ---------------- */
+const smoother = (t) => t * t * t * (t * (t * 6 - 15) + 10);
+const EASE = CSS.supports("animation-timing-function", "linear(0, 1)")
+  ? `linear(${Array.from({ length: 49 }, (_, i) => smoother(i / 48).toFixed(4)).join(", ")})`
+  : "cubic-bezier(0.65, 0, 0.35, 1)";
+document.documentElement.style.setProperty("--ease", EASE);
+
+// value follows a target through two soft springs, so even its acceleration changes gradually
+function damp(s, target, time, dt) {
+  const w = 2 / time, k = w * dt, e = 1 / (1 + k + 0.48 * k * k + 0.235 * k * k * k);
+  const d = s.x - target, tmp = (s.v + w * d) * dt;
+  s.v = (s.v - w * tmp) * e;
+  s.x = target + (d + tmp) * e;
+}
+const spring = () => ({ a: { x: 0, v: 0 }, b: { x: 0, v: 0 } });
+function follow(s, target, dt, t1 = 0.5, t2 = 0.3) { damp(s.a, target, t1, dt); damp(s.b, s.a.x, t2, dt); return s.b.x; }
+
+const glides = new Map();
+function glide(obj, key, to, ms) {
+  const from = obj[key], t0 = performance.now(), token = {};
+  glides.set(key, token);
+  return new Promise((res) => {
+    const step = (now) => {
+      if (glides.get(key) !== token) return res();
+      const k = Math.min(1, (now - t0) / ms);
+      obj[key] = from + (to - from) * smoother(k);
+      k < 1 ? requestAnimationFrame(step) : res();
+    };
+    requestAnimationFrame(step);
+  });
+}
+const wait = (ms) => new Promise((r) => setTimeout(r, ms));
 
 /* ---------------- footage ---------------- */
 const videos = {};
@@ -48,67 +79,88 @@ const FRAG = `
 precision highp float;
 varying vec2 vUv;
 uniform sampler2D uA, uB;
-uniform float uProg, uTime, uAspA, uAspB, uScreen, uDim, uStrips, uAngle;
-uniform vec2 uOrigin;
+uniform float uProg, uTime, uAspA, uAspB, uScreen, uDim, uStrips, uAngle, uSweep, uZoom, uPx, uSeed;
+uniform vec2 uOrigin, uPar;
 
+const vec3 VOLT = vec3(0.839, 1.0, 0.239);
+const vec3 LILAC = vec3(0.788, 0.729, 0.957);
+
+float ss(float t) { t = clamp(t, 0.0, 1.0); return t * t * t * (t * (t * 6.0 - 15.0) + 10.0); }
 vec2 cover(vec2 uv, float asp) {
   vec2 s = vec2(1.0);
   if (uScreen > asp) s.y = asp / uScreen; else s.x = uScreen / asp;
   return (uv - 0.5) * s + 0.5;
 }
+vec2 zoomed(vec2 uv, float z) { return (uv - 0.5) / z + 0.5; }
 vec2 rot(vec2 p, float a) { float c = cos(a), s = sin(a); return vec2(c * p.x - s * p.y, s * p.x + c * p.y); }
 float luma(vec3 c) { return dot(c, vec3(0.2126, 0.7152, 0.0722)); }
-vec3 grade(float l) {
-  // black and white, from the brand's near-black to its cream
-  l = smoothstep(0.03, 0.97, l);
-  l = pow(l, 1.12);
-  return mix(vec3(0.047, 0.051, 0.035), vec3(0.957, 0.953, 0.91), l);
-}
+float tone(float l) { l = smoothstep(0.03, 0.97, l); return pow(l, 1.12); }
+// black and white: the brand's near-black to its cream
+vec3 grade(float l) { return mix(vec3(0.047, 0.051, 0.035), vec3(0.957, 0.953, 0.91), l); }
+// the same picture seen through mauve glass
+vec3 gradeM(float l) { return mix(vec3(0.05, 0.036, 0.085), vec3(0.86, 0.80, 1.0), l); }
 float hash(vec2 p) { return fract(sin(dot(p, vec2(12.9898, 78.233))) * 43758.5453); }
-float io(float t) { return t < 0.5 ? 4.0 * t * t * t : 1.0 - pow(-2.0 * t + 2.0, 3.0) / 2.0; }
+float wrap(float x, float r) { return mod(x + r * 0.5, r) - r * 0.5; }
+// strips of uneven width, so the cut reads as shards, not blinds
+float stripCoord(float y, float span) { float s = (y / span + 0.5) * uStrips; return s + 0.32 * sin(s * 1.9 + uSeed); }
+// a slanted pane: x = how far inside it, y = its edge line
+vec2 pane(vec2 p, float ang, float pos, float w) {
+  float d = dot(p, vec2(sin(ang), cos(ang))) - pos;
+  float aa = uPx * 1.5;
+  return vec2(1.0 - smoothstep(w * 0.5 - aa, w * 0.5 + aa, abs(d)), 1.0 - smoothstep(0.0, aa * 1.3, abs(abs(d) - w * 0.5)));
+}
 
 void main() {
   vec2 uv = vUv;
+  vec2 p = vec2((uv.x - 0.5) * uScreen, uv.y - 0.5);
   float span = uScreen + 1.0;
-  vec2 r = rot(vec2((uv.x - 0.5) * uScreen, uv.y - 0.5), uAngle);
-  float sy = (r.y / span + 0.5) * uStrips;
+  vec2 r = rot(p, uAngle);
+  float sy = stripCoord(r.y, span);
   float idx = floor(sy);
   float dir = mod(idx, 2.0) < 1.0 ? 1.0 : -1.0;
 
-  // strips nearest the word you picked move first
+  // shards nearest the word you picked move first
   vec2 ro = rot(vec2((uOrigin.x - 0.5) * uScreen, uOrigin.y - 0.5), uAngle);
-  float oIdx = floor((ro.y / span + 0.5) * uStrips);
-  float delay = abs(idx - oIdx) / uStrips * 0.5;
-  float lp = io(clamp((uProg - delay) / 0.5, 0.0, 1.0));
-  float moving = step(0.0001, lp) * step(lp, 0.9999);
+  float oIdx = floor(stripCoord(ro.y, span));
+  float delay = min(abs(idx - oIdx) / uStrips, 1.0) * 0.5;
+  float lp = ss((uProg - delay) / 0.5);
+  float env = ss(lp / 0.2) * (1.0 - ss((lp - 0.8) / 0.2));   // fades the cut's own marks in and out
+  float depth = 0.5 + hash(vec2(idx, uSeed));                 // each shard sits at its own depth
 
   float ax = r.x / span + 0.5;
   if (dir < 0.0) ax = 1.0 - ax;
-  float edge = ax - (lp * 1.12 - 0.06);       // above 0: old clip, below 0: new clip
-  float showB = step(edge, 0.0);
-  float near = 1.0 - smoothstep(0.0, 0.09, abs(edge));
+  float edge = ax - (lp * 1.14 - 0.07);        // above 0: old clip, below 0: new clip
+  float aa = uPx * 1.5 / span;
+  float showB = 1.0 - smoothstep(-aa, aa, edge);
+  float near = 1.0 - smoothstep(0.0, 0.1, abs(edge));
 
-  // pull the picture along the strip near the moving edge
+  // depth: the old picture pushes away as it leaves, the new one settles in from closer
   vec2 along = vec2(cos(uAngle) / uScreen, -sin(uAngle)) * dir;
-  vec2 offA = along * near * 0.05 * moving;
-  vec2 offB = -along * near * 0.035 * moving;
+  vec2 drift = uPar * 0.010;
+  vec2 offA = along * (0.05 * depth * lp + near * 0.03 * env);
+  vec2 offB = -along * (0.05 * depth * (1.0 - lp) + near * 0.025 * env);
+  vec2 ua = zoomed(cover(uv + offA + drift, uAspA), uZoom * (1.0 + 0.10 * depth * lp));
+  vec2 ub = zoomed(cover(uv + offB + drift, uAspB), uZoom * (1.0 + 0.12 * depth * (1.0 - lp)));
+  float l = tone(mix(luma(texture2D(uA, ua).rgb), luma(texture2D(uB, ub).rgb), showB));
 
-  float split = near * 0.006 * moving;  // a thin colour fringe at the edge only
-  vec2 ua = cover(uv + offA, uAspA), ub = cover(uv + offB, uAspB);
-  float la = luma(texture2D(uA, ua).rgb);
-  float lb = luma(texture2D(uB, ub).rgb);
-  vec3 col = mix(grade(la), grade(lb), showB);
-  float lbR = luma(texture2D(uB, ub + along * split).rgb);
-  col += vec3(0.79, 0.73, 0.96) * (lbR - lb) * 2.5 * showB * moving;   // mauve fringe
+  // mauve glass panes at three depths: they drift slowly, lean with the pointer, and glide on every cut
+  vec2 q1 = pane(p, -0.42, wrap(-0.50 + uSweep * 0.47 + 0.04 * sin(uTime * 0.13) + uPar.x * 0.035, 2.4), 0.26);
+  vec2 q2 = pane(p, 1.15, wrap(0.45 + uSweep * 0.61 + 0.05 * sin(uTime * 0.09 + 2.0) - uPar.x * 0.06, 3.0), 0.13);
+  vec2 q3 = pane(p, 0.42, wrap(0.15 - uSweep * 0.71 + 0.03 * sin(uTime * 0.17 + 4.0) + uPar.y * 0.05, 2.4), 0.012);
+  float tint = 1.0 - (1.0 - q1.x * 0.5) * (1.0 - q2.x * 0.38);
+  float wash = smoothstep(-0.18, 0.0, edge) * showB * env * 0.5;    // mauve trails each cut edge
+  vec3 col = mix(grade(l), gradeM(l), clamp(tint + wash, 0.0, 0.85));
 
-  // strip seams while the cut is moving
+  // shard seams while the cut is moving
   float f = fract(sy);
-  col *= mix(1.0, smoothstep(0.0, 0.025, f) * smoothstep(1.0, 0.975, f), moving * 0.7);
+  col *= mix(1.0, smoothstep(0.0, 0.03, f) * smoothstep(1.0, 0.97, f), env * 0.6);
 
-  // the volt edge
-  float line = (1.0 - smoothstep(0.0, 0.0035, abs(edge))) * moving;
-  col = mix(col, vec3(0.839, 1.0, 0.239), line);
-  col += vec3(0.839, 1.0, 0.239) * (1.0 - smoothstep(0.0, 0.03, abs(edge))) * moving * 0.18;
+  // the cut edge: volt in front, a mauve echo just behind it
+  float line = (1.0 - smoothstep(0.0, 0.003, abs(edge))) * env;
+  float echo = (1.0 - smoothstep(0.0, 0.002, abs(edge + 0.045))) * env;
+  col = mix(col, LILAC, echo * 0.6);
+  col = mix(col, VOLT, line);
+  col += VOLT * (1.0 - smoothstep(0.0, 0.03, abs(edge))) * env * 0.14;
 
   // keep the type readable
   col *= uDim;
@@ -116,24 +168,30 @@ void main() {
   vec2 q = (uv - 0.5) * vec2(uScreen / max(uScreen, 1.0), 1.0);
   col *= 1.0 - dot(q, q) * 0.9;
 
-  // subtle console texture: fine scan lines and moving grain
-  col *= 0.975 + 0.025 * sin(gl_FragCoord.y * 1.6);
-  col += (hash(gl_FragCoord.xy + fract(uTime * 7.0) * 113.0) - 0.5) * 0.055;
+  // pane edges stay crisp over the dimmed picture
+  col += LILAC * (q1.y * 0.20 + q2.y * 0.28 + q3.y * 0.34 + tint * 0.05);
+
+  // fine grain
+  col *= 0.985 + 0.015 * sin(gl_FragCoord.y * 1.6);
+  col += (hash(gl_FragCoord.xy + fract(uTime * 7.0) * 113.0) - 0.5) * 0.05;
   gl_FragColor = vec4(col, 1.0);
 }`;
 
 let stage = null;
+const UNIFORMS = ["uA", "uB", "uProg", "uTime", "uAspA", "uAspB", "uScreen", "uDim", "uStrips", "uAngle", "uOrigin", "uSweep", "uZoom", "uPx", "uSeed", "uPar"];
 if (gl) {
   const sh = (type, src) => { const s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s);
     if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) throw new Error(gl.getShaderInfoLog(s)); return s; };
   try {
     const prog = gl.createProgram();
     gl.attachShader(prog, sh(gl.VERTEX_SHADER, VERT)); gl.attachShader(prog, sh(gl.FRAGMENT_SHADER, FRAG));
-    gl.linkProgram(prog); gl.useProgram(prog);
+    gl.linkProgram(prog);
+    if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) throw new Error(gl.getProgramInfoLog(prog));
+    gl.useProgram(prog);
     const buf = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, buf);
     gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
     const loc = gl.getAttribLocation(prog, "p"); gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
-    const U = {}; ["uA", "uB", "uProg", "uTime", "uAspA", "uAspB", "uScreen", "uDim", "uStrips", "uAngle", "uOrigin"].forEach((n) => (U[n] = gl.getUniformLocation(prog, n)));
+    const U = {}; UNIFORMS.forEach((n) => (U[n] = gl.getUniformLocation(prog, n)));
     const mkTex = (unit) => { const t = gl.createTexture(); gl.activeTexture(gl.TEXTURE0 + unit); gl.bindTexture(gl.TEXTURE_2D, t);
       gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
       gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
@@ -141,7 +199,7 @@ if (gl) {
     const texA = mkTex(0), texB = mkTex(1);
     gl.uniform1i(U.uA, 0); gl.uniform1i(U.uB, 1);
     gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
-    stage = { gl, U, texA, texB, a: null, b: null, prog: 0, dim: 0, dimTo: 0.6, strips: 9, angle: -0.42, origin: [0.2, 0.3] };
+    stage = { gl, U, texA, texB, a: null, b: null, prog: 0, dim: 0, sweep: 0, strips: 9, angle: -0.42, seed: 0, origin: [0.2, 0.3] };
   } catch (e) { console.warn("Console stage fell back to plain video:", e); }
 }
 if (!stage) body.classList.add("no-gl");
@@ -156,30 +214,63 @@ function resize() {
   const w = Math.round(innerWidth * dpr), h = Math.round(innerHeight * dpr);
   if (canvas.width !== w || canvas.height !== h) { canvas.width = w; canvas.height = h; }
 }
-function frame(t) {
+
+/* ---------------- pointer parallax: footage, panes and type sit at different depths ---------------- */
+const pointer = { x: 0, y: 0 };
+const parX = spring(), parY = spring();
+addEventListener("pointermove", (e) => {
+  if (e.pointerType === "touch") return;
+  pointer.x = (e.clientX / innerWidth) * 2 - 1;
+  pointer.y = 1 - (e.clientY / innerHeight) * 2;
+}, { passive: true });
+
+/* ---------------- credits roll ---------------- */
+const roll = { box: $(".roll"), el: $(".roll-inner"), y: 0, max: 0, hover: false, v: spring() };
+const measureRoll = () => (roll.max = roll.el.offsetHeight - roll.box.clientHeight);
+roll.box.addEventListener("pointerenter", () => (roll.hover = true));
+roll.box.addEventListener("pointerleave", () => (roll.hover = false));
+addEventListener("resize", measureRoll);
+
+let lastT = performance.now();
+function frame(now) {
   requestAnimationFrame(frame);
-  if (stage) {
-    resize();
-    const { U } = stage;
-    stage.dim += (stage.dimTo - stage.dim) * 0.05;
-    upload(stage.texA, 0, stage.a);
-    if (stage.prog > 0) upload(stage.texB, 1, stage.b);
-    gl.viewport(0, 0, canvas.width, canvas.height);
-    gl.uniform1f(U.uProg, stage.prog);
-    gl.uniform1f(U.uTime, t / 1000);
-    gl.uniform1f(U.uScreen, canvas.width / canvas.height);
-    gl.uniform1f(U.uAspA, stage.a && stage.a.videoWidth ? stage.a.videoWidth / stage.a.videoHeight : 16 / 9);
-    gl.uniform1f(U.uAspB, stage.b && stage.b.videoWidth ? stage.b.videoWidth / stage.b.videoHeight : 16 / 9);
-    gl.uniform1f(U.uDim, stage.dim);
-    gl.uniform1f(U.uStrips, stage.strips);
-    gl.uniform1f(U.uAngle, stage.angle);
-    gl.uniform2f(U.uOrigin, stage.origin[0], stage.origin[1]);
-    gl.drawArrays(gl.TRIANGLES, 0, 3);
+  const dt = Math.min(0.05, (now - lastT) / 1000); lastT = now;
+  const t = now / 1000;
+
+  const px = reduce ? 0 : follow(parX, pointer.x + 0.22 * Math.sin(t * 0.21), dt);
+  const py = reduce ? 0 : follow(parY, pointer.y + 0.22 * Math.cos(t * 0.17), dt);
+  body.style.setProperty("--px", px.toFixed(4));
+  body.style.setProperty("--py", py.toFixed(4));
+
+  if (!reduce) {
+    const speed = current === "credits" && !roll.hover ? innerHeight * 0.046 : 0;
+    roll.y += follow(roll.v, speed, dt, 0.6, 0.4) * dt;
+    if (roll.max > 0 && roll.y >= roll.max) roll.y = 0;      // both ends of the roll are empty, so the loop is invisible
+    roll.el.style.transform = `translate3d(0, ${-roll.y.toFixed(2)}px, 0)`;
   }
-  const v = videos[current];
-  if (v && v.duration) clock.textContent = `${mmss(v.currentTime)} / ${mmss(v.duration)}`;
+
+  if (!stage) return;
+  resize();
+  const { U } = stage;
+  upload(stage.texA, 0, stage.a);
+  if (stage.prog > 0) upload(stage.texB, 1, stage.b);
+  gl.viewport(0, 0, canvas.width, canvas.height);
+  gl.uniform1f(U.uProg, stage.prog);
+  gl.uniform1f(U.uTime, t);
+  gl.uniform1f(U.uScreen, canvas.width / canvas.height);
+  gl.uniform1f(U.uPx, 1 / canvas.height);
+  gl.uniform1f(U.uAspA, stage.a && stage.a.videoWidth ? stage.a.videoWidth / stage.a.videoHeight : 16 / 9);
+  gl.uniform1f(U.uAspB, stage.b && stage.b.videoWidth ? stage.b.videoWidth / stage.b.videoHeight : 16 / 9);
+  gl.uniform1f(U.uDim, stage.dim);
+  gl.uniform1f(U.uSweep, stage.sweep);
+  gl.uniform1f(U.uZoom, reduce ? 1.05 : 1.06 + 0.02 * Math.sin(t * 0.1));   // a slow breathing push on the footage
+  gl.uniform1f(U.uStrips, stage.strips);
+  gl.uniform1f(U.uAngle, stage.angle);
+  gl.uniform1f(U.uSeed, stage.seed);
+  gl.uniform2f(U.uOrigin, stage.origin[0], stage.origin[1]);
+  gl.uniform2f(U.uPar, px, py);
+  gl.drawArrays(gl.TRIANGLES, 0, 3);
 }
-const mmss = (s) => `${String(Math.floor(s / 60)).padStart(2, "0")}:${String(Math.floor(s % 60)).padStart(2, "0")}`;
 const tween = (ms, fn) => new Promise((res) => {
   const t0 = performance.now();
   const step = (now) => { const k = Math.min(1, (now - t0) / ms); fn(k); k < 1 ? requestAnimationFrame(step) : res(); };
@@ -199,12 +290,14 @@ async function cutTo(id, origin) {
   cutNo++;
   stage.b = v;
   stage.origin = origin;
-  stage.angle = cutNo % 2 ? -0.42 : 0.42;          // alternate the slant on every cut
-  stage.strips = [9, 7, 12, 8][cutNo % 4];
-  stage.dimTo = DIM[id] ?? 0.46;
+  stage.angle = cutNo % 2 ? -0.42 : 0.42;          // the slant flips on every cut
+  stage.strips = [9, 7, 11, 8][cutNo % 4];
+  stage.seed = cutNo * 1.7;
   upload(stage.texB, 1, v);
-  slashSweep(origin);
-  await tween(reduce ? 350 : 1250, (k) => (stage.prog = k));
+  glide(stage, "dim", DIM[id] ?? 0.46, reduce ? 300 : 1600);
+  glide(stage, "sweep", cutNo, reduce ? 300 : 2300);    // the panes glide on, past the end of the cut
+  sweeps();
+  await tween(reduce ? 350 : 1450, (k) => (stage.prog = k));
   // the new clip becomes the base layer
   const old = stage.a;
   [stage.texA, stage.texB] = [stage.texB, stage.texA];
@@ -214,61 +307,68 @@ async function cutTo(id, origin) {
   if (old && old !== v) old.pause();
 }
 
-function slashSweep(origin) {
+// two slanted sweeps cross the screen: a thin volt line, and a wide mauve band that lags behind it
+function sweeps() {
   if (reduce) return;
-  const dir = cutNo % 2 ? 1 : -1;
-  const x0 = dir > 0 ? -0.15 * innerWidth : 1.15 * innerWidth, x1 = dir > 0 ? 1.15 * innerWidth : -0.15 * innerWidth;
-  const sk = dir > 0 ? -24 : 24;
-  slash.animate([
-    { transform: `translateX(${x0}px) skewX(${sk}deg)`, opacity: 0 },
-    { opacity: 1, offset: 0.15 },
-    { opacity: 1, offset: 0.8 },
-    { transform: `translateX(${x1}px) skewX(${sk}deg)`, opacity: 0 },
-  ], { duration: 1100, easing: ease });
+  const dir = cutNo % 2 ? 1 : -1, sk = dir > 0 ? -24 : 24;
+  const run = (el, pad, ms, delay) => {
+    const x0 = dir > 0 ? -pad : innerWidth + pad, x1 = dir > 0 ? innerWidth + pad : -pad;
+    el.animate([
+      { transform: `translateX(${x0}px) skewX(${sk}deg)`, opacity: 0 },
+      { opacity: 1, offset: 0.25 },
+      { opacity: 1, offset: 0.75 },
+      { transform: `translateX(${x1}px) skewX(${sk}deg)`, opacity: 0 },
+    ], { duration: ms, delay, easing: EASE, fill: "backwards" });
+  };
+  run($(".sweep--volt"), innerWidth * 0.2, 1300, 0);
+  run($(".sweep--mauve"), innerWidth * 0.35, 1900, 80);
 }
 
 /* ---------------- type: slanted wipes ---------------- */
-const CLIP_HIDDEN_L = "polygon(-12% 0, -12% 0, -22% 100%, -22% 100%)";
-const CLIP_SHOWN = "polygon(-12% 0, 122% 0, 112% 100%, -22% 100%)";
-const CLIP_HIDDEN_R = "polygon(122% 0, 122% 0, 112% 100%, 112% 100%)";
-function wipeIn(el, delay = 0) {
-  if (reduce) return el.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 300, delay, fill: "both" }).finished;
-  return el.animate([
-    { clipPath: CLIP_HIDDEN_L, transform: "translateX(-0.4em)" },
+// each headline line gets its own wrapper so a mauve bar can ride the edge of the wipe
+$$(".title .ln").forEach((ln) => {
+  const w = document.createElement("span"), t = document.createElement("span"), b = document.createElement("span");
+  w.className = "ln-w"; t.className = "ln-t"; b.className = "bar"; b.setAttribute("aria-hidden", "true");
+  while (ln.firstChild) t.appendChild(ln.firstChild);
+  w.append(t, b); ln.appendChild(w);
+});
+const T = "-0.15em", B = "calc(100% + 0.2em)", R0 = "calc(100% + 1em)", R1 = "calc(100% + 0.38em)";
+const CLIP_HIDDEN_L = `polygon(-0.4em ${T}, -0.4em ${T}, -1.02em ${B}, -1.02em ${B})`;
+const CLIP_SHOWN = `polygon(-0.4em ${T}, ${R0} ${T}, ${R1} ${B}, -1.02em ${B})`;
+const CLIP_HIDDEN_R = `polygon(${R0} ${T}, ${R0} ${T}, ${R1} ${B}, ${R1} ${B})`;
+
+function wipeIn(el, delay = 0, ms = 900) {
+  if (reduce) return el.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 300, delay, fill: "backwards" }).finished;
+  const title = el.classList.contains("ln-t");
+  const a = el.animate([
+    { clipPath: CLIP_HIDDEN_L, transform: title ? "translateX(-0.5em) scale(1.05)" : "translateX(-0.4em)" },
     { clipPath: CLIP_SHOWN, transform: "none" },
-  ], { duration: 820, delay, easing: ease, fill: "both" }).finished;
+  ], { duration: ms, delay, easing: EASE, fill: "both" });
+  if (title) el.nextElementSibling.animate([
+    { left: "-0.6em", opacity: 0 },
+    { opacity: 1, offset: 0.2 },
+    { opacity: 1, offset: 0.7 },
+    { left: "calc(100% + 0.8em)", opacity: 0 },
+  ], { duration: ms, delay, easing: EASE, fill: "backwards" });
+  return a.finished.then(() => a.cancel());      // drop the clip once the text is fully in
 }
 function wipeOut(el, delay = 0) {
   if (reduce) return el.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 200, delay, fill: "both" }).finished;
   return el.animate([
     { clipPath: CLIP_SHOWN, transform: "none" },
     { clipPath: CLIP_HIDDEN_R, transform: "translateX(0.4em)" },
-  ], { duration: 520, delay, easing: "cubic-bezier(0.6, 0, 0.8, 0.3)", fill: "both" }).finished;
+  ], { duration: 620, delay, easing: EASE, fill: "both" }).finished;
 }
-const parts = (ch) => [...$$(".title .ln", ch), ...$$(".sub, .more, .contact-big a, .roll", ch)];
+const parts = (ch) => [...$$(".title .ln-t", ch), ...$$(".sub, .more, .contact-big a, .roll", ch)];
 
 async function showChapter(ch, d0 = 0) {
   ch.hidden = false; ch.classList.add("is-on");
-  await Promise.all(parts(ch).map((el, i) => wipeIn(el, d0 + i * 80)));
+  await Promise.all(parts(ch).map((el, i) => wipeIn(el, d0 + i * 90)));
 }
 async function hideChapter(ch) {
-  await Promise.all(parts(ch).map((el, i) => wipeOut(el, i * 45)));
+  await Promise.all(parts(ch).map((el, i) => wipeOut(el, i * 50)));
   ch.classList.remove("is-on"); ch.hidden = true;
   parts(ch).forEach((el) => el.getAnimations().forEach((a) => a.cancel()));
-}
-
-/* ---------------- readouts ---------------- */
-const GLYPHS = "/\\<>[]_-=+*#%";
-function typeCredit(text) {
-  if (!text) { credit.textContent = ""; return; }
-  const label = `Footage: ${text}`;
-  if (reduce) { credit.textContent = label; return; }
-  let i = 0;
-  const id = setInterval(() => {
-    i++;
-    credit.textContent = label.slice(0, i) + Array.from({ length: Math.min(4, label.length - i) }, () => GLYPHS[(Math.random() * GLYPHS.length) | 0]).join("");
-    if (i >= label.length) clearInterval(id);
-  }, 28);
 }
 
 /* ---------------- menu: big words <-> rail, animated as one piece ---------------- */
@@ -279,17 +379,16 @@ function flipMenu(toRail) {
   if (reduce) return;
   menuButtons.forEach((b, i) => {
     const a = before[i], z = after[i];
-    const s = a.height / z.height;
     b.animate([
-      { transform: `translate(${a.left - z.left}px, ${a.top - z.top}px) scale(${s})` },
+      { transform: `translate(${a.left - z.left}px, ${a.top - z.top}px) scale(${a.width / z.width}, ${a.height / z.height})` },
       { transform: "none" },
-    ], { duration: 900, delay: (toRail ? i : menuButtons.length - i) * 22, easing: ease, fill: "backwards" });
+    ], { duration: 1100, delay: (toRail ? i : menuButtons.length - 1 - i) * 26, easing: EASE, fill: "backwards" });
   });
 }
 
 /* ---------------- navigation ---------------- */
 let current = "home";
-let busy = false;
+let busy = true;
 function originOf(el) {
   if (!el) return [0.5, 0.5];
   const r = el.getBoundingClientRect();
@@ -298,21 +397,19 @@ function originOf(el) {
 async function go(id, from) {
   if (busy || id === current || !byId[id]) return;
   busy = true;
-  body.classList.add("is-switching");
   const prev = byId[current], next = byId[id];
   menuButtons.forEach((b) => b.setAttribute("aria-current", String(b.dataset.go === id)));
   const leaving = hideChapter(prev);
-  if ((current === "home") !== (id === "home")) setTimeout(() => flipMenu(id !== "home"), 120);
+  if ((current === "home") !== (id === "home")) setTimeout(() => flipMenu(id !== "home"), 140);
   const cut = cutTo(id, originOf(from));
   await leaving;
-  typeCredit(next.dataset.credit);
   current = id;
+  if (id === "credits") { roll.y = 0; next.hidden = false; measureRoll(); }
   history.replaceState(null, "", id === "home" ? location.pathname : `#${id}`);
-  await showChapter(next, 260);
+  await showChapter(next, 200);
   await cut;
-  body.classList.remove("is-switching");
   busy = false;
-  // warm up the neighbours so the next cut starts instantly
+  // warm up the neighbours so the next cut starts at once
   const i = order.indexOf(id);
   [order[(i + 1) % order.length], order[(i - 1 + order.length) % order.length]].forEach((n) => videoFor(n).load());
 }
@@ -345,35 +442,36 @@ addEventListener("touchend", (e) => {
 
 /* ---------------- intro: title card, then the console ---------------- */
 async function intro() {
-  busy = true;
   requestAnimationFrame(frame);
   const v = videoFor("home");
   play(v);
-  await whenReady(v);
-  if (stage) { stage.a = v; stage.dimTo = 0.5; }
-  else $$(".stage-fallback video").forEach((x) => x.classList.toggle("on", x === v));
-  typeCredit(byId.home.dataset.credit);
+  // the title card starts straight away; the footage fades up behind it as soon as it has a frame
+  whenReady(v, 6000).then(() => {
+    if (stage) { stage.a = v; glide(stage, "dim", body.classList.contains("is-intro") ? 0.5 : DIM.home, 1800); }
+    else $$(".stage-fallback video").forEach((x) => x.classList.toggle("on", x === v));
+  });
+  if (stage) glide(stage, "sweep", 0.6, 2600);
   const home = byId.home;
   home.classList.add("is-on");
-  await Promise.all($$(".title .ln", home).map((el, i) => wipeIn(el, 300 + i * 140)));
-  await new Promise((r) => setTimeout(r, reduce ? 200 : 1300));
+  await Promise.all($$(".title .ln-t", home).map((el, i) => wipeIn(el, 400 + i * 160, 1100)));
+  await wait(reduce ? 200 : 1100);
 
   // the title card settles into the corner and the menu wipes in
   const t = $(".title", home);
   const a = t.getBoundingClientRect();
   body.classList.remove("is-intro");
   const z = t.getBoundingClientRect();
-  if (stage) stage.dimTo = DIM.home;
+  if (stage && stage.a) glide(stage, "dim", DIM.home, 1600);
   if (!reduce) t.animate([
-    { transform: `translate(${a.left - z.left}px, ${a.top - z.top}px) scale(${a.height / z.height})`, transformOrigin: "0 0" },
+    { transform: `translate(${a.left - z.left}px, ${a.top - z.top}px) scale(${a.width / z.width}, ${a.height / z.height})`, transformOrigin: "0 0" },
     { transform: "none", transformOrigin: "0 0" },
-  ], { duration: 1000, easing: ease });
-  wipeIn($(".sub", home), 500);
-  await Promise.all(menuButtons.map((b, i) => wipeIn(b, 350 + i * 70)));
+  ], { duration: 1300, easing: EASE });
+  wipeIn($(".sub", home), 700);
+  await Promise.all(menuButtons.map((b, i) => wipeIn(b, 450 + i * 80)));
   busy = false;
 
   // open a chapter straight from the address bar (#production etc.)
   const start = location.hash.slice(1);
-  if (byId[start] && start !== "home") setTimeout(() => go(start, $(`.menu button[data-go="${start}"]`)), 1400);
+  if (byId[start] && start !== "home") go(start, $(`.menu button[data-go="${start}"]`));
 }
 intro();
