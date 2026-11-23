@@ -162,6 +162,22 @@
     .work-grid .more-card { grid-column: 1 / -1; }
     .work-grid .more-card .more-thumb { aspect-ratio: auto; min-height: 9rem; }
     .work-grid .more-card:hover .more-thumb { transform: scale(1.005); }
+    /* Showreel: full width at the top of the page, starts playing with the sound on */
+    .showreel { position: relative; background: var(--bg); }
+    .showreel video { display: block; width: 100%; aspect-ratio: 16 / 9; max-height: calc(100vh - 4rem); object-fit: cover; background: var(--bg); cursor: pointer; }
+    .showreel-controls { position: absolute; left: 0; right: 0; bottom: 0; display: flex; gap: 0.75rem; padding: clamp(0.9rem, 2.5vw, 1.75rem); background: linear-gradient(to top, rgba(12, 13, 9, 0.6), transparent); }
+    .reel-btn { display: inline-flex; align-items: center; gap: 0.6rem; min-height: 2.9rem; padding: 0.7rem 1.25rem; border-radius: 999px; border: 1px solid rgba(244, 243, 232, 0.35); background: rgba(12, 13, 9, 0.55); color: var(--cream); font: 600 0.95rem var(--font-body); cursor: pointer; backdrop-filter: blur(8px); }
+    .reel-btn:hover, .reel-btn:focus-visible { border-color: var(--volt); color: var(--volt); }
+    .reel-btn svg { width: 1.15rem; height: 1.15rem; flex: none; }
+    .reel-btn.needs-tap { border-color: var(--volt); color: var(--volt); }
+    @media (max-width: 600px) {
+      .showreel-controls { padding: 0.6rem; gap: 0.5rem; }
+      .reel-btn { min-height: 2.25rem; padding: 0.4rem 0.85rem; font-size: 0.82rem; gap: 0.4rem; }
+      .reel-btn svg { width: 1rem; height: 1rem; }
+    }
+    .reel-sound .icon-off { display: none; }
+    .reel-sound[aria-pressed="false"] .icon-on { display: none; }
+    .reel-sound[aria-pressed="false"] .icon-off { display: block; }
   </style>
 </head>
 <body>
@@ -203,6 +219,21 @@
   </header>
 
   <main>
+
+    <!-- Showreel: plays first, full width, with sound -->
+    <section class="showreel" aria-label="Volare Media showreel">
+      <video id="showreel-video" playsinline preload="auto" poster="assets/img/showreel-poster.jpg" aria-label="Volare Media showreel">
+        <source src="assets/showreel-720.mp4" type="video/mp4">
+      </video>
+      <div class="showreel-controls">
+        <button class="reel-btn reel-sound" type="button" aria-pressed="true">
+          <svg class="icon-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5L6 9H3v6h3l5 4V5z"/><path d="M15.5 8.5a5 5 0 010 7M18.5 5.5a9 9 0 010 13"/></svg>
+          <svg class="icon-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5L6 9H3v6h3l5 4V5z"/><path d="M16 9l6 6M22 9l-6 6"/></svg>
+          <span class="reel-sound-label">Sound on</span>
+        </button>
+        <button class="reel-btn reel-play" type="button">Pause</button>
+      </div>
+    </section>
 
     <section class="hero grid-bleed grid-bleed--glow">
       <div class="wrap">
@@ -393,5 +424,44 @@
   </footer>
 
   <script src="script.js?v=33"></script>
+  <script>
+    // Showreel: start with the sound on. Browsers that block sound on arrival
+    // (Safari, phones, a direct visit) start it muted and light up the sound button.
+    (function () {
+      var v = document.getElementById('showreel-video'); if (!v) return;
+      var sound = document.querySelector('.reel-sound'), label = document.querySelector('.reel-sound-label');
+      var playBtn = document.querySelector('.reel-play'), autoPaused = false;
+      function setSound(on) {
+        v.muted = !on;
+        sound.setAttribute('aria-pressed', on ? 'true' : 'false');
+        label.textContent = on ? 'Sound on' : 'Tap for sound';
+        sound.classList.toggle('needs-tap', !on);
+      }
+      function syncPlay() { playBtn.textContent = v.ended ? 'Watch again' : (v.paused ? 'Play' : 'Pause'); }
+      function start() { var p = v.play(); return p && p.catch ? p : Promise.resolve(); }
+      setSound(true);
+      start().catch(function () { setSound(false); start().catch(function () {}); });
+      sound.addEventListener('click', function () {
+        setSound(v.muted);
+        if (!v.muted) { label.textContent = 'Sound on'; }
+        if (v.paused) start().catch(function () {});
+      });
+      playBtn.addEventListener('click', function () { if (v.paused || v.ended) start().catch(function () {}); else v.pause(); });
+      v.addEventListener('click', function () { if (v.paused) start().catch(function () {}); else v.pause(); });
+      ['play', 'pause', 'ended'].forEach(function (ev) { v.addEventListener(ev, syncPlay); });
+      // pause when it scrolls away or a client video starts, resume when it comes back
+      if ('IntersectionObserver' in window) {
+        new IntersectionObserver(function (es) {
+          es.forEach(function (e) {
+            if (!e.isIntersecting && !v.paused) { v.pause(); autoPaused = true; }
+            else if (e.isIntersecting && autoPaused) { autoPaused = false; start().catch(function () {}); }
+          });
+        }, { threshold: 0.35 }).observe(v);
+      }
+      document.querySelectorAll('[data-youtube]').forEach(function (t) {
+        t.addEventListener('click', function () { v.pause(); autoPaused = false; });
+      });
+    })();
+  </script>
 </body>
 </html>
