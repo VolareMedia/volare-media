@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Volare Media | Production House, Vancouver Island</title>
+  <meta name="description" content="Volare Media is a production house on Vancouver Island: creative direction, production, post-production, launch, brand and web.">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Inter+Tight:wght@500;600;700&family=Fragment+Mono&display=swap">
+  <link rel="stylesheet" href="console.css?v=2">
+</head>
+<body class="is-intro">
+  <!-- Full-screen footage: one WebGL canvas, every clip in black and white, played at normal speed -->
+  <canvas id="stage" aria-hidden="true"></canvas>
+  <div class="stage-fallback" aria-hidden="true"></div>
+
+  <!-- the console frame -->
+  <div class="frame" aria-hidden="true">
+    <span class="corner tl"></span><span class="corner tr"></span>
+    <span class="corner bl"></span><span class="corner br"></span>
+    <span class="slash"></span>
+  </div>
+
+  <header class="hud-top">
+    <button class="logo" type="button" data-go="home" aria-label="Volare Media, back to the start"><img src="assets/vm-logo.png" alt="Volare Media"></button>
+    <a class="hud-call" href="tel:+12505894521">250.589.4521</a>
+  </header>
+
+  <!-- Menu: big words at the start, a slim rail once a chapter is open -->
+  <nav class="menu" aria-label="Chapters">
+    <ul>
+      <li><button type="button" data-go="direction">Direction</button></li>
+      <li><button type="button" data-go="production">Production</button></li>
+      <li><button type="button" data-go="post">Post-production</button></li>
+      <li><button type="button" data-go="launch">Launch</button></li>
+      <li><button type="button" data-go="brand">Brand and web</button></li>
+      <li><button type="button" data-go="credits">Credits</button></li>
+      <li><button type="button" data-go="contact">Contact</button></li>
+    </ul>
+  </nav>
+
+  <main class="chapters">
+    <section class="chapter" data-id="home" data-clip="assets/showreel-720.mp4" data-credit="Volare Media reel" aria-labelledby="t-home">
+      <h1 id="t-home" class="title"><span class="ln">Videos made</span> <span class="ln">with intention<span class="dot">.</span></span></h1>
+      <p class="sub">A production house on Vancouver Island.</p>
+    </section>
+
+    <section class="chapter" data-id="direction" data-clip="assets/banner-loop-3.mp4" aria-labelledby="t-direction" hidden>
+      <h2 id="t-direction" class="title"><span class="ln">Every shot</span> <span class="ln">has a reason<span class="dot">.</span></span></h2>
+      <p class="sub">A good video starts with a reason, not a camera. We work out who it's for, where it will run and what it has to do before we film anything.</p>
+      <a class="more" href="creative-direction.html">Creative direction</a>
+    </section>
+
+    <section class="chapter" data-id="production" data-clip="assets/modelk-rolling-loop.mp4" aria-labelledby="t-production" hidden>
+      <h2 id="t-production" class="title"><span class="ln">The right crew</span> <span class="ln">for every project<span class="dot">.</span></span></h2>
+      <p class="sub">We bring in the director, DP and crew each project needs, people we know and trust on set.</p>
+      <a class="more" href="crew.html">Meet the crew</a>
+    </section>
+
+    <section class="chapter" data-id="post" data-clip="assets/sixtyforty-loop.mp4" data-credit="Sixty Forty" aria-labelledby="t-post" hidden>
+      <h2 id="t-post" class="title"><span class="ln">The edit is where</span> <span class="ln">a video finds</span> <span class="ln">its feeling<span class="dot">.</span></span></h2>
+      <p class="sub">Editing, colour, sound and music, and one shoot cut for every platform.</p>
+      <a class="more" href="services.html">Services</a>
+    </section>
+
+    <section class="chapter" data-id="launch" data-clip="assets/g2g-loop.mp4" data-credit="Gas 2 Go" aria-labelledby="t-launch" hidden>
+      <h2 id="t-launch" class="title"><span class="ln">A video only works</span> <span class="ln">once the right</span> <span class="ln">people see it<span class="dot">.</span></span></h2>
+      <p class="sub">So we run the Meta, Google and YouTube ads and the social posts too.</p>
+      <a class="more" href="marketing-videos.html">Marketing videos</a>
+    </section>
+
+    <section class="chapter" data-id="brand" data-clip="assets/lp-banner-720.mp4" aria-labelledby="t-brand" hidden>
+      <h2 id="t-brand" class="title"><span class="ln">Websites and branding,</span> <span class="ln">built around</span> <span class="ln">your video<span class="dot">.</span></span></h2>
+      <p class="sub">Your website and brand should look as good as your video does, so we build those as well.</p>
+      <a class="more" href="website-development.html">Websites and branding</a>
+    </section>
+
+    <section class="chapter chapter--credits" data-id="credits" data-clip="assets/fundraiser-loop.mp4" aria-labelledby="t-credits" hidden>
+      <h2 id="t-credits" class="sr-only">Credits</h2>
+      <div class="roll" aria-live="off">
+        <div class="roll-inner">
+          <p class="roll-head">A Volare Media production</p>
+          <dl class="credits">
+            <div><dt>Founder, producer, editor, DP</dt><dd>Chris Chisholm</dd></div>
+            <div><dt>Producer, director, writer, props master</dt><dd>Jackie Taylor</dd></div>
+            <div><dt>Audio engineer, voice over</dt><dd>Jonathan Wright</dd></div>
+            <div><dt>Budgets, bookkeeping, customer service</dt><dd>Ashley Chisholm</dd></div>
+          </dl>
+          <p class="roll-head">The partners we bring in</p>
+          <ul class="credit-list">
+            <li>Townley Visual Media</li><li>Free Lance Industries</li><li>Untold Forge</li>
+            <li>Dominic Hall</li><li>Sarah Alexander Studio Services</li><li>Birns &amp; Sawyer</li>
+          </ul>
+          <p class="roll-head">Made for</p>
+          <ul class="credit-list credit-list--cols">
+            <li>Tailgate Toolkit</li><li>Gas 2 Go</li><li>Sixty Forty</li><li>Stratos Nutrition</li>
+            <li>De Mode en Vogue</li><li>White Wolf Homes</li><li>Harbour City Kitchens</li><li>Maxxam Insurance</li>
+            <li>Peninsula Gives</li><li>VICA</li><li>West Haven Cabinetry</li><li>It's A Doodle K9 Service</li>
+          </ul>
+          <p class="roll-end"><img src="assets/vm-logo.png" alt="Volare Media"></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="chapter chapter--contact" data-id="contact" data-clip="assets/peninsula-recap-loop.mp4" data-credit="Peninsula Gives" aria-labelledby="t-contact" hidden>
+      <h2 id="t-contact" class="title"><span class="ln">Tell us what you want</span> <span class="ln">your video to do<span class="dot">.</span></span></h2>
+      <p class="contact-big"><a href="tel:+12505894521">250.589.4521</a><a href="mailto:video@volaremedia.net">video@volaremedia.net</a></p>
+      <p class="sub">We reply within one business day.</p>
+      <a class="more" href="contact.html">Send us a message</a>
+    </section>
+  </main>
+
+  <footer class="hud-bottom" aria-hidden="true">
+    <span class="hud-credit"></span>
+    <span class="hud-time"></span>
+  </footer>
+
+  <script src="console.js?v=1" type="module"></script>
+</body>
+</html>
