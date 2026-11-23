@@ -16,10 +16,6 @@ const order = chapters.map((c) => c.dataset.id);
 const byId = Object.fromEntries(chapters.map((c) => [c.dataset.id, c]));
 const menuButtons = $$(".menu button");
 
-// four mock-ups of the chapter link: console.html?link=1 to 4 (1 if none is given)
-const linkStyle = new URLSearchParams(location.search).get("link");
-body.classList.add("link-" + (["1", "2", "3", "4"].includes(linkStyle) ? linkStyle : "1"));
-
 /* ---------------- one easing curve for everything ---------------- */
 const smoother = (t) => t * t * t * (t * (t * 6 - 15) + 10);
 const EASE = CSS.supports("animation-timing-function", "linear(0, 1)")
@@ -84,8 +80,10 @@ const FRAG = `
 precision highp float;
 varying vec2 vUv;
 uniform sampler2D uA, uB;
-uniform float uProg, uTime, uAspA, uAspB, uScreen, uDim, uStrips, uAngle, uZoom, uPx, uSeed, uSwing;
-uniform vec2 uOrigin, uPar;
+uniform float uProg, uTime, uAspA, uAspB, uScreen, uDim, uStrips, uAngle, uZoom, uPx, uSeed, uSwing, uRoll;
+uniform vec2 uOrigin, uPar, uShake;
+float gZoom;      // how far the camera is pushed in right now
+float gLift;      // 0 at rest, 1 at the middle of a cut
 
 const vec3 VOLT = vec3(0.839, 1.0, 0.239);
 const vec3 LILAC = vec3(0.788, 0.729, 0.957);
@@ -110,16 +108,16 @@ float hash(vec2 p) { return fract(sin(dot(p, vec2(12.9898, 78.233))) * 43758.545
 float warp(float s) { return s + 0.32 * sin(s * 1.9 + uSeed); }
 float warpD(float s) { return 1.0 + 0.608 * cos(s * 1.9 + uSeed); }
 // brightness of each clip at a point on the flat picture plane (centre 0,0; height 1)
-float sampA(vec2 q) { return tone(luma(texture2D(uA, (cover(vec2(q.x / uScreen + 0.5, q.y + 0.5), uAspA) - 0.5) / uZoom + 0.5).rgb)); }
-float sampB(vec2 q) { return tone(luma(texture2D(uB, (cover(vec2(q.x / uScreen + 0.5, q.y + 0.5), uAspB) - 0.5) / uZoom + 0.5).rgb)); }
+float sampA(vec2 q) { return tone(luma(texture2D(uA, (cover(vec2(q.x / uScreen + 0.5, q.y + 0.5), uAspA) - 0.5) / gZoom + 0.5).rgb)); }
+float sampB(vec2 q) { return tone(luma(texture2D(uB, (cover(vec2(q.x / uScreen + 0.5, q.y + 0.5), uAspB) - 0.5) / gZoom + 0.5).rgb)); }
 
 struct Pane { float hit; vec2 q; float s; float id; float sn; float g; float lp; float dir; float t; };
 
 // Which pane of this depth layer covers the pixel, and where on that (tilted) pane are we?
 Pane paneAt(vec2 pc, float front, float lift) {
   Pane P;
-  float z = front > 0.5 ? 0.05 : -0.022;                       // front panes come closer, back panes drop away
-  vec2 pl = (pc - uPar * z * lift * 0.6) / (1.0 + z * lift);
+  float z = front > 0.5 ? 0.075 : -0.035;                      // front panes come closer, back panes drop away
+  vec2 pl = (pc - (uPar * 0.6 + vec2(uSwing * 0.5, 0.0)) * z * lift) / (1.0 + z * lift);   // closer panes slide further as the camera swings
   float span = uScreen + 1.0;
   vec2 r = rot(pl, uAngle);
   float S = (r.y / span + 0.5) * uStrips;
@@ -135,10 +133,10 @@ Pane paneAt(vec2 pc, float front, float lift) {
   float t = clamp((uProg - min(abs(id - oId) / uStrips, 1.0) * 0.38) / 0.62, 0.0, 1.0);   // each pane's turn overlaps its neighbours'
   float g = bump(t);                                            // this pane's swell: its tilt and its glass
   float dir = even > 0.5 ? 1.0 : -1.0;
-  float th = g * dir * (0.20 + 0.20 * hash(vec2(id, uSeed)));  // tilt about the pane's long axis
+  float th = g * dir * (0.23 + 0.23 * hash(vec2(id, uSeed)));  // tilt about the pane's long axis
   float sn = sin(th), cs = cos(th);
   // one end of the pane also swings away from the camera, so the gap beside it opens as a wedge
-  float Y = g * 0.11 * (0.4 + 0.6 * hash(vec2(id + 7.0, uSeed))) * (0.5 + dir * r.x / span);
+  float Y = g * 0.127 * (0.4 + 0.6 * hash(vec2(id + 7.0, uSeed))) * (0.5 + dir * r.x / span);
   float s = v * (1.0 + Y) / (cs - v * sn * K);                  // undo the tilt: where on the flat pane is this pixel
   float d = 1.0 + Y + s * sn * K;                               // how far that point sits from the camera
 
@@ -167,12 +165,13 @@ vec3 shade(Pane P) {
 
   // glass: the bevel along each long edge bends the picture, and the tilt shifts it sideways
   float bev = smoothstep(0.27, 0.5, abs(P.s)) * sign(P.s);
-  vec2 refr = acrossV * (bev * abs(bev) * 0.05 + P.sn * 0.04) * P.g;
+  vec2 refr = acrossV * (bev * abs(bev) * 0.058 + P.sn * 0.046) * P.g;
   vec2 qa = (P.q + alongV * (0.05 * depth * P.lp + near * 0.03 * env) + refr) / (1.0 + 0.10 * depth * P.lp);
   vec2 qb = (P.q - alongV * (0.05 * depth * (1.0 - P.lp) + near * 0.025 * env) + refr) / (1.0 + 0.12 * depth * (1.0 - P.lp));
 
-  // colour split: three samples spread across the pane, wider toward the bevel
-  vec2 ab = acrossV * (0.006 + 0.03 * abs(bev)) * P.g;
+  // colour split: three samples spread across the pane, wider toward the bevel,
+  // plus a lens split that grows toward the corners of the frame while the camera is moving
+  vec2 ab = acrossV * (0.010 + 0.046 * abs(bev)) * P.g + P.q * gLift * 0.011;
   float l0 = mix(sampA(qa), sampB(qb), showB), l1, l2;
   if (showB > 0.5) { l1 = sampB(qb + ab); l2 = sampB(qb - ab); }
   else { l1 = sampA(qa + ab); l2 = sampA(qa - ab); }
@@ -192,10 +191,10 @@ vec3 shade(Pane P) {
   float rimW = uPx * uStrips / span * 3.0, as = abs(P.s);
   float rim = smoothstep(0.5 - rimW * 2.2, 0.5 - rimW * 0.6, as)                 // the outer edge
             + 0.45 * (1.0 - smoothstep(0.0, rimW * 1.2, abs(as - 0.455)));        // and a fainter inner one: the glass has thickness
-  col += mix(CREAM, LILAC, 0.55) * rim * P.g * 0.5;
+  col += mix(CREAM, LILAC, 0.55) * rim * P.g * 0.58;
   // a glint slides across the pane as it tilts
   float gl = (P.s - (P.t * 1.6 - 0.8) * P.dir) / 0.09;
-  col += mix(CREAM, LILAC, 0.4) * exp(-gl * gl) * P.g * 0.16;
+  col += mix(CREAM, LILAC, 0.4) * exp(-gl * gl) * P.g * 0.19;
   return col;
 }
 
@@ -203,10 +202,16 @@ void main() {
   vec2 uv = vUv;
   vec2 p = vec2((uv.x - 0.5) * uScreen, uv.y - 0.5);
 
-  // camera: the whole picture leans a little toward the pointer, and swings on every cut
+  // camera. At rest it drifts, rolls a touch and leans toward the pointer, like a slow handheld shot.
+  // On a cut it pushes in, swings to one side, rolls and whips across, then settles.
   float lift = bump(uProg);
-  vec2 lean = vec2(uPar.x * 0.028 + uSwing * lift * 0.07, uPar.y * 0.028);
-  vec2 pc = p * (1.0 + dot(p, lean)) + uPar * 0.008;
+  gLift = lift;
+  gZoom = uZoom * (1.0 + 0.07 * lift);
+  p = rot(p, uRoll + uSwing * lift * 0.035);
+  vec2 lean = vec2(uPar.x * 0.036 + uSwing * lift * 0.10, uPar.y * 0.036 - lift * 0.03);
+  // the lean only ever moves the picture inward, so the frame edge never shows
+  float inward = sqrt(lean.x * lean.x + 0.00002) * uScreen * 0.5 + sqrt(lean.y * lean.y + 0.00002) * 0.5;
+  vec2 pc = p * (1.0 + dot(p, lean) - inward) + uPar * 0.010 + uShake + vec2(uSwing * lift * 0.035, 0.0);
 
   vec3 col;
   if (uProg <= 0.0) {
@@ -238,7 +243,7 @@ void main() {
 }`;
 
 let stage = null;
-const UNIFORMS = ["uA", "uB", "uProg", "uTime", "uAspA", "uAspB", "uScreen", "uDim", "uStrips", "uAngle", "uOrigin", "uZoom", "uPx", "uSeed", "uSwing", "uPar"];
+const UNIFORMS = ["uA", "uB", "uProg", "uTime", "uAspA", "uAspB", "uScreen", "uDim", "uStrips", "uAngle", "uOrigin", "uZoom", "uPx", "uSeed", "uSwing", "uPar", "uRoll", "uShake"];
 if (gl) {
   const sh = (type, src) => { const s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s);
     if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) throw new Error(gl.getShaderInfoLog(s)); return s; };
@@ -297,8 +302,9 @@ function frame(now) {
   const dt = Math.min(0.05, (now - lastT) / 1000); lastT = now;
   const t = now / 1000;
 
-  const px = reduce ? 0 : follow(parX, pointer.x + 0.22 * Math.sin(t * 0.21), dt);
-  const py = reduce ? 0 : follow(parY, pointer.y + 0.22 * Math.cos(t * 0.17), dt);
+  // the camera never sits still: it wanders on two slow waves, on top of following the pointer
+  const px = reduce ? 0 : follow(parX, pointer.x + 0.42 * Math.sin(t * 0.29) + 0.16 * Math.sin(t * 0.67 + 1.3), dt);
+  const py = reduce ? 0 : follow(parY, pointer.y + 0.36 * Math.cos(t * 0.23) + 0.14 * Math.sin(t * 0.59 + 0.4), dt);
   body.style.setProperty("--px", px.toFixed(4));
   body.style.setProperty("--py", py.toFixed(4));
 
@@ -322,7 +328,11 @@ function frame(now) {
   gl.uniform1f(U.uAspA, stage.a && stage.a.videoWidth ? stage.a.videoWidth / stage.a.videoHeight : 16 / 9);
   gl.uniform1f(U.uAspB, stage.b && stage.b.videoWidth ? stage.b.videoWidth / stage.b.videoHeight : 16 / 9);
   gl.uniform1f(U.uDim, stage.dim);
-  gl.uniform1f(U.uZoom, reduce ? 1.08 : 1.085 + 0.015 * Math.sin(t * 0.1));   // a slow breathing push on the footage
+  gl.uniform1f(U.uZoom, reduce ? 1.1 : 1.115 + 0.03 * Math.sin(t * 0.16));    // a slow push in and out
+  gl.uniform1f(U.uRoll, reduce ? 0 : 0.008 * Math.sin(t * 0.13) + 0.004 * Math.sin(t * 0.31 + 2));      // a touch of roll
+  gl.uniform2f(U.uShake,                                                         // and a small handheld float
+    reduce ? 0 : 0.0035 * Math.sin(t * 0.9) + 0.002 * Math.sin(t * 2.3 + 1),
+    reduce ? 0 : 0.0035 * Math.cos(t * 1.1) + 0.002 * Math.sin(t * 1.9 + 2));
   gl.uniform1f(U.uStrips, stage.strips);
   gl.uniform1f(U.uAngle, stage.angle);
   gl.uniform1f(U.uSeed, stage.seed);
