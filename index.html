@@ -174,15 +174,7 @@
     .v2-form .btn { justify-self: start; cursor: pointer; }
     .v2-form .form-small { color: var(--muted); font-size: 0.95rem; font-family: var(--font-body); text-transform: none; letter-spacing: 0; }
 
-    /* spinning start-your-project circle */
-    .spin-cta { position: fixed; right: clamp(1rem, 2.5vw, 2rem); bottom: clamp(1rem, 2.5vw, 2rem); z-index: 40; width: clamp(5.5rem, 8vw, 7.5rem); aspect-ratio: 1; border-radius: 50%; display: grid; place-items: center; text-decoration: none; color: var(--cream); background: rgba(12, 13, 9, 0.6); backdrop-filter: blur(8px); border: 1px solid var(--line); transition: opacity 0.3s, transform 0.3s, border-color 0.2s; }
-    .spin-cta svg { position: absolute; inset: 0; width: 100%; height: 100%; animation: spin 16s linear infinite; }
-    .spin-cta text { fill: currentColor; font: 600 9.5px var(--font-body); text-transform: uppercase; }
-    .spin-cta .arrow { font-size: clamp(1.3rem, 2vw, 1.8rem); color: var(--volt); transform: rotate(-45deg); }
-    .spin-cta:hover { border-color: var(--volt); transform: scale(1.05); }
-    .spin-cta.is-hidden { opacity: 0; pointer-events: none; transform: scale(0.8); }
-    @keyframes spin { to { transform: rotate(360deg); } }
-    @media (prefers-reduced-motion: reduce) { .spin-cta svg { animation: none; } .lit .w { opacity: 1; } }
+    @media (prefers-reduced-motion: reduce) { .lit .w { opacity: 1; } }
 
 
     /* black and white footage and photos */
@@ -523,14 +515,6 @@
 
   </main>
 
-  <a class="spin-cta" href="#contact" aria-label="Start your project with us">
-    <svg viewBox="0 0 100 100" aria-hidden="true">
-      <defs><path id="spin-path" d="M50,50 m-38,0 a38,38 0 1,1 76,0 a38,38 0 1,1 -76,0"/></defs>
-      <text textLength="236" lengthAdjust="spacing"><textPath href="#spin-path" textLength="236" lengthAdjust="spacing">Start your project with us ·</textPath></text>
-    </svg>
-    <span class="arrow" aria-hidden="true">&#8594;</span>
-  </a>
-
   <footer class="site-footer footer-v2 photo-band" style="--photo: url('assets/img/footer-crew-cinema.jpg'); --photo-pos: 60% 42%; --photo-opacity: 0.4;">
     <div class="wrap">
       <div class="footer-top">
@@ -606,14 +590,6 @@
         lazyVids.forEach(function (v) { vo.observe(v); });
       }
 
-      // Hide the spinning circle over the hero and the contact form
-      var spin = document.querySelector('.spin-cta'), hero = document.querySelector('.hero-cinema'), contact = document.getElementById('contact');
-      function spinVis() {
-        var h = hero.getBoundingClientRect().bottom > window.innerHeight * 0.5;
-        var c = contact.getBoundingClientRect().top < window.innerHeight * 0.9;
-        spin.classList.toggle('is-hidden', h || c);
-      }
-      window.addEventListener('scroll', spinVis, { passive: true }); spinVis();
     })();
   </script>
 </body>
