@@ -1,9 +1,10 @@
 // Volare Media console concept.
 // One WebGL canvas shows the footage in black and white. Every clip plays at normal speed.
-// At rest the footage is one flat plane that leans very slightly toward the pointer.
+// Between cuts the footage is shown plain: flat, still and full frame. Nothing follows the pointer.
 // Picking a chapter turns it into slanted panes of glass on two depth layers: each pane
-// tilts toward or away from the camera, bends and colour-splits the picture near its edges,
-// and carries the cut from the old clip to the new one. Then the panes settle flat again.
+// tilts toward or away from the camera, bends the picture and splits it into the full spectrum
+// near its edges, and carries the cut from the old clip to the new one, while the camera pushes in,
+// swings and rolls. Then the panes settle flat and the camera comes back to rest.
 // Every movement runs on one curve (smootherstep): it starts and stops with no speed and
 // no sudden change of acceleration.
 
@@ -80,9 +81,9 @@ const FRAG = `
 precision highp float;
 varying vec2 vUv;
 uniform sampler2D uA, uB;
-uniform float uProg, uTime, uAspA, uAspB, uScreen, uDim, uStrips, uAngle, uZoom, uPx, uSeed, uSwing, uRoll;
-uniform vec2 uOrigin, uPar, uShake;
-float gZoom;      // how far the camera is pushed in right now
+uniform float uProg, uTime, uAspA, uAspB, uScreen, uDim, uStrips, uAngle, uPx, uSeed, uSwing;
+uniform vec2 uOrigin;
+float gZoom;      // how far the camera is pushed in right now (exactly 1 between cuts)
 float gLift;      // 0 at rest, 1 at the middle of a cut
 
 const vec3 VOLT = vec3(0.839, 1.0, 0.239);
@@ -108,8 +109,16 @@ float hash(vec2 p) { return fract(sin(dot(p, vec2(12.9898, 78.233))) * 43758.545
 float warp(float s) { return s + 0.32 * sin(s * 1.9 + uSeed); }
 float warpD(float s) { return 1.0 + 0.608 * cos(s * 1.9 + uSeed); }
 // brightness of each clip at a point on the flat picture plane (centre 0,0; height 1)
-float sampA(vec2 q) { return tone(luma(texture2D(uA, (cover(vec2(q.x / uScreen + 0.5, q.y + 0.5), uAspA) - 0.5) / gZoom + 0.5).rgb)); }
-float sampB(vec2 q) { return tone(luma(texture2D(uB, (cover(vec2(q.x / uScreen + 0.5, q.y + 0.5), uAspB) - 0.5) / gZoom + 0.5).rgb)); }
+// (a point pushed past the frame edge during a cut reads the picture mirrored, never a smeared edge)
+vec2 mirror(vec2 uv) { return abs(mod(uv + 1.0, 2.0) - 1.0); }
+float sampA(vec2 q) { return tone(luma(texture2D(uA, mirror((cover(vec2(q.x / uScreen + 0.5, q.y + 0.5), uAspA) - 0.5) / gZoom + 0.5)).rgb)); }
+float sampB(vec2 q) { return tone(luma(texture2D(uB, mirror((cover(vec2(q.x / uScreen + 0.5, q.y + 0.5), uAspB) - 0.5) / gZoom + 0.5)).rgb)); }
+// the colours of the spectrum from red (0) to violet (1), weighted so seven even steps add up to white
+vec3 spectrum(float f) {
+  return vec3((max(0.0, 1.0 - 2.0 * f) + 0.35 * max(0.0, 3.0 * f - 2.0)) / 2.525,
+              max(0.0, 1.0 - abs(2.0 * f - 1.0)) / 3.0,
+              max(0.0, 2.0 * f - 1.0) / 2.0);
+}
 
 struct Pane { float hit; vec2 q; float s; float id; float sn; float g; float lp; float dir; float t; };
 
@@ -117,7 +126,7 @@ struct Pane { float hit; vec2 q; float s; float id; float sn; float g; float lp;
 Pane paneAt(vec2 pc, float front, float lift) {
   Pane P;
   float z = front > 0.5 ? 0.075 : -0.035;                      // front panes come closer, back panes drop away
-  vec2 pl = (pc - (uPar * 0.6 + vec2(uSwing * 0.5, 0.0)) * z * lift) / (1.0 + z * lift);   // closer panes slide further as the camera swings
+  vec2 pl = (pc - vec2(uSwing * 0.5, 0.0) * z * lift) / (1.0 + z * lift);   // closer panes slide further as the camera swings
   float span = uScreen + 1.0;
   vec2 r = rot(pl, uAngle);
   float S = (r.y / span + 0.5) * uStrips;
@@ -169,16 +178,21 @@ vec3 shade(Pane P) {
   vec2 qa = (P.q + alongV * (0.05 * depth * P.lp + near * 0.03 * env) + refr) / (1.0 + 0.10 * depth * P.lp);
   vec2 qb = (P.q - alongV * (0.05 * depth * (1.0 - P.lp) + near * 0.025 * env) + refr) / (1.0 + 0.12 * depth * (1.0 - P.lp));
 
-  // colour split: three samples spread across the pane, wider toward the bevel,
-  // plus a lens split that grows toward the corners of the frame while the camera is moving
-  vec2 ab = acrossV * (0.010 + 0.046 * abs(bev)) * P.g + P.q * gLift * 0.011;
-  float l0 = mix(sampA(qa), sampB(qb), showB), l1, l2;
-  if (showB > 0.5) { l1 = sampB(qb + ab); l2 = sampB(qb - ab); }
-  else { l1 = sampA(qa + ab); l2 = sampA(qa - ab); }
-  // one sample feeds mauve, one cream, one volt. Where the three agree the result is plain black and white.
-  vec3 W = CREAM - DARK;
-  vec3 cM = W * vec3(0.40, 0.36, 0.50), cV = W * vec3(0.30, 0.36, 0.08);
-  vec3 col = DARK + cM * l1 + (W - cM - cV) * l0 + cV * l2;
+  // full-spectrum colour split: seven samples fanned across the pane, red at one end and violet at the other,
+  // wider toward the bevel, plus a lens split that grows toward the corners while the camera is moving.
+  // Where the seven agree, the colours add back up to plain black and white.
+  vec2 ab = acrossV * (0.012 + 0.052 * abs(bev)) * P.g + P.q * gLift * 0.013;
+  float l0 = mix(sampA(qa), sampB(qb), showB);
+  vec3 acc = l0 * spectrum(0.5);
+  for (int i = 0; i < 7; i++) {
+    if (i == 3) continue;                          // the middle sample is l0, taken above
+    float f = float(i) / 6.0;
+    vec2 o = ab * (f * 2.0 - 1.0);
+    float l;
+    if (showB > 0.5) l = sampB(qb + o); else l = sampA(qa + o);
+    acc += l * spectrum(f);
+  }
+  vec3 col = DARK + (CREAM - DARK) * acc;
 
   // mauve trails each cut edge; volt leads it, with a mauve echo just behind
   col = mix(col, gradeM(l0), smoothstep(-0.18, 0.0, edge) * showB * env * 0.5);
@@ -202,20 +216,19 @@ void main() {
   vec2 uv = vUv;
   vec2 p = vec2((uv.x - 0.5) * uScreen, uv.y - 0.5);
 
-  // camera. At rest it drifts, rolls a touch and leans toward the pointer, like a slow handheld shot.
-  // On a cut it pushes in, swings to one side, rolls and whips across, then settles.
+  // The camera only moves during a cut: it pushes in, swings to one side, rolls and whips across, then settles.
+  // Between cuts every one of these is exactly zero, so the footage is shown as it is: flat, still and full frame.
   float lift = bump(uProg);
   gLift = lift;
-  gZoom = uZoom * (1.0 + 0.07 * lift);
-  p = rot(p, uRoll + uSwing * lift * 0.035);
-  vec2 lean = vec2(uPar.x * 0.036 + uSwing * lift * 0.10, uPar.y * 0.036 - lift * 0.03);
-  // the lean only ever moves the picture inward, so the frame edge never shows
-  float inward = sqrt(lean.x * lean.x + 0.00002) * uScreen * 0.5 + sqrt(lean.y * lean.y + 0.00002) * 0.5;
-  vec2 pc = p * (1.0 + dot(p, lean) - inward) + uPar * 0.010 + uShake + vec2(uSwing * lift * 0.035, 0.0);
+  gZoom = 1.0 + 0.12 * ss(uProg / 0.22) * (1.0 - ss((uProg - 0.78) / 0.22));
+  p = rot(p, uSwing * lift * 0.045);
+  vec2 lean = vec2(uSwing * lift * 0.12, -lift * 0.04);
+  float inward = abs(lean.x) * uScreen * 0.5 + abs(lean.y) * 0.5;   // the lean only moves the picture inward
+  vec2 pc = p * (1.0 + dot(p, lean) - inward) + vec2(uSwing * lift * 0.045, 0.0);
 
   vec3 col;
   if (uProg <= 0.0) {
-    col = grade(sampA(pc));                        // at rest: one flat pane, no glass
+    col = grade(sampA(p));                         // between cuts: the plain footage, no glass, no camera
   } else {
     Pane F = paneAt(pc, 1.0, lift);
     vec3 cf = vec3(0.0), cb = vec3(0.0);
@@ -243,7 +256,7 @@ void main() {
 }`;
 
 let stage = null;
-const UNIFORMS = ["uA", "uB", "uProg", "uTime", "uAspA", "uAspB", "uScreen", "uDim", "uStrips", "uAngle", "uOrigin", "uZoom", "uPx", "uSeed", "uSwing", "uPar", "uRoll", "uShake"];
+const UNIFORMS = ["uA", "uB", "uProg", "uTime", "uAspA", "uAspB", "uScreen", "uDim", "uStrips", "uAngle", "uOrigin", "uPx", "uSeed", "uSwing"];
 if (gl) {
   const sh = (type, src) => { const s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s);
     if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) throw new Error(gl.getShaderInfoLog(s)); return s; };
@@ -280,15 +293,6 @@ function resize() {
   if (canvas.width !== w || canvas.height !== h) { canvas.width = w; canvas.height = h; }
 }
 
-/* ---------------- pointer: the picture and the type sit at different depths ---------------- */
-const pointer = { x: 0, y: 0 };
-const parX = spring(), parY = spring();
-addEventListener("pointermove", (e) => {
-  if (e.pointerType === "touch") return;
-  pointer.x = (e.clientX / innerWidth) * 2 - 1;
-  pointer.y = 1 - (e.clientY / innerHeight) * 2;
-}, { passive: true });
-
 /* ---------------- credits roll ---------------- */
 const roll = { box: $(".roll"), el: $(".roll-inner"), y: 0, max: 0, hover: false, v: spring() };
 const measureRoll = () => (roll.max = roll.el.offsetHeight - roll.box.clientHeight);
@@ -301,12 +305,6 @@ function frame(now) {
   requestAnimationFrame(frame);
   const dt = Math.min(0.05, (now - lastT) / 1000); lastT = now;
   const t = now / 1000;
-
-  // the camera never sits still: it wanders on two slow waves, on top of following the pointer
-  const px = reduce ? 0 : follow(parX, pointer.x + 0.42 * Math.sin(t * 0.29) + 0.16 * Math.sin(t * 0.67 + 1.3), dt);
-  const py = reduce ? 0 : follow(parY, pointer.y + 0.36 * Math.cos(t * 0.23) + 0.14 * Math.sin(t * 0.59 + 0.4), dt);
-  body.style.setProperty("--px", px.toFixed(4));
-  body.style.setProperty("--py", py.toFixed(4));
 
   if (!reduce) {
     const speed = current === "credits" && !roll.hover ? innerHeight * 0.046 : 0;
@@ -328,17 +326,11 @@ function frame(now) {
   gl.uniform1f(U.uAspA, stage.a && stage.a.videoWidth ? stage.a.videoWidth / stage.a.videoHeight : 16 / 9);
   gl.uniform1f(U.uAspB, stage.b && stage.b.videoWidth ? stage.b.videoWidth / stage.b.videoHeight : 16 / 9);
   gl.uniform1f(U.uDim, stage.dim);
-  gl.uniform1f(U.uZoom, reduce ? 1.1 : 1.115 + 0.03 * Math.sin(t * 0.16));    // a slow push in and out
-  gl.uniform1f(U.uRoll, reduce ? 0 : 0.008 * Math.sin(t * 0.13) + 0.004 * Math.sin(t * 0.31 + 2));      // a touch of roll
-  gl.uniform2f(U.uShake,                                                         // and a small handheld float
-    reduce ? 0 : 0.0035 * Math.sin(t * 0.9) + 0.002 * Math.sin(t * 2.3 + 1),
-    reduce ? 0 : 0.0035 * Math.cos(t * 1.1) + 0.002 * Math.sin(t * 1.9 + 2));
   gl.uniform1f(U.uStrips, stage.strips);
   gl.uniform1f(U.uAngle, stage.angle);
   gl.uniform1f(U.uSeed, stage.seed);
   gl.uniform1f(U.uSwing, stage.swing);
   gl.uniform2f(U.uOrigin, stage.origin[0], stage.origin[1]);
-  gl.uniform2f(U.uPar, px, py);
   gl.drawArrays(gl.TRIANGLES, 0, 3);
 }
 const tween = (ms, fn) => new Promise((res) => {

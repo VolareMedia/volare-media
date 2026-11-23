@@ -50,7 +50,7 @@ img { display: block; max-width: 100%; }
 .logo img { height: clamp(24px, 2.4vw, 32px); width: auto; }
 
 /* ---------- menu ---------- */
-.menu { position: fixed; z-index: 15; left: var(--gutter); bottom: clamp(4.5rem, 12vh, 8rem); translate: calc(var(--px, 0) * -7px) calc(var(--py, 0) * 7px); }
+.menu { position: fixed; z-index: 15; left: var(--gutter); bottom: clamp(4.5rem, 12vh, 8rem); }
 .menu ul { list-style: none; }
 .menu li { line-height: 1; }
 .menu button {
@@ -80,7 +80,7 @@ img { display: block; max-width: 100%; }
 .is-rail .menu button[aria-current="true"] { color: var(--volt); }
 
 /* ---------- chapters ---------- */
-.chapters { position: fixed; inset: 0; z-index: 10; pointer-events: none; translate: calc(var(--px, 0) * -14px) calc(var(--py, 0) * 14px); }
+.chapters { position: fixed; inset: 0; z-index: 10; pointer-events: none; }
 .chapter { position: absolute; inset: 0; pointer-events: none; }
 .chapter[hidden] { display: none; }
 .chapter.is-on { pointer-events: auto; }
@@ -104,6 +104,8 @@ img { display: block; max-width: 100%; }
 .more:hover::before { background-position: 0 0, 0 0; }
 .more-i { display: inline-block; width: 0.5em; height: 0.5em; border-top: 2px solid currentColor; border-right: 2px solid currentColor; rotate: 45deg; transition: translate 0.5s var(--ease); }
 .more:hover .more-i { translate: 0.35em 0; }
+/* the slanted left end makes the button look indented, so it hangs out into the margin to sit level with the text above */
+.chapter .more { margin-left: -0.95em; }
 
 /* home title: a centred title card during the intro, then it settles bottom right */
 .chapter[data-id="home"] .title { position: absolute; right: var(--gutter); bottom: clamp(5.5rem, 14vh, 9rem); text-align: right; font-size: clamp(1.9rem, 3.6vw, 3.6rem); transform-origin: 100% 100%; }
@@ -158,6 +160,7 @@ img { display: block; max-width: 100%; }
   .chapter:not([data-id="home"]) .title { bottom: 15.5rem; font-size: clamp(2.2rem, 10vw, 3rem); }
   .chapter:not([data-id="home"]) .sub { bottom: 8rem; right: var(--gutter); font-size: 0.98rem; }
   .chapter:not([data-id="home"]) .more { bottom: 4.6rem; }
+  .chapter .more { margin-left: -0.5em; }
   .chapter--contact .title { bottom: 18.5rem !important; font-size: 1.5rem !important; }
   .chapter--contact .contact-big { bottom: 12rem; }
   .contact-big a { font-size: clamp(1.7rem, 8vw, 2.4rem); }
