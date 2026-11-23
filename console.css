@@ -175,3 +175,11 @@ img { display: block; max-width: 100%; }
   .chapter.is-on .title { animation: none; }
   .chapter--credits .roll { overflow-y: auto; }
 }
+
+/* ---------- moving to an inner page: the new page wipes in on the slant ---------- */
+@view-transition { navigation: auto; }
+::view-transition-old(root) { animation: vt-out 0.55s var(--ease) both; }
+::view-transition-new(root) { animation: vt-in 0.8s var(--ease) both; }
+@keyframes vt-out { to { opacity: 0.2; } }
+@keyframes vt-in { from { clip-path: polygon(0 0, 0 0, -28% 100%, 0 100%); } to { clip-path: polygon(0 0, 128% 0, 100% 100%, 0 100%); } }
+@media (prefers-reduced-motion: reduce) { ::view-transition-old(root), ::view-transition-new(root) { animation: none; } }

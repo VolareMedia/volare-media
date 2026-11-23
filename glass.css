@@ -1,0 +1,58 @@
+/* Volare Media inner pages in the console's language, kept calmer than the landing page:
+   content first, plain dark sections, one glass reveal on the opening photo, headings that wipe in.
+   Loaded after styles.css and clean.css on every page with <body class="v2 v3">. */
+
+/* ---------- one easing curve for everything: starts and stops with no speed and no sudden push ---------- */
+:root { --ease: cubic-bezier(0.65, 0, 0.35, 1); }
+@supports (animation-timing-function: linear(0, 1)) { :root { --ease: linear(0, 0.0003, 0.0022, 0.0071, 0.0161, 0.0298, 0.0488, 0.0733, 0.1035, 0.1392, 0.18, 0.2255, 0.2752, 0.3283, 0.384, 0.4416, 0.5, 0.5584, 0.616, 0.6717, 0.7248, 0.7745, 0.82, 0.8608, 0.8965, 0.9267, 0.9512, 0.9702, 0.9839, 0.9929, 0.9978, 0.9997, 1); } }
+
+/* ---------- moving between pages: the new page wipes in on the slant ---------- */
+@view-transition { navigation: auto; }
+::view-transition-old(root) { animation: vt-out 0.55s var(--ease) both; }
+::view-transition-new(root) { animation: vt-in 0.8s var(--ease) both; }
+@keyframes vt-out { to { opacity: 0.2; } }
+@keyframes vt-in { from { clip-path: polygon(0 0, 0 0, -28% 100%, 0 100%); } to { clip-path: polygon(0 0, 128% 0, 100% 100%, 0 100%); } }
+@media (prefers-reduced-motion: reduce) { ::view-transition-old(root), ::view-transition-new(root) { animation: none; } }
+
+/* ---------- angular, not rounded ---------- */
+.v3 { --radius: 0px; --cut: clamp(16px, 2.2vw, 34px); }
+/* panels and picture frames lose one corner top right and one bottom left, cut on the brand's slant */
+.v3 .panel, .v3 .cta.band--volt, .v3 .section.band--volt, .v3 .big-list-shot, .v3 .video-thumb, .v3 .crew-shot, .v3 .family-shot, .v3 .photo-strip {
+  border-radius: 0;
+  clip-path: polygon(0 0, calc(100% - var(--cut) * 0.445) 0, 100% var(--cut), 100% 100%, calc(var(--cut) * 0.445) 100%, 0 calc(100% - var(--cut)));
+}
+
+/* ---------- less going on: photos and footage stay out of the body of the page ---------- */
+.v3 main > :not(:first-child).photo-band::before, .v3 main > :not(:first-child).photo-band::after,
+.v3 main > :not(:first-child).video-band::after, .v3 .site-footer.photo-band::before, .v3 .site-footer.photo-band::after { display: none; }
+.v3 main > :not(:first-child) > video.band-video { display: none; }
+
+/* ---------- opening photo: full width, shown through the glass stage ---------- */
+.v3 main > .hero:first-child { margin: 0; min-height: min(70svh, 44rem); }
+.hero-stage { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -1; display: block; }
+.has-stage::before, .has-stage::after { display: none !important; }
+.has-stage > video.band-video { position: absolute; width: 2px; height: 2px; opacity: 0; pointer-events: none; }
+.has-stage { overflow: hidden; }
+.cut-sweeps { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+.cut-sweep { position: absolute; top: -20%; bottom: -20%; left: 0; opacity: 0; will-change: transform, opacity; }
+.cut-sweep--volt { width: 2px; background: var(--volt); box-shadow: 0 0 18px rgba(214, 255, 61, 0.5); }
+.cut-sweep--mauve { width: clamp(70px, 12vw, 200px); margin-left: calc(clamp(70px, 12vw, 200px) / -2); background: rgba(201, 186, 244, 0.12); border-right: 1px solid rgba(201, 186, 244, 0.6); mix-blend-mode: screen; }
+.has-stage > .wrap { position: relative; z-index: 1; }
+
+/* ---------- type: headings wipe in line by line behind a mauve bar; everything else follows quietly ---------- */
+.v3 .reveal { opacity: 1; transform: none; transition: none; }
+/* held back until the script takes over, so nothing flashes and then animates (the page's own inline script lifts this after 4 s if the script never runs) */
+html.v3-pending .v3 .reveal, html.v3-pending .v3 main > :first-child > .wrap > *, [data-wipe] { opacity: 0; }
+.v3 .ln { display: block; }
+.v3 .ln-w { position: relative; display: inline-block; }
+.v3 .ln-t { display: inline-block; }
+.v3 .bar { position: absolute; top: 0.02em; bottom: 0.06em; left: -0.6em; width: 0.14em; background: var(--lilac); transform: skewX(-24deg); opacity: 0; pointer-events: none; }
+
+/* ---------- buttons: volt with slanted ends; mauve wipes across on hover ---------- */
+.v3 .btn:not(.btn--ghost) { --k: 0.95em; position: relative; isolation: isolate; border: 0; border-radius: 0; background: none; box-shadow: none; color: var(--bg);
+  padding: 0.95em 1.9em 0.95em 2em; font-family: var(--font-display); font-weight: 600; letter-spacing: -0.02em; transform: none; }
+.v3 .btn:not(.btn--ghost)::before { content: ""; position: absolute; inset: 0; z-index: -1; clip-path: polygon(var(--k) 0, 100% 0, calc(100% - var(--k)) 100%, 0 100%);
+  background: linear-gradient(105deg, var(--lilac) 0 46%, transparent 46.2%) 100% 0 / 300% 100% no-repeat, var(--volt); transition: background-position 0.7s var(--ease); }
+.v3 .btn:not(.btn--ghost):hover { background: none; color: var(--bg); transform: none; }
+.v3 .btn:not(.btn--ghost):hover::before { background-position: 0 0, 0 0; }
+.v3 a, .v3 button { transition-timing-function: var(--ease); }
