@@ -74,3 +74,28 @@ html.anim:not(.no-glass) .v3 main > :first-child > video.band-video { position: 
 .v3 .text-link::after { content: ""; width: 0.3em; height: 0.62em; background: var(--lilac); transform: skewX(-24deg); transform-origin: left; transition: transform 0.5s var(--ease), background-color 0.45s var(--ease); }
 .v3 .text-link:hover { color: var(--volt); border: 0; }
 .v3 .text-link:hover::after { background: var(--volt); transform: skewX(-24deg) scaleX(3.2); }
+
+/* ---------- the last of the older styles ---------- */
+/* outlined buttons become the same quiet link as .text-link: a word with the slanted marker */
+.v3 .btn--ghost { display: inline-flex; align-items: center; gap: 0.5em; border: 0; padding: 0; background: none; box-shadow: none; transform: none;
+  font-family: var(--font-display); font-weight: 600; letter-spacing: -0.02em; font-size: 1.1rem; color: var(--cream); transition: color 0.45s var(--ease); }
+.v3 .btn--ghost::after { content: ""; width: 0.3em; height: 0.62em; background: var(--lilac); transform: skewX(-24deg); transform-origin: left; transition: transform 0.5s var(--ease), background-color 0.45s var(--ease); }
+.v3 .btn--ghost:hover { background: none; color: var(--volt); transform: none; }
+.v3 .btn--ghost:hover::after { background: var(--volt); transform: skewX(-24deg) scaleX(3.2); }
+
+/* the menu behaves like the console's: mauve and a slanted marker under the pointer, volt on the page you are on */
+.v3 .v2-menu-links a { position: relative; letter-spacing: -0.035em; transition: color 0.45s var(--ease); }
+.v3 .v2-menu-links a::before { content: ""; position: absolute; left: -0.55em; top: 50%; width: 0.3em; height: 0.62em; margin-top: -0.31em; background: var(--lilac);
+  transform: skewX(-24deg) scaleX(0); transform-origin: left; transition: transform 0.5s var(--ease), background-color 0.45s var(--ease); }
+.v3 .v2-menu-links a:hover { color: var(--lilac); }
+.v3 .v2-menu-links a:hover::before { transform: skewX(-24deg) scaleX(1); }
+.v3 .v2-menu-links a[aria-current="page"] { color: var(--volt); }
+.v3 .v2-menu-links a[aria-current="page"]::before { background: var(--volt); transform: skewX(-24deg) scaleX(1); }
+.v3 .v2-menu-side a { transition: color 0.45s var(--ease); }
+.v3 .v2-menu-side a:hover { color: var(--lilac); }
+.v3 .v2-menu-side a[aria-current="page"] { color: var(--volt); }
+.v3 .v2-menu.photo-band::before { filter: grayscale(1) contrast(1.08); }
+
+/* partnership rows: the photo behind each row is black and white like every other photo on the site (the clients' own posts stay in colour) */
+.v3 .pship::before { filter: grayscale(1) contrast(1.05); }
+@media (max-width: 760px) { .v3 .v2-menu-links a::before { display: none; } }

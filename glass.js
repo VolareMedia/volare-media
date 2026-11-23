@@ -56,7 +56,7 @@ async function glassHero(box) {
   ], { duration: ms, delay, easing: EASE, fill: "backwards" });
   run(sweeps.lastChild, w * 0.2, 1100, 0);
   run(sweeps.firstChild, w * 0.35, 1500, 60);
-  stage.cut(src, { origin: [0.1, 0.35], dim: 0.5 });   // from dark to the photo, through the panes
+  stage.cut(src, { origin: [0.1, 0.35], dim: 0.4 });   // from dark to the photo, through the panes
 }
 
 /* ---------------- 2. type ---------------- */
