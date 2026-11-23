@@ -330,8 +330,6 @@
 .big-list--long a, .big-list--long span { font-size: clamp(1.8rem, 3.9vw, 3.5rem); line-height: 1.1; }
 .big-list--long li + li { margin-top: 0.3em; }
 .big-band .big-list-head { color: var(--cream); opacity: 0.75; }
-.big-band .big-list { max-width: 22ch; }
-.big-band .big-list--long { max-width: 26ch; }
 
 /* contact: phone and email in big type */
 .v2 .contact-grid .contact-line { font-family: var(--font-display); font-weight: 600; letter-spacing: -0.03em; font-size: clamp(1.9rem, 3.6vw, 3.2rem); line-height: 1.1; overflow-wrap: anywhere; }
