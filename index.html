@@ -215,6 +215,20 @@
       .crew-shot { aspect-ratio: auto; overflow: visible; border-radius: 0; }
       .crew-shot img { position: static; width: 100%; height: auto; aspect-ratio: 4 / 3; border-radius: var(--radius); }
     }
+    /* Showreel player: "View showreel" opens the reel full screen with sound */
+    body.reel-open { overflow: hidden; }
+    .reel-modal { position: fixed; inset: 0; z-index: 200; background: var(--bg); display: flex; align-items: center; justify-content: center; }
+    .reel-modal[hidden] { display: none; }
+    .reel-video { width: 100%; height: 100%; object-fit: contain; background: var(--bg); cursor: pointer; }
+    .reel-top, .reel-bar { position: absolute; left: 0; right: 0; display: flex; align-items: center; gap: 1rem; padding: clamp(1rem, 2.5vw, 1.75rem); }
+    .reel-top { top: 0; justify-content: flex-end; background: linear-gradient(to bottom, rgba(12, 13, 9, 0.7), transparent); }
+    .reel-bar { bottom: 0; justify-content: space-between; flex-wrap: wrap; background: linear-gradient(to top, rgba(12, 13, 9, 0.75), transparent); }
+    .reel-btn { display: inline-flex; align-items: center; gap: 0.6rem; min-height: 2.9rem; padding: 0.7rem 1.25rem; border-radius: 999px; border: 1px solid rgba(244, 243, 232, 0.35); background: rgba(12, 13, 9, 0.55); color: var(--cream); font: 600 0.95rem var(--font-body); text-decoration: none; cursor: pointer; backdrop-filter: blur(8px); }
+    .reel-btn:hover, .reel-btn:focus-visible { border-color: var(--volt); color: var(--volt); }
+    .reel-btn svg { width: 1.15rem; height: 1.15rem; flex: none; }
+    .reel-sound .icon-off { display: none; }
+    .reel-sound[aria-pressed="false"] .icon-on { display: none; }
+    .reel-sound[aria-pressed="false"] .icon-off { display: block; }
   </style>
   <script type="application/ld+json">
   {
@@ -294,7 +308,7 @@
         <p class="hero-line">A production house and marketing agency on Vancouver Island.</p>
         <div class="hero-foot">
           <div class="hero-actions">
-            <a class="btn" href="work.html">View showreel</a>
+            <a class="btn" href="work.html" data-reel-open>View showreel</a>
             <a class="btn btn--ghost" href="#contact">Start your project</a>
           </div>
           <p class="hero-call">Prefer to speak directly? <a href="tel:+12505894521">Call 250.589.4521</a></p>
@@ -495,6 +509,25 @@
 
   </main>
 
+  <!-- Showreel player, opened by "View showreel" -->
+  <div class="reel-modal" id="reel" role="dialog" aria-modal="true" aria-label="Volare Media showreel" hidden>
+    <video class="reel-video" playsinline preload="none" poster="assets/img/showreel-poster.jpg" data-src="assets/showreel-720.mp4"></video>
+    <div class="reel-top">
+      <button class="reel-btn reel-close" type="button">Close
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+    <div class="reel-bar">
+      <button class="reel-btn reel-sound" type="button" aria-pressed="true">
+        <svg class="icon-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5L6 9H3v6h3l5 4V5z"/><path d="M15.5 8.5a5 5 0 010 7M18.5 5.5a9 9 0 010 13"/></svg>
+        <svg class="icon-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5L6 9H3v6h3l5 4V5z"/><path d="M16 9l6 6M22 9l-6 6"/></svg>
+        <span class="reel-sound-label">Sound on</span>
+      </button>
+      <a class="reel-btn" href="work.html">See all our work</a>
+    </div>
+  </div>
+
+
   <footer class="site-footer footer-v2 photo-band" style="--photo: url('assets/img/footer-crew-cinema.jpg'); --photo-pos: 60% 42%; --photo-opacity: 0.4;">
     <div class="wrap">
       <div class="footer-top">
@@ -559,8 +592,40 @@
       });
 
 
+      // Showreel: "View showreel" plays the reel full screen with the sound on
+      var reel = document.getElementById('reel'), rv = reel.querySelector('.reel-video');
+      var soundBtn = reel.querySelector('.reel-sound'), soundLabel = reel.querySelector('.reel-sound-label');
+      var heroV = document.querySelector('.hero-video'), opener = null;
+      function setSound(on) {
+        rv.muted = !on;
+        soundBtn.setAttribute('aria-pressed', on ? 'true' : 'false');
+        soundLabel.textContent = on ? 'Sound on' : 'Sound off';
+      }
+      function openReel(e) {
+        e.preventDefault(); opener = e.currentTarget;
+        reel.hidden = false; document.body.classList.add('reel-open');
+        if (!rv.getAttribute('src')) rv.src = rv.dataset.src;
+        if (heroV) heroV.pause();
+        rv.currentTime = 0; setSound(true);
+        var p = rv.play();
+        // if a browser refuses sound, start it muted and let the viewer turn sound on
+        if (p && p.catch) p.catch(function () { setSound(false); rv.play().catch(function () {}); });
+        reel.querySelector('.reel-close').focus();
+      }
+      function closeReel() {
+        if (reel.hidden) return;
+        rv.pause(); reel.hidden = true; document.body.classList.remove('reel-open');
+        if (heroV && !reduced) heroV.play().catch(function () {});
+        if (opener) opener.focus();
+      }
+      document.querySelectorAll('[data-reel-open]').forEach(function (a) { a.addEventListener('click', openReel); });
+      reel.querySelector('.reel-close').addEventListener('click', closeReel);
+      soundBtn.addEventListener('click', function () { setSound(rv.muted); if (rv.paused) rv.play().catch(function () {}); });
+      rv.addEventListener('click', function () { if (rv.paused) rv.play().catch(function () {}); else rv.pause(); });
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeReel(); });
+
       // Background footage: load when near the screen, pause when off it
-      var lazyVids = document.querySelectorAll('video[data-src]:not(#beyond-the-reel video)');
+      var lazyVids = document.querySelectorAll('video[data-src]:not(#beyond-the-reel video):not(.reel-video)');
       function play(v) { if (!v.src) v.src = v.dataset.src; var p = v.play(); if (p && p.catch) p.catch(function () {}); }
       if (!('IntersectionObserver' in window)) { lazyVids.forEach(play); }
       else {
