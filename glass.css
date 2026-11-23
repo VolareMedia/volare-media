@@ -35,9 +35,17 @@
 .has-stage > .wrap { position: relative; z-index: 1; }
 
 /* ---------- type: headings wipe in line by line behind a mauve bar; everything else follows quietly ---------- */
-.v3 .reveal { opacity: 1; transform: none; transition: none; }
-/* held back until the script takes over, so nothing flashes and then animates (the page's own inline script lifts this after 4 s if the script never runs) */
-html.v3-pending .v3 .reveal, html.v3-pending .v3 main > :first-child > .wrap > *, [data-wipe] { opacity: 0; }
+.v3 .reveal { opacity: 1; transform: none; transition: none; }          /* the old fade-up is off */
+/* Whatever is going to animate in is hidden by this stylesheet from the very first paint, and only glass.js
+   un-hides it, by starting its animation and marking it data-in in the same moment. So nothing can show early.
+   html.anim is set by the one-line script in <head> (not for visitors who asked for reduced motion). */
+html.anim .v3 .reveal:not([data-in]),
+html.anim .v3 main > :first-child > .wrap > :not([data-in]) { opacity: 0 !important; }
+/* the opening photo starts dark and arrives through the glass, so the page's own copy of it never shows first */
+html.anim:not(.no-glass) .v3 main > :first-child.photo-band::before,
+html.anim:not(.no-glass) .v3 main > :first-child.photo-band::after,
+html.anim:not(.no-glass) .v3 main > :first-child.video-band::after { display: none; }
+html.anim:not(.no-glass) .v3 main > :first-child > video.band-video { position: absolute; width: 2px; height: 2px; opacity: 0; pointer-events: none; }
 .v3 .ln { display: block; }
 .v3 .ln-w { position: relative; display: inline-block; }
 .v3 .ln-t { display: inline-block; }
@@ -51,3 +59,18 @@ html.v3-pending .v3 .reveal, html.v3-pending .v3 main > :first-child > .wrap > *
 .v3 .btn:not(.btn--ghost):hover { background: none; color: var(--bg); transform: none; }
 .v3 .btn:not(.btn--ghost):hover::before { background-position: 0 0, 0 0; }
 .v3 a, .v3 button { transition-timing-function: var(--ease); }
+
+/* ---------- headings: plain cream with the mauve full stop, as on the console ---------- */
+/* the older highlight boxes, underlines, coloured words and italics inside headings are gone */
+.v3 :is(h1, h2, h3) :is(.sweep, .mark-line, .ink-volt, .ink-lilac) { color: inherit; background: none; box-shadow: none; padding: 0; white-space: normal; }
+.v3 :is(h1, h2, h3) .sweep::before { display: none; }
+.v3 :is(h1, h2, h3) .sweep .dot, .v3 :is(h1, h2, h3) .dot { color: var(--lilac); }
+.v3 :is(h1, h2, h3) em, .v3 .footer-tag em { font-style: normal; font-weight: inherit; }
+
+/* ---------- text links: the underlined word with an arrow is retired ---------- */
+/* a link is now a word in the display face with the menu's slanted marker; on hover the word turns volt and the marker stretches */
+.v3 .text-link { display: inline-flex; align-items: center; gap: 0.5em; border: 0; padding: 0; font-family: var(--font-display); font-weight: 600; letter-spacing: -0.02em;
+  font-size: 1.1rem; color: var(--cream); text-decoration: none; transition: color 0.45s var(--ease); }
+.v3 .text-link::after { content: ""; width: 0.3em; height: 0.62em; background: var(--lilac); transform: skewX(-24deg); transform-origin: left; transition: transform 0.5s var(--ease), background-color 0.45s var(--ease); }
+.v3 .text-link:hover { color: var(--volt); border: 0; }
+.v3 .text-link:hover::after { background: var(--volt); transform: skewX(-24deg) scaleX(3.2); }

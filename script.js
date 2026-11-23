@@ -11,7 +11,8 @@ if (toggle && nav) {
 }
 
 // Scroll reveal
-const reveals = document.querySelectorAll(".reveal");
+// (pages in the new design, body.v3, animate these themselves in glass.js)
+const reveals = document.body.classList.contains("v3") ? [] : document.querySelectorAll(".reveal");
 const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 // Respect reduced motion for the hero loop
