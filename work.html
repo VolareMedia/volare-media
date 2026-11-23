@@ -59,6 +59,16 @@
     {
       "@context": "https://schema.org",
       "@type": "VideoObject",
+      "name": "Gas 2 Go",
+      "description": "Commercial produced by Volare Media for Gas 2 Go, a fuel delivery company on Vancouver Island that brings fuel to your vehicle at home or at work.",
+      "thumbnailUrl": "https://www.volaremedia.net/assets/img/g2g-driver-fill-up.jpg",
+      "uploadDate": "2026-11-22",
+      "embedUrl": "https://www.youtube.com/embed/m2GW6FpggX8",
+      "publisher": { "@type": "Organization", "name": "Volare Media", "url": "https://www.volaremedia.net" }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "VideoObject",
       "name": "White Wolf Homes",
       "description": "Brand film produced by Volare Media for White Wolf Homes, a custom home builder, on craftsmanship and building a legacy.",
       "thumbnailUrl": "https://www.volaremedia.net/assets/img/white-wolf-homes.jpg",
@@ -148,6 +158,10 @@
     .more-card .more-thumb span:nth-child(3n+1) { background: var(--volt); color: var(--bg); border-color: var(--volt); transform: rotate(-3deg); }
     .more-card .more-thumb span:nth-child(3n+2) { border-color: var(--lilac); color: var(--lilac); transform: rotate(2deg); }
     .more-card:hover .more-thumb { border-color: var(--volt); transform: scale(1.02); }
+    /* nine videos fill the grid, so the teaser runs full width as a closing strip */
+    .work-grid .more-card { grid-column: 1 / -1; }
+    .work-grid .more-card .more-thumb { aspect-ratio: auto; min-height: 9rem; }
+    .work-grid .more-card:hover .more-thumb { transform: scale(1.005); }
   </style>
 </head>
 <body>
@@ -206,6 +220,14 @@
           </button>
           <h3>Tailgate Toolkit</h3>
           <span class="work-tag">TV Commercial: broadcast on 61 stations across BC</span>
+        </article>
+        <article class="work-card">
+          <button class="video-thumb" data-youtube="m2GW6FpggX8" aria-label="Play: Gas 2 Go fuel delivery commercial">
+            <img src="assets/img/g2g-driver-fill-up.jpg" alt="Still from the Gas 2 Go commercial: a smiling driver fills up a customer's car in her driveway" loading="lazy">
+            <span class="play-btn" aria-hidden="true"></span>
+          </button>
+          <h3>Gas 2 Go</h3>
+          <span class="work-tag">Commercial: fuel delivery on Vancouver Island</span>
         </article>
         <article class="work-card">
           <button class="video-thumb" data-vimeo="1150555122" aria-label="Play: Sixty Forty brand film">
