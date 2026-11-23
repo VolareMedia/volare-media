@@ -95,12 +95,46 @@ img { display: block; max-width: 100%; }
 @keyframes push { from { scale: 1; } to { scale: 1.03; } }
 .dot { color: var(--lilac); }
 .sub { color: var(--muted); font-size: clamp(1rem, 1.25vw, 1.15rem); line-height: 1.5; max-width: 32rem; }
-.more { display: inline-flex; align-items: center; gap: 0.7rem; margin-top: 1.5rem; font-family: var(--font-display); font-weight: 600; letter-spacing: -0.02em; font-size: 1.05rem; text-decoration: none; color: var(--cream); }
-.more { transition: color 0.4s var(--ease); }
-.more::after { content: ""; width: 2.2rem; height: 1px; background: var(--lilac); transition: width 0.5s var(--ease), background-color 0.4s var(--ease); }
-.more:hover::after { background: var(--volt); }
-.more:hover { color: var(--volt); }
-.more:hover::after { width: 3.4rem; }
+/* ---------- the link out of each chapter. Four mock-ups: console.html?link=1 to 4 ---------- */
+.more { position: relative; isolation: isolate; display: inline-flex; align-items: center; gap: 0.8em; margin-top: 1.5rem;
+  font-family: var(--font-display); font-weight: 600; letter-spacing: -0.02em; font-size: 1.05rem; line-height: 1;
+  text-decoration: none; color: var(--cream); transition: color 0.45s var(--ease), transform 0.6s var(--ease); }
+.more-i { display: inline-block; width: 0.5em; height: 0.5em; border-top: 2px solid currentColor; border-right: 2px solid currentColor; rotate: 45deg; transition: translate 0.5s var(--ease); }
+.more:hover .more-i { translate: 0.35em 0; }
+
+/* 1. Glass pane button: a slanted pane with a mauve rim; on hover it tilts and volt wipes in behind a glint */
+.link-1 .more, .link-2 .more { --k: 1.05em; padding: 1em 1.9em 1em 2.1em; }
+.link-1 .more::before, .link-1 .more::after, .link-2 .more::before { content: ""; position: absolute; clip-path: polygon(var(--k) 0, 100% 0, calc(100% - var(--k)) 100%, 0 100%); }
+.link-1 .more::before { inset: 0; z-index: -2; background: linear-gradient(105deg, rgba(201, 186, 244, 0.95), rgba(201, 186, 244, 0.3) 45%, rgba(244, 243, 232, 0.65)); }
+.link-1 .more::after { inset: 1px; z-index: -1;
+  background: linear-gradient(105deg, var(--volt) 0 44%, #fff 44% 47%, transparent 47.2%) 100% 0 / 300% 100% no-repeat, rgba(12, 13, 9, 0.5);
+  -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); transition: background-position 0.7s var(--ease); }
+.link-1 .more:hover { color: var(--bg); transform: perspective(700px) rotateY(-9deg) rotateX(3deg); }
+.link-1 .more:hover::after { background-position: 0 0, 0 0; }
+
+/* 2. Solid volt parallelogram: the lime button with slanted ends; mauve wipes across on hover */
+.link-2 .more { color: var(--bg); }
+.link-2 .more::before { inset: 0; z-index: -1;
+  background: linear-gradient(105deg, var(--lilac) 0 46%, transparent 46.2%) 100% 0 / 300% 100% no-repeat, var(--volt); transition: background-position 0.7s var(--ease); }
+.link-2 .more:hover::before { background-position: 0 0, 0 0; }
+
+/* 3. Menu-style word: the display face with the menu's slanted marker, which stretches and turns volt */
+.link-3 .more, .link-4 .more { font-size: clamp(1.5rem, 2.3vw, 2.1rem); letter-spacing: -0.035em; }
+.link-3 .more { gap: 0.45em; }
+.link-3 .more-i { width: 0.3em; height: 0.62em; border: 0; rotate: none; background: var(--lilac); transform: skewX(-24deg); transform-origin: left; transition: transform 0.5s var(--ease), background-color 0.45s var(--ease); }
+.link-3 .more:hover { color: var(--volt); }
+.link-3 .more:hover .more-i { translate: none; background: var(--volt); transform: skewX(-24deg) scaleX(3.2); }
+
+/* 4. Wipe-through word: a hairline under the word; a slanted volt wipe passes through both on hover */
+.link-4 .more { min-width: 15rem; justify-content: space-between; padding-bottom: 0.55em; }
+.link-4 .more::before, .link-4 .more::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; }
+.link-4 .more::before { height: 1px; background: rgba(244, 243, 232, 0.35); }
+.link-4 .more::after { height: 2px; background: var(--volt); transform: scaleX(0); transform-origin: left; transition: transform 0.7s var(--ease); }
+.link-4 .more-t { padding-bottom: 0.08em; color: transparent;
+  background: linear-gradient(105deg, var(--volt) 0 50%, var(--cream) 50.2%) 100% 0 / 260% 100% no-repeat; -webkit-background-clip: text; background-clip: text; transition: background-position 0.7s var(--ease); }
+.link-4 .more:hover { color: var(--volt); }
+.link-4 .more:hover .more-t { background-position: 0 0; }
+.link-4 .more:hover::after { transform: scaleX(1); }
 
 /* home title: a centred title card during the intro, then it settles bottom right */
 .chapter[data-id="home"] .title { position: absolute; right: var(--gutter); bottom: clamp(5.5rem, 14vh, 9rem); text-align: right; font-size: clamp(1.9rem, 3.6vw, 3.6rem); transform-origin: 100% 100%; }

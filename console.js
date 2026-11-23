@@ -16,6 +16,10 @@ const order = chapters.map((c) => c.dataset.id);
 const byId = Object.fromEntries(chapters.map((c) => [c.dataset.id, c]));
 const menuButtons = $$(".menu button");
 
+// four mock-ups of the chapter link: console.html?link=1 to 4 (1 if none is given)
+const linkStyle = new URLSearchParams(location.search).get("link");
+body.classList.add("link-" + (["1", "2", "3", "4"].includes(linkStyle) ? linkStyle : "1"));
+
 /* ---------------- one easing curve for everything ---------------- */
 const smoother = (t) => t * t * t * (t * (t * 6 - 15) + 10);
 const EASE = CSS.supports("animation-timing-function", "linear(0, 1)")

@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Chapter link: four ideas</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Inter+Tight:wght@500;600;700&display=swap">
+  <link rel="stylesheet" href="console.css?v=6">
+  <style>
+    /* comparison sheet only: four chapter-sized panels, each with one link idea. Hover each link. */
+    body { overflow: auto; height: auto; }
+    .sheet { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); min-height: 100svh; }
+    .cell { position: relative; isolation: isolate; overflow: hidden; min-height: 50svh; padding: clamp(1.5rem, 3vw, 3rem); display: flex; flex-direction: column; justify-content: flex-end; border: 1px solid rgba(244, 243, 232, 0.08); }
+    .cell::before { content: ""; position: absolute; inset: 0; z-index: -1; background: var(--shot) center / cover; filter: grayscale(1) contrast(1.1) brightness(0.42); }
+    .cell .name { position: absolute; top: clamp(1.2rem, 2.4vw, 2rem); left: clamp(1.5rem, 3vw, 3rem); color: var(--muted); font-size: 0.95rem; }
+    .cell .name a { color: var(--cream); margin-left: 0.8rem; }
+    .cell .title { font-size: clamp(1.9rem, 3.4vw, 3.4rem); margin-bottom: 1rem; }
+    .cell .sub { margin-bottom: 0.4rem; }
+    .cell .more { align-self: flex-start; }
+    @media (max-width: 760px) { .sheet { grid-template-columns: minmax(0, 1fr); } }
+  </style>
+</head>
+<body>
+  <main class="sheet">
+    <section class="cell link-1" style="--shot: url('assets/img/sixtyforty-loop-poster.jpg')">
+      <p class="name">1. Glass pane button <a href="console.html?link=1#launch">Try it in the console</a></p>
+      <h2 class="title">A video only works once the right people see it<span class="dot">.</span></h2>
+      <p class="sub">So we run the Meta, Google and YouTube ads and the social posts too.</p>
+      <a class="more" href="marketing-videos.html"><span class="more-t">Marketing videos</span><span class="more-i" aria-hidden="true"></span></a>
+    </section>
+    <section class="cell link-2" style="--shot: url('assets/img/g2g-loop-poster.jpg')">
+      <p class="name">2. Solid volt button <a href="console.html?link=2#launch">Try it in the console</a></p>
+      <h2 class="title">A video only works once the right people see it<span class="dot">.</span></h2>
+      <p class="sub">So we run the Meta, Google and YouTube ads and the social posts too.</p>
+      <a class="more" href="marketing-videos.html"><span class="more-t">Marketing videos</span><span class="more-i" aria-hidden="true"></span></a>
+    </section>
+    <section class="cell link-3" style="--shot: url('assets/img/modelk-rolling-loop-poster.jpg')">
+      <p class="name">3. Menu-style word <a href="console.html?link=3#launch">Try it in the console</a></p>
+      <h2 class="title">A video only works once the right people see it<span class="dot">.</span></h2>
+      <p class="sub">So we run the Meta, Google and YouTube ads and the social posts too.</p>
+      <a class="more" href="marketing-videos.html"><span class="more-t">Marketing videos</span><span class="more-i" aria-hidden="true"></span></a>
+    </section>
+    <section class="cell link-4" style="--shot: url('assets/img/g2g-busy-loop-poster.jpg')">
+      <p class="name">4. Wipe-through word <a href="console.html?link=4#launch">Try it in the console</a></p>
+      <h2 class="title">A video only works once the right people see it<span class="dot">.</span></h2>
+      <p class="sub">So we run the Meta, Google and YouTube ads and the social posts too.</p>
+      <a class="more" href="marketing-videos.html"><span class="more-t">Marketing videos</span><span class="more-i" aria-hidden="true"></span></a>
+    </section>
+  </main>
+</body>
+</html>
