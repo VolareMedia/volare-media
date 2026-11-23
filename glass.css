@@ -14,13 +14,8 @@
 @keyframes vt-in { from { clip-path: polygon(0 0, 0 0, -28% 100%, 0 100%); } to { clip-path: polygon(0 0, 128% 0, 100% 100%, 0 100%); } }
 @media (prefers-reduced-motion: reduce) { ::view-transition-old(root), ::view-transition-new(root) { animation: none; } }
 
-/* ---------- angular, not rounded ---------- */
-.v3 { --radius: 0px; --cut: clamp(16px, 2.2vw, 34px); }
-/* panels and picture frames lose one corner top right and one bottom left, cut on the brand's slant */
-.v3 .panel, .v3 .cta.band--volt, .v3 .section.band--volt, .v3 .big-list-shot, .v3 .video-thumb, .v3 .crew-shot, .v3 .family-shot, .v3 .photo-strip {
-  border-radius: 0;
-  clip-path: polygon(0 0, calc(100% - var(--cut) * 0.445) 0, 100% var(--cut), 100% 100%, calc(var(--cut) * 0.445) 100%, 0 calc(100% - var(--cut)));
-}
+/* ---------- square corners: nothing rounded, nothing cut off ---------- */
+.v3 { --radius: 0px; }
 
 /* ---------- less going on: photos and footage stay out of the body of the page ---------- */
 .v3 main > :not(:first-child).photo-band::before, .v3 main > :not(:first-child).photo-band::after,

@@ -335,3 +335,11 @@
 .v2 .contact-grid .contact-line { font-family: var(--font-display); font-weight: 600; letter-spacing: -0.03em; font-size: clamp(1.9rem, 3.6vw, 3.2rem); line-height: 1.1; overflow-wrap: anywhere; }
 .v2 .contact-grid .contact-line .contact-note { display: block; font-family: var(--font-body); font-weight: 400; letter-spacing: 0; font-size: 0.95rem; color: var(--muted); margin-bottom: 0.3rem; }
 .v2 .contact-grid span.contact-line { font-size: clamp(1.2rem, 1.8vw, 1.5rem); }
+
+/* ---------- concept: nothing is rounded, anywhere ---------- */
+.v2 { --radius: 0px; }
+.v2 *, .v2 *::before, .v2 *::after { border-radius: 0 !important; }
+/* the play button was a circle; it is now a volt block with slanted ends, like the buttons */
+.v2 .play-btn { width: 5rem; height: 3.1rem; clip-path: polygon(0.95rem 0, 100% 0, calc(100% - 0.95rem) 100%, 0 100%); }
+.v2 .work-v2 .work-card:first-child .play-btn,
+.v2 .work-v2 .work-card:last-child:nth-child(even) .play-btn { width: 6.4rem; height: 3.9rem; clip-path: polygon(1.2rem 0, 100% 0, calc(100% - 1.2rem) 100%, 0 100%); }
