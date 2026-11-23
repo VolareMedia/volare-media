@@ -97,10 +97,14 @@
     .work-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 2rem; flex-wrap: wrap; margin-bottom: clamp(2.5rem, 5vw, 4rem); }
     .work-head h2 { max-width: 13ch; }
     .work-v2 { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(1rem, 2vw, 1.75rem); row-gap: clamp(2.5rem, 4vw, 3.5rem); }
-    .work-v2 .work-card:first-child { grid-column: 1 / -1; }
+    .work-v2 .work-card:first-child,
+    .work-v2 .work-card:last-child:nth-child(even) { grid-column: 1 / -1; }
     .work-v2 .video-thumb { border-radius: var(--radius); border: 0; margin-bottom: 1.25rem; }
-    .work-v2 .work-card:first-child .video-thumb { aspect-ratio: 21 / 9; }
-    .work-v2 .work-card:first-child .play-btn { width: 5rem; height: 5rem; }
+    .work-v2 .work-card:first-child .video-thumb,
+    .work-v2 .work-card:last-child:nth-child(even) .video-thumb { aspect-ratio: 21 / 9; }
+    .work-v2 .work-card:last-child:nth-child(even) .video-thumb img { object-position: 50% 30%; }
+    .work-v2 .work-card:first-child .play-btn,
+    .work-v2 .work-card:last-child:nth-child(even) .play-btn { width: 5rem; height: 5rem; }
     .work-v2 h3 { font-size: clamp(1.4rem, 2vw, 1.75rem); margin-bottom: 0.35rem; }
     .work-v2 .work-tag { color: var(--muted); font-size: 1rem; font-family: var(--font-body); text-transform: none; letter-spacing: 0; }
 
@@ -216,7 +220,7 @@
       .stat-cards { grid-template-columns: minmax(0, 1fr); }
       .stat-cards li { min-height: 0; flex-direction: row; align-items: baseline; justify-content: flex-start; gap: 1rem; }
       .work-v2 { grid-template-columns: minmax(0, 1fr); }
-      .work-v2 .work-card:first-child .video-thumb, .family-shot { aspect-ratio: 4 / 3; }
+      .work-v2 .work-card:first-child .video-thumb, .work-v2 .work-card:last-child:nth-child(even) .video-thumb, .family-shot { aspect-ratio: 4 / 3; }
       .do-body { grid-template-columns: minmax(0, 1fr); padding-right: 0; }
       .review-row { grid-template-columns: minmax(0, 85%); grid-auto-flow: column; grid-auto-columns: 85%; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 0.5rem; }
       .review-card { scroll-snap-align: start; min-height: 15rem; }
@@ -373,6 +377,14 @@
             </button>
             <h3>De Mode en Vogue</h3>
             <span class="work-tag">Campaign: When your outfit is missing something</span>
+          </article>
+          <article class="work-card">
+            <button class="video-thumb" data-youtube="m2GW6FpggX8" aria-label="Play: Gas 2 Go fuel delivery commercial">
+              <img src="assets/img/g2g-driver-fill-up.jpg" alt="Still from the Gas 2 Go commercial: a smiling driver fills up a customer's car in her driveway" loading="lazy">
+              <span class="play-btn" aria-hidden="true"></span>
+            </button>
+            <h3>Gas 2 Go</h3>
+            <span class="work-tag">Commercial for a Vancouver Island fuel delivery company</span>
           </article>
         </div>
       </div>
