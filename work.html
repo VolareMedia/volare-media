@@ -59,6 +59,16 @@
     {
       "@context": "https://schema.org",
       "@type": "VideoObject",
+      "name": "Gas 2 Go",
+      "description": "Commercial produced by Volare Media for Gas 2 Go, a fuel delivery company on Vancouver Island that brings fuel to your vehicle at home or at work.",
+      "thumbnailUrl": "https://www.volaremedia.net/assets/img/g2g-driver-fill-up.jpg",
+      "uploadDate": "2026-11-22",
+      "embedUrl": "https://www.youtube.com/embed/m2GW6FpggX8",
+      "publisher": { "@type": "Organization", "name": "Volare Media", "url": "https://www.volaremedia.net" }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "VideoObject",
       "name": "White Wolf Homes",
       "description": "Brand film produced by Volare Media for White Wolf Homes, a custom home builder, on craftsmanship and building a legacy.",
       "thumbnailUrl": "https://www.volaremedia.net/assets/img/white-wolf-homes.jpg",
@@ -148,6 +158,26 @@
     .more-card .more-thumb span:nth-child(3n+1) { background: var(--volt); color: var(--bg); border-color: var(--volt); transform: rotate(-3deg); }
     .more-card .more-thumb span:nth-child(3n+2) { border-color: var(--lilac); color: var(--lilac); transform: rotate(2deg); }
     .more-card:hover .more-thumb { border-color: var(--volt); transform: scale(1.02); }
+    /* nine videos fill the grid, so the teaser runs full width as a closing strip */
+    .work-grid .more-card { grid-column: 1 / -1; }
+    .work-grid .more-card .more-thumb { aspect-ratio: auto; min-height: 9rem; }
+    .work-grid .more-card:hover .more-thumb { transform: scale(1.005); }
+    /* Showreel: full width at the top of the page, starts playing with the sound on */
+    .showreel { position: relative; background: var(--bg); }
+    .showreel video { display: block; width: 100%; aspect-ratio: 16 / 9; max-height: calc(100vh - 7rem); max-height: calc(100svh - 7rem); object-fit: cover; background: var(--bg); cursor: pointer; }
+    .showreel-controls { position: absolute; left: 0; bottom: 0; display: flex; gap: 1.25rem; padding: clamp(0.75rem, 2vw, 1.25rem); }
+    /* just the words, half see-through, no button shapes */
+    .reel-btn { display: inline-flex; align-items: center; gap: 0.35rem; padding: 0.35rem 0; border: 0; background: none; color: var(--cream); opacity: 0.55; font: 600 0.78rem var(--font-body); letter-spacing: 0.01em; text-shadow: 0 1px 6px rgba(12, 13, 9, 0.6); cursor: pointer; transition: opacity 0.2s, color 0.2s; }
+    .reel-btn:hover, .reel-btn:focus-visible { opacity: 1; }
+    .reel-btn svg { width: 0.85rem; height: 0.85rem; flex: none; filter: drop-shadow(0 1px 4px rgba(12, 13, 9, 0.6)); }
+    .reel-btn.needs-tap { color: var(--volt); opacity: 0.9; }
+    @media (max-width: 600px) {
+      .showreel-controls { padding: 0.5rem 0.75rem; gap: 1rem; }
+      .reel-btn { font-size: 0.72rem; }
+    }
+    .reel-sound .icon-off { display: none; }
+    .reel-sound[aria-pressed="false"] .icon-on { display: none; }
+    .reel-sound[aria-pressed="false"] .icon-off { display: block; }
   </style>
 </head>
 <body>
@@ -190,6 +220,21 @@
 
   <main>
 
+    <!-- Showreel: plays first, full width, with sound -->
+    <section class="showreel" aria-label="Volare Media showreel">
+      <video id="showreel-video" playsinline preload="auto" poster="assets/img/showreel-poster.jpg" aria-label="Volare Media showreel">
+        <source src="assets/showreel-720.mp4" type="video/mp4">
+      </video>
+      <div class="showreel-controls">
+        <button class="reel-btn reel-sound" type="button" aria-pressed="true">
+          <svg class="icon-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5L6 9H3v6h3l5 4V5z"/><path d="M15.5 8.5a5 5 0 010 7M18.5 5.5a9 9 0 010 13"/></svg>
+          <svg class="icon-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5L6 9H3v6h3l5 4V5z"/><path d="M16 9l6 6M22 9l-6 6"/></svg>
+          <span class="reel-sound-label">Sound on</span>
+        </button>
+        <button class="reel-btn reel-play" type="button">Pause</button>
+      </div>
+    </section>
+
     <section class="hero grid-bleed grid-bleed--glow">
       <div class="wrap">
         <h1 class="display-xl">The work speaks <span class="sweep">for itself</span><span class="dot">.</span></h1>
@@ -206,6 +251,14 @@
           </button>
           <h3>Tailgate Toolkit</h3>
           <span class="work-tag">TV Commercial: broadcast on 61 stations across BC</span>
+        </article>
+        <article class="work-card">
+          <button class="video-thumb" data-youtube="m2GW6FpggX8" aria-label="Play: Gas 2 Go fuel delivery commercial">
+            <img src="assets/img/g2g-driver-fill-up.jpg" alt="Still from the Gas 2 Go commercial: a smiling driver fills up a customer's car in her driveway" loading="lazy">
+            <span class="play-btn" aria-hidden="true"></span>
+          </button>
+          <h3>Gas 2 Go</h3>
+          <span class="work-tag">Commercial: fuel delivery on Vancouver Island</span>
         </article>
         <article class="work-card">
           <button class="video-thumb" data-vimeo="1150555122" aria-label="Play: Sixty Forty brand film">
@@ -371,5 +424,44 @@
   </footer>
 
   <script src="script.js?v=33"></script>
+  <script>
+    // Showreel: start with the sound on. Browsers that block sound on arrival
+    // (Safari, phones, a direct visit) start it muted and light up the sound button.
+    (function () {
+      var v = document.getElementById('showreel-video'); if (!v) return;
+      var sound = document.querySelector('.reel-sound'), label = document.querySelector('.reel-sound-label');
+      var playBtn = document.querySelector('.reel-play'), autoPaused = false;
+      function setSound(on) {
+        v.muted = !on;
+        sound.setAttribute('aria-pressed', on ? 'true' : 'false');
+        label.textContent = on ? 'Sound on' : 'Tap for sound';
+        sound.classList.toggle('needs-tap', !on);
+      }
+      function syncPlay() { playBtn.textContent = v.ended ? 'Watch again' : (v.paused ? 'Play' : 'Pause'); }
+      function start() { var p = v.play(); return p && p.catch ? p : Promise.resolve(); }
+      setSound(true);
+      start().catch(function () { setSound(false); start().catch(function () {}); });
+      sound.addEventListener('click', function () {
+        setSound(v.muted);
+        if (!v.muted) { label.textContent = 'Sound on'; }
+        if (v.paused) start().catch(function () {});
+      });
+      playBtn.addEventListener('click', function () { if (v.paused || v.ended) start().catch(function () {}); else v.pause(); });
+      v.addEventListener('click', function () { if (v.paused) start().catch(function () {}); else v.pause(); });
+      ['play', 'pause', 'ended'].forEach(function (ev) { v.addEventListener(ev, syncPlay); });
+      // pause when it scrolls away or a client video starts, resume when it comes back
+      if ('IntersectionObserver' in window) {
+        new IntersectionObserver(function (es) {
+          es.forEach(function (e) {
+            if (!e.isIntersecting && !v.paused) { v.pause(); autoPaused = true; }
+            else if (e.isIntersecting && autoPaused) { autoPaused = false; start().catch(function () {}); }
+          });
+        }, { threshold: 0.35 }).observe(v);
+      }
+      document.querySelectorAll('[data-youtube]').forEach(function (t) {
+        t.addEventListener('click', function () { v.pause(); autoPaused = false; });
+      });
+    })();
+  </script>
 </body>
 </html>
