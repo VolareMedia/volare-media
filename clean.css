@@ -303,3 +303,7 @@
 @media (max-width: 860px) {
   .v2 .service-row:has(.service-num) { grid-template-columns: 1fr; }
 }
+
+/* any other lime band becomes the same quiet rounded panel */
+.v2 .section.band--volt { background: var(--bg-raised); color: var(--cream); margin: 0 var(--inset); border-radius: var(--radius); }
+.v2 .section.band--volt h2, .v2 .section.band--volt h3 { color: var(--cream); }
