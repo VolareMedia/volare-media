@@ -20,7 +20,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Inter+Tight:wght@500;600;700&display=swap">
-  <link rel="stylesheet" href="console.css?v=11">
+  <link rel="stylesheet" href="console.css?v=14">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -57,6 +57,7 @@
   <!-- Menu: big words at the start, a slim rail once a chapter is open -->
   <nav class="menu" aria-label="Chapters">
     <ul>
+      <li><button type="button" data-go="work">Work</button></li>
       <li><button type="button" data-go="direction">Direction</button></li>
       <li><button type="button" data-go="production">Production</button></li>
       <li><button type="button" data-go="post">Post-production</button></li>
@@ -71,6 +72,65 @@
     <section class="chapter" data-id="home" data-clip="assets/showreel-720.mp4" aria-labelledby="t-home">
       <h1 id="t-home" class="title"><span class="ln">Videos made</span> <span class="ln">with intention<span class="dot">.</span></span></h1>
       <p class="sub">A production house on Vancouver Island.</p>
+    </section>
+
+    <!-- Our work: the footage behind the home screen becomes a frame. Scrolling grows it to fill the screen ("Play reel"),
+         holds it for one more scroll, then lets it scroll away and brings the projects up underneath. -->
+    <section class="chapter chapter--work" data-id="work" data-clip="assets/showreel-720.mp4" aria-labelledby="t-work" hidden>
+      <h2 id="t-work" class="title work-intro"><span class="ln">The work speaks</span> <span class="ln">for itself<span class="dot">.</span></span></h2>
+      <div class="reel">
+        <button class="reel-play" type="button" data-play="file:assets/showreel-720.mp4" aria-label="Play the Volare Media reel with sound"><span>Play</span><i aria-hidden="true"></i><span>reel</span></button>
+      </div>
+      <div class="projects"><div class="projects-in">
+        <ul class="project-grid">
+          <li><button class="project" type="button" data-play="vimeo:1071293680" aria-label="Play: Tailgate Toolkit Commercial, Director's Cut">
+            <span class="project-shot"><img src="https://i.vimeocdn.com/video/1999999503-d06fd3a64afb9f18253bed85e27137c1bfe5eba9c9d5d4aa1d1b1d19d97e236f-d_1280x720?region=us" alt="Still from the Tailgate Toolkit TV commercial" loading="lazy"><i aria-hidden="true"></i></span>
+            <span class="project-name">Tailgate Toolkit</span>
+            <span class="project-note">TV Commercial: broadcast on 61 stations across BC</span>
+          </button></li>
+          <li><button class="project" type="button" data-play="youtube:m2GW6FpggX8" aria-label="Play: Gas 2 Go fuel delivery commercial">
+            <span class="project-shot"><img src="assets/img/g2g-driver-fill-up.jpg" alt="Still from the Gas 2 Go commercial: a smiling driver fills up a customer's car in her driveway" loading="lazy"><i aria-hidden="true"></i></span>
+            <span class="project-name">Gas 2 Go</span>
+            <span class="project-note">Commercial: fuel delivery on Vancouver Island</span>
+          </button></li>
+          <li><button class="project" type="button" data-play="vimeo:1150555122" aria-label="Play: Sixty Forty brand film">
+            <span class="project-shot"><img src="https://i.vimeocdn.com/video/2101460947-ee7b44290e2d635de2eac89c6361e2e1e66cfb6364d84fa56626f210dc1e9cba-d_1280x720?region=us" alt="Still from the Sixty Forty brand film" loading="lazy"><i aria-hidden="true"></i></span>
+            <span class="project-name">Sixty Forty</span>
+            <span class="project-note">Brand Film: farm &amp; dining experience with Chef Paul Moran</span>
+          </button></li>
+          <li><button class="project" type="button" data-play="youtube:DUAHFEBabnU" aria-label="Play: When Your Outfit Is Missing Something, De Mode en Vogue">
+            <span class="project-shot"><img src="assets/img/dmev-outfit-missing-something.jpg" alt="Still from the De Mode en Vogue commercial: two friends laughing in a rose garden" loading="lazy"><i aria-hidden="true"></i></span>
+            <span class="project-name">De Mode en Vogue</span>
+            <span class="project-note">Campaign: When your outfit is missing something</span>
+          </button></li>
+          <li><button class="project" type="button" data-play="youtube:G6EoryyEAEs" aria-label="Play: White Wolf Homes brand film, Building a Legacy">
+            <span class="project-shot"><img src="assets/img/white-wolf-homes.jpg" alt="Still from the White Wolf Homes brand film" loading="lazy"><i aria-hidden="true"></i></span>
+            <span class="project-name">White Wolf Homes</span>
+            <span class="project-note">Brand Film: custom home builder, craftsmanship &amp; legacy</span>
+          </button></li>
+          <li><button class="project" type="button" data-play="vimeo:851929284" aria-label="Play: Stratos Performance Nutrition Endurance commercial">
+            <span class="project-shot"><img src="https://i.vimeocdn.com/video/1706807741-6a3e7635fec993fb2322debbd8606ab47086d3398619d252eb2a977cb60d90aa-d_1280x720?region=us" alt="Still from the Stratos Endurance commercial" loading="lazy"><i aria-hidden="true"></i></span>
+            <span class="project-name">Stratos: Endurance</span>
+            <span class="project-note">Commercial: fitness</span>
+          </button></li>
+          <li><button class="project" type="button" data-play="vimeo:970880312" aria-label="Play: Quinn's Story, fundraiser film">
+            <span class="project-shot"><img src="https://i.vimeocdn.com/video/1884571923-db111377d4e4e4179c7b4b597aceed51e7fb26d197ea7952f97d932480699f46-d_1280x720?region=us" alt="Still from Quinn's Story, a fundraiser film" loading="lazy"><i aria-hidden="true"></i></span>
+            <span class="project-name">Quinn's Story</span>
+            <span class="project-note">Promotional: fundraiser</span>
+          </button></li>
+          <li><button class="project" type="button" data-play="vimeo:1102386111" aria-label="Play: Lover music video">
+            <span class="project-shot"><img src="https://i.vimeocdn.com/video/2038112022-87c4687b3efa3136d1080199367148712c58d2a92fcaa09eb415d0fe008c4a78-d_1280x720?region=us" alt="Still from the Lover music video" loading="lazy"><i aria-hidden="true"></i></span>
+            <span class="project-name">Lover</span>
+            <span class="project-note">Music Video</span>
+          </button></li>
+          <li><button class="project" type="button" data-play="youtube:JdHcqPXTbAs" aria-label="Play: Making of The Model K, a cinematic feature">
+            <span class="project-shot"><img src="assets/img/model-k.jpg" alt="Still from The Model K film, a handcrafted automobile" loading="lazy"><i aria-hidden="true"></i></span>
+            <span class="project-name">Making of The Model K</span>
+            <span class="project-note">Brand Film: a one-of-a-kind handcrafted automobile by Moorhouse Design</span>
+          </button></li>
+        </ul>
+        <a class="more" href="contact.html"><span class="more-t">Start a project</span><span class="more-i" aria-hidden="true"></span></a>
+      </div></div>
     </section>
 
     <section class="chapter" data-id="direction" data-clip="assets/banner-loop-3.mp4" aria-labelledby="t-direction" hidden>
@@ -137,6 +197,12 @@
     </section>
   </main>
 
-  <script src="console.js?v=18" type="module"></script>
+  <!-- plays the reel or a project with sound, over everything -->
+  <div class="player" hidden>
+    <div class="player-box"></div>
+    <button class="player-close" type="button">Close</button>
+  </div>
+
+  <script src="console.js?v=24" type="module"></script>
 </body>
 </html>

@@ -57,7 +57,7 @@ img { display: block; max-width: 100%; }
 .menu button {
   position: relative; display: inline-block; transform-origin: 0 0;
   font-family: var(--font-display); font-weight: 600; letter-spacing: -0.035em;
-  font-size: clamp(2.2rem, 5vw, 4.4rem); line-height: 1.06; color: var(--cream);
+  font-size: clamp(2.2rem, min(5vw, 8.2vh), 4.4rem); line-height: 1.06; color: var(--cream);   /* eight words must fit a short laptop screen */
   transition: color 0.45s var(--ease);
 }
 .menu button::before { /* the angular marker: mauve when you point at a word, volt on the one that's open */
@@ -188,3 +188,58 @@ img { display: block; max-width: 100%; }
 @keyframes vt-out { to { opacity: 0.2; } }
 @keyframes vt-in { from { clip-path: polygon(0 0, 0 0, -28% 100%, 0 100%); } to { clip-path: polygon(0 0, 128% 0, 100% 100%, 0 100%); } }
 @media (prefers-reduced-motion: reduce) { ::view-transition-old(root), ::view-transition-new(root) { animation: none; } }
+
+/* ---------- our work: the reel frame, then the projects ---------- */
+/* the footage canvas and the "Play reel" label share one transform (set by the script), so the label rides the frame */
+#stage, .reel { transform-origin: 50% 85%; will-change: transform; }
+.chapter--work { --left: calc(var(--gutter) + clamp(9rem, 14vw, 14rem)); }
+.chapter:not([data-id="home"]) .work-intro { bottom: auto; top: clamp(6rem, 15vh, 9.5rem); font-size: clamp(2rem, 3.6vw, 3.6rem); }
+.chapter > .reel { position: fixed; inset: 0; z-index: 11; display: grid; place-items: center; pointer-events: none; }
+.reel-play { display: flex; align-items: center; gap: 0.3em; font-family: var(--font-display); font-weight: 600; letter-spacing: -0.04em;
+  font-size: clamp(3rem, 11.5vw, 12rem); line-height: 1; color: var(--cream); opacity: 0; pointer-events: none; text-shadow: 0 0.02em 0.5em rgba(12, 13, 9, 0.35); }
+.reel.is-live .reel-play { pointer-events: auto; }
+.reel-play i { display: grid; place-items: center; width: 1.2em; height: 0.74em; background: var(--volt); clip-path: polygon(0.22em 0, 100% 0, calc(100% - 0.22em) 100%, 0 100%); transition: background-color 0.45s var(--ease); }
+.reel-play i::after { content: ""; border-left: 0.26em solid var(--bg); border-top: 0.16em solid transparent; border-bottom: 0.16em solid transparent; margin-left: 0.05em; }
+.reel-play:hover i { background: var(--lilac); }
+/* while the big frame sits under the rail, the rail's words go full strength with a soft shadow so they stay readable */
+.over-reel .menu button { color: var(--cream); text-shadow: 0 0 14px rgba(12, 13, 9, 0.8); }
+.over-reel .menu button[aria-current="true"] { color: var(--volt); }
+
+.projects { position: absolute; left: 0; right: 0; top: 0; visibility: hidden; will-change: transform;
+  padding: clamp(5.5rem, 13vh, 8.5rem) var(--gutter) clamp(4rem, 10vh, 7rem) var(--left); }
+.project-grid { list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(2.2rem, 4.5vw, 4.5rem) clamp(1.5rem, 3vw, 3rem); }
+.project { display: block; width: 100%; }
+.project-shot { position: relative; display: block; aspect-ratio: 16 / 9; overflow: hidden; background: #14160F; }
+.project-shot img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.9s var(--ease); }
+.project:hover .project-shot img, .project:focus-visible .project-shot img { transform: scale(1.04); }
+.project-shot i { position: absolute; inset: 0; margin: auto; width: 5rem; height: 3.1rem; display: grid; place-items: center; background: var(--volt);
+  clip-path: polygon(0.95rem 0, 100% 0, calc(100% - 0.95rem) 100%, 0 100%); transition: background-color 0.45s var(--ease); }
+.project-shot i::after { content: ""; border-left: 1rem solid var(--bg); border-top: 0.6rem solid transparent; border-bottom: 0.6rem solid transparent; margin-left: 0.2rem; }
+.project:hover .project-shot i { background: var(--lilac); }
+.project-name { display: block; margin-top: 1rem; font-family: var(--font-display); font-weight: 600; letter-spacing: -0.035em; font-size: clamp(1.5rem, 2.4vw, 2.3rem); line-height: 1.08; transition: color 0.45s var(--ease); }
+.project:hover .project-name { color: var(--volt); }
+.project-note { display: block; margin-top: 0.4rem; color: var(--muted); font-size: 1rem; line-height: 1.45; }
+.chapter:not([data-id="home"]) .projects .more { position: relative; left: auto; bottom: auto; margin-top: clamp(3rem, 7vw, 5rem); }
+
+/* ---------- player: the reel or a project, with sound ---------- */
+.player { position: fixed; inset: 0; z-index: 60; display: grid; place-items: center; background: rgba(12, 13, 9, 0.95);
+  padding: clamp(4rem, 9vh, 6rem) var(--gutter) var(--gutter); opacity: 0; transition: opacity 0.5s var(--ease); }
+.player.is-open { opacity: 1; }
+.player[hidden] { display: none; }
+.player-box { width: min(100%, calc((100svh - 9rem) * 16 / 9)); aspect-ratio: 16 / 9; background: #000; }
+.player-box video, .player-box iframe { display: block; width: 100%; height: 100%; border: 0; }
+.player-close { position: absolute; top: 1.35rem; right: var(--gutter); font-family: var(--font-display); font-weight: 600; font-size: 1rem; letter-spacing: -0.02em; color: var(--cream); transition: color 0.45s var(--ease); }
+.player-close:hover { color: var(--volt); }
+
+/* while the project list scrolls, a soft dark band keeps the logo (and, on phones, the rail) clear of what passes underneath */
+body::before { content: ""; position: fixed; top: 0; left: 0; right: 0; height: 5.5rem; z-index: 12; pointer-events: none;
+  background: linear-gradient(var(--bg) 62%, rgba(12, 13, 9, 0)); opacity: 0; transition: opacity 0.5s var(--ease); }
+body.in-list::before { opacity: 1; }
+
+@media (max-width: 760px) {
+  body::before { height: 8rem; background: linear-gradient(var(--bg) 78%, rgba(12, 13, 9, 0)); }
+  .chapter--work { --left: var(--gutter); }
+  .chapter:not([data-id="home"]) .work-intro { top: 8rem; font-size: clamp(1.9rem, 8.6vw, 2.6rem); }
+  .projects { padding-top: 8rem; }
+  .project-grid { grid-template-columns: minmax(0, 1fr); }
+}

@@ -35,7 +35,7 @@ const FRAG = `
 precision highp float;
 varying vec2 vUv;
 uniform sampler2D uA, uB;
-uniform float uProg, uTime, uAspA, uAspB, uScreen, uDim, uStrips, uAngle, uPx, uSeed, uSwing;
+uniform float uProg, uTime, uAspA, uAspB, uScreen, uDim, uStrips, uAngle, uPx, uSeed, uSwing, uColour, uClean;
 uniform vec2 uOrigin;
 float gZoom;      // how far the camera is pushed in right now (exactly 1 between cuts)
 float gLift;      // 0 at rest, 1 at the middle of a cut
@@ -58,8 +58,8 @@ vec2 cover(vec2 uv, float asp) {
 vec2 rot(vec2 p, float a) { float c = cos(a), s = sin(a); return vec2(c * p.x - s * p.y, s * p.x + c * p.y); }
 float luma(vec3 c) { return dot(c, vec3(0.2126, 0.7152, 0.0722)); }
 float tone(float l) { l = smoothstep(0.03, 0.97, l); return pow(l, 1.12); }
-vec3 grade(float l) { return mix(DARK, CREAM, l); }
-vec3 gradeM(float l) { return mix(vec3(0.05, 0.036, 0.085), vec3(0.86, 0.80, 1.0), l); }   // seen through mauve
+vec3 grade(vec3 v) { return DARK + (CREAM - DARK) * v; }     // v is grey for black and white, or the footage's own colour
+vec3 gradeM(vec3 v) { float l = luma(v); return mix(vec3(0.05, 0.036, 0.085), vec3(0.86, 0.80, 1.0), l); }   // seen through mauve
 float hash(vec2 p) { return fract(sin(dot(p, vec2(12.9898, 78.233))) * 43758.5453); }
 // strips of uneven width, so the cut reads as panes, not blinds
 float warp(float s) { return s + 0.32 * sin(s * 1.9 + uSeed); }
@@ -67,8 +67,10 @@ float warpD(float s) { return 1.0 + 0.608 * cos(s * 1.9 + uSeed); }
 // brightness of each clip at a point on the flat picture plane (centre 0,0; height 1)
 // (a point pushed past the frame edge during a cut reads the picture mirrored, never a smeared edge)
 vec2 mirror(vec2 uv) { return abs(mod(uv + 1.0, 2.0) - 1.0); }
-float sampA(vec2 q) { return tone(luma(texture2D(uA, mirror((cover(vec2(q.x / uScreen + 0.5, q.y + 0.5), uAspA) - 0.5) / gZoom + 0.5)).rgb)); }
-float sampB(vec2 q) { return tone(luma(texture2D(uB, mirror((cover(vec2(q.x / uScreen + 0.5, q.y + 0.5), uAspB) - 0.5) / gZoom + 0.5)).rgb)); }
+vec3 sampA(vec2 q) { vec3 c = texture2D(uA, mirror((cover(vec2(q.x / uScreen + 0.5, q.y + 0.5), uAspA) - 0.5) / gZoom + 0.5)).rgb;
+  return mix(vec3(tone(luma(c))), c, uColour); }     // uColour 0 = black and white (the default), 1 = colour
+vec3 sampB(vec2 q) { vec3 c = texture2D(uB, mirror((cover(vec2(q.x / uScreen + 0.5, q.y + 0.5), uAspB) - 0.5) / gZoom + 0.5)).rgb;
+  return mix(vec3(tone(luma(c))), c, uColour); }     // uColour 0 = black and white (the default), 1 = colour
 // the colours of the spectrum from red (0) to violet (1), weighted so seven even steps add up to white
 vec3 spectrum(float f) {
   return vec3((max(0.0, 1.0 - 2.0 * f) + 0.35 * max(0.0, 3.0 * f - 2.0)) / 2.525,
@@ -138,13 +140,13 @@ vec3 shade(Pane P) {
   // wider toward the bevel, plus a lens split that grows toward the corners while the camera is moving.
   // Where the seven agree, the colours add back up to plain black and white.
   vec2 ab = acrossV * (0.012 + 0.052 * abs(bev)) * P.g + P.q * gLift * 0.013;
-  float l0 = mix(sampA(qa), sampB(qb), showB);
+  vec3 l0 = mix(sampA(qa), sampB(qb), showB);
   vec3 acc = l0 * spectrum(0.5);
   for (int i = 0; i < 7; i++) {
     if (i == 3) continue;                          // the middle sample is l0, taken above
     float f = float(i) / 6.0;
     vec2 o = ab * (f * 2.0 - 1.0);
-    float l;
+    vec3 l;
     if (showB > 0.5) l = sampB(qb + o); else l = sampA(qa + o);
     acc += l * spectrum(f);
   }
@@ -201,15 +203,17 @@ void main() {
 
   // keep the type readable
   col *= uDim;
-  col *= 1.0 - 0.38 * smoothstep(0.62, 0.0, uv.y);
   vec2 q = (uv - 0.5) * vec2(uScreen / max(uScreen, 1.0), 1.0);
-  col *= 1.0 - dot(q, q) * 0.9;
+  float shade = (1.0 - 0.38 * smoothstep(0.62, 0.0, uv.y)) * (1.0 - dot(q, q) * 0.9);
+  col *= mix(shade, 1.0, uClean);        // uClean 1 = the picture as it is, for when it is the thing being shown
 
   // (no grain and no scan lines: the picture is shown clean)
   gl_FragColor = vec4(col, 1.0);
 }`;
 
-const UNIFORMS = ["uA", "uB", "uProg", "uTime", "uAspA", "uAspB", "uScreen", "uDim", "uStrips", "uAngle", "uOrigin", "uPx", "uSeed", "uSwing"];
+const UNIFORMS = ["uA", "uB", "uProg", "uTime", "uAspA", "uAspB", "uScreen", "uDim", "uStrips", "uAngle", "uOrigin", "uPx", "uSeed", "uSwing", "uColour", "uClean"];
+// a preview switch: add ?colour to the address to see the footage in colour
+const COLOUR = new URLSearchParams(location.search).has("colour") ? 1 : 0;
 
 // Returns the stage, or null where WebGL is not available (the caller then falls back to plain pictures).
 export function createStage(canvas) {
@@ -239,7 +243,7 @@ export function createStage(canvas) {
   } catch (e) { console.warn("Glass stage is off, falling back to plain pictures:", e); return null; }
 
   // a = the picture on screen, b = the picture a cut is bringing in
-  const st = { a: null, b: null, prog: 0, hold: null, paused: false, dim: 0, strips: 9, angle: -0.42, seed: 0, swing: 1, origin: [0.5, 0.5], cutNo: 0, cutting: false };
+  const st = { a: null, b: null, prog: 0, hold: null, paused: false, dim: 0, colour: 0, clean: 0, strips: 9, angle: -0.42, seed: 0, swing: 1, origin: [0.5, 0.5], cutNo: 0, cutting: false };
   let dirtyA = false, dirtyB = false;      // a photo is sent to the graphics card once; a video every frame
 
   const aspect = (s) => (!s ? 16 / 9 : isVideo(s) ? (s.videoWidth ? s.videoWidth / s.videoHeight : 16 / 9) : (s.naturalWidth ? s.naturalWidth / s.naturalHeight : 16 / 9));
@@ -273,6 +277,8 @@ export function createStage(canvas) {
     gl.uniform1f(U.uAngle, st.angle);
     gl.uniform1f(U.uSeed, st.seed);
     gl.uniform1f(U.uSwing, st.swing);
+    gl.uniform1f(U.uColour, Math.max(COLOUR, st.colour));      // st.colour 0 = black and white, 1 = the footage's own colour
+    gl.uniform1f(U.uClean, st.clean);
     gl.uniform2f(U.uOrigin, st.origin[0], st.origin[1]);
     gl.drawArrays(gl.TRIANGLES, 0, 3);
   }

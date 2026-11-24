@@ -8,7 +8,7 @@
 // Every movement runs on one curve (smootherstep): it starts and stops with no speed and
 // no sudden change of acceleration.
 
-import { smoother, EASE, reduce, whenReady, createStage } from "./glass-stage.js?v=3";
+import { smoother, EASE, reduce, whenReady, createStage } from "./glass-stage.js?v=5";
 
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
@@ -35,13 +35,14 @@ const wait = (ms) => new Promise((r) => setTimeout(r, ms));
 /* ---------------- footage ---------------- */
 const videos = {};
 function videoFor(id) {
-  if (videos[id]) return videos[id];
+  const clip = byId[id].dataset.clip;         // one player per clip: the home screen and the Work section share the reel
+  if (videos[clip]) return videos[clip];
   const v = document.createElement("video");
-  v.src = byId[id].dataset.clip;
+  v.src = clip;
   v.muted = true; v.loop = true; v.playsInline = true;
   v.setAttribute("playsinline", ""); v.setAttribute("muted", "");
   v.preload = "auto";
-  videos[id] = v;
+  videos[clip] = v;
   if (body.classList.contains("no-gl")) $(".stage-fallback").appendChild(v);
   return v;
 }
@@ -70,6 +71,119 @@ roll.box.addEventListener("pointerenter", () => (roll.hover = true));
 roll.box.addEventListener("pointerleave", () => (roll.hover = false));
 addEventListener("resize", measureRoll);
 
+/* ---------------- our work: the reel grows to fill the screen, then the projects follow ---------------- */
+// The footage behind the home screen becomes a frame you scroll through. work.y is how far you have scrolled inside the section:
+//   0 .. grow             the frame grows from half size to almost the whole screen and "Play reel" arrives
+//   .. grow + hold        it stays there for one more scroll
+//   beyond                it scrolls away upward like an ordinary page, and the projects come up underneath
+// work.mix (0 to 1) is how much of this layout is applied: it glides up when the section opens and back down when it closes,
+// which is what turns the full-screen footage into the frame and back.
+const S0 = 0.5, S1 = 0.88;                       // frame size at the start, and at its biggest (close to full screen, clear of the logo)
+const work = { canvas: $("#stage"), reel: $(".reel"), label: $(".reel-play"), intro: $(".work-intro"), list: $(".projects"),
+  y: 0, kick: 0, mix: 0, grow: 1, hold: 1, max: 0 };
+const measureWork = () => {
+  work.grow = innerHeight * 0.9; work.hold = innerHeight * 0.7;
+  work.max = work.grow + work.hold + work.list.offsetHeight;
+};
+addEventListener("resize", measureWork);
+$$(".project-shot img").forEach((img) => img.addEventListener("load", measureWork));
+// scroll the section by hand; returns how much of the movement did not fit (you were already at one end)
+function nudgeWork(d, eased) {
+  const pos = work.y + work.kick, to = Math.min(work.max, Math.max(0, pos + d));
+  if (eased) work.kick += to - pos; else work.y += to - pos;
+  return pos + d - to;
+}
+const ramp = (x, a, b) => smoother(Math.min(1, Math.max(0, (x - a) / (b - a))));
+function layoutWork(dt) {
+  if (current !== "work" && work.mix === 0) return;
+  const k = work.kick * (1 - Math.exp(-dt * 12));          // your own scrolling, eased out
+  work.y += k; work.kick -= k;
+  const vh = innerHeight, m = work.mix;
+  const p = Math.min(1, work.y / work.grow), grown = smoother(p);
+  const away = Math.max(0, work.y - work.grow - work.hold);         // how far the frame has scrolled off the top
+  const scale = 1 + (S0 + (S1 - S0) * grown - 1) * m;
+  const tf = m > 0.0005 ? `translate3d(0, ${(-away * m).toFixed(1)}px, 0) scale(${scale.toFixed(4)})` : "";
+  work.canvas.style.transform = tf; work.reel.style.transform = tf;
+  const gone = m > 0.99 && away > vh * 1.02;
+  if (stage) stage.paused = gone;                                    // nothing to draw once the frame is off screen
+  const label = m * ramp(p, 0.4, 0.95);
+  work.label.style.opacity = label.toFixed(3);
+  work.reel.classList.toggle("is-live", label > 0.6 && !gone);
+  work.intro.style.opacity = (1 - ramp(p, 0.05, 0.4)).toFixed(3);
+  body.classList.toggle("over-reel", current === "work" && p > 0.45 && away < vh * 0.9);
+  body.classList.toggle("in-list", current === "work" && away > vh * 0.3);
+  work.list.style.transform = `translate3d(0, ${(vh - away).toFixed(1)}px, 0)`;
+  work.list.style.visibility = away > 0 && m > 0 ? "visible" : "hidden";
+}
+const eases = new Map();
+function easeTo(obj, key, to, ms) {
+  const from = obj[key], t0 = performance.now(), token = {};
+  eases.set(key, token);
+  const tick = (now) => {
+    if (eases.get(key) !== token) return;
+    const k = Math.min(1, (now - t0) / ms);
+    obj[key] = from + (to - from) * smoother(k);
+    if (k < 1) requestAnimationFrame(tick);
+  };
+  requestAnimationFrame(tick);
+}
+// opening the section: the full-screen footage pulls back into the frame, in colour and at full brightness
+function enterWork(instant) {
+  work.y = 0; work.kick = 0; measureWork();
+  const ms = instant || reduce ? 1 : 1100;
+  easeTo(work, "mix", 1, ms);
+  if (stage) { stage.glide("colour", 1, ms); stage.glide("clean", 1, ms); }
+}
+// closing it: the frame opens back out to the full screen, or, if it had already scrolled away, the next picture simply fades up
+function leaveWork() {
+  const away = work.y - work.grow - work.hold > innerHeight * 0.6;
+  const ms = away || reduce ? 1 : 1100;
+  if (away && stage) stage.dim = 0;
+  work.kick = 0;
+  easeTo(work, "mix", 0, ms);
+  if (stage) { stage.paused = false; stage.glide("colour", 0, ms); stage.glide("clean", 0, ms); }
+  body.classList.remove("over-reel", "in-list");
+}
+
+// coming back up into the section from the chapter below: the old picture fades out, and the section is simply there,
+// scrolled to its end, with the reel waiting above
+async function workFromBelow() {
+  const v = videoFor("work"), old = stage && stage.a;
+  play(v);
+  if (!stage) return;
+  await stage.glide("dim", 0, reduce ? 1 : 450);
+  eases.set("mix", {}); work.mix = 1;
+  stage.colour = 1; stage.clean = 1;
+  stage.show(v, DIM.work, 1);
+  if (old && old !== v) old.pause();
+}
+
+/* ---------------- player: the reel or a project, with sound ---------------- */
+const player = $(".player"), playerBox = $(".player-box");
+function openPlayer(what) {
+  const [kind, id] = [what.slice(0, what.indexOf(":")), what.slice(what.indexOf(":") + 1)];
+  playerBox.innerHTML = kind === "file"
+    ? `<video src="${id}" controls autoplay playsinline></video>`
+    : kind === "vimeo"
+      ? `<iframe src="https://player.vimeo.com/video/${id}?autoplay=1" title="Video player" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>`
+      : `<iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0" title="Video player" allow="autoplay; encrypted-media; fullscreen; picture-in-picture" allowfullscreen></iframe>`;
+  player.hidden = false;
+  requestAnimationFrame(() => player.classList.add("is-open"));
+  if (stage && stage.a) stage.a.pause();
+  $(".player-close").focus();
+}
+function closePlayer() {
+  if (player.hidden) return false;
+  player.classList.remove("is-open");
+  playerBox.innerHTML = "";                                   // stops the sound at once
+  setTimeout(() => (player.hidden = true), 500);
+  if (stage && stage.a) play(stage.a);
+  return true;
+}
+$$("[data-play]").forEach((b) => b.addEventListener("click", () => openPlayer(b.dataset.play)));
+$(".player-close").addEventListener("click", closePlayer);
+player.addEventListener("click", (e) => { if (e.target === player) closePlayer(); });
+
 let lastT = performance.now();
 function frame(now) {
   requestAnimationFrame(frame);
@@ -84,8 +198,9 @@ function frame(now) {
     if (roll.max > 0 && roll.y >= roll.max) roll.y = 0;      // both ends of the roll are empty, so the loop is invisible
     roll.el.style.transform = `translate3d(0, ${-roll.y.toFixed(2)}px, 0)`;
   }
+  layoutWork(dt);
 }
-const DIM = { home: 0.6, credits: 0.32, contact: 0.3 };
+const DIM = { home: 0.6, work: 1, credits: 0.32, contact: 0.3 };
 let fallbackCuts = 0;
 async function cutTo(id, origin) {
   const v = videoFor(id);
@@ -97,6 +212,8 @@ async function cutTo(id, origin) {
   }
   const old = stage.a;
   sweeps(stage.cutNo + 1);
+  // the home screen and the Work section show the same reel: no cut between them, only the brightness changes
+  if (old === v) { stage.cutNo++; return stage.glide("dim", DIM[id] ?? 0.46, reduce ? 1 : 1100); }
   await stage.cut(v, { origin, dim: DIM[id] ?? 0.46 });
   if (old && old !== v) old.pause();
 }
@@ -153,7 +270,7 @@ function wipeOut(el, delay = 0) {
     { clipPath: CLIP_HIDDEN_R, transform: "translateX(0.4em)" },
   ], { duration: 520, delay, easing: EASE, fill: "both" }).finished;
 }
-const parts = (ch) => [...$$(".title .ln-t", ch), ...$$(".sub, .more, .contact-big a, .roll", ch)];
+const parts = (ch) => [...$$(".title .ln-t", ch), ...$$(".sub, .more, .contact-big a, .roll, .projects-in", ch)].filter((n) => !n.closest(".projects-in") || n.matches(".projects-in"));
 
 async function showChapter(ch, d0 = 0) {
   ch.hidden = false; ch.classList.add("is-on");
@@ -189,7 +306,7 @@ function originOf(el) {
   const r = el.getBoundingClientRect();
   return [(r.left + r.width / 2) / innerWidth, 1 - (r.top + r.height / 2) / innerHeight];
 }
-async function go(id, from) {
+async function go(id, from, dir = 0) {
   if (busy || id === current || !byId[id]) return;
   busy = true;
   const prev = byId[current], next = byId[id];
@@ -201,12 +318,19 @@ async function go(id, from) {
     morph(menuButtons, () => body.classList.toggle("is-rail", toRail), 900, (i) => (toRail ? i : n - 1 - i) * 22);
   }
   const leaving = hideChapter(prev);
-  const cut = cutTo(id, origin);
+  if (current === "work") leaveWork();
+  // scrolling back up into Work from the chapter below lands at the foot of the project list, as it would on an ordinary page
+  const fromBelow = id === "work" && dir < 0;
+  const cut = fromBelow ? workFromBelow() : cutTo(id, origin);
+  if (id === "work" && !fromBelow) enterWork();
   await leaving;
   current = id;
   if (id === "credits") { next.hidden = false; measureRoll(); roll.y = roll.start; roll.kick = 0; roll.heldUntil = 0; }
   history.replaceState(null, "", id === "home" ? location.pathname : `#${id}`);
-  await showChapter(next, 260);
+  const shown = showChapter(next, 260);
+  if (id === "work") measureWork();          // the section is on the page now, so its length can be measured
+  if (fromBelow) { work.y = work.max; work.kick = 0; }
+  await shown;
   await cut;
   busy = false;
   // warm up the neighbours so the next cut starts at once
@@ -216,32 +340,46 @@ async function go(id, from) {
 function step(d) {
   const i = order.indexOf(current);
   const n = order[(i + d + order.length) % order.length];
-  go(n, $(`.menu button[data-go="${n}"]`) || $(".logo"));
+  go(n, $(`.menu button[data-go="${n}"]`) || $(".logo"), d);
 }
 
 $$("[data-go]").forEach((b) => b.addEventListener("click", () => go(b.dataset.go, b)));
 addEventListener("keydown", (e) => {
   if (e.key === "ArrowDown" || e.key === "ArrowRight" || e.key === "PageDown") { e.preventDefault(); step(1); }
   if (e.key === "ArrowUp" || e.key === "ArrowLeft" || e.key === "PageUp") { e.preventDefault(); step(-1); }
-  if (e.key === "Escape") go("home", $(".logo"));
+  if (e.key === "Escape" && !closePlayer()) go("home", $(".logo"));
 });
-let wheelAcc = 0, wheelT = 0;
+let wheelAcc = 0, wheelT = 0, lastWheel = 0, fromEdge = true;
 const rollInHand = () => current === "credits" && !reduce && roll.max > 0;
+const workInHand = () => current === "work" && !busy && player.hidden;
+// whichever section scrolls by hand right now (the credits roll or the Work section), or nothing
+const inHand = () => (rollInHand() ? nudgeRoll : workInHand() ? nudgeWork : null);
 addEventListener("wheel", (e) => {
   let d = e.deltaMode === 1 ? e.deltaY * 32 : e.deltaY;
-  // on Credits the wheel moves the roll; only what is left over at either end goes on to the next chapter
-  if (rollInHand()) { d = nudgeRoll(d, true); if (!d) return; }
+  if (!player.hidden) return;
+  // on Credits and in Work the wheel scrolls the section; only what is left over at either end goes on to the next chapter
+  const hand = inHand(), now = performance.now(), fresh = now - lastWheel > 200;
+  lastWheel = now;
+  if (hand) {
+    const left = hand(d, true);
+    // Leaving a section takes a scroll of its own: one that starts when you are already at its end.
+    // The tail of the scroll that brought you to the end never carries you into the next chapter.
+    if (fresh) fromEdge = Math.abs(left - d) < 1;      // this scroll began with (almost) nowhere left to go
+    if (!left || !fromEdge) return;
+    d = left;
+  }
   if (busy) return;
   wheelAcc += d;
   clearTimeout(wheelT); wheelT = setTimeout(() => (wheelAcc = 0), 220);
-  if (Math.abs(wheelAcc) > (rollInHand() ? 220 : 80)) { step(wheelAcc > 0 ? 1 : -1); wheelAcc = 0; }
+  if (Math.abs(wheelAcc) > (hand ? 220 : 80)) { step(wheelAcc > 0 ? 1 : -1); wheelAcc = 0; }
 }, { passive: true });
 let touchY = null, touchLast = null, touchRolled = false;
 addEventListener("touchstart", (e) => { touchY = touchLast = e.touches[0].clientY; touchRolled = false; }, { passive: true });
 addEventListener("touchmove", (e) => {
-  if (touchLast == null || !rollInHand()) return;
+  const hand = inHand();
+  if (touchLast == null || !hand) return;
   const y = e.touches[0].clientY, d = touchLast - y; touchLast = y;
-  if (Math.abs(d - nudgeRoll(d, false)) > 0.5) touchRolled = true;      // the roll follows the finger
+  if (Math.abs(d - hand(d, false)) > 0.5) touchRolled = true;           // the section follows the finger
 }, { passive: true });
 addEventListener("touchend", (e) => {
   if (touchY == null) return;
@@ -276,6 +414,7 @@ async function arrive(id) {
     else $$(".stage-fallback video").forEach((x) => x.classList.toggle("on", x === v));
   });
   if (id === "credits") { ch.hidden = false; measureRoll(); roll.y = roll.start; roll.kick = 0; roll.heldUntil = 0; }
+  if (id === "work") enterWork(true);
   const coming = Promise.all([showChapter(ch, 120), ...menuButtons.map((b, i) => wipeIn(b, 80 + i * 50))]);
   body.classList.remove("is-loading");      // the animations above now hold everything hidden until its turn
   await coming;
