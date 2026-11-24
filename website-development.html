@@ -95,12 +95,71 @@
       .step::before { left: -1.75rem; top: 0.3rem; }
     }
   </style>
+  <style>
+    .ba-hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 1.25rem 2rem; margin-top: 2rem; }
+    .symptoms { margin-top: 2rem; }
+    @media (min-width: 64rem) { .symptoms { grid-template-columns: repeat(3, minmax(0, 1fr)); } .ba-who { grid-template-columns: repeat(3, minmax(0, 1fr)); } #ba-faq .card-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    .symptoms .card h3 { font-size: 1.25rem; }
+    .steps { list-style: none; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: clamp(1rem, 2vw, 1.75rem); position: relative; }
+    .steps::before { content: ""; position: absolute; left: 0; right: 0; top: 0.55rem; border-top: 1px dashed rgba(214, 255, 61, 0.45); }
+    .step { position: relative; padding-top: 2.25rem; }
+    .step::before { content: ""; position: absolute; top: 0.2rem; left: 0; width: 0.75rem; height: 0.75rem; border-radius: 50%; background: var(--volt); box-shadow: 0 0 0 5px var(--bg); }
+    .step-num { font-family: var(--font-mono); font-size: 0.78rem; color: var(--lilac); }
+    .step h3 { font-size: 1.35rem; margin: 0.4rem 0 0.6rem; }
+    .step p { color: var(--muted); font-size: 0.95rem; line-height: 1.55; }
+    .steps-cta { display: flex; flex-wrap: wrap; align-items: center; gap: 1.25rem 2rem; margin-top: clamp(2.5rem, 4vw, 3.5rem); }
+    .compare-col { position: relative; }
+    .ba-case { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: clamp(2rem, 5vw, 4.5rem); align-items: start; }
+    .ba-case .eyebrow { margin-bottom: 1rem; }
+    .ba-changes { list-style: none; display: grid; gap: 0.85rem; margin-bottom: 1.75rem; }
+    .ba-changes li { position: relative; padding-left: 1.6rem; color: var(--muted); line-height: 1.55; }
+    .ba-changes li::before { content: ""; position: absolute; left: 0; top: 0.5rem; width: 0.6rem; height: 0.6rem; border-radius: 50%; background: var(--volt); }
+    .ba-changes b { color: var(--cream); font-weight: 600; }
+    .ba-after { border: 1px dashed rgba(214, 255, 61, 0.5); border-radius: 1rem; padding: 1.1rem 1.25rem; margin-bottom: 1.5rem; }
+    .ba-after p { color: var(--muted); margin-top: 0.6rem; }
+    @media (max-width: 64rem) {
+      .steps { grid-template-columns: minmax(0, 1fr); gap: 1.75rem; padding-left: 1.75rem; }
+      .steps::before { left: 0.35rem; right: auto; top: 0.5rem; bottom: 0.5rem; border-top: 0; border-left: 1px dashed rgba(214, 255, 61, 0.45); }
+      .step { padding-top: 0; }
+      .step::before { left: -1.75rem; top: 0.3rem; }
+      .ba-case { grid-template-columns: minmax(0, 1fr); }
+    }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "Brand Alignment and Rebranding",
+    "serviceType": "Brand alignment, rebranding, logo refresh, brand guidelines and brand rollout",
+    "description": "Brand alignment and rebranding for small and growing businesses: a full audit of every touchpoint, logo refresh or rebrand, colour and type, voice and core message, a practical brand guide, and a coordinated rollout across the website, social profiles, Google Business Profile, print and video.",
+    "provider": {
+      "@type": "ProfessionalService",
+      "name": "Volare Media",
+      "url": "https://www.volaremedia.net",
+      "telephone": "+1-250-589-4521",
+      "email": "video@volaremedia.net",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Victoria",
+        "addressRegion": "BC",
+        "addressCountry": "CA"
+      }
+    },
+    "areaServed": [
+      "Victoria BC",
+      "Vancouver Island",
+      "British Columbia",
+      "Canada"
+    ],
+    "url": "https://www.volaremedia.net/website-development.html#brand-alignment"
+  }
+  </script>
 </head>
 <body class="v2 v3">
 
   <header class="v2-header">
     <div class="wrap">
-      <a class="logo" href="console.html" aria-label="Volare Media, home"><img src="assets/vm-logo.png" alt="Volare Media logo"></a>
+      <a class="logo" href="index.html" aria-label="Volare Media, home"><img src="assets/vm-logo.png" alt="Volare Media logo"></a>
       <div class="v2-header-right">
         <a class="btn" href="contact.html">Start a project</a>
         <button class="menu-btn" aria-expanded="false" aria-controls="site-menu">Menu <span class="menu-lines" aria-hidden="true"></span></button>
@@ -112,7 +171,6 @@
     <div class="wrap">
       <ul class="v2-menu-links">
         <li><a href="work.html">Work</a></li>
-        <li><a href="partnerships.html">Partnerships</a></li>
         <li><a href="crew.html">The Crew</a></li>
         <li><a href="community.html">Community</a></li>
         <li><a href="contact.html">Contact</a></li>
@@ -121,12 +179,9 @@
         <h3>What we make</h3>
         <ul>
           <li><a href="marketing-videos.html">Marketing videos</a></li>
-          <li><a href="creative-direction.html">Creative direction</a></li>
           <li><a href="corporate-video.html">Corporate video</a></li>
           <li><a href="event-videography.html">Event videography</a></li>
           <li><a href="website-development.html" aria-current="page">Websites and branding</a></li>
-          <li><a href="brand-alignment.html">Brand alignment</a></li>
-          <li><a href="agencies.html">For agencies</a></li>
         </ul>
         <h3>Say hello</h3>
         <ul>
@@ -208,7 +263,7 @@
           <div class="card">
             <span class="site-shot"><img src="assets/img/site-itsadoodle.jpg" alt="The It's A Doodle Labradoodles website homepage, in development" loading="lazy"></span>
             <h3>It's A Doodle K9 Service</h3>
-            <p>A full rebrand and rebuild for this Sooke Labradoodle breeder: all-new logos, a brand guide, realigned socials and a video-led website. <a href="brand-alignment.html#its-a-doodle">See the before</a>. Launching soon.</p>
+            <p>A full rebrand and rebuild for this Sooke Labradoodle breeder: all-new logos, a brand guide, realigned socials and a video-led website. <a href="website-development.html#its-a-doodle">See the before</a>. Launching soon.</p>
           </div>
         </div>
       </div>
@@ -240,11 +295,110 @@
         <ul class="big-list reveal">
             <li id="websites"><span>Website development</span></li>
             <li id="brand-building"><span>Brand building</span></li>
-            <li><a href="brand-alignment.html">Brand alignment</a></li>
+            <li><a href="website-development.html#brand-alignment">Brand alignment</a></li>
             <li id="campaigns"><span>Marketing campaigns</span></li>
         </ul>
       </div>
     </section>
+    <section class="section merged" id="brand-alignment">
+      <div class="wrap reveal">
+        <h2 class="display-lg">Make your brand look the same <span class="sweep">everywhere</span><span class="dot">.</span></h2>
+        <p class="lede">Your logo, name, colours and message, matched across your website, Facebook, Instagram, LinkedIn, Google and everything you print. Brand alignment and rebranding for businesses on Vancouver Island and across BC, from the team that makes your video.</p>
+        <div class="ba-hero-actions">
+          <a class="btn" href="contact.html?project=brand">Align my brand</a>
+          <a class="text-link" href="what-is-brand-alignment.html">What is brand alignment?</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel big-words" aria-labelledby="signs-your-brand-has-drifted-head">
+      <div class="wrap">
+        <h2 id="signs-your-brand-has-drifted-head" class="big-list-head reveal">Signs your brand has drifted<span class="dot">.</span></h2>
+        <div class="big-list-grid">
+          <ul class="big-list big-list--long reveal">
+            <li><span>Three versions of your logo</span></li>
+            <li><span>A name that changes</span></li>
+            <li><span>Colours that are almost the same</span></li>
+            <li><span>A different story on every page</span></li>
+            <li><span>Profiles that don't match</span></li>
+            <li><span>No one can find the logo file</span></li>
+          </ul>
+          <div class="big-list-side reveal">
+            <div class="big-list-shot"><img class="bw" src="assets/img/bts-gimbal.jpg" alt="A Volare Media operator on a gimbal shot" loading="lazy" style="object-position: 50% 50%;"></div>
+            <p class="big-list-call"><a href="tel:+12505894521">250.589.4521</a> <a href="mailto:video@volaremedia.net">video@volaremedia.net</a></p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="sec big-band photo-band" aria-labelledby="what-s-included-head" style="--photo: url('assets/img/bts-spotlight.jpg'); --photo-pos: 40% 40%; --photo-opacity: 0.32;">
+      <div class="wrap">
+        <h2 id="what-s-included-head" class="big-list-head reveal">What's included<span class="dot">.</span></h2>
+        <ul class="big-list big-list--long reveal">
+            <li><span>Brand audit</span></li>
+            <li><span>Logo refresh or full rebrand</span></li>
+            <li><span>Colour, type and visual style</span></li>
+            <li><span>Voice and core message</span></li>
+            <li><span>Brand guide</span></li>
+            <li><span>Rollout everywhere</span></li>
+        </ul>
+      </div>
+    </section>
+    <section class="section band--sky grid-bleed grid-bleed--glow" id="its-a-doodle" aria-labelledby="ba-case">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div>
+            <h2 id="ba-case" class="display-lg">It's A Doodle <span class="ink-volt">K9 Service</span><span class="dot">.</span></h2>
+          </div>
+          <p class="lede">A much-loved Labradoodle breeder in Sooke, a brand video that was already working, and a brand that had grown in layers. On the left, a section of their current homepage. On the right, the top of the new design.</p>
+        </div>
+        <div class="reveal">
+          <div class="site-compare site-compare--static">
+          <figure class="compare-col">
+            <div class="compare-frame">
+              <img src="assets/img/doodle-before-cluttered.jpg" alt="A section of the current It's A Doodle homepage: a long wall of small bullet-point text on a pink-to-blue gradient beside four bright coloured tiles" loading="lazy">
+            </div>
+            <span class="before-stamp">Before</span>
+            <figcaption>Part of the current homepage. Walls of text, mixed colours and a layout that has grown in layers.</figcaption>
+          </figure>
+          <figure class="compare-col compare-col--after">
+            <div class="compare-frame">
+              <video class="lazy-loop" muted loop playsinline preload="none" poster="assets/img/doodle-after-top.jpg" data-src="assets/doodle-after-hero.mp4" aria-label="The top of the new It's A Doodle homepage design playing: a video hero of Labradoodle puppies, the headline Labradoodle puppies raised like family, and the cursor leaving a trail of paw prints"></video>
+            </div>
+            <span class="before-stamp">After</span>
+            <figcaption>The top of the new homepage design, in progress, paw-print cursor trail and all. The name and logos update to It's A Doodle K9 Service with the new brand.</figcaption>
+          </figure>
+        </div>
+        </div>
+        <div class="ba-case reveal" style="margin-top:clamp(2.5rem,5vw,4rem);">
+          <div class="ba-before">
+            <div class="logo-chips">
+              <figure class="logo-chip"><img src="assets/img/doodle-logo-bone.png" alt="Current It's A Doodle Labradoodles bone logo" loading="lazy"></figure>
+              <figure class="logo-chip"><img src="assets/img/doodle-logo-paw.png" alt="Current It's A Doodle Labradoodles paw badge logo" loading="lazy"></figure>
+              <figure class="logo-chip"><img src="assets/img/doodle-logo-wordmark.jpg" alt="Current Doodle Labradoodles wordmark logo" loading="lazy"></figure>
+            </div>
+            <p class="before-caption">Three logo versions in use today. All of them are being replaced.</p>
+            <p class="before-caption" style="margin-top:1.25rem;">Two names in use: It's A Doodle Labradoodles on the logos, It's A Doodle K9 Service in the website's top bar.</p>
+          </div>
+          <div>
+            <h3 class="display-md" style="margin-bottom:1.25rem;">One name. One brand. Everywhere<span class="dot">.</span></h3>
+            <ul class="ba-changes">
+              <li><b>The name.</b> Back to the original: It's A Doodle K9 Service, used the same way everywhere.</li>
+              <li><b>All-new logos and design.</b> A fresh logo set and visual style, developed with the owners and approved together.</li>
+              <li><b>A full brand guide.</b> Logos, colours, type, voice and templates, so it stays aligned for years.</li>
+              <li><b>A rebuilt website,</b> centred on the brand video we made for them.</li>
+              <li><b>Instagram and Facebook,</b> rebuilt and realigned: profile images, covers, bios and highlights.</li>
+              <li><b>Google, upgraded and connected.</b> Their Google Business Profile refreshed and linked to every social platform.</li>
+            </ul>
+            <div class="ba-after">
+              <span class="before-stamp" style="position:static;display:inline-block;">After</span>
+              <p>The finished brand and website launch in 2027, with the new name and logos in place. We'll update this page when they go live.</p>
+            </div>
+            <a class="text-link" href="what-is-brand-alignment.html">Read the full story</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="cta band--volt">
       <div class="wrap reveal">
         <h2 class="display-lg">One team for your video, website and <span class="sweep">brand</span><span class="dot">.</span></h2>
@@ -262,10 +416,7 @@
           <p class="footer-tag">Stories worth <em>sharing</em><span class="dot">.</span></p>
         </div>
         <ul class="footer-links">
-          <li><a href="services.html">Services</a></li>
           <li><a href="work.html">Work</a></li>
-          <li><a href="partnerships.html">Partnerships</a></li>
-          <li><a href="about.html">About</a></li>
           <li><a href="crew.html">The Crew</a></li>
           <li><a href="community.html">Community</a></li>
           <li><a href="journal.html">Journal</a></li>

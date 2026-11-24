@@ -6,20 +6,31 @@ AddDefaultCharset UTF-8
 
 # Old Zyrosite URLs (still in Google's index) → closest new page.
 # Anchored with ^...$ so real .html files are never matched.
-RedirectMatch 301 ^/voice-over-recording/?$      /services.html
-RedirectMatch 301 ^/film-production/?$           /services.html
-RedirectMatch 301 ^/marketing-videos/?$          /services.html
-RedirectMatch 301 ^/music-video-production/?$    /services.html
-RedirectMatch 301 ^/services/?$                  /services.html
+RedirectMatch 301 ^/voice-over-recording/?$      /
+RedirectMatch 301 ^/film-production/?$           /
+RedirectMatch 301 ^/marketing-videos/?$          /
+RedirectMatch 301 ^/music-video-production/?$    /
+RedirectMatch 301 ^/services/?$                  /
 RedirectMatch 301 ^/blog/?$                      /journal.html
 RedirectMatch 301 ^/contact/?$                   /contact.html
-RedirectMatch 301 ^/about/?$                     /about.html
+RedirectMatch 301 ^/about/?$                     /crew.html#about
 RedirectMatch 301 ^/privacy-policy/?$            /privacy-policy.html
 RedirectMatch 301 ^/terms-and-conditions/?$      /
 # Old Zyrosite blog/service URLs flagged in Search Console (2026-10-07)
 RedirectMatch 301 ^/digital-marketing/?$         /marketing-videos.html
 RedirectMatch 301 ^/non-skippable-youtube-video-ad/?$  /never-make-a-video-to-make-a-video.html
 RedirectMatch 301 ^/local-filmmakers-bring-powerful-mental-health-message-to-bcs-construction-community(-copy)?/?$  /tailgate-toolkit-61-stations.html
+
+# ---- Condensed site (2026-11-23): each retired page goes to the section that now holds its content ----
+RedirectMatch 301 ^/services\.html$  /
+RedirectMatch 301 ^/creative-direction\.html$  /marketing-videos.html#creative-direction
+RedirectMatch 301 ^/brand-alignment\.html$  /website-development.html#brand-alignment
+RedirectMatch 301 ^/about\.html$  /crew.html#about
+RedirectMatch 301 ^/partnerships\.html$  /work.html#partnerships
+RedirectMatch 301 ^/agencies\.html$  /work.html#agencies
+RedirectMatch 301 ^/community-peninsula-gives\.html$  /community.html#peninsula-gives
+RedirectMatch 301 ^/community-shine-gala\.html$  /community.html#shine-gala
+RedirectMatch 301 ^/community-fashion-splash\.html$  /community.html#fashion-splash
 
 # ---- Added 2026-10-28 (site maintenance) ----
 

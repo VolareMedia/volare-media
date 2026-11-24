@@ -182,12 +182,111 @@
     .reel-sound[aria-pressed="false"] .icon-on { display: none; }
     .reel-sound[aria-pressed="false"] .icon-off { display: block; }
   </style>
+  <style>
+/* Partnerships page (2026-11-05). New entries are added at the top of .pship-list by
+   volare-media-src/partnerships-queue/add_partnership.py */
+.pship-hero { padding-bottom: clamp(2.5rem, 5vw, 4rem); }
+.pship-hero .lede { margin-top: 1.75rem; }
+.pship-list { padding-bottom: clamp(2.5rem, 5vw, 4rem); }
+.pship { position: relative; isolation: isolate; overflow: hidden; border-top: 1px solid var(--line); margin-inline: calc(-1 * var(--gutter)); padding-inline: var(--gutter); }
+/* each bar carries a faded photo of that client on its right side */
+.pship::before {
+  content: ""; position: absolute; top: 0; bottom: 0; right: 0; left: 38%; z-index: -1;
+  background: var(--bar-photo) var(--bar-pos, center) / cover no-repeat;
+  opacity: 0.42; transition: opacity .3s;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 55%); mask-image: linear-gradient(90deg, transparent, #000 55%);
+}
+.pship:hover::before { opacity: 0.55; }
+/* when open, the same photo becomes a soft, blurred wash behind the whole entry */
+.pship[open]::before {
+  left: 0; inset: -80px; opacity: 0.5; filter: blur(46px) saturate(1.15) brightness(0.62);
+  -webkit-mask-image: none; mask-image: none;
+}
+.pship:last-child { border-bottom: 1px solid var(--line); }
+.pship > summary {
+  list-style: none; cursor: pointer; padding-right: 0;
+  display: grid; grid-template-columns: 10rem minmax(0, 1fr) auto auto; align-items: center;
+  gap: clamp(1rem, 2.5vw, 2rem); padding: 1.5rem 0;
+}
+.pship > summary::-webkit-details-marker { display: none; }
+.pship-logo {
+  height: 5.25rem; border-radius: 0.75rem; background: #fff; border: 1px solid rgba(12,13,9,.12);
+  display: grid; place-items: center; padding: 0.85rem 1rem; overflow: hidden;
+}
+.pship-logo img { max-height: 3.5rem; max-width: 100%; width: auto; height: auto; }
+.pship-name h2 { font-size: clamp(1.6rem, 2.8vw, 2.4rem); letter-spacing: -0.035em; }
+.pship-name > span { display: block; margin-top: 0.45rem; color: var(--muted); font-size: 1.0625rem; line-height: 1.4; }
+.pship-date { text-shadow: 0 1px 8px rgba(12,13,9,.8); font-family: var(--font-mono); font-size: 0.8125rem; letter-spacing: 0.04em; color: var(--muted); white-space: nowrap; }
+.pship-toggle {
+  position: relative; background: rgba(12,13,9,.55); backdrop-filter: blur(6px); width: 3rem; height: 3rem; border-radius: 50%; border: 1px solid var(--line);
+  transition: border-color .2s, transform .3s;
+}
+.pship-toggle::before, .pship-toggle::after {
+  content: ""; position: absolute; left: 50%; top: 50%; width: 1rem; height: 2px; margin: -1px 0 0 -0.5rem; background: var(--cream);
+}
+.pship-toggle::after { transform: rotate(90deg); transition: transform .3s; }
+.pship[open] .pship-toggle::after { transform: rotate(0deg); }
+.pship > summary:hover .pship-toggle { border-color: var(--volt); }
+.pship > summary:hover h2 { color: var(--volt); }
+.pship-body {
+  display: grid; grid-template-columns: minmax(0, 27rem) minmax(0, 1fr);
+  gap: clamp(2rem, 4vw, 4rem); padding: 0.5rem 0 3rem;
+}
+.pship-text p { color: var(--muted); }
+.pship-text p + p { margin-top: 1rem; }
+.pship-text .pship-intro { color: var(--cream); font-size: 1.1875rem; line-height: 1.5; }
+.pship-text h3 { font-size: 1.15rem; letter-spacing: -0.02em; margin: 1.75rem 0 0.4rem; }
+.pship-work { list-style: none; }
+.pship-work li { display: flex; align-items: center; gap: 0.8rem; padding: 0.5rem 0; border-bottom: 1px solid var(--line); }
+.pship-work li::before { content: ""; width: 0.45rem; height: 0.45rem; background: var(--volt); flex: none; }
+.pship-links { display: flex; flex-wrap: wrap; gap: 0.5rem 1.75rem; margin-top: 1.5rem; }
+.pship-slides {
+  display: flex; gap: 1rem; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 0.9rem; align-self: start;
+  -webkit-mask-image: linear-gradient(90deg, #000 85%, transparent);
+  scrollbar-width: thin; scrollbar-color: rgba(244,243,232,.25) transparent;
+}
+.pship-slides img { height: 27rem; width: auto; flex: none; border-radius: 0.75rem; scroll-snap-align: start; }
+.pship-slides:focus-visible { outline: 2px solid var(--volt); outline-offset: 4px; }
+@media (max-width: 860px) {
+  .pship > summary { grid-template-columns: 5.5rem minmax(0, 1fr) auto; gap: 1rem; }
+  .pship-logo { height: 3.75rem; padding: 0.5rem; }
+  .pship-logo img { max-height: 2.6rem; }
+  .pship-date { grid-column: 2; grid-row: 2; margin-top: -0.6rem; }
+  .pship-toggle { grid-column: 3; grid-row: 1; width: 2.5rem; height: 2.5rem; }
+  .pship-name > span { font-size: 0.95rem; }
+  .pship-body { grid-template-columns: 1fr; }
+  .pship-slides { order: -1; }
+  .pship-slides img { height: 20rem; }
+  .pship-hero h1 br { display: none; }
+  .pship::before { left: 50%; opacity: 0.32; }
+}
+
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "Video Production for Marketing Agencies & Brands",
+    "serviceType": "White-label video production",
+    "description": "White-label and partner video production for marketing agencies and brand teams: TV and radio commercials, brand films, campaign content and social video, produced across BC and Canada.",
+    "provider": {
+      "@type": "ProfessionalService",
+      "name": "Volare Media",
+      "url": "https://www.volaremedia.net",
+      "telephone": "+1-250-589-4521",
+      "email": "video@volaremedia.net",
+      "address": { "@type": "PostalAddress", "addressLocality": "Victoria", "addressRegion": "BC", "addressCountry": "CA" }
+    },
+    "areaServed": ["Victoria BC", "Vancouver BC", "Vancouver Island", "British Columbia", "Canada"],
+    "url": "https://www.volaremedia.net/work.html#agencies"
+  }
+  </script>
 </head>
 <body class="v2 v3">
 
   <header class="v2-header">
     <div class="wrap">
-      <a class="logo" href="console.html" aria-label="Volare Media, home"><img src="assets/vm-logo.png" alt="Volare Media logo"></a>
+      <a class="logo" href="index.html" aria-label="Volare Media, home"><img src="assets/vm-logo.png" alt="Volare Media logo"></a>
       <div class="v2-header-right">
         <a class="btn" href="contact.html">Start a project</a>
         <button class="menu-btn" aria-expanded="false" aria-controls="site-menu">Menu <span class="menu-lines" aria-hidden="true"></span></button>
@@ -199,7 +298,6 @@
     <div class="wrap">
       <ul class="v2-menu-links">
         <li><a href="work.html" aria-current="page">Work</a></li>
-        <li><a href="partnerships.html">Partnerships</a></li>
         <li><a href="crew.html">The Crew</a></li>
         <li><a href="community.html">Community</a></li>
         <li><a href="contact.html">Contact</a></li>
@@ -208,12 +306,9 @@
         <h3>What we make</h3>
         <ul>
           <li><a href="marketing-videos.html">Marketing videos</a></li>
-          <li><a href="creative-direction.html">Creative direction</a></li>
           <li><a href="corporate-video.html">Corporate video</a></li>
           <li><a href="event-videography.html">Event videography</a></li>
           <li><a href="website-development.html">Websites and branding</a></li>
-          <li><a href="brand-alignment.html">Brand alignment</a></li>
-          <li><a href="agencies.html">For agencies</a></li>
         </ul>
         <h3>Say hello</h3>
         <ul>
@@ -337,8 +432,174 @@
           <p class="lede">Video is what we do most. But a great video gets wasted when it lands on a tired website or a brand that doesn't match it, so when you need them, we also build the website, the online store and the landing page, and we line up your logo, colours and message so the campaign and the business look like they belong together.</p>
           <p style="display:flex; flex-wrap:wrap; gap: 0.75rem; margin-top: 1.5rem;">
             <a class="btn" href="website-development.html">Websites &amp; online stores</a>
-            <a class="btn btn--ghost" href="brand-alignment.html">Brand alignment</a>
+            <a class="btn btn--ghost" href="website-development.html#brand-alignment">Brand alignment</a>
           </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section merged pship-hero" id="partnerships">
+      <div class="wrap reveal">
+      <h2 class="display-lg">Brands we&rsquo;re proud to <span class="sweep">partner</span> with<span class="dot">.</span></h2>
+      <p class="lede">These are the businesses we work with all the time, not just once. Every time a partnership grows, we share it here, newest first.</p>
+      </div>
+    </section>
+
+    <section class="wrap pship-list" aria-label="Our partnerships">
+      <!-- NEW PARTNERSHIPS GO HERE, newest first -->
+
+      <details class="pship" open style="--bar-photo: url('assets/img/dmev-campaign-patio.jpg'); --bar-pos: 60% 40%;">
+        <summary>
+          <span class="pship-logo"><img src="assets/img/partnerships/dmev-logo.png" alt="De Mode en Vogue logo"></span>
+          <span class="pship-name"><h2>De Mode en Vogue</h2><span>Her marketing, website, videos and online store.</span></span>
+          <time class="pship-date" datetime="2026-11-16">Nov 16, 2026</time>
+          <span class="pship-toggle" aria-hidden="true"></span>
+        </summary>
+        <div class="pship-body">
+          <div class="pship-text">
+            <p class="pship-intro">We&rsquo;re proud to be the marketing partner for De Mode en Vogue. Danica sells beautiful tights made in Italy, and we help more people find them.</p>
+            <p>We designed her website and run all of her e-commerce, from her Shopify store to her Amazon listings. We also produce her videos, including her commercial, &ldquo;When Your Outfit Is Missing Something,&rdquo; and run her campaigns on Google and Meta.</p>
+            <h3>What we do together</h3>
+            <ul class="pship-work">
+              <li>Marketing</li><li>Website design</li><li>Video production</li><li>Google and Meta campaigns</li><li>Shopify and Amazon</li>
+            </ul>
+            <p class="pship-links"><a class="text-link" href="https://demodeenvogue.ca" rel="noopener">Visit De Mode en Vogue</a></p>
+          </div>
+          <div class="pship-slides" tabindex="0" aria-label="De Mode en Vogue partnership slides">
+            <img src="assets/img/partnerships/dmev-1-cover.jpg" loading="lazy" decoding="async" alt="Still from the De Mode en Vogue commercial">
+            <img src="assets/img/partnerships/dmev-2-video.jpg" loading="lazy" decoding="async" alt="Campaign stills and vertical videos">
+            <img src="assets/img/partnerships/dmev-3-store.jpg" loading="lazy" decoding="async" alt="The De Mode en Vogue website on a laptop and a phone">
+            <img src="assets/img/partnerships/dmev-4-ads.jpg" loading="lazy" decoding="async" alt="Three De Mode en Vogue Meta ads">
+          </div>
+        </div>
+      </details>
+
+      <details class="pship" style="--bar-photo: url('assets/img/partnerships/svi-garage-lift.jpg'); --bar-pos: 50% 55%;">
+        <summary>
+          <span class="pship-logo"><img src="assets/img/partnerships/svi-logo.png" alt="SVI Automotive Equipment logo"></span>
+          <span class="pship-name"><h2>SVI Automotive</h2><span>Their website, videos, social media and ads.</span></span>
+          <time class="pship-date" datetime="2026-11-09">Nov 9, 2026</time>
+          <span class="pship-toggle" aria-hidden="true"></span>
+        </summary>
+        <div class="pship-body">
+          <div class="pship-text">
+            <p class="pship-intro">We&rsquo;re proud to be the marketing partner for SVI Automotive. They supply, install and service lifts and shop equipment across Vancouver Island.</p>
+            <p>We built their website and keep it growing with a monthly blog. We make three social posts a week, run their Google and Meta ads, and make their videos, from customer testimonials to vertical video ads.</p>
+            <h3>What we do together</h3>
+            <ul class="pship-work">
+              <li>Website and monthly blog</li><li>Customer testimonial videos</li><li>Vertical video ads</li><li>Social media, three posts a week</li><li>Google and Meta ads</li>
+            </ul>
+            <p class="pship-links"><a class="text-link" href="https://sviautomotive.com" rel="noopener">Visit SVI Automotive</a></p>
+          </div>
+          <div class="pship-slides" tabindex="0" aria-label="SVI Automotive partnership slides">
+            <img src="assets/img/partnerships/svi-1-cover.jpg" loading="lazy" decoding="async" alt="A car up on a two-post lift">
+            <img src="assets/img/partnerships/svi-2-videos.jpg" loading="lazy" decoding="async" alt="A customer testimonial and three vertical video ads">
+            <img src="assets/img/partnerships/svi-3-site.jpg" loading="lazy" decoding="async" alt="The SVI Automotive website on a laptop and a phone">
+            <img src="assets/img/partnerships/svi-4-social.jpg" loading="lazy" decoding="async" alt="Three SVI Automotive social posts">
+          </div>
+        </div>
+      </details>
+
+      <details class="pship" style="--bar-photo: url('assets/img/white-wolf-tailgate-interview.jpg'); --bar-pos: 30% 40%;">
+        <summary>
+          <span class="pship-logo"><img src="assets/img/partnerships/white-wolf-logo.svg" alt="White Wolf Homes logo"></span>
+          <span class="pship-name"><h2>White Wolf Homes</h2><span>Videos, fundraiser media and a full team photo shoot.</span></span>
+          <time class="pship-date" datetime="2026-11-05">Nov 5, 2026</time>
+          <span class="pship-toggle" aria-hidden="true"></span>
+        </summary>
+        <div class="pship-body">
+          <div class="pship-text">
+            <p class="pship-intro">We&rsquo;re a little behind on sharing this one. We&rsquo;ve been working with White Wolf Homes for almost a year, and it&rsquo;s been really great.</p>
+            <p>We make media for their fundraisers, vertical videos for their socials, documentary-style pieces like their brand film, Building a Legacy, and content for their website. We also brought in a photographer to refresh all of their team photos.</p>
+            <h3>What we do together</h3>
+            <ul class="pship-work">
+              <li>Fundraiser media</li><li>Vertical videos for social media</li><li>Documentary-style brand films</li><li>Website and social content</li><li>Team photography</li>
+            </ul>
+            <p class="pship-links"><a class="text-link" href="https://whitewolfhomes.ca" rel="noopener">Visit White Wolf Homes</a><a class="text-link" href="work.html">See the brand film</a></p>
+          </div>
+          <div class="pship-slides" tabindex="0" aria-label="White Wolf Homes partnership slides">
+            <img src="assets/img/partnerships/white-wolf-1-cover.jpg" loading="lazy" decoding="async" alt="Kyle from White Wolf Homes on the tailgate of the company truck">
+            <img src="assets/img/partnerships/white-wolf-2-videos.jpg" loading="lazy" decoding="async" alt="Their brand film and vertical videos">
+            <img src="assets/img/partnerships/white-wolf-3-photos.jpg" loading="lazy" decoding="async" alt="The White Wolf Homes team photos">
+            <img src="assets/img/partnerships/white-wolf-4-next.jpg" loading="lazy" decoding="async" alt="Kyle and Ashley, the owners of White Wolf Homes">
+          </div>
+        </div>
+      </details>
+
+      <details class="pship" style="--bar-photo: url('assets/img/doodle-owner-puppy.jpg'); --bar-pos: 50% 35%;">
+        <summary>
+          <span class="pship-logo"><img src="assets/img/doodle-logo-paw.png" alt="It's A Doodle logo"></span>
+          <span class="pship-name"><h2>It&rsquo;s A Doodle K9 Service</h2><span>Her full marketing partner: new website, new logo and monthly marketing.</span></span>
+          <time class="pship-date" datetime="2026-11-04">Nov 4, 2026</time>
+          <span class="pship-toggle" aria-hidden="true"></span>
+        </summary>
+        <div class="pship-body">
+          <div class="pship-text">
+            <p class="pship-intro">We&rsquo;re so excited to help Sheila reach her business goals. We&rsquo;re now the full marketing partner for It&rsquo;s A Doodle K9 Service.</p>
+            <p>We&rsquo;ve already made her brand video, vertical content and video ads. Now we&rsquo;re designing her new website and logo, and running her marketing every month.</p>
+            <h3>What we do together</h3>
+            <ul class="pship-work">
+              <li>New website and logo</li><li>Brand video and video ads</li><li>Google and Meta ads</li><li>Blogs and social content</li><li>Her Google Business Profile</li>
+            </ul>
+          </div>
+          <div class="pship-slides" tabindex="0" aria-label="It's A Doodle partnership slides">
+            <img src="assets/img/partnerships/its-a-doodle-1-cover.jpg" loading="lazy" decoding="async" alt="Sheila with a cream puppy">
+            <img src="assets/img/partnerships/its-a-doodle-2-website.jpg" loading="lazy" decoding="async" alt="Her new homepage">
+            <img src="assets/img/partnerships/its-a-doodle-3-alignment.jpg" loading="lazy" decoding="async" alt="Her brand across three social platforms">
+            <img src="assets/img/partnerships/its-a-doodle-4-marketing.jpg" loading="lazy" decoding="async" alt="Sheila with her puppies">
+          </div>
+        </div>
+      </details>
+
+    </section>
+
+    <section class="section merged" id="agencies">
+      <div class="wrap reveal">
+        <h2 class="display-lg">Your production team, whenever you <span class="sweep"><em>need one</em></span><span class="dot">.</span></h2>
+        <p class="lede">Marketing agencies and brand teams across BC and Canada use Volare Media as their <a href="crew.html">crew on call</a>. Bring the strategy, the brief, or just the client's problem. We handle everything between the concept and the screen, under your banner or ours.</p>
+      </div>
+    </section>
+
+    <section class="panel big-words" aria-labelledby="how-agencies-work-with-us-head">
+      <div class="wrap">
+        <h2 id="how-agencies-work-with-us-head" class="big-list-head reveal">How agencies work with us<span class="dot">.</span></h2>
+        <div class="big-list-grid">
+          <ul class="big-list reveal">
+            <li><span>White-label</span></li>
+            <li><span>Production partner</span></li>
+            <li id="brand-teams"><span>Brand teams</span></li>
+          </ul>
+          <div class="big-list-side reveal">
+            <div class="big-list-shot"><img class="bw" src="assets/img/footer-camera-rig.jpg" alt="A camera operator with a rigged cinema camera" loading="lazy" style="object-position: 50% 50%;"></div>
+            <p class="big-list-call"><a href="tel:+12505894521">250.589.4521</a> <a href="mailto:video@volaremedia.net">video@volaremedia.net</a></p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="sec big-band photo-band" aria-labelledby="easy-to-brief-and-easy-to-work-with-head" style="--photo: url('assets/img/bts-video-village.jpg'); --photo-pos: 50% 45%; --photo-opacity: 0.32;">
+      <div class="wrap">
+        <h2 id="easy-to-brief-and-easy-to-work-with-head" class="big-list-head reveal">Easy to brief, and easy to work with<span class="dot">.</span></h2>
+        <ul class="big-list big-list--long reveal">
+            <li><span>Brief in, boards back</span></li>
+            <li><span>Cleared for air</span></li>
+            <li><span>One shoot, every asset</span></li>
+            <li><span>Your brand on the work</span></li>
+        </ul>
+      </div>
+    </section>
+    <section class="section band--ink">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div>
+            <h2 class="display-lg">Our <span class="ink-volt">track record</span><span class="dot">.</span></h2>
+          </div>
+          <a class="text-link" href="work.html">See the work</a>
+        </div>
+        <div class="stat-grid reveal">
+          <div class="stat"><h3>5.0&#9733;</h3><p>average rating across 16 Google reviews from clients we’ve worked with</p></div>
+          <div class="stat"><h3>250+</h3><p>marketing assets delivered, from TV commercials and social cutdowns to photos and websites</p></div>
+          <div class="stat"><h3>20K+</h3><p>followers across Volare Media’s social channels</p></div>
+          <div class="stat"><h3>15+</h3><p>years of combined experience across marketing, the film industry and social media</p></div>
         </div>
       </div>
     </section>
@@ -360,10 +621,7 @@
           <p class="footer-tag">Stories worth <em>sharing</em><span class="dot">.</span></p>
         </div>
         <ul class="footer-links">
-          <li><a href="services.html">Services</a></li>
           <li><a href="work.html">Work</a></li>
-          <li><a href="partnerships.html">Partnerships</a></li>
-          <li><a href="about.html">About</a></li>
           <li><a href="crew.html">The Crew</a></li>
           <li><a href="community.html">Community</a></li>
           <li><a href="journal.html">Journal</a></li>
