@@ -67,6 +67,10 @@ img { display: block; max-width: 100%; }
 .menu button:hover::before { transform: skewX(-24deg) scaleX(1); }
 .menu button[aria-current="true"] { color: var(--volt); }
 .menu button[aria-current="true"]::before { background: var(--volt); transform: skewX(-24deg) scaleX(1); }
+/* before the script has started its animations nothing is on screen, so nothing can show and then vanish.
+   (If the script never runs, everything simply appears after five seconds.) */
+.is-loading .chapter .title, .is-loading .chapter .sub, .is-loading .menu li { opacity: 0; animation: failsafe 0.01s 5s forwards; }
+@keyframes failsafe { to { opacity: 1; } }
 /* intro: the menu waits behind the title card */
 .is-intro .menu li { opacity: 0; }
 

@@ -99,3 +99,11 @@ html.anim:not(.no-glass) .v3 main > :first-child > video.band-video { position: 
 /* partnership rows: the photo behind each row is black and white like every other photo on the site (the clients' own posts stay in colour) */
 .v3 .pship::before { filter: grayscale(1) contrast(1.05); }
 @media (max-width: 760px) { .v3 .v2-menu-links a::before { display: none; } }
+
+/* ---------- phones: the menu is the landing page's menu ---------- */
+/* just the big words, bottom left, over the picture; same size, spacing and position as on the landing page */
+@media (max-width: 760px) {
+  .v3 .v2-menu .wrap { display: flex; flex-direction: column; justify-content: flex-end; min-height: calc(100svh - 4.5rem); padding: 0 clamp(22px, 4.2vw, 72px) 7.5rem; }
+  .v3 .v2-menu-side { display: none; }
+  .v3 .v2-menu-links a { font-size: clamp(2rem, 9.4vw, 2.8rem); line-height: 1.06; letter-spacing: -0.035em; }
+}

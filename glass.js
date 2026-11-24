@@ -151,3 +151,12 @@ if (animate && "IntersectionObserver" in window) {
   }), { threshold: 0, rootMargin: "0px 0px -8% 0px" });   // as soon as any part of it is 8% up from the bottom edge (works for very tall blocks too)
   later.forEach((n) => io.observe(n));
 } else later.forEach((n) => reveal(n));
+
+/* ---------------- 3. the menu: its words wipe in each time it opens, as on the landing page ---------------- */
+const menuWords = $$(".v2-menu-links a, .v2-menu-side > *");
+let menuWasOpen = false;
+if (animate && menuWords.length) new MutationObserver(() => {
+  const open = document.body.classList.contains("menu-open");
+  if (open && !menuWasOpen) menuWords.forEach((n, i) => wipe(n, 120 + i * 55));
+  menuWasOpen = open;
+}).observe(document.body, { attributes: true, attributeFilter: ["class"] });

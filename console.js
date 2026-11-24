@@ -256,9 +256,37 @@ if (stage && new URLSearchParams(location.search).has("debug")) window.__vm = {
   set(k, val) { stage[k] = val; },
 };
 
+/* ---------------- arriving ---------------- */
+// The title card is an opening, not a toll. It plays the first time someone lands here in a visit,
+// and not again when they come back to this page from elsewhere on the site.
+let opened = false;
+try { opened = sessionStorage.getItem("vm-opened") === "1"; sessionStorage.setItem("vm-opened", "1"); } catch (e) {}
+
+// Arriving without the title card: straight to the menu, or straight into a chapter if the address names one.
+async function arrive(id) {
+  const ch = byId[id], v = videoFor(id);
+  body.classList.remove("is-intro");
+  chapters.forEach((c) => { c.hidden = c !== ch; });      // only the chapter being opened is on stage
+  body.classList.toggle("is-rail", id !== "home");
+  menuButtons.forEach((b) => b.setAttribute("aria-current", String(b.dataset.go === id)));
+  current = id;
+  play(v);
+  whenReady(v, 6000).then(() => {
+    if (stage) stage.show(v, DIM[id] ?? 0.46, 1200);
+    else $$(".stage-fallback video").forEach((x) => x.classList.toggle("on", x === v));
+  });
+  if (id === "credits") { ch.hidden = false; measureRoll(); roll.y = roll.start; roll.kick = 0; roll.heldUntil = 0; }
+  const coming = Promise.all([showChapter(ch, 120), ...menuButtons.map((b, i) => wipeIn(b, 80 + i * 50))]);
+  body.classList.remove("is-loading");      // the animations above now hold everything hidden until its turn
+  await coming;
+  busy = false;
+}
+
 /* ---------------- intro: title card, then the console ---------------- */
 async function intro() {
   requestAnimationFrame(frame);
+  const named = location.hash.slice(1);
+  if (opened || reduce) return arrive(byId[named] ? named : "home");
   const v = videoFor("home");
   play(v);
   // the title card starts straight away; the footage fades up behind it as soon as it has a frame
@@ -268,7 +296,9 @@ async function intro() {
   });
   const home = byId.home;
   home.classList.add("is-on");
-  await Promise.all($$(".title .ln-t", home).map((el, i) => wipeIn(el, 300 + i * 140)));
+  const card = Promise.all($$(".title .ln-t", home).map((el, i) => wipeIn(el, 300 + i * 140)));
+  body.classList.remove("is-loading");      // the wipes above now hold the title hidden until its turn
+  await card;
   await wait(reduce ? 200 : 1300);
 
   // The title card leaves the centre for its corner, one line at a time, and the menu starts in the same moment.
