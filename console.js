@@ -160,26 +160,50 @@ async function workFromBelow() {
 
 /* ---------------- player: the reel or a project, with sound ---------------- */
 const player = $(".player"), playerBox = $(".player-box");
+// The demo reel is our own file in our own player: the picture, a thin progress line and Close, nothing else.
+// The line and Close fade away after a moment and come back when the pointer moves. Click the picture to pause, click the line to jump.
+// The project videos open in their YouTube or Vimeo player.
+let reelVid = null, reelBar = null, awakeT = 0, closeT = 0;
+function wake() {
+  player.classList.add("is-awake");
+  clearTimeout(awakeT);
+  awakeT = setTimeout(() => { if (!reelVid || !reelVid.paused) player.classList.remove("is-awake"); }, 2200);
+}
 function openPlayer(what) {
-  const [kind, id] = [what.slice(0, what.indexOf(":")), what.slice(what.indexOf(":") + 1)];
-  playerBox.innerHTML = kind === "file"
-    ? `<video src="${id}" controls autoplay playsinline></video>`
-    : kind === "vimeo"
+  const i = what.indexOf(":"), kind = what.slice(0, i), id = what.slice(i + 1);
+  clearTimeout(closeT);
+  player.classList.toggle("player--clean", kind === "file");
+  if (kind === "file") {
+    playerBox.innerHTML = `<video src="${id}" autoplay playsinline></video><div class="player-line" aria-hidden="true"><i></i></div>`;
+    reelVid = $("video", playerBox); reelBar = $(".player-line i", playerBox);
+    reelVid.addEventListener("click", () => { reelVid.paused ? reelVid.play() : reelVid.pause(); wake(); });
+    reelVid.addEventListener("ended", closePlayer);            // when it finishes you are back on the Work section, not on an end screen
+    $(".player-line", playerBox).addEventListener("click", (ev) => {
+      const r = ev.currentTarget.getBoundingClientRect();
+      if (reelVid.duration) reelVid.currentTime = ((ev.clientX - r.left) / r.width) * reelVid.duration;
+    });
+    wake();
+  } else {
+    playerBox.innerHTML = kind === "vimeo"
       ? `<iframe src="https://player.vimeo.com/video/${id}?autoplay=1" title="Video player" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>`
       : `<iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0" title="Video player" allow="autoplay; encrypted-media; fullscreen; picture-in-picture" allowfullscreen></iframe>`;
+  }
   player.hidden = false;
   requestAnimationFrame(() => player.classList.add("is-open"));
   if (stage && stage.a) stage.a.pause();
-  $(".player-close").focus();
+  // keyboard focus moves into the player (to the picture for the reel, so the space bar pauses it and does not press Close)
+  if (reelVid) { reelVid.tabIndex = -1; reelVid.focus({ preventScroll: true }); } else $(".player-close").focus({ preventScroll: true });
 }
 function closePlayer() {
-  if (player.hidden) return false;
-  player.classList.remove("is-open");
+  if (player.hidden || !player.classList.contains("is-open")) return false;
+  player.classList.remove("is-open", "is-awake");
   playerBox.innerHTML = "";                                   // stops the sound at once
-  setTimeout(() => (player.hidden = true), 500);
+  reelVid = reelBar = null;
+  closeT = setTimeout(() => (player.hidden = true), 500);
   if (stage && stage.a) play(stage.a);
   return true;
 }
+player.addEventListener("pointermove", wake);
 $$("[data-play]").forEach((b) => b.addEventListener("click", () => openPlayer(b.dataset.play)));
 $(".player-close").addEventListener("click", closePlayer);
 player.addEventListener("click", (e) => { if (e.target === player) closePlayer(); });
@@ -199,6 +223,7 @@ function frame(now) {
     roll.el.style.transform = `translate3d(0, ${-roll.y.toFixed(2)}px, 0)`;
   }
   layoutWork(dt);
+  if (reelBar && reelVid.duration) reelBar.style.transform = `scaleX(${(reelVid.currentTime / reelVid.duration).toFixed(4)})`;
 }
 const DIM = { home: 0.6, work: 1, credits: 0.32, contact: 0.3 };
 let fallbackCuts = 0;
@@ -345,9 +370,14 @@ function step(d) {
 
 $$("[data-go]").forEach((b) => b.addEventListener("click", () => go(b.dataset.go, b)));
 addEventListener("keydown", (e) => {
+  if (!player.hidden) {                                     // while a video is open the keys belong to it
+    if (e.key === "Escape") closePlayer();
+    if (e.key === " " && reelVid) { e.preventDefault(); reelVid.paused ? reelVid.play() : reelVid.pause(); wake(); }
+    return;
+  }
   if (e.key === "ArrowDown" || e.key === "ArrowRight" || e.key === "PageDown") { e.preventDefault(); step(1); }
   if (e.key === "ArrowUp" || e.key === "ArrowLeft" || e.key === "PageUp") { e.preventDefault(); step(-1); }
-  if (e.key === "Escape" && !closePlayer()) go("home", $(".logo"));
+  if (e.key === "Escape") go("home", $(".logo"));
 });
 let wheelAcc = 0, wheelT = 0, lastWheel = 0, fromEdge = true;
 const rollInHand = () => current === "credits" && !reduce && roll.max > 0;

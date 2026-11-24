@@ -230,6 +230,19 @@ img { display: block; max-width: 100%; }
 .player-box video, .player-box iframe { display: block; width: 100%; height: 100%; border: 0; }
 .player-close { position: absolute; top: 1.35rem; right: var(--gutter); font-family: var(--font-display); font-weight: 600; font-size: 1rem; letter-spacing: -0.02em; color: var(--cream); transition: color 0.45s var(--ease); }
 .player-close:hover { color: var(--volt); }
+/* the demo reel: our own file, nothing on screen but the picture. The line and Close fade out when the pointer rests. */
+.player--clean { padding: clamp(1rem, 2.4vw, 2.2rem); background: var(--bg); }      /* solid, so nothing of the page shows around the picture */
+.player--clean .player-box { position: relative; width: min(100%, calc((100svh - 2 * clamp(1rem, 2.4vw, 2.2rem)) * 16 / 9)); }
+.player--clean video { cursor: pointer; }
+.player--clean video:focus { outline: none; }
+.player--clean:not(.is-awake) { cursor: none; }
+.player--clean:not(.is-awake) video { cursor: none; }
+.player-line { position: absolute; left: 0; right: 0; bottom: 0; height: 14px; display: flex; align-items: flex-end; cursor: pointer; }
+.player-line::before { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: rgba(244, 243, 232, 0.25); }
+.player-line i { position: relative; display: block; width: 100%; height: 2px; background: var(--volt); transform: scaleX(0); transform-origin: left; }
+.player--clean .player-close { z-index: 1; text-shadow: 0 0 12px rgba(12, 13, 9, 0.9); }
+.player--clean .player-close, .player--clean .player-line { opacity: 0; transition: opacity 0.5s var(--ease), color 0.45s var(--ease); }
+.player--clean.is-awake .player-close, .player--clean.is-awake .player-line { opacity: 1; }
 
 /* while the project list scrolls, a soft dark band keeps the logo (and, on phones, the rail) clear of what passes underneath */
 body::before { content: ""; position: fixed; top: 0; left: 0; right: 0; height: 5.5rem; z-index: 12; pointer-events: none;
