@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -8,7 +8,7 @@
   <noscript><img height="1" width="1" style="display:none"
     src="https://www.facebook.com/tr?id=612504680491197&ev=PageView&noscript=1"/></noscript>
   <meta name="facebook-domain-verification" content="3vx90std0sarqosonhh6awvs3yn0hi" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Volare Media | Video-Production and Marketing on Vancouver Island</title>
   <meta name="description" content="A video-first marketing agency on Vancouver Island. We plan the campaign, film it with our crew, cut it for every platform and launch it in all the right places!">
   <link rel="canonical" href="https://www.volaremedia.net/">
@@ -16,13 +16,11 @@
   <meta property="og:title" content="Volare Media | Video-Production and Marketing on Vancouver Island">
   <meta property="og:description" content="A video-first marketing agency on Vancouver Island. We plan the campaign, film it with our crew, cut it for every platform and launch it in all the right places!">
   <meta property="og:url" content="https://www.volaremedia.net/">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Inter+Tight:ital,wght@0,400..800;1,400..800&family=Fragment+Mono:ital@0;1&display=swap" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Inter+Tight:ital,wght@0,400..800;1,400..800&family=Fragment+Mono:ital@0;1&display=swap"></noscript>
-  <link rel="icon" href="favicon.svg?v=2" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css?v=43">
-  <link rel="stylesheet" href="clean.css?v=4">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Inter+Tight:wght@500;600;700&display=swap">
+  <link rel="stylesheet" href="console.css?v=10">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -44,255 +42,102 @@
   }
   </script>
 </head>
-<body class="v2 v2-home">
+<body class="is-intro is-loading">
+  <!-- Full-screen footage: one WebGL canvas, every clip in black and white, played at normal speed -->
+  <canvas id="stage" aria-hidden="true"></canvas>
+  <div class="stage-fallback" aria-hidden="true"></div>
 
-  <header class="v2-header">
-    <div class="wrap">
-      <a class="logo" href="index.html" aria-label="Volare Media, home"><img src="assets/vm-logo.png" alt="Volare Media logo"></a>
-      <div class="v2-header-right">
-        <a class="btn" href="#contact">Start a project</a>
-        <button class="menu-btn" aria-expanded="false" aria-controls="site-menu">Menu <span class="menu-lines" aria-hidden="true"></span></button>
-      </div>
-    </div>
+  <!-- two slanted sweeps cross the screen on every cut only: volt in front, mauve behind -->
+  <div class="sweeps" aria-hidden="true"><span class="sweep sweep--mauve"></span><span class="sweep sweep--volt"></span></div>
+
+  <header class="hud-top">
+    <button class="logo" type="button" data-go="home" aria-label="Volare Media, back to the start"><img src="assets/vm-logo.png" alt="Volare Media"></button>
   </header>
 
-  <nav class="v2-menu photo-band" id="site-menu" aria-label="Main" style="--photo: url('assets/img/footer-crew-cinema.jpg'); --photo-pos: 60% 40%;">
-    <div class="wrap">
-      <ul class="v2-menu-links">
-        <li><a href="work.html">Work</a></li>
-        <li><a href="crew.html">The Crew</a></li>
-        <li><a href="community.html">Community</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
-      <div class="v2-menu-side">
-        <h3>What we make</h3>
-        <ul>
-          <li><a href="marketing-videos.html">Marketing videos</a></li>
-          <li><a href="corporate-video.html">Corporate video</a></li>
-          <li><a href="event-videography.html">Event videography</a></li>
-          <li><a href="website-development.html">Websites and branding</a></li>
-        </ul>
-        <h3>Say hello</h3>
-        <ul>
-          <li><a href="mailto:video@volaremedia.net">video@volaremedia.net</a></li>
-          <li><a href="tel:+12505894521">250.589.4521</a></li>
-        </ul>
-      </div>
-    </div>
+  <!-- Menu: big words at the start, a slim rail once a chapter is open -->
+  <nav class="menu" aria-label="Chapters">
+    <ul>
+      <li><button type="button" data-go="direction">Direction</button></li>
+      <li><button type="button" data-go="production">Production</button></li>
+      <li><button type="button" data-go="post">Post-production</button></li>
+      <li><button type="button" data-go="launch">Launch</button></li>
+      <li><button type="button" data-go="brand">Brand and web</button></li>
+      <li><button type="button" data-go="credits">Credits</button></li>
+      <li><button type="button" data-go="contact">Contact</button></li>
+    </ul>
   </nav>
 
-  <main>
-
-    <!-- Hero: rounded, the video does the talking -->
-    <section class="hero-cinema" aria-label="Intro">
-      <video class="hero-video" autoplay muted loop playsinline poster="">
-        <source src="assets/banner-loop-3.mp4" type="video/mp4">
-      </video>
-      <div class="hero-scrim" aria-hidden="true"></div>
-      <div class="wrap">
-        <h1 class="display-xl">Videos made with <span class="sweep"><em>intention</em></span><span class="dot">.</span></h1>
-        <p class="hero-line">A production house and marketing agency on Vancouver Island.</p>
-        <div class="hero-foot">
-          <div class="hero-actions">
-            <a class="btn" href="work.html">View showreel</a>
-            <a class="btn btn--ghost" href="#contact">Start your project</a>
-          </div>
-          <p class="hero-call">Prefer to speak directly? <a href="tel:+12505894521">Call 250.589.4521</a></p>
-        </div>
-      </div>
+  <main class="chapters">
+    <section class="chapter" data-id="home" data-clip="assets/showreel-720.mp4" aria-labelledby="t-home">
+      <h1 id="t-home" class="title"><span class="ln">Videos made</span> <span class="ln">with intention<span class="dot">.</span></span></h1>
+      <p class="sub">A production house on Vancouver Island.</p>
     </section>
 
-    <!-- Client marquee -->
-    <section class="marquee" aria-label="Clients">
-      <div class="marquee-track">
-        <span>Harbour City Kitchens</span><span>Stratos Nutrition</span><span>Maxxam Insurance</span><span>De Mode en Vogue</span><span>Sixty Forty</span><span>VICA</span><span>Peninsula Gives</span><span>Tailgate Toolkit</span><span>Harris</span><span>White Wolf Homes</span><span>Gas 2 Go</span><span>West Haven Cabinetry</span><span>Oakcrest Estates</span><span>Centre Mountain Business Park</span><span>It's A Doodle K9 Service</span><span>Adam ATM</span>
-        <span>Harbour City Kitchens</span><span>Stratos Nutrition</span><span>Maxxam Insurance</span><span>De Mode en Vogue</span><span>Sixty Forty</span><span>VICA</span><span>Peninsula Gives</span><span>Tailgate Toolkit</span><span>Harris</span><span>White Wolf Homes</span><span>Gas 2 Go</span><span>West Haven Cabinetry</span><span>Oakcrest Estates</span><span>Centre Mountain Business Park</span><span>It's A Doodle K9 Service</span><span>Adam ATM</span>
-      </div>
+    <section class="chapter" data-id="direction" data-clip="assets/banner-loop-3.mp4" aria-labelledby="t-direction" hidden>
+      <h2 id="t-direction" class="title"><span class="ln">Every shot</span> <span class="ln">has a reason<span class="dot">.</span></span></h2>
+      <p class="sub">A good video starts with a reason, not a camera. We work out who it's for, where it will run and what it has to do before we film anything.</p>
+      <a class="more" href="marketing-videos.html#creative-direction"><span class="more-t">Creative direction</span><span class="more-i" aria-hidden="true"></span></a>
     </section>
 
-    <!-- Why us: statement lights up as you scroll -->
-    <section class="sec" aria-labelledby="why-head">
-      <div class="wrap why-grid">
-        <h2 id="why-head" class="big lit" data-lit>We never make a video just to make a video<span class="dot">.</span></h2>
-        <div class="why-body reveal">
-          <div>
-            <p>Every project starts with one question: what does this need to do for your business? We get to know what you're up against, then plan the video, the ads and the website around it. We're honest with you from start to finish and work together on the best possible result for your budget. Marketing agencies bring us in as their production team too, with the same care.</p>
-            <a class="text-link" href="crew.html#about">More about us</a>
-          </div>
-          <ul class="stat-cards">
-            <li><b>5.0&#9733;</b>From 16 Google reviews</li>
-            <li><b>250+</b>Marketing assets delivered</li>
-            <li><b>15+</b>Years of experience in film and marketing</li>
+    <section class="chapter" data-id="production" data-clip="assets/modelk-rolling-loop.mp4" aria-labelledby="t-production" hidden>
+      <h2 id="t-production" class="title"><span class="ln">The right crew</span> <span class="ln">for every project<span class="dot">.</span></span></h2>
+      <p class="sub">We bring in the director, DP and crew each project needs, people we know and trust on set.</p>
+      <a class="more" href="crew.html"><span class="more-t">Meet the crew</span><span class="more-i" aria-hidden="true"></span></a>
+    </section>
+
+    <section class="chapter" data-id="post" data-clip="assets/sixtyforty-loop.mp4" aria-labelledby="t-post" hidden>
+      <h2 id="t-post" class="title"><span class="ln">The edit is where</span> <span class="ln">a video finds</span> <span class="ln">its feeling<span class="dot">.</span></span></h2>
+      <p class="sub">Editing, colour, sound and music, and one shoot cut for every platform.</p>
+      <a class="more" href="work.html"><span class="more-t">See the work</span><span class="more-i" aria-hidden="true"></span></a>
+    </section>
+
+    <section class="chapter" data-id="launch" data-clip="assets/g2g-loop.mp4" aria-labelledby="t-launch" hidden>
+      <h2 id="t-launch" class="title"><span class="ln">A video only works</span> <span class="ln">once the right</span> <span class="ln">people see it<span class="dot">.</span></span></h2>
+      <p class="sub">So we run the Meta, Google and YouTube ads and the social posts too.</p>
+      <a class="more" href="marketing-videos.html"><span class="more-t">Marketing videos</span><span class="more-i" aria-hidden="true"></span></a>
+    </section>
+
+    <section class="chapter" data-id="brand" data-clip="assets/lp-banner-720.mp4" aria-labelledby="t-brand" hidden>
+      <h2 id="t-brand" class="title"><span class="ln">Websites and branding,</span> <span class="ln">built around</span> <span class="ln">your video<span class="dot">.</span></span></h2>
+      <p class="sub">Your website and brand should look as good as your video does, so we build those as well.</p>
+      <a class="more" href="website-development.html"><span class="more-t">Websites and branding</span><span class="more-i" aria-hidden="true"></span></a>
+    </section>
+
+    <section class="chapter chapter--credits" data-id="credits" data-clip="assets/fundraiser-loop.mp4" aria-labelledby="t-credits" hidden>
+      <h2 id="t-credits" class="sr-only">Credits</h2>
+      <div class="roll" aria-live="off">
+        <div class="roll-inner">
+          <p class="roll-head">A Volare Media production</p>
+          <dl class="credits">
+            <div><dt>Founder, producer, editor, DP</dt><dd>Chris Chisholm</dd></div>
+            <div><dt>Producer, director, writer, props master</dt><dd>Jackie Taylor</dd></div>
+            <div><dt>Audio engineer, voice over</dt><dd>Jonathan Wright</dd></div>
+            <div><dt>Budgets, bookkeeping, customer service</dt><dd>Ashley Chisholm</dd></div>
+          </dl>
+          <p class="roll-head">The partners we bring in</p>
+          <ul class="credit-list">
+            <li>Townley Visual Media</li><li>Free Lance Industries</li><li>Untold Forge</li>
+            <li>Dominic Hall</li><li>Sarah Alexander Studio Services</li><li>Birns &amp; Sawyer</li>
           </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- Work, shown big -->
-    <section class="sec video-band" aria-labelledby="work-head">
-      <video class="band-video bw" muted loop playsinline preload="none" data-src="assets/g2g-busy-loop.mp4" poster="assets/img/g2g-busy-loop-poster.jpg" style="--video-opacity: 0.5;" aria-hidden="true"></video>
-      <div class="wrap">
-        <div class="work-head reveal">
-          <h2 id="work-head" class="big">Ads we've made for our clients<span class="dot">.</span></h2>
-          <a class="text-link" href="work.html">See all work</a>
-        </div>
-        <div class="work-v2 reveal">
-          <article class="work-card">
-            <button class="video-thumb" data-vimeo="1071293680" aria-label="Play: Tailgate Toolkit Commercial, Director's Cut">
-              <img src="https://i.vimeocdn.com/video/1999999503-d06fd3a64afb9f18253bed85e27137c1bfe5eba9c9d5d4aa1d1b1d19d97e236f-d_1280x720?region=us" alt="Still from the Tailgate Toolkit TV commercial" loading="lazy">
-              <span class="play-btn" aria-hidden="true"></span>
-            </button>
-            <h3>Tailgate Toolkit</h3>
-            <span class="work-tag">TV commercial, broadcast on 61 stations across BC</span>
-          </article>
-          <article class="work-card">
-            <button class="video-thumb" data-vimeo="851929284" aria-label="Play: Stratos Performance Nutrition Endurance commercial">
-              <img src="https://i.vimeocdn.com/video/1706807741-6a3e7635fec993fb2322debbd8606ab47086d3398619d252eb2a977cb60d90aa-d_1280x720?region=us" alt="Still from the Stratos Endurance commercial" loading="lazy">
-              <span class="play-btn" aria-hidden="true"></span>
-            </button>
-            <h3>Stratos: Endurance</h3>
-            <span class="work-tag">Commercial for a performance nutrition brand</span>
-          </article>
-          <article class="work-card">
-            <button class="video-thumb" data-youtube="DUAHFEBabnU" aria-label="Play: When Your Outfit Is Missing Something, De Mode en Vogue">
-              <img src="assets/img/dmev-outfit-missing-something.jpg" alt="Still from the De Mode en Vogue commercial: two friends laughing in a rose garden" loading="lazy">
-              <span class="play-btn" aria-hidden="true"></span>
-            </button>
-            <h3>De Mode en Vogue</h3>
-            <span class="work-tag">Campaign: When your outfit is missing something</span>
-          </article>
-          <article class="work-card">
-            <button class="video-thumb" data-youtube="m2GW6FpggX8" aria-label="Play: Gas 2 Go fuel delivery commercial">
-              <img src="assets/img/g2g-driver-fill-up.jpg" alt="Still from the Gas 2 Go commercial: a smiling driver fills up a customer's car in her driveway" loading="lazy">
-              <span class="play-btn" aria-hidden="true"></span>
-            </button>
-            <h3>Gas 2 Go</h3>
-            <span class="work-tag">Commercial for a Vancouver Island fuel delivery company</span>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- What we do: rounded panel, open/close rows -->
-    <section class="panel" id="what-we-do" aria-labelledby="do-head">
-      <div class="wrap">
-        <h2 id="do-head" class="big-list-head reveal">We start with video, but we don't stop there<span class="dot">.</span></h2>
-        <div class="big-list-grid">
-          <ul class="big-list reveal">
-            <li><a href="marketing-videos.html">Marketing videos</a></li>
-            <li><a href="corporate-video.html">Corporate video</a></li>
-            <li><a href="event-videography.html">Event videography</a></li>
-            <li><a href="marketing-videos.html#creative-direction">Creative direction</a></li>
-            <li><a href="website-development.html">Websites and ads</a></li>
+          <p class="roll-head">Made for</p>
+          <ul class="credit-list credit-list--cols">
+            <li>Tailgate Toolkit</li><li>Gas 2 Go</li><li>Sixty Forty</li><li>Stratos Nutrition</li>
+            <li>De Mode en Vogue</li><li>White Wolf Homes</li><li>Harbour City Kitchens</li><li>Maxxam Insurance</li>
+            <li>Peninsula Gives</li><li>VICA</li><li>West Haven Cabinetry</li><li>It's A Doodle K9 Service</li>
           </ul>
-          <div class="big-list-side reveal">
-            <div class="big-list-shot"><img class="bw" src="assets/img/bts-camera-rig-cool.jpg" alt="A Volare Media camera on set" loading="lazy"></div>
-            <p>One shoot becomes a whole campaign, cut for every platform.</p>
-            <p class="big-list-call"><a href="tel:+12505894521">250.589.4521</a> <a href="mailto:video@volaremedia.net">video@volaremedia.net</a></p>
-          </div>
+          <p class="roll-end"><img src="assets/vm-logo.png" alt="Volare Media"></p>
         </div>
       </div>
     </section>
 
-    <!-- The crew -->
-    <section class="sec video-band" aria-labelledby="crew-head">
-      <video class="band-video bw" muted loop playsinline preload="none" data-src="assets/sixtyforty-loop.mp4" poster="assets/img/sixtyforty-loop-poster.jpg" style="--video-opacity: 0.5;" aria-hidden="true"></video>
-      <div class="wrap">
-        <div class="crew-head reveal">
-          <h2 id="crew-head" class="big">The right crew for every project<span class="dot">.</span></h2>
-          <p>We're a production house, so we build the crew around the project. We bring in the directors, directors of photography and crew each shoot needs, from people we know and trust, and we produce every project from start to finish.</p>
-        </div>
-        <div class="crew-shot reveal">
-          <img class="bw" src="assets/img/bts-crew-smiles.jpg" alt="A Volare Media crew on set" loading="lazy">
-        </div>
-        <p class="crew-link reveal"><a class="text-link" href="crew.html">Meet our crew and production partners</a></p>
-      </div>
+    <section class="chapter chapter--contact" data-id="contact" data-clip="assets/peninsula-recap-loop.mp4" aria-labelledby="t-contact" hidden>
+      <h2 id="t-contact" class="title"><span class="ln">Tell us what you want</span> <span class="ln">your video to do<span class="dot">.</span></span></h2>
+      <p class="contact-big"><a href="tel:+12505894521">250.589.4521</a><a href="mailto:video@volaremedia.net">video@volaremedia.net</a></p>
+      <p class="sub">We reply within one business day.</p>
+      <a class="more" href="contact.html"><span class="more-t">Send us a message</span><span class="more-i" aria-hidden="true"></span></a>
     </section>
-
-    <!-- Reviews -->
-    <section class="sec" aria-labelledby="reviews-head">
-      <div class="wrap">
-        <div class="reviews-head reveal">
-          <h2 id="reviews-head" class="big">What our clients say<span class="dot">.</span></h2>
-          <a class="rating" href="https://share.google/SHgZDnW8Q4ltIST9U" rel="noopener" target="_blank" style="text-decoration:none"><b>5.0</b><span><span class="stars">★★★★★</span><br>16 Google reviews</span></a>
-        </div>
-        <div class="review-row reveal">
-          <blockquote class="review-card">
-            <p>"They had everything prepared: a storyboard, my script and a hospitality tent for their crew."</p>
-            <cite><span class="stars" aria-label="5 out of 5 stars">★★★★★</span>Sheila, It's A Doodle K9 Service</cite>
-          </blockquote>
-          <blockquote class="review-card">
-            <p>"The crew was so friendly and amazing with kids. Organized and professional at every step."</p>
-            <cite><span class="stars" aria-label="5 out of 5 stars">★★★★★</span>Ashly Paquette</cite>
-          </blockquote>
-          <blockquote class="review-card">
-            <p>"Very professional and a great team to work with. Cannot wait to work on another project with them."</p>
-            <cite><span class="stars" aria-label="5 out of 5 stars">★★★★★</span>Derek Lewers</cite>
-          </blockquote>
-        </div>
-      </div>
-    </section>
-
-    <!-- Long-term partners -->
-    <section class="sec family video-band" aria-labelledby="family-head">
-      <video class="band-video bw" muted loop playsinline preload="none" data-src="assets/modelk-rolling-loop.mp4" poster="assets/img/modelk-rolling-loop-poster.jpg" style="--video-opacity: 0.55;" aria-hidden="true"></video>
-      <div class="wrap reveal">
-        <h2 id="family-head" class="big">We'd rather be your marketing team for years than your film crew for a day<span class="dot">.</span></h2>
-        <p>Several of the businesses we work with are ongoing partners. We plan their marketing month to month and keep the videos, ads and website working together.</p>
-        <a class="text-link" href="work.html#partnerships">See our partnerships</a>
-      </div>
-    </section>
-
-    <!-- Contact, right on the homepage -->
-    <section class="sec" id="contact" aria-labelledby="contact-head">
-      <div class="wrap contact-v2">
-        <div class="reveal">
-          <h2 id="contact-head">Tell us what you want your video to do<span class="dot">.</span></h2>
-          <p class="lede">We'll take it from there. Strategy, video, ads and your website, all with one team.</p>
-          <ul class="contact-direct">
-            <li><a href="mailto:video@volaremedia.net">video@volaremedia.net</a></li>
-            <li><a href="tel:+12505894521">250.589.4521</a></li>
-            <li>Victoria, BC, Canada</li>
-          </ul>
-        </div>
-        <form class="v2-form reveal" action="contact-form.php" method="POST">
-          <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;">
-          <label>Name<input type="text" name="name" required autocomplete="name"></label>
-          <label>Email<input type="email" name="email" required autocomplete="email"></label>
-          <label>What's the project?<textarea name="message" rows="5" required placeholder="A sentence on your business and what the video is for. A hunch is enough to start."></textarea></label>
-          <button type="submit" class="btn">Send it over</button>
-          <p class="form-small">We reply within one business day.</p>
-        </form>
-      </div>
-    </section>
-
   </main>
 
-  <footer class="site-footer footer-v2 photo-band" style="--photo: url('assets/img/footer-crew-cinema.jpg'); --photo-pos: 60% 42%; --photo-opacity: 0.4;">
-    <div class="wrap">
-      <div class="footer-top">
-        <div>
-          <p class="footer-mark"><img src="assets/vm-logo.png" alt="Volare Media logo"></p>
-          <p class="footer-tag">Stories worth <em>sharing</em><span class="dot">.</span></p>
-        </div>
-        <ul class="footer-links">
-          <li><a href="work.html">Work</a></li>
-          <li><a href="crew.html">The Crew</a></li>
-          <li><a href="community.html">Community</a></li>
-          <li><a href="journal.html">Journal</a></li>
-          <li><a href="contact.html">Contact</a></li>
-          <li><a href="https://www.instagram.com/volare.media" rel="noopener">Instagram</a></li>
-          <li><a href="https://www.facebook.com/VolareMedia.net" rel="noopener">Facebook</a></li>
-        </ul>
-      </div>
-      <div class="footer-base">
-        <span>© 2026 Volare Media · <a href="privacy-policy.html">Privacy policy</a></span>
-        <span>Video production across Vancouver Island, BC &amp; Canada</span>
-      </div>
-    </div>
-  </footer>
-
-  <script src="script.js?v=33"></script>
-  <script src="clean.js?v=1"></script>
+  <script src="console.js?v=16" type="module"></script>
 </body>
 </html>
