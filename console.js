@@ -34,19 +34,28 @@ const wait = (ms) => new Promise((r) => setTimeout(r, ms));
 
 /* ---------------- footage ---------------- */
 const videos = {};
+// A chapter's picture: footage (data-clip) or a still photo (data-photo). One player per file, shared by chapters that use the same one.
 function videoFor(id) {
-  const clip = byId[id].dataset.clip;         // one player per clip: the home screen and the Work section share the reel
-  if (videos[clip]) return videos[clip];
-  const v = document.createElement("video");
-  v.src = clip;
-  v.muted = true; v.loop = true; v.playsInline = true;
-  v.setAttribute("playsinline", ""); v.setAttribute("muted", "");
-  v.preload = "auto";
-  videos[clip] = v;
-  if (body.classList.contains("no-gl")) $(".stage-fallback").appendChild(v);
+  const ch = byId[id], file = ch.dataset.clip || ch.dataset.photo;
+  if (videos[file]) return videos[file];
+  let v;
+  if (ch.dataset.clip) {
+    v = document.createElement("video");
+    v.src = file;
+    v.muted = true; v.loop = true; v.playsInline = true;
+    v.setAttribute("playsinline", ""); v.setAttribute("muted", "");
+    v.preload = "auto";
+    if (body.classList.contains("no-gl")) $(".stage-fallback").appendChild(v);
+  } else {
+    v = new Image(); v.decoding = "async"; v.src = file;
+    if (body.classList.contains("no-gl")) $(".stage-fallback").appendChild(v);
+  }
+  videos[file] = v;
   return v;
 }
-function play(v) { if (!reduce) v.play().catch(() => {}); }
+const isClip = (v) => v instanceof HTMLVideoElement;
+const rest = (v) => { if (v && isClip(v)) v.pause(); };
+function play(v) { if (!reduce && isClip(v)) v.play().catch(() => {}); }
 
 /* ---------------- the glass stage (shared with the inner pages) ---------------- */
 const stage = createStage($("#stage"));
@@ -55,8 +64,9 @@ if (!stage) body.classList.add("no-gl");
 /* ---------------- credits roll ---------------- */
 // The roll runs by itself, but it never makes you wait: it opens with the first names already on screen,
 // and the wheel, a trackpad or a finger moves it at your own pace (it carries on by itself a moment after you stop).
-const roll = { box: $(".roll"), el: $(".roll-inner"), y: 0, max: 0, start: 0, kick: 0, heldUntil: 0, hover: false, v: spring() };
+const roll = { on: !!$(".roll"), box: $(".roll"), el: $(".roll-inner"), y: 0, max: 0, start: 0, kick: 0, heldUntil: 0, hover: false, v: spring() };
 const measureRoll = () => {
+  if (!roll.on) return;
   roll.max = roll.el.offsetHeight - roll.box.clientHeight;
   roll.start = Math.max(0, parseFloat(getComputedStyle(roll.el).paddingTop) - roll.box.clientHeight * 0.4);
 };
@@ -67,8 +77,10 @@ function nudgeRoll(d, eased) {
   roll.heldUntil = performance.now() + 2500;
   return pos + d - to;
 }
-roll.box.addEventListener("pointerenter", () => (roll.hover = true));
-roll.box.addEventListener("pointerleave", () => (roll.hover = false));
+if (roll.on) {
+  roll.box.addEventListener("pointerenter", () => (roll.hover = true));
+  roll.box.addEventListener("pointerleave", () => (roll.hover = false));
+}
 addEventListener("resize", measureRoll);
 
 /* ---------------- our work: the reel grows to fill the screen, then the projects follow ---------------- */
@@ -82,6 +94,7 @@ const S0 = 0.5, S1 = 0.88;                       // frame size at the start, and
 const work = { canvas: $("#stage"), reel: $(".reel"), label: $(".reel-play"), intro: $(".work-intro"), list: $(".projects"),
   y: 0, kick: 0, mix: 0, grow: 1, hold: 1, max: 0 };
 const measureWork = () => {
+  if (!work.reel) return;
   work.grow = innerHeight * 0.9; work.hold = innerHeight * 0.7;
   work.max = work.grow + work.hold + work.list.offsetHeight;
 };
@@ -95,7 +108,7 @@ function nudgeWork(d, eased) {
 }
 const ramp = (x, a, b) => smoother(Math.min(1, Math.max(0, (x - a) / (b - a))));
 function layoutWork(dt) {
-  if (current !== "work" && work.mix === 0) return;
+  if (!work.reel || (current !== "work" && work.mix === 0)) return;
   const k = work.kick * (1 - Math.exp(-dt * 12));          // your own scrolling, eased out
   work.y += k; work.kick -= k;
   const vh = innerHeight, m = work.mix;
@@ -155,7 +168,7 @@ async function workFromBelow() {
   eases.set("mix", {}); work.mix = 1;
   stage.colour = 1; stage.clean = 1;
   stage.show(v, DIM.work, 1);
-  if (old && old !== v) old.pause();
+  if (old !== v) rest(old);
 }
 
 /* ---------------- player: the reel or a project, with sound ---------------- */
@@ -190,7 +203,7 @@ function openPlayer(what) {
   }
   player.hidden = false;
   requestAnimationFrame(() => player.classList.add("is-open"));
-  if (stage && stage.a) stage.a.pause();
+  if (stage) rest(stage.a);
   // keyboard focus moves into the player (to the picture for the reel, so the space bar pauses it and does not press Close)
   if (reelVid) { reelVid.tabIndex = -1; reelVid.focus({ preventScroll: true }); } else $(".player-close").focus({ preventScroll: true });
 }
@@ -214,7 +227,7 @@ function frame(now) {
   const dt = Math.min(0.05, (now - lastT) / 1000); lastT = now;
   const t = now / 1000;
 
-  if (!reduce) {
+  if (!reduce && roll.on) {
     const speed = current === "credits" && !roll.hover && now > roll.heldUntil ? innerHeight * 0.092 : 0;
     roll.y += follow(roll.v, speed, dt, 0.6, 0.4) * dt;
     const k = roll.kick * (1 - Math.exp(-dt * 14));          // your own scrolling, eased out
@@ -226,21 +239,23 @@ function frame(now) {
   if (reelBar && reelVid.duration) reelBar.style.transform = `scaleX(${(reelVid.currentTime / reelVid.duration).toFixed(4)})`;
 }
 const DIM = { home: 0.6, work: 1, credits: 0.32, contact: 0.3 };
+// how bright the picture sits behind a chapter: the chapter can say (data-dim), otherwise by name, otherwise a middle value
+const dimFor = (id) => parseFloat(byId[id].dataset.dim) || DIM[id] || 0.46;
 let fallbackCuts = 0;
 async function cutTo(id, origin) {
   const v = videoFor(id);
   play(v);
   await whenReady(v);
   if (!stage) {
-    $$(".stage-fallback video").forEach((x) => x.classList.toggle("on", x === v));
+    $$(".stage-fallback > *").forEach((x) => x.classList.toggle("on", x === v));
     return;
   }
   const old = stage.a;
   sweeps(stage.cutNo + 1);
   // the home screen and the Work section show the same reel: no cut between them, only the brightness changes
-  if (old === v) { stage.cutNo++; return stage.glide("dim", DIM[id] ?? 0.46, reduce ? 1 : 1100); }
-  await stage.cut(v, { origin, dim: DIM[id] ?? 0.46 });
-  if (old && old !== v) old.pause();
+  if (old === v) { stage.cutNo++; return stage.glide("dim", dimFor(id), reduce ? 1 : 1100); }
+  await stage.cut(v, { origin, dim: dimFor(id) });
+  if (old !== v) rest(old);
 }
 
 // two slanted sweeps cross the screen: a thin volt line, and a wide mauve band that lags behind it
@@ -295,7 +310,7 @@ function wipeOut(el, delay = 0) {
     { clipPath: CLIP_HIDDEN_R, transform: "translateX(0.4em)" },
   ], { duration: 520, delay, easing: EASE, fill: "both" }).finished;
 }
-const parts = (ch) => [...$$(".title .ln-t", ch), ...$$(".sub, .more, .contact-big a, .roll, .projects-in", ch)].filter((n) => !n.closest(".projects-in") || n.matches(".projects-in"));
+const parts = (ch) => [...$$(".title .ln-t", ch), ...$$(".sub, .points li, .shots > li, .more, .contact-big a, .roll, .projects-in", ch)].filter((n) => !n.closest(".projects-in") || n.matches(".projects-in"));
 
 async function showChapter(ch, d0 = 0) {
   ch.hidden = false; ch.classList.add("is-on");
@@ -360,7 +375,7 @@ async function go(id, from, dir = 0) {
   busy = false;
   // warm up the neighbours so the next cut starts at once
   const i = order.indexOf(id);
-  [order[(i + 1) % order.length], order[(i - 1 + order.length) % order.length]].forEach((n) => videoFor(n).load());
+  [order[(i + 1) % order.length], order[(i - 1 + order.length) % order.length]].forEach((n) => { const m = videoFor(n); if (isClip(m)) m.load(); });
 }
 function step(d) {
   const i = order.indexOf(current);
@@ -369,6 +384,8 @@ function step(d) {
 }
 
 $$("[data-go]").forEach((b) => b.addEventListener("click", () => go(b.dataset.go, b)));
+// a menu word that leaves the page (for example Home on an inner page)
+$$("[data-href]").forEach((b) => b.addEventListener("click", () => { location.href = b.dataset.href; }));
 addEventListener("keydown", (e) => {
   if (!player.hidden) {                                     // while a video is open the keys belong to it
     if (e.key === "Escape") closePlayer();
@@ -380,7 +397,7 @@ addEventListener("keydown", (e) => {
   if (e.key === "Escape") go("home", $(".logo"));
 });
 let wheelAcc = 0, wheelT = 0, lastWheel = 0, fromEdge = true;
-const rollInHand = () => current === "credits" && !reduce && roll.max > 0;
+const rollInHand = () => roll.on && current === "credits" && !reduce && roll.max > 0;
 const workInHand = () => current === "work" && !busy && player.hidden;
 // whichever section scrolls by hand right now (the credits roll or the Work section), or nothing
 const inHand = () => (rollInHand() ? nudgeRoll : workInHand() ? nudgeWork : null);
@@ -425,6 +442,13 @@ if (stage && new URLSearchParams(location.search).has("debug")) window.__vm = {
 };
 
 /* ---------------- arriving ---------------- */
+// The address can name a chapter by its id, or by an older anchor name the chapter also answers to (data-also).
+function named() {
+  const n = location.hash.slice(1);
+  if (byId[n]) return n;
+  const ch = n && chapters.find((c) => (c.dataset.also || "").split(" ").includes(n));
+  return ch ? ch.dataset.id : "";
+}
 // The title card is an opening, not a toll. It plays the first time someone lands here in a visit,
 // and not again when they come back to this page from elsewhere on the site.
 let opened = false;
@@ -440,8 +464,8 @@ async function arrive(id) {
   current = id;
   play(v);
   whenReady(v, 6000).then(() => {
-    if (stage) stage.show(v, DIM[id] ?? 0.46, 1200);
-    else $$(".stage-fallback video").forEach((x) => x.classList.toggle("on", x === v));
+    if (stage) stage.show(v, dimFor(id), 1200);
+    else $$(".stage-fallback > *").forEach((x) => x.classList.toggle("on", x === v));
   });
   if (id === "credits") { ch.hidden = false; measureRoll(); roll.y = roll.start; roll.kick = 0; roll.heldUntil = 0; }
   if (id === "work") enterWork(true);
@@ -454,14 +478,13 @@ async function arrive(id) {
 /* ---------------- intro: title card, then the console ---------------- */
 async function intro() {
   requestAnimationFrame(frame);
-  const named = location.hash.slice(1);
-  if (opened || reduce) return arrive(byId[named] ? named : "home");
+  if (opened || reduce) return arrive(named() || "home");
   const v = videoFor("home");
   play(v);
   // the title card starts straight away; the footage fades up behind it as soon as it has a frame
   whenReady(v, 6000).then(() => {
-    if (stage) stage.show(v, body.classList.contains("is-intro") ? 0.5 : DIM.home, 1600);
-    else $$(".stage-fallback video").forEach((x) => x.classList.toggle("on", x === v));
+    if (stage) stage.show(v, body.classList.contains("is-intro") ? 0.5 : dimFor("home"), 1600);
+    else $$(".stage-fallback > *").forEach((x) => x.classList.toggle("on", x === v));
   });
   const home = byId.home;
   home.classList.add("is-on");
@@ -473,13 +496,13 @@ async function intro() {
   // The title card leaves the centre for its corner, one line at a time, and the menu starts in the same moment.
   // Each line is moved on its own: the card is centred and the corner is not, so moving the block as a whole made the lines jump.
   morph($$(".ln-w", home), () => body.classList.remove("is-intro"), 1000);
-  if (stage && stage.a) stage.glide("dim", DIM.home, 1300);
+  if (stage && stage.a) stage.glide("dim", dimFor("home"), 1300);
   wipeIn($(".sub", home), 500);
   await Promise.all(menuButtons.map((b, i) => wipeIn(b, i * 70)));
   busy = false;
 
   // open a chapter straight from the address bar (#production etc.)
-  const start = location.hash.slice(1);
-  if (byId[start] && start !== "home") go(start, $(`.menu button[data-go="${start}"]`));
+  const start = named();
+  if (start && start !== "home") go(start, $(`.menu button[data-go="${start}"]`));
 }
 intro();

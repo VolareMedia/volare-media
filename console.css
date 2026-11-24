@@ -36,8 +36,8 @@ img { display: block; max-width: 100%; }
 .stage-fallback { display: none; }
 .no-gl #stage { display: none; }
 .no-gl .stage-fallback { display: block; }
-.stage-fallback video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) contrast(1.1) brightness(0.55); opacity: 0; transition: opacity 0.6s; }
-.stage-fallback video.on { opacity: 1; }
+.stage-fallback > * { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) contrast(1.1) brightness(0.55); opacity: 0; transition: opacity 0.6s; }
+.stage-fallback > *.on { opacity: 1; }
 
 /* ---------- sweeps: a thin volt line in front, a wide mauve band behind ---------- */
 .sweeps { position: fixed; inset: 0; z-index: 5; pointer-events: none; overflow: hidden; }
@@ -149,8 +149,9 @@ img { display: block; max-width: 100%; }
 
 /* ---------- phones ---------- */
 @media (max-width: 760px) {
-  .menu { left: var(--gutter); bottom: 7.5rem; }
-  .menu button { font-size: clamp(2rem, 9.4vw, 2.8rem); }
+  /* a phone with its browser bars showing is short: the words size to the height as well as the width, so the menu never climbs into the title */
+  .menu { left: var(--gutter); bottom: clamp(2.6rem, 9vh, 7.5rem); }
+  .menu button { font-size: clamp(1.5rem, min(9.4vw, 5.2vh), 2.8rem); }
   .is-rail .menu { top: 4.5rem; transform: none; left: 0; right: 0; overflow-x: auto; scrollbar-width: none; -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 90%, transparent); mask-image: linear-gradient(90deg, transparent, #000 6%, #000 90%, transparent); }
   .is-rail .menu::-webkit-scrollbar { display: none; }
   .is-rail .menu ul { display: flex; gap: 1.4rem; padding: 0.4rem var(--gutter); width: max-content; }
@@ -158,8 +159,11 @@ img { display: block; max-width: 100%; }
   .is-rail .menu button::before { display: none; }
   .is-rail .menu button { font-size: 0.78rem; white-space: nowrap; }
   .is-rail .menu button[aria-current="true"] { border-bottom: 1px solid var(--volt); }
-  .chapter[data-id="home"] .title { right: var(--gutter); left: var(--gutter); bottom: auto; top: 34vh; text-align: left; font-size: clamp(2.2rem, 10vw, 3rem); transform-origin: 0 0; }
-  .chapter[data-id="home"] .sub { right: var(--gutter); left: var(--gutter); bottom: auto; top: calc(34vh + 2 * 0.98 * clamp(2.2rem, 10vw, 3rem) + 1.2rem); text-align: left; }
+  /* the headline sits under the logo and the menu at the foot, with the picture between them */
+  .chapter[data-id="home"] { --tf: clamp(2.2rem, 10vw, 3rem); --lines: 2; --tt: max(6.6rem, 15vh); }
+  .chapter[data-id="home"]:has(.title--page) { --tf: clamp(1.9rem, 8.6vw, 2.6rem); --lines: 3; }
+  .chapter[data-id="home"] .title { right: var(--gutter); left: var(--gutter); bottom: auto; top: var(--tt); text-align: left; font-size: var(--tf); transform-origin: 0 0; }
+  .chapter[data-id="home"] .sub { right: var(--gutter); left: var(--gutter); bottom: auto; top: calc(var(--tt) + var(--lines) * 1.04 * var(--tf) + 0.9rem); text-align: left; }
   .is-intro .chapter[data-id="home"] .title { top: 50%; left: 50%; right: auto; bottom: auto; transform: translate(-50%, -50%); width: calc(100% - 2 * var(--gutter)); text-align: center; font-size: clamp(2.6rem, 12vw, 3.6rem); }
   .chapter:not([data-id="home"]) { --left: var(--gutter); }
   .chapter:not([data-id="home"]) .title { bottom: 15.5rem; font-size: clamp(2.2rem, 10vw, 3rem); }
@@ -188,6 +192,32 @@ img { display: block; max-width: 100%; }
 @keyframes vt-out { to { opacity: 0.2; } }
 @keyframes vt-in { from { clip-path: polygon(0 0, 0 0, -28% 100%, 0 100%); } to { clip-path: polygon(0 0, 128% 0, 100% 100%, 0 100%); } }
 @media (prefers-reduced-motion: reduce) { ::view-transition-old(root), ::view-transition-new(root) { animation: none; } }
+
+/* ---------- inner pages: the same console, with a page's own chapters ---------- */
+/* a chapter can hold more than a headline: its pieces stack up from the bottom left, beside the rail */
+.stack { position: absolute; left: var(--left); right: var(--gutter); bottom: clamp(4.5rem, 11vh, 7rem); display: flex; flex-direction: column; align-items: flex-start; gap: clamp(1rem, 2.4vh, 1.7rem); }
+.chapter:not([data-id="home"]) .stack .title,
+.chapter:not([data-id="home"]) .stack .sub { position: static; }
+.chapter:not([data-id="home"]) .stack .more { position: relative; left: auto; bottom: auto; }   /* relative, not static: the button's volt shape is drawn against it */
+.chapter:not([data-id="home"]) .stack .title { font-size: clamp(2.2rem, 4.6vw, 4.8rem); max-width: 20ch; }
+.stack .sub { max-width: 36rem; }
+.stack .more { margin-top: 0.5rem; }
+.points { list-style: none; }
+.points li { font-family: var(--font-display); font-weight: 600; letter-spacing: -0.03em; font-size: clamp(1.25rem, 2.1vw, 2rem); line-height: 1.24; color: var(--cream); width: fit-content; }
+.shots { list-style: none; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(0.8rem, 1.6vw, 1.5rem); width: 100%; max-width: 64rem; }
+.shots .project-name { margin-top: 0.6rem; font-size: clamp(1rem, 1.35vw, 1.3rem); }
+.shots .project-shot i { width: 3.4rem; height: 2.1rem; clip-path: polygon(0.64rem 0, 100% 0, calc(100% - 0.64rem) 100%, 0 100%); }
+.shots .project-shot i::after { border-left-width: 0.7rem; border-top-width: 0.42rem; border-bottom-width: 0.42rem; margin-left: 0.14rem; }
+/* an inner page's own headline sits in the corner the way "Videos made with intention." does; it runs a little longer, so a little smaller */
+.chapter[data-id="home"] .title--page { font-size: clamp(1.7rem, 3vw, 3rem); }
+@media (max-width: 760px) {
+  .stack { left: var(--gutter); bottom: 3.6rem; gap: 0.85rem; }
+  .chapter:not([data-id="home"]) .stack .title { font-size: clamp(1.9rem, 8.4vw, 2.6rem); }
+  .stack .sub { font-size: 0.98rem; }
+  .points li { font-size: 1.2rem; }
+  .shots { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .chapter[data-id="home"] .title--page { font-size: var(--tf); }
+}
 
 /* ---------- our work: the reel frame, then the projects ---------- */
 /* the footage canvas and the "Play reel" label share one transform (set by the script), so the label rides the frame */
