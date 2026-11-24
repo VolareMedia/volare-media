@@ -8,7 +8,7 @@
 // Every movement runs on one curve (smootherstep): it starts and stops with no speed and
 // no sudden change of acceleration.
 
-import { smoother, EASE, reduce, whenReady, createStage } from "./glass-stage.js?v=1";
+import { smoother, EASE, reduce, whenReady, createStage } from "./glass-stage.js?v=2";
 
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];

@@ -47,7 +47,9 @@ const vec3 CREAM = vec3(0.957, 0.953, 0.91);     // and its cream
 const float K = 0.35;                             // how strongly a tilted pane shows perspective
 
 float ss(float t) { t = clamp(t, 0.0, 1.0); return t * t * t * (t * (t * 6.0 - 15.0) + 10.0); }
-float bump(float t) { return ss(t / 0.5) * (1.0 - ss((t - 0.5) / 0.5)); }   // 0 -> 1 -> 0, soft at every point
+// 0 -> 1 -> 0, soft at every point. It rises in the first third and takes the other two thirds to settle,
+// so a cut arrives with energy and eases out gently instead of stopping short.
+float bump(float t) { return ss(t / 0.34) * (1.0 - ss((t - 0.34) / 0.66)); }
 vec2 cover(vec2 uv, float asp) {
   vec2 s = vec2(1.0);
   if (uScreen > asp) s.y = asp / uScreen; else s.x = uScreen / asp;
@@ -174,7 +176,7 @@ void main() {
   // Between cuts every one of these is exactly zero, so the footage is shown as it is: flat, still and full frame.
   float lift = bump(uProg);
   gLift = lift;
-  gZoom = 1.0 + 0.12 * ss(uProg / 0.22) * (1.0 - ss((uProg - 0.78) / 0.22));
+  gZoom = 1.0 + 0.12 * ss(uProg / 0.22) * (1.0 - ss((uProg - 0.3) / 0.7));    // pushes in fast, eases back out over the rest of the cut
   p = rot(p, uSwing * lift * 0.045);
   vec2 lean = vec2(uSwing * lift * 0.12, -lift * 0.04);
   float inward = abs(lean.x) * uScreen * 0.5 + abs(lean.y) * 0.5;   // the lean only moves the picture inward
@@ -296,7 +298,7 @@ export function createStage(canvas) {
   // put a first picture on screen and fade it up
   st.show = (s, dim, ms = 1600) => { st.a = s; dirtyA = true; return st.glide("dim", dim, ms); };
   // cut to a new picture through the glass panes; origin = where on screen the cut starts (0-1, y up)
-  st.cut = async (s, { origin = [0.5, 0.5], dim = st.dim, ms = 1250 } = {}) => {
+  st.cut = async (s, { origin = [0.5, 0.5], dim = st.dim, ms = 1450 } = {}) => {
     st.cutNo++; st.cutting = true;
     st.b = s; dirtyB = !upload(texB, 1, s);
     st.origin = origin;
