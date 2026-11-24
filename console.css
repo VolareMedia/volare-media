@@ -9,7 +9,7 @@
   --font-display: "Inter Tight", "Inter", system-ui, sans-serif;
   --font-body: "Inter", system-ui, sans-serif;
   --inset: clamp(12px, 1.8vw, 28px);
-  --gutter: clamp(22px, 4.2vw, 72px);
+  --gutter: clamp(1.25rem, 4vw, 4rem);      /* the same side margin as every other page */
   --slant: 0.32em;
   --ease: cubic-bezier(0.65, 0, 0.35, 1);
 }
@@ -45,9 +45,10 @@ img { display: block; max-width: 100%; }
 .sweep--volt { width: 2px; background: var(--volt); box-shadow: 0 0 18px rgba(214, 255, 61, 0.5); }
 .sweep--mauve { width: clamp(70px, 12vw, 200px); margin-left: calc(clamp(70px, 12vw, 200px) / -2); background: rgba(201, 186, 244, 0.12); border-right: 1px solid rgba(201, 186, 244, 0.6); mix-blend-mode: screen; }
 
-/* ---------- logo ---------- */
-.hud-top { position: fixed; z-index: 20; top: clamp(18px, 2.6vw, 40px); left: var(--gutter); }
-.logo img { height: clamp(24px, 2.4vw, 32px); width: auto; }
+/* ---------- logo: in exactly the place the inner pages' header puts it, so it does not move between pages ---------- */
+.hud-top { position: fixed; z-index: 20; top: 0; left: var(--gutter); height: 4.5rem; display: flex; align-items: center; }
+.logo { display: flex; padding: 0; }
+.logo img { height: 1.9rem; width: auto; }
 
 /* ---------- menu ---------- */
 .menu { position: fixed; z-index: 15; left: var(--gutter); bottom: clamp(4.5rem, 12vh, 8rem); }
@@ -150,7 +151,7 @@ img { display: block; max-width: 100%; }
 @media (max-width: 760px) {
   .menu { left: var(--gutter); bottom: 7.5rem; }
   .menu button { font-size: clamp(2rem, 9.4vw, 2.8rem); }
-  .is-rail .menu { top: 68px; transform: none; left: 0; right: 0; overflow-x: auto; scrollbar-width: none; -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 90%, transparent); mask-image: linear-gradient(90deg, transparent, #000 6%, #000 90%, transparent); }
+  .is-rail .menu { top: 4.5rem; transform: none; left: 0; right: 0; overflow-x: auto; scrollbar-width: none; -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 90%, transparent); mask-image: linear-gradient(90deg, transparent, #000 6%, #000 90%, transparent); }
   .is-rail .menu::-webkit-scrollbar { display: none; }
   .is-rail .menu ul { display: flex; gap: 1.4rem; padding: 0.4rem var(--gutter); width: max-content; }
   .is-rail .menu li + li { margin-top: 0; }

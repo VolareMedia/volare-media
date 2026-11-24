@@ -6,7 +6,7 @@
 // (html.anim, set by the one-line script in <head>). This file never hides anything. It only un-hides a block,
 // by starting its animations and marking it data-in in the same step.
 // Nothing here follows the pointer, and nothing keeps moving once it has arrived.
-import { EASE, reduce, whenReady, createStage } from "./glass-stage.js?v=2";
+import { EASE, reduce, whenReady, createStage } from "./glass-stage.js?v=3";
 
 const root = document.documentElement;
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];

@@ -205,9 +205,7 @@ void main() {
   vec2 q = (uv - 0.5) * vec2(uScreen / max(uScreen, 1.0), 1.0);
   col *= 1.0 - dot(q, q) * 0.9;
 
-  // fine grain
-  col *= 0.985 + 0.015 * sin(gl_FragCoord.y * 1.6);
-  col += (hash(gl_FragCoord.xy + fract(uTime * 7.0) * 113.0) - 0.5) * 0.05;
+  // (no grain and no scan lines: the picture is shown clean)
   gl_FragColor = vec4(col, 1.0);
 }`;
 

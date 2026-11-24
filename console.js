@@ -8,7 +8,7 @@
 // Every movement runs on one curve (smootherstep): it starts and stops with no speed and
 // no sudden change of acceleration.
 
-import { smoother, EASE, reduce, whenReady, createStage } from "./glass-stage.js?v=2";
+import { smoother, EASE, reduce, whenReady, createStage } from "./glass-stage.js?v=3";
 
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
@@ -250,7 +250,7 @@ addEventListener("touchend", (e) => {
   if (Math.abs(dy) > 60) step(dy > 0 ? 1 : -1);
 }, { passive: true });
 
-// For checking the cut by eye: console.html?debug, then __vm.freeze("production", 0.5) holds a cut halfway; __vm.freeze() lets go.
+// For checking the cut by eye: index.html?debug, then __vm.freeze("production", 0.5) holds a cut halfway; __vm.freeze() lets go.
 if (stage && new URLSearchParams(location.search).has("debug")) window.__vm = {
   async freeze(id, at) { if (id == null) return stage.freeze(); const v = videoFor(id); play(v); await whenReady(v); stage.freeze(v, at); },
   set(k, val) { stage[k] = val; },

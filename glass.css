@@ -103,7 +103,13 @@ html.anim:not(.no-glass) .v3 main > :first-child > video.band-video { position: 
 /* ---------- phones: the menu is the landing page's menu ---------- */
 /* just the big words, bottom left, over the picture; same size, spacing and position as on the landing page */
 @media (max-width: 760px) {
-  .v3 .v2-menu .wrap { display: flex; flex-direction: column; justify-content: flex-end; min-height: calc(100svh - 4.5rem); padding: 0 clamp(22px, 4.2vw, 72px) 7.5rem; }
+  .v3 .v2-menu .wrap { display: flex; flex-direction: column; justify-content: flex-end; min-height: calc(100svh - 4.5rem); padding: 0 var(--gutter) 7.5rem; }
   .v3 .v2-menu-side { display: none; }
   .v3 .v2-menu-links a { font-size: clamp(2rem, 9.4vw, 2.8rem); line-height: 1.06; letter-spacing: -0.035em; }
 }
+
+/* a section that used to be its own page: a link to it stops below the header, not under it */
+.v3 .merged, .v3 [id] { scroll-margin-top: 5.5rem; }
+/* a folded-in page's own headline keeps a little air before its opening paragraph */
+.v3 .merged h2 { margin-bottom: 1.5rem; max-width: 22ch; }
+.v3 .merged .lede { max-width: 44rem; }
