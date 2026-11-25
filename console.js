@@ -323,6 +323,34 @@ function fitLong(ch) {
 const longBox = () => $(".stack.is-long", byId[current]);
 const roomIn = (box, d) => (d > 0 ? box.scrollHeight - box.clientHeight - box.scrollTop : box.scrollTop);
 document.documentElement.style.setProperty("--n", $$(".menu li").length);   // the phone layout keeps sections clear of the menu list
+
+/* ---------------- edges that line up ---------------- */
+// Letters do not start or end exactly at the edge of their own box: an M sits further in than a W, an e further out than a full stop.
+// So each word or row is nudged by the gap its first or last letter leaves, and the ink itself lines up down the edge.
+// The gaps are measured from the font (as a share of the type size) and handed to the stylesheet as --lsb and --rsb.
+const inkCanvas = document.createElement("canvas").getContext("2d");
+let inkCache = {};
+function inkGap(el, ch, side) {
+  const cs = getComputedStyle(el), key = [cs.fontFamily, cs.fontWeight, cs.fontStyle, ch, side].join("|");
+  if (!(key in inkCache)) {
+    inkCanvas.font = cs.fontStyle + " " + cs.fontWeight + " 200px " + cs.fontFamily;
+    const m = inkCanvas.measureText(ch);
+    inkCache[key] = (side === "l" ? -m.actualBoundingBoxLeft : m.width - m.actualBoundingBoxRight) / 200;
+  }
+  return inkCache[key];
+}
+function lineUpEdges() {
+  $$(".menu button, .title .ln, .points li, .contact-big a, .chapter[data-id='home'] .sub").forEach((el) => {
+    const txt = el.textContent.trim(); if (!txt) return;
+    el.style.setProperty("--lsb", inkGap(el, txt[0], "l").toFixed(4));
+    el.style.setProperty("--rsb", inkGap(el, txt[txt.length - 1], "r").toFixed(4));
+  });
+}
+lineUpEdges();
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { inkCache = {}; lineUpEdges(); });   // again once the real fonts are in
+// The corner headline sits a fixed step above its line, so it needs to know how tall that line is (one row or two).
+const cornerSub = $(".chapter[data-id='home'] .sub");
+if (cornerSub && window.ResizeObserver) new ResizeObserver(() => cornerSub.parentElement.style.setProperty("--subh", cornerSub.offsetHeight + "px")).observe(cornerSub);
 addEventListener("resize", () => fitLong(byId[current]));
 async function showChapter(ch, d0 = 0) {
   ch.hidden = false; ch.classList.add("is-on");

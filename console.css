@@ -10,6 +10,11 @@
   --font-body: "Inter", system-ui, sans-serif;
   --inset: clamp(12px, 1.8vw, 28px);
   --line: clamp(6.5rem, 21vh, 13rem);       /* the one level every section starts on: the top of the menu list and the top of the headline */
+  --menu-f: clamp(2.2rem, min(5vw, 8.2vh), 4.4rem);   /* the big menu words; eight must fit a short laptop screen */
+  --menu-b: clamp(4.5rem, 12vh, 8rem);                 /* how far the menu sits off the bottom of the screen */
+  /* the bottom of the line under the corner headline, placed so its words sit on the same baseline as the menu's last word:
+     0.172 = where the baseline sits in a menu word's row; 0.394rem = the same for the small line */
+  --corner-b: calc(var(--menu-b) + var(--menu-f) * 0.172 - 0.394rem);
   --gutter: clamp(1.25rem, 4vw, 4rem);      /* the same side margin as every other page */
   --slant: 0.32em;
   --ease: cubic-bezier(0.65, 0, 0.35, 1);
@@ -63,13 +68,14 @@ img { display: block; max-width: 100%; }
 .logo img { height: 1.9rem; width: auto; }
 
 /* ---------- menu ---------- */
-.menu { position: fixed; z-index: 15; left: var(--gutter); bottom: clamp(4.5rem, 12vh, 8rem); }
+.menu { position: fixed; z-index: 15; left: var(--gutter); bottom: var(--menu-b); }
 .menu ul { list-style: none; }
 .menu li { line-height: 1; }
 .menu button {
   position: relative; display: inline-block; transform-origin: 0 0;
   font-family: var(--font-display); font-weight: 600; letter-spacing: -0.035em;
-  font-size: clamp(2.2rem, min(5vw, 8.2vh), 4.4rem); line-height: 1.06; color: var(--cream);   /* eight words must fit a short laptop screen */
+  font-size: var(--menu-f); line-height: 1.06; color: var(--cream);
+  margin-left: calc(var(--lsb, 0) * -1em);   /* each word starts on the same edge, whatever its first letter (set per word in console.js) */
   transition: color 0.45s var(--ease);
 }
 .menu button::before { /* the angular marker: mauve when you point at a word, volt on the one that's open */
@@ -103,7 +109,7 @@ img { display: block; max-width: 100%; }
 .chapter.is-on { pointer-events: auto; }
 .chapter > * { pointer-events: auto; }
 .title { font-family: var(--font-display); font-weight: 600; letter-spacing: -0.045em; line-height: 0.98; }
-.title .ln { display: block; padding-bottom: 0.06em; }
+.title .ln { display: block; padding-bottom: 0.06em; margin-left: calc(var(--lsb, 0) * -1em); }   /* rows start on the same edge, whatever their first letter */
 .ln-w { position: relative; display: inline-block; transform-origin: 0 0; }
 .ln-t { display: inline-block; transform-origin: 0 60%; }
 .bar { position: absolute; top: 0.02em; bottom: 0.06em; left: -0.6em; width: 0.14em; background: var(--lilac); transform: skewX(-24deg); opacity: 0; pointer-events: none; }
@@ -125,10 +131,15 @@ img { display: block; max-width: 100%; }
 .chapter .more { margin-left: -0.95em; }
 
 /* home title: a centred title card during the intro, then it settles bottom right */
-.chapter[data-id="home"] .title { position: absolute; right: var(--gutter); bottom: clamp(5.5rem, 14vh, 9rem); text-align: right; font-size: clamp(1.9rem, 3.6vw, 3.6rem); transform-origin: 100% 100%; }
-/* the line hangs under the headline (not up from the bottom of the screen), so a line that wraps to two rows grows downward and never runs into the headline */
-.chapter[data-id="home"] .sub { position: absolute; right: var(--gutter); bottom: auto; top: calc(100% - clamp(5.5rem, 14vh, 9rem) + 1.1rem); text-align: right; font-size: 0.95rem; color: var(--volt); }
+.chapter[data-id="home"] .title { position: absolute; right: var(--gutter); bottom: calc(var(--corner-b) + var(--subh, 1.425rem) + 0.75rem); text-align: right; font-size: clamp(1.9rem, 3.6vw, 3.6rem); transform-origin: 100% 100%; }
+/* the line under the corner headline sits on the same baseline as the last word of the menu across from it; the headline sits a fixed
+   step above the line, however many rows the line takes (--subh is its height, kept up to date in console.js) */
+.chapter[data-id="home"] .sub { position: absolute; right: var(--gutter); top: auto; bottom: var(--corner-b); text-align: right; font-size: 0.95rem; color: var(--volt);
+  max-width: min(40rem, 48vw); margin-right: calc(var(--rsb, 0) * -1em); }
+/* right-hand edges line up: every row of the corner headline ends on the same edge, whatever its last letter */
+.chapter[data-id="home"] .title .ln { margin-left: 0; margin-right: calc((0.045 - var(--rsb, 0.045)) * 1em); }
 .is-intro .chapter[data-id="home"] .title { right: 50%; bottom: 50%; transform: translate(50%, 50%); text-align: center; font-size: clamp(2.8rem, 7.4vw, 7.4rem); }
+.is-intro .chapter[data-id="home"] .title .ln { margin-left: 0; margin-right: 0; }   /* centred on the opening card: no edge to line up with */
 .is-intro .chapter[data-id="home"] .sub { opacity: 0; }
 
 /* open chapters: headline beside the rail */
@@ -143,7 +154,7 @@ img { display: block; max-width: 100%; }
 /* contact: the phone and email in big type */
 .chapter--contact .title { bottom: clamp(21rem, 56vh, 32rem) !important; font-size: clamp(1.8rem, 3.4vw, 3.4rem) !important; color: var(--muted); }
 .chapter--contact .contact-big { bottom: clamp(11rem, 28vh, 17rem); display: flex; flex-direction: column; }
-.contact-big a { font-family: var(--font-display); font-weight: 600; letter-spacing: -0.04em; font-size: clamp(2.2rem, 5.4vw, 5.4rem); line-height: 1.04; text-decoration: none; transition: color 0.45s var(--ease); }
+.contact-big a { margin-left: calc(var(--lsb, 0) * -1em); font-family: var(--font-display); font-weight: 600; letter-spacing: -0.04em; font-size: clamp(2.2rem, 5.4vw, 5.4rem); line-height: 1.04; text-decoration: none; transition: color 0.45s var(--ease); }
 .contact-big a:hover { color: var(--volt); }
 
 /* credits: a slow roll, like the end of a film */
@@ -173,7 +184,8 @@ img { display: block; max-width: 100%; }
   .chapter[data-id="home"] { --tf: clamp(2.2rem, 10vw, 3rem); --lines: 2; --tt: max(6.6rem, 15vh); }
   .chapter[data-id="home"]:has(.title--page) { --tf: clamp(1.9rem, 8.6vw, 2.6rem); --lines: 3; }
   .chapter[data-id="home"] .title { right: var(--gutter); left: var(--gutter); bottom: auto; top: var(--tt); text-align: left; font-size: var(--tf); transform-origin: 0 0; }
-  .chapter[data-id="home"] .sub { right: var(--gutter); left: var(--gutter); bottom: auto; top: calc(var(--tt) + var(--lines) * 1.04 * var(--tf) + 0.9rem); text-align: left; }
+  .chapter[data-id="home"] .sub { right: var(--gutter); left: var(--gutter); bottom: auto; top: calc(var(--tt) + var(--lines) * 1.04 * var(--tf) + 0.9rem); text-align: left; max-width: none; margin-right: 0; }
+  .chapter[data-id="home"] .title .ln { margin-right: 0; margin-left: calc(var(--lsb, 0) * -1em); }
   .is-intro .chapter[data-id="home"] .title { top: 50%; left: 50%; right: auto; bottom: auto; transform: translate(-50%, -50%); width: calc(100% - 2 * var(--gutter)); text-align: center; font-size: clamp(2.6rem, 12vw, 3.6rem); }
   .chapter:not([data-id="home"]) { --left: var(--gutter); }
   .chapter:not([data-id="home"]) .title { bottom: 15.5rem; font-size: clamp(2.2rem, 10vw, 3rem); }
@@ -216,8 +228,8 @@ img { display: block; max-width: 100%; }
 .stack .sub { max-width: 36rem; }
 .stack .more { margin-top: 0.5rem; }
 .points { list-style: none; }
-.points li { font-family: var(--font-display); font-weight: 600; letter-spacing: -0.03em; font-size: clamp(1.25rem, 2.1vw, 2rem); line-height: 1.24; color: var(--cream); width: fit-content; }
-.shots { list-style: none; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(0.8rem, 1.6vw, 1.5rem); width: 100%; max-width: 64rem; }
+.points li { margin-left: calc(var(--lsb, 0) * -1em); font-family: var(--font-display); font-weight: 600; letter-spacing: -0.03em; font-size: clamp(1.25rem, 2.1vw, 2rem); line-height: 1.24; color: var(--cream); width: fit-content; }
+.shots { list-style: none; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(0.8rem, 1.6vw, 1.5rem); width: 100%; max-width: 72rem; }   /* every row of pictures or tiles ends on the same right-hand mark */
 .shots .project-name { margin-top: 0.6rem; font-size: clamp(1rem, 1.35vw, 1.3rem); }
 .shots .project-shot i { width: 3.4rem; height: 2.1rem; clip-path: polygon(0.64rem 0, 100% 0, calc(100% - 0.64rem) 100%, 0 100%); }
 .shots .project-shot i::after { border-left-width: 0.7rem; border-top-width: 0.42rem; border-bottom-width: 0.42rem; margin-left: 0.14rem; }
@@ -232,7 +244,7 @@ img { display: block; max-width: 100%; }
 .credit-line { display: flex; align-items: center; flex-wrap: wrap; gap: 0.6rem 1.4rem; font-family: var(--font-display); font-weight: 600; letter-spacing: -0.02em; font-size: clamp(1rem, 1.3vw, 1.2rem); color: var(--cream); }
 .credit-line img { height: 2.3rem; width: auto; display: block; }
 /* the organisations we support: logo, name and a line each; each opens its section */
-.orgs { list-style: none; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(1.2rem, 2.6vw, 2.6rem); width: 100%; max-width: 64rem; }
+.orgs { list-style: none; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(1.2rem, 2.6vw, 2.6rem); width: 100%; max-width: 72rem; }
 .org { display: block; width: 100%; text-align: left; color: inherit; }
 .org-logo { display: block; height: clamp(2.8rem, 5vw, 4.2rem); width: auto; max-width: 100%; object-fit: contain; object-position: left; margin-bottom: 0.9rem; }
 .org .project-name { margin-top: 0; font-size: clamp(1.15rem, 1.7vw, 1.6rem); }
