@@ -117,6 +117,7 @@ function layoutWork(dt) {
   const scale = 1 + (S0 + (S1 - S0) * grown - 1) * m;
   const tf = m > 0.0005 ? `translate3d(0, ${(-away * m).toFixed(1)}px, 0) scale(${scale.toFixed(4)})` : "";
   work.canvas.style.transform = tf; work.reel.style.transform = tf;
+  document.documentElement.style.setProperty("--grid", (m * (1 - grown)).toFixed(3));   // the grid behind the reel: all there while the reel is small, gone when it fills the screen
   const gone = m > 0.99 && away > vh * 1.02;
   if (stage) stage.paused = gone;                                    // nothing to draw once the frame is off screen
   const label = m * ramp(p, 0.4, 0.95);
