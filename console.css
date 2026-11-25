@@ -180,6 +180,8 @@ img { display: block; max-width: 100%; }
   .is-rail .menu { top: 4.7rem; bottom: auto; transform: none; left: var(--gutter); }
   .is-rail .menu li + li { margin-top: 0.34rem; }
   .is-rail .menu button { font-size: 0.77rem; }
+  /* the small words are close together for a finger: each one's touch area reaches out to its neighbours and to the right, with nothing changing on screen */
+  .is-rail .menu button::after { content: ""; position: absolute; inset: -0.17rem -2.5rem -0.17rem -0.6rem; }
   /* the headline sits under the logo and the menu at the foot, with the picture between them */
   .chapter[data-id="home"] { --tf: clamp(2.2rem, 10vw, 3rem); --lines: 2; --tt: max(6.6rem, 15vh); }
   .chapter[data-id="home"]:has(.title--page) { --tf: clamp(1.9rem, 8.6vw, 2.6rem); --lines: 3; }
@@ -234,9 +236,11 @@ img { display: block; max-width: 100%; }
 .shots .project-shot i { width: 3.4rem; height: 2.1rem; clip-path: polygon(0.64rem 0, 100% 0, calc(100% - 0.64rem) 100%, 0 100%); }
 .shots .project-shot i::after { border-left-width: 0.7rem; border-top-width: 0.42rem; border-bottom-width: 0.42rem; margin-left: 0.14rem; }
 /* a section with more to read than the screen holds scrolls inside itself; its last lines fade out to show there is more */
-.stack { max-height: calc(100svh - var(--line) - 2.6rem); }
+.stack { --smax: calc(100svh - var(--line) - 2.6rem); max-height: var(--smax); }
 .stack > * { flex-shrink: 0; }
+/* a scrolling box cuts at its own edge, and tall letters (E, k, d, the dot on an i) reach above the headline's line: the box starts a little higher, with the words exactly where they were */
 .stack.is-long { overflow-y: auto; overscroll-behavior: contain; scrollbar-width: none; margin-left: -1.4rem; padding-left: 1.4rem; padding-bottom: 3.2rem;
+  margin-top: -0.9rem; padding-top: 0.9rem; max-height: calc(var(--smax) + 0.9rem);
   -webkit-mask-image: linear-gradient(#000 calc(100% - 3rem), transparent); mask-image: linear-gradient(#000 calc(100% - 3rem), transparent); }
 .stack.is-long::-webkit-scrollbar { display: none; }
 .stack .sub + .sub { margin-top: -0.4rem; }
@@ -290,7 +294,7 @@ a.project, span.project { color: inherit; text-decoration: none; }
   .shots--pics { max-width: 100%; }
   .chapter[data-id="home"] .title--page { font-size: var(--tf); }
   .is-intro .chapter[data-id="home"] .title--page { font-size: clamp(2rem, 9.6vw, 3rem); }
-  .stack { max-height: calc(100svh - (4.4rem + var(--n, 7) * 1.34rem + 1rem) - 1.6rem); }
+  .stack { --smax: calc(100svh - (4.4rem + var(--n, 7) * 1.34rem + 1rem) - 1.6rem); }
   .orgs { grid-template-columns: 1fr; gap: 0.9rem; }
   .org { display: grid; grid-template-columns: 4.6rem 1fr; column-gap: 0.9rem; align-items: start; }
   .org-logo { grid-row: span 2; height: auto; width: 100%; margin: 0.15rem 0 0; }
