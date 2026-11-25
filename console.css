@@ -224,7 +224,7 @@ img { display: block; max-width: 100%; }
 .org { display: block; width: 100%; text-align: left; color: inherit; }
 .org-logo { display: block; height: clamp(2.8rem, 5vw, 4.2rem); width: auto; max-width: 100%; object-fit: contain; object-position: left; margin-bottom: 0.9rem; }
 .org .project-name { margin-top: 0; font-size: clamp(1.15rem, 1.7vw, 1.6rem); }
-.org:hover .project-name { color: var(--volt); }
+button.org:hover .project-name { color: var(--volt); }
 .shots .project-note, .org .project-note { font-size: 0.92rem; }
 /* pictures that are not videos (websites we built): the same row, no play mark */
 .shots--pics { grid-template-columns: repeat(5, minmax(0, 1fr)); max-width: 72rem; }
