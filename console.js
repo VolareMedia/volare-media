@@ -363,7 +363,7 @@ async function go(id, from, dir = 0) {
   busy = true;
   const prev = byId[current], next = byId[id];
   const origin = originOf(from);
-  menuButtons.forEach((b) => b.setAttribute("aria-current", String(b.dataset.go === id)));
+  menuButtons.forEach((b) => b.setAttribute("aria-current", String(b.dataset.go === id || (b.dataset.covers || "").split(" ").includes(id))));   // a menu word also lights up for the sections it leads to
   // big words <-> rail, starting on the click itself
   if ((current === "home") !== (id === "home")) {
     const toRail = id !== "home", n = menuButtons.length;
@@ -489,7 +489,7 @@ async function arrive(id) {
   body.classList.remove("is-intro");
   chapters.forEach((c) => { c.hidden = c !== ch; });      // only the chapter being opened is on stage
   body.classList.toggle("is-rail", id !== "home");
-  menuButtons.forEach((b) => b.setAttribute("aria-current", String(b.dataset.go === id)));
+  menuButtons.forEach((b) => b.setAttribute("aria-current", String(b.dataset.go === id || (b.dataset.covers || "").split(" ").includes(id))));   // a menu word also lights up for the sections it leads to
   current = id;
   play(v);
   whenReady(v, 6000).then(() => {

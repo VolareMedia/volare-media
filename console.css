@@ -220,7 +220,7 @@ img { display: block; max-width: 100%; }
 .credit-line { display: flex; align-items: center; flex-wrap: wrap; gap: 0.6rem 1.4rem; font-family: var(--font-display); font-weight: 600; letter-spacing: -0.02em; font-size: clamp(1rem, 1.3vw, 1.2rem); color: var(--cream); }
 .credit-line img { height: 2.3rem; width: auto; display: block; }
 /* the organisations we support: logo, name and a line each; each opens its section */
-.orgs { list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(1.2rem, 2.6vw, 2.6rem); width: 100%; max-width: 64rem; }
+.orgs { list-style: none; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(1.2rem, 2.6vw, 2.6rem); width: 100%; max-width: 64rem; }
 .org { display: block; width: 100%; text-align: left; color: inherit; }
 .org-logo { display: block; height: clamp(2.8rem, 5vw, 4.2rem); width: auto; max-width: 100%; object-fit: contain; object-position: left; margin-bottom: 0.9rem; }
 .org .project-name { margin-top: 0; font-size: clamp(1.15rem, 1.7vw, 1.6rem); }
