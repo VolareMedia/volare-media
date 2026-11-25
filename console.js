@@ -353,22 +353,6 @@ function morph(els, change, ms, delayOf = () => 0) {
 /* ---------------- navigation ---------------- */
 let current = "home";
 let busy = true;
-// The always-there contact button (on pages that have one): its words follow the section on screen.
-// The words fade over and the button eases to its new width, so nothing jumps.
-const cta = $(".cta"), ctaT = cta && $(".more-t", cta);
-function ctaFor(id) {
-  if (!cta) return;
-  const ch = byId[id], words = ch.dataset.cta || cta.dataset.words;
-  cta.href = ch.dataset.ctaHref || cta.dataset.href;
-  if (ctaT.textContent === words) return;
-  if (reduce) { ctaT.textContent = words; return; }
-  ctaT.animate({ opacity: [1, 0] }, { duration: 300, easing: EASE, fill: "forwards" }).finished.then(() => {
-    const from = cta.offsetWidth;
-    ctaT.textContent = words;
-    cta.animate({ width: [from + "px", cta.offsetWidth + "px"] }, { duration: 620, easing: EASE });
-    ctaT.animate({ opacity: [0, 1] }, { duration: 620, easing: EASE, fill: "forwards" });
-  });
-}
 function originOf(el) {
   if (!el) return [0.5, 0.5];
   const r = el.getBoundingClientRect();
@@ -380,7 +364,6 @@ async function go(id, from, dir = 0) {
   const prev = byId[current], next = byId[id];
   const origin = originOf(from);
   menuButtons.forEach((b) => b.setAttribute("aria-current", String(b.dataset.go === id)));
-  ctaFor(id);
   // big words <-> rail, starting on the click itself
   if ((current === "home") !== (id === "home")) {
     const toRail = id !== "home", n = menuButtons.length;
@@ -507,7 +490,6 @@ async function arrive(id) {
   chapters.forEach((c) => { c.hidden = c !== ch; });      // only the chapter being opened is on stage
   body.classList.toggle("is-rail", id !== "home");
   menuButtons.forEach((b) => b.setAttribute("aria-current", String(b.dataset.go === id)));
-  ctaFor(id);
   current = id;
   play(v);
   whenReady(v, 6000).then(() => {

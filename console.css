@@ -226,10 +226,6 @@ img { display: block; max-width: 100%; }
 .org .project-name { margin-top: 0; font-size: clamp(1.15rem, 1.7vw, 1.6rem); }
 .org:hover .project-name { color: var(--volt); }
 .shots .project-note, .org .project-note { font-size: 0.92rem; }
-/* the always-there way to reach us: the angled button, top right, with words that follow the section on screen */
-.cta { position: fixed; z-index: 20; top: 0.9rem; right: var(--gutter); margin: 0; font-size: 0.92rem; padding: 0.82em 1.7em 0.82em 1.9em; white-space: nowrap; transition: opacity 0.9s var(--ease); }
-.is-intro .cta, .is-loading .cta { opacity: 0; pointer-events: none; }
-@media (max-width: 760px) { .cta { font-size: 0.8rem; top: 1rem; } }
 /* pictures that are not videos (websites we built): the same row, no play mark */
 .shots--pics { grid-template-columns: repeat(5, minmax(0, 1fr)); max-width: 72rem; }
 .shots--pics .project-shot { aspect-ratio: 16 / 10; }
