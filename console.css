@@ -225,7 +225,7 @@ img { display: block; max-width: 100%; }
 .chapter:not([data-id="home"]) .stack .title { font-size: clamp(2.2rem, min(5.2vw, 9vh), 5.4rem); max-width: 20ch; margin-top: -0.1em; }
 .chapter--contact .stack .title { max-width: none; margin-top: 0; }
 .chapter--contact .stack .contact-big { position: static; }
-.stack .sub { max-width: 36rem; }
+.stack .sub { max-width: 44rem; }   /* about 75 characters a line: wide enough that a full paragraph and a list share one screen */
 .stack .more { margin-top: 0.5rem; }
 .points { list-style: none; }
 .points li { margin-left: calc(var(--lsb, 0) * -1em); font-family: var(--font-display); font-weight: 600; letter-spacing: -0.03em; font-size: clamp(1.25rem, 2.1vw, 2rem); line-height: 1.24; color: var(--cream); width: fit-content; }
