@@ -243,6 +243,9 @@ img { display: block; max-width: 100%; }
 /* a plain line of credit under the text (who sponsored what), with a partner's logo beside it if there is one */
 .credit-line { display: flex; align-items: center; flex-wrap: wrap; gap: 0.6rem 1.4rem; font-family: var(--font-display); font-weight: 600; letter-spacing: -0.02em; font-size: clamp(1rem, 1.3vw, 1.2rem); color: var(--cream); }
 .credit-line img { height: 2.3rem; width: auto; display: block; }
+/* a link inside one of these lines: same words, a volt underline */
+.credit-line a { color: inherit; text-decoration: underline; text-decoration-color: var(--volt); text-decoration-thickness: 2px; text-underline-offset: 0.22em; transition: color 0.45s var(--ease); }
+.credit-line a:hover { color: var(--volt); }
 /* the organisations we support: logo, name and a line each; each opens its section */
 .orgs { list-style: none; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(1.2rem, 2.6vw, 2.6rem); width: 100%; max-width: 72rem; }
 .org { display: block; width: 100%; text-align: left; color: inherit; }
