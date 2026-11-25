@@ -317,7 +317,7 @@ function fitLong(ch) {
   const s = ch && $(".stack", ch);
   if (!s) return;
   s.classList.remove("is-long"); s.scrollTop = 0;
-  s.classList.toggle("is-long", s.scrollHeight > s.clientHeight + 2);
+  s.classList.toggle("is-long", s.scrollHeight > s.clientHeight + 10);      // a few pixels of overhang (tall letters) is not "more to read"
 }
 const longBox = () => $(".stack.is-long", byId[current]);
 const roomIn = (box, d) => (d > 0 ? box.scrollHeight - box.clientHeight - box.scrollTop : box.scrollTop);
