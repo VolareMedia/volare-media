@@ -127,7 +127,7 @@ img { display: block; max-width: 100%; }
 /* home title: a centred title card during the intro, then it settles bottom right */
 .chapter[data-id="home"] .title { position: absolute; right: var(--gutter); bottom: clamp(5.5rem, 14vh, 9rem); text-align: right; font-size: clamp(1.9rem, 3.6vw, 3.6rem); transform-origin: 100% 100%; }
 /* the line hangs under the headline (not up from the bottom of the screen), so a line that wraps to two rows grows downward and never runs into the headline */
-.chapter[data-id="home"] .sub { position: absolute; right: var(--gutter); bottom: auto; top: calc(100% - clamp(5.5rem, 14vh, 9rem) + 1.1rem); text-align: right; font-size: 0.95rem; }
+.chapter[data-id="home"] .sub { position: absolute; right: var(--gutter); bottom: auto; top: calc(100% - clamp(5.5rem, 14vh, 9rem) + 1.1rem); text-align: right; font-size: 0.95rem; color: var(--volt); }
 .is-intro .chapter[data-id="home"] .title { right: 50%; bottom: 50%; transform: translate(50%, 50%); text-align: center; font-size: clamp(2.8rem, 7.4vw, 7.4rem); }
 .is-intro .chapter[data-id="home"] .sub { opacity: 0; }
 
