@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -7,7 +7,7 @@
   <script src="/tracking.js?v=1" defer></script>
   <noscript><img height="1" width="1" style="display:none"
     src="https://www.facebook.com/tr?id=612504680491197&ev=PageView&noscript=1"/></noscript>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Contact Volare Media: Start Your Video Project | Victoria, BC</title>
   <meta name="description" content="Start a video project with Volare Media in Victoria, BC. Email video@volaremedia.net or call 250.589.4521 for commercials, brand films and social content.">
   <link rel="canonical" href="https://www.volaremedia.net/contact.html">
@@ -15,15 +15,11 @@
   <meta property="og:title" content="Contact Volare Media">
   <meta property="og:description" content="Start a video project with Volare Media in Victoria, BC. Email video@volaremedia.net or call 250.589.4521 for commercials, brand films and social content.">
   <meta property="og:url" content="https://www.volaremedia.net/contact.html">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Inter+Tight:ital,wght@0,400..800;1,400..800&family=Fragment+Mono:ital@0;1&display=swap" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Inter+Tight:ital,wght@0,400..800;1,400..800&family=Fragment+Mono:ital@0;1&display=swap"></noscript>
-  <link rel="icon" href="favicon.svg?v=2" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css?v=43">
-  <link rel="stylesheet" href="clean.css?v=4">
-  <link rel="stylesheet" href="glass.css?v=8">
-  <script>(function(d){if(matchMedia("(prefers-reduced-motion: reduce)").matches)return;d.classList.add("anim");setTimeout(function(){if(!d.classList.contains("glass-on"))d.classList.remove("anim")},5000)})(document.documentElement)</script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Inter+Tight:wght@500;600;700&display=swap">
+  <link rel="stylesheet" href="console.css?v=18">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -37,139 +33,59 @@
   }
   </script>
 </head>
-<body class="v2 v3">
+<body class="is-intro is-loading" data-card>
+  <!-- Built by volare-media-src/console-pages.py. This page opens and works like the landing page: its headline in the centre
+       over black-and-white footage, then big words on the left for its own sections, one section per screen. No menu across the top. -->
+  <canvas id="stage" aria-hidden="true"></canvas>
+  <div class="stage-fallback" aria-hidden="true"></div>
+  <div class="sweeps" aria-hidden="true"><span class="sweep sweep--mauve"></span><span class="sweep sweep--volt"></span></div>
 
-  <header class="v2-header">
-    <div class="wrap">
-      <a class="logo" href="index.html" aria-label="Volare Media, home"><img src="assets/vm-logo.png" alt="Volare Media logo"></a>
-      <div class="v2-header-right">
-        <a class="btn" href="contact.html">Start a project</a>
-        <button class="menu-btn" aria-expanded="false" aria-controls="site-menu">Menu <span class="menu-lines" aria-hidden="true"></span></button>
-      </div>
-    </div>
+  <header class="hud-top">
+    <a class="logo" href="index.html" aria-label="Volare Media, home"><img src="assets/vm-logo.png" alt="Volare Media"></a>
   </header>
 
-  <nav class="v2-menu photo-band" id="site-menu" aria-label="Main" style="--photo: url('assets/img/footer-crew-cinema.jpg'); --photo-pos: 60% 40%;">
-    <div class="wrap">
-      <ul class="v2-menu-links">
-        <li><a href="work.html">Work</a></li>
-        <li><a href="crew.html">The Crew</a></li>
-        <li><a href="community.html">Community</a></li>
-        <li><a href="contact.html" aria-current="page">Contact</a></li>
-      </ul>
-      <div class="v2-menu-side">
-        <h3>What we make</h3>
-        <ul>
-          <li><a href="marketing-videos.html">Marketing videos</a></li>
-          <li><a href="corporate-video.html">Corporate video</a></li>
-          <li><a href="event-videography.html">Event videography</a></li>
-          <li><a href="website-development.html">Websites and branding</a></li>
-        </ul>
-        <h3>Say hello</h3>
-        <ul>
-          <li><a href="mailto:video@volaremedia.net">video@volaremedia.net</a></li>
-          <li><a href="tel:+12505894521">250.589.4521</a></li>
-        </ul>
-      </div>
-    </div>
+  <nav class="menu" aria-label="This page">
+    <ul>
+      <li><button type="button" data-go="message">Send a message</button></li>
+      <li><button type="button" data-go="reach">Call or email</button></li>
+      <li><button type="button" data-href="index.html">Home</button></li>
+    </ul>
   </nav>
 
-  <main>
-
-    <section class="hero photo-band photo-band--side" style="--photo: url('assets/img/vm-gimbal-cafe.jpg'); --photo-pos: 75% 30%; --photo-opacity: 0.5;">
-      <div class="wrap">
-      <h1 class="display-xl">Let's get <span class="sweep">rolling</span><span class="dot">.</span></h1>
-      <p class="lede">Tell us what you're making: a commercial, a brand film, a music video, or an idea that doesn't have a name yet. We'll come back with a plan and a straight answer on budget.</p>
-    </div>
+  <main class="chapters">
+    <section class="chapter" data-id="home" data-clip="assets/g2g-loop.mp4" style="--lines:1" aria-labelledby="t-home">
+      <h1 id="t-home" class="title title--page"><span class="ln">Let's get rolling<span class="dot">.</span></span></h1>
+      <p class="sub">We'll come back with a plan and a straight answer on budget.</p>
     </section>
 
-    <section class="wrap" style="padding-bottom: var(--section-gap);">
-      <div class="contact-grid reveal">
-        <div>
-          <a class="contact-line" href="tel:+12505894521">
-            <span class="contact-note">Phone</span>
-            250.589.4521
-          </a>
-          <a class="contact-line" href="mailto:video@volaremedia.net">
-            <span class="contact-note">Email</span>
-            video@volaremedia.net
-          </a>
-          <span class="contact-line" style="cursor: default;">
-            <span class="contact-note">Studio</span>
-            Victoria, BC, Canada
-          </span>
-        </div>
-        <div>
-          <form class="card contact-form" action="contact-form.php" method="POST">
-            <h3>Tell us what you're making</h3>
-
-            <div class="form-notice form-notice--sent" hidden>Thanks, your message is on its way.</div>
-            <div class="form-notice form-notice--error" hidden>Something was missing, please check your name, email and message and try again.</div>
-
-            <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;">
-
-            <label class="form-field">
-              <span>Name</span>
-              <input type="text" name="name" required autocomplete="name">
-            </label>
-            <label class="form-field">
-              <span>Email</span>
-              <input type="email" name="email" required autocomplete="email">
-            </label>
-            <label class="form-field">
-              <span>Ballpark budget <em>(optional, it helps, honest)</em></span>
-              <input type="text" name="budget" placeholder="e.g. $5,000">
-            </label>
-            <label class="form-field">
-              <span>What's the project?</span>
-              <textarea name="message" rows="5" required placeholder="A sentence on your business, what the video is for, and a rough timeline. A hunch is enough to start."></textarea>
-            </label>
-
-            <button type="submit" class="btn">Send it over</button>
-          </form>
-        </div>
+    <section class="chapter" data-id="message" data-photo="assets/img/bts-spotlight.jpg" data-dim="0.2" aria-labelledby="t-message" hidden>
+      <div class="stack">
+        <h2 id="t-message" class="title"><span class="ln">Tell us what</span> <span class="ln">you're making<span class="dot">.</span></span></h2>
+        <form class="form contact-form" action="contact-form.php" method="POST">
+          <div class="form-notice form-notice--sent" hidden>Thanks, your message is on its way.</div>
+          <div class="form-notice form-notice--error" hidden>Something was missing, please check your name, email and message and try again.</div>
+          <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;">
+          <label class="form-field"><span>Name</span><input type="text" name="name" required autocomplete="name"></label>
+          <label class="form-field"><span>Email</span><input type="email" name="email" required autocomplete="email"></label>
+          <label class="form-field form-field--wide"><span>Ballpark budget <em>(optional, it helps, honest)</em></span><input type="text" name="budget" placeholder="e.g. $5,000"></label>
+          <label class="form-field form-field--wide"><span>What's the project?</span><textarea name="message" rows="3" required placeholder="A sentence on your business, what the video is for, and a rough timeline. A hunch is enough to start."></textarea></label>
+          <button type="submit" class="more"><span class="more-t">Send it over</span><span class="more-i" aria-hidden="true"></span></button>
+        </form>
       </div>
     </section>
 
-
+    <section class="chapter chapter--contact" data-id="reach" data-clip="assets/peninsula-recap-loop.mp4" data-dim="0.3" aria-labelledby="t-reach" hidden>
+      <h2 id="t-reach" class="title"><span class="ln">Tell us what you want</span> <span class="ln">your video to do<span class="dot">.</span></span></h2>
+      <p class="contact-big"><a href="tel:+12505894521">250.589.4521</a><a href="mailto:video@volaremedia.net">video@volaremedia.net</a></p>
+    </section>
   </main>
 
-  <footer class="site-footer footer-v2 photo-band" style="--photo: url('assets/img/footer-crew-cinema.jpg'); --photo-pos: 60% 42%; --photo-opacity: 0.4;">
-    <div class="wrap">
-      <div class="footer-top">
-        <div>
-          <p class="footer-mark"><img src="assets/vm-logo.png" alt="Volare Media logo"></p>
-          <p class="footer-tag">Stories worth <em>sharing</em><span class="dot">.</span></p>
-        </div>
-        <ul class="footer-links">
-          <li><a href="work.html">Work</a></li>
-          <li><a href="crew.html">The Crew</a></li>
-          <li><a href="community.html">Community</a></li>
-          <li><a href="journal.html">Journal</a></li>
-          <li><a href="contact.html">Contact</a></li>
-          <li><a href="https://www.instagram.com/volare.media" rel="noopener">Instagram</a></li>
-          <li><a href="https://www.facebook.com/VolareMedia.net" rel="noopener">Facebook</a></li>
-        </ul>
-      </div>
-      <div class="footer-base">
-        <span>© 2026 Volare Media · <a href="privacy-policy.html">Privacy policy</a></span>
-        <span>Video production across Vancouver Island, BC &amp; Canada</span>
-      </div>
-    </div>
-  </footer>
+  <!-- plays a video with sound, over everything -->
+  <div class="player" hidden>
+    <div class="player-box"></div>
+    <button class="player-close" type="button">Close</button>
+  </div>
 
-  <script src="script.js?v=34"></script>
-  <script src="clean.js?v=1"></script>
-  <script type="module" src="glass.js?v=6"></script>
-  <script>
-    // Pre-fill the message when someone arrives from a "pick your path" button (contact.html?project=rebuild)
-    (function () {
-      var labels = { website: 'Website project', rebuild: 'Website rebuild', 'new': 'New website', store: 'Online store', brand: 'Brand alignment' };
-      var key = new URLSearchParams(location.search).get('project');
-      var box = document.querySelector('.contact-form textarea[name="message"]');
-      if (!key || !labels[key] || !box || box.value) return;
-      box.value = 'Project: ' + labels[key] + (key === 'rebuild' ? '\nCurrent website: ' : '') + '\n\n';
-    })();
-  </script>
+  <script src="console.js?v=29" type="module"></script>
 </body>
 </html>

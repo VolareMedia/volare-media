@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -7,7 +7,7 @@
   <script src="/tracking.js?v=1" defer></script>
   <noscript><img height="1" width="1" style="display:none"
     src="https://www.facebook.com/tr?id=612504680491197&ev=PageView&noscript=1"/></noscript>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Event Videography Victoria BC: Galas &amp; Conferences | Volare Media</title>
   <meta name="description" content="Event videography in Victoria, BC: recap films, multi-camera coverage and next-day social clips for galas, fundraisers, conferences and launches.">
   <link rel="canonical" href="https://www.volaremedia.net/event-videography.html">
@@ -16,15 +16,11 @@
   <meta property="og:description" content="Event videography in Victoria, BC: recap films, multi-camera coverage and next-day social clips for galas, fundraisers, conferences and launches.">
   <meta property="og:url" content="https://www.volaremedia.net/event-videography.html">
   <meta property="og:image" content="https://www.volaremedia.net/assets/img/peninsula-gives-event.jpg">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Inter+Tight:ital,wght@0,400..800;1,400..800&family=Fragment+Mono:ital@0;1&display=swap" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Inter+Tight:ital,wght@0,400..800;1,400..800&family=Fragment+Mono:ital@0;1&display=swap"></noscript>
-  <link rel="icon" href="favicon.svg?v=2" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css?v=43">
-  <link rel="stylesheet" href="clean.css?v=4">
-  <link rel="stylesheet" href="glass.css?v=8">
-  <script>(function(d){if(matchMedia("(prefers-reduced-motion: reduce)").matches)return;d.classList.add("anim");setTimeout(function(){if(!d.classList.contains("glass-on"))d.classList.remove("anim")},5000)})(document.documentElement)</script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Inter+Tight:wght@500;600;700&display=swap">
+  <link rel="stylesheet" href="console.css?v=18">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -44,139 +40,82 @@
     "url": "https://www.volaremedia.net/event-videography.html"
   }
   </script>
-  <style>
-    /* "If there's a room" grid: six cards plus a tall crew photo tile */
-    .cover-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(1rem, 2vw, 1.5rem); }
-    .cover-photo { grid-column: 4; grid-row: 1 / span 2; margin: 0; border-radius: 1.25rem; overflow: hidden; border: 1px solid var(--line); background: var(--bg-raised); }
-    .cover-photo img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 40%; }
-    @media (max-width: 72rem) { .cover-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } .cover-photo { grid-column: 3; grid-row: 1 / span 3; } }
-    @media (max-width: 56rem) { .cover-grid { grid-template-columns: minmax(0, 1fr); } .cover-photo { grid-column: auto; grid-row: auto; aspect-ratio: 4 / 5; } }
-  </style>
 </head>
-<body class="v2 v3">
+<body class="is-intro is-loading" data-card>
+  <!-- Built by volare-media-src/console-pages.py. This page opens and works like the landing page: its headline in the centre
+       over black-and-white footage, then big words on the left for its own sections, one section per screen. No menu across the top. -->
+  <canvas id="stage" aria-hidden="true"></canvas>
+  <div class="stage-fallback" aria-hidden="true"></div>
+  <div class="sweeps" aria-hidden="true"><span class="sweep sweep--mauve"></span><span class="sweep sweep--volt"></span></div>
 
-  <header class="v2-header">
-    <div class="wrap">
-      <a class="logo" href="index.html" aria-label="Volare Media, home"><img src="assets/vm-logo.png" alt="Volare Media logo"></a>
-      <div class="v2-header-right">
-        <a class="btn" href="contact.html">Start a project</a>
-        <button class="menu-btn" aria-expanded="false" aria-controls="site-menu">Menu <span class="menu-lines" aria-hidden="true"></span></button>
-      </div>
-    </div>
+  <header class="hud-top">
+    <a class="logo" href="index.html" aria-label="Volare Media, home"><img src="assets/vm-logo.png" alt="Volare Media"></a>
   </header>
 
-  <nav class="v2-menu photo-band" id="site-menu" aria-label="Main" style="--photo: url('assets/img/footer-crew-cinema.jpg'); --photo-pos: 60% 40%;">
-    <div class="wrap">
-      <ul class="v2-menu-links">
-        <li><a href="work.html">Work</a></li>
-        <li><a href="crew.html">The Crew</a></li>
-        <li><a href="community.html">Community</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
-      <div class="v2-menu-side">
-        <h3>What we make</h3>
-        <ul>
-          <li><a href="marketing-videos.html">Marketing videos</a></li>
-          <li><a href="corporate-video.html">Corporate video</a></li>
-          <li><a href="event-videography.html" aria-current="page">Event videography</a></li>
-          <li><a href="website-development.html">Websites and branding</a></li>
-        </ul>
-        <h3>Say hello</h3>
-        <ul>
-          <li><a href="mailto:video@volaremedia.net">video@volaremedia.net</a></li>
-          <li><a href="tel:+12505894521">250.589.4521</a></li>
-        </ul>
-      </div>
-    </div>
+  <nav class="menu" aria-label="This page">
+    <ul>
+      <li><button type="button" data-go="kinds">Events we film</button></li>
+      <li><button type="button" data-go="cuts">What you get</button></li>
+      <li><button type="button" data-go="gave">Giving back</button></li>
+      <li><button type="button" data-go="start">Book us</button></li>
+      <li><button type="button" data-href="index.html">Home</button></li>
+    </ul>
   </nav>
 
-  <main>
-
-    <section class="hero video-band" style="--video-opacity: 0.35;">
-      <video class="band-video" autoplay muted loop playsinline preload="metadata" poster="assets/img/peninsula-gives-event.jpg" aria-hidden="true">
-        <source src="assets/peninsula-recap-loop.mp4" type="video/mp4">
-      </video>
-      <div class="wrap">
-        <h1 class="display-xl">Your event, captured to share and <span class="sweep"><em>remember</em></span><span class="dot">.</span></h1>
-        <p class="lede">Your event happens once. The video works for years. Volare Media covers galas, fundraisers, conferences and launches across Victoria and Vancouver Island: recap films that sell next year's tickets, and clips your socials can run all season.</p>
-      </div>
+  <main class="chapters">
+    <section class="chapter" data-id="home" data-clip="assets/peninsula-recap-loop.mp4" aria-labelledby="t-home">
+      <h1 id="t-home" class="title title--page"><span class="ln">Your event,</span> <span class="ln">captured to share</span> <span class="ln">and remember<span class="dot">.</span></span></h1>
+      <p class="sub">Your event happens once. The video works for years.</p>
     </section>
 
-    <section class="panel big-words" aria-labelledby="the-events-we-film-head">
-      <div class="wrap">
-        <h2 id="the-events-we-film-head" class="big-list-head reveal">The events we film<span class="dot">.</span></h2>
-        <div class="big-list-grid">
-          <ul class="big-list big-list--long reveal">
-            <li><span>Galas and fundraisers</span></li>
-            <li><span>Conferences and summits</span></li>
-            <li><span>Product and venue launches</span></li>
-            <li><span>Festivals and community events</span></li>
-            <li><span>Corporate events and AGMs</span></li>
-            <li><span>Shows and performances</span></li>
-          </ul>
-          <div class="big-list-side reveal">
-            <div class="big-list-shot"><img class="bw" src="assets/img/event-camera-op-vertical.jpg" alt="A Volare Media camera operator filming an event" loading="lazy" style="object-position: 50% 30%;"></div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <section class="sec big-band photo-band" aria-labelledby="every-event-cut-the-way-you-need-it-head" style="--photo: url('assets/img/event-concert-lilac-crowd.jpg'); --photo-pos: 50% 45%; --photo-opacity: 0.32;">
-      <div class="wrap">
-        <h2 id="every-event-cut-the-way-you-need-it-head" class="big-list-head reveal">Every event, cut the way you need it<span class="dot">.</span></h2>
-        <ul class="big-list reveal">
-            <li><span>Recap films</span></li>
-            <li><span>Full coverage</span></li>
-            <li><span>Social clips</span></li>
+    <section class="chapter" data-id="kinds" data-photo="assets/img/event-concert-lilac-crowd.jpg" data-dim="0.36" aria-labelledby="t-kinds" hidden>
+      <div class="stack">
+        <h2 id="t-kinds" class="title"><span class="ln">The events we film<span class="dot">.</span></span></h2>
+        <ul class="points">
+          <li>Galas and fundraisers</li>
+          <li>Conferences and summits</li>
+          <li>Product and venue launches</li>
+          <li>Festivals and community events</li>
+          <li>Corporate events and AGMs</li>
+          <li>Shows and performances</li>
         </ul>
       </div>
     </section>
-    <section class="section band--ink">
-      <div class="wrap">
-        <div class="section-head reveal">
-          <div>
-            <h2 class="display-lg">Events that <span class="ink-volt">gave back</span><span class="dot">.</span></h2>
-          </div>
-          <a class="text-link" href="community.html">Our community work</a>
-        </div>
-        <p class="lede reveal">As media sponsor for Peninsula Gives, the Shine Gala and Fashion Splash, we've filmed the moments that moved rooms to give, from patient stories played on the big screen to the crowd that stood up after. That's event filming with real stakes, and it's the same care we bring to yours.</p>
+
+    <section class="chapter" data-id="cuts" data-clip="assets/shine-gala-loop.mp4" data-dim="0.36" aria-labelledby="t-cuts" hidden>
+      <div class="stack">
+        <h2 id="t-cuts" class="title"><span class="ln">Every event, cut</span> <span class="ln">the way you need it<span class="dot">.</span></span></h2>
+        <p class="sub">Recap films that sell next year's tickets, and clips your socials can run all season.</p>
+        <ul class="points">
+          <li>Recap films</li>
+          <li>Full coverage</li>
+          <li>Social clips</li>
+        </ul>
       </div>
     </section>
 
-    <section class="cta band--volt">
-      <div class="wrap reveal">
-        <h2 class="display-lg">Book us for your <span class="sweep">event</span><span class="dot">.</span></h2>
-        <a class="btn" href="contact.html">Check our availability</a>
+    <section class="chapter" data-id="gave" data-clip="assets/fundraiser-loop.mp4" data-dim="0.36" aria-labelledby="t-gave" hidden>
+      <div class="stack">
+        <h2 id="t-gave" class="title"><span class="ln">Events that gave back<span class="dot">.</span></span></h2>
+        <p class="sub">As media sponsor for Peninsula Gives, the Shine Gala and Fashion Splash, we've filmed the moments that moved rooms to give, from patient stories played on the big screen to the crowd that stood up after.</p>
+        <a class="more" href="community.html"><span class="more-t">Community</span><span class="more-i" aria-hidden="true"></span></a>
       </div>
     </section>
 
+    <section class="chapter" data-id="start" data-clip="assets/fashion-splash-loop.mp4" aria-labelledby="t-start" hidden>
+      <div class="stack">
+        <h2 id="t-start" class="title"><span class="ln">Book us for</span> <span class="ln">your event<span class="dot">.</span></span></h2>
+        <a class="more" href="contact.html"><span class="more-t">Check our availability</span><span class="more-i" aria-hidden="true"></span></a>
+      </div>
+    </section>
   </main>
 
-  <footer class="site-footer footer-v2 photo-band" style="--photo: url('assets/img/footer-crew-cinema.jpg'); --photo-pos: 60% 42%; --photo-opacity: 0.4;">
-    <div class="wrap">
-      <div class="footer-top">
-        <div>
-          <p class="footer-mark"><img src="assets/vm-logo.png" alt="Volare Media logo"></p>
-          <p class="footer-tag">Stories worth <em>sharing</em><span class="dot">.</span></p>
-        </div>
-        <ul class="footer-links">
-          <li><a href="work.html">Work</a></li>
-          <li><a href="crew.html">The Crew</a></li>
-          <li><a href="community.html">Community</a></li>
-          <li><a href="journal.html">Journal</a></li>
-          <li><a href="contact.html">Contact</a></li>
-          <li><a href="https://www.instagram.com/volare.media" rel="noopener">Instagram</a></li>
-          <li><a href="https://www.facebook.com/VolareMedia.net" rel="noopener">Facebook</a></li>
-        </ul>
-      </div>
-      <div class="footer-base">
-        <span>© 2026 Volare Media · <a href="privacy-policy.html">Privacy policy</a></span>
-        <span>Video production across Vancouver Island, BC &amp; Canada</span>
-      </div>
-    </div>
-  </footer>
+  <!-- plays a video with sound, over everything -->
+  <div class="player" hidden>
+    <div class="player-box"></div>
+    <button class="player-close" type="button">Close</button>
+  </div>
 
-  <script src="script.js?v=34"></script>
-  <script src="clean.js?v=1"></script>
-  <script type="module" src="glass.js?v=6"></script>
+  <script src="console.js?v=29" type="module"></script>
 </body>
 </html>

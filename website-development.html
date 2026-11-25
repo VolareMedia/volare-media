@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -7,7 +7,7 @@
   <script src="/tracking.js?v=1" defer></script>
   <noscript><img height="1" width="1" style="display:none"
     src="https://www.facebook.com/tr?id=612504680491197&ev=PageView&noscript=1"/></noscript>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Website Design &amp; Brand Alignment in BC | Volare Media</title>
   <meta name="description" content="New websites, rebuilds, Shopify stores and brand alignment for businesses on Vancouver Island and across BC, built and managed by Volare Media's own team.">
   <link rel="canonical" href="https://www.volaremedia.net/website-development.html">
@@ -16,15 +16,11 @@
   <meta property="og:description" content="New websites, rebuilds, Shopify stores and brand alignment for businesses on Vancouver Island and across BC, built and managed by Volare Media's own team.">
   <meta property="og:url" content="https://www.volaremedia.net/website-development.html">
   <meta property="og:image" content="https://www.volaremedia.net/assets/img/web-development-code-dark.jpg">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Inter+Tight:ital,wght@0,400..800;1,400..800&family=Fragment+Mono:ital@0;1&display=swap" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Inter+Tight:ital,wght@0,400..800;1,400..800&family=Fragment+Mono:ital@0;1&display=swap"></noscript>
-  <link rel="icon" href="favicon.svg?v=2" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css?v=43">
-  <link rel="stylesheet" href="clean.css?v=4">
-  <link rel="stylesheet" href="glass.css?v=8">
-  <script>(function(d){if(matchMedia("(prefers-reduced-motion: reduce)").matches)return;d.classList.add("anim");setTimeout(function(){if(!d.classList.contains("glass-on"))d.classList.remove("anim")},5000)})(document.documentElement)</script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Inter+Tight:wght@500;600;700&display=swap">
+  <link rel="stylesheet" href="console.css?v=18">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -58,73 +54,6 @@
     }
   }
   </script>
-  <style>
-    /* how it works */
-    .steps { list-style: none; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: clamp(1rem, 2vw, 1.75rem); position: relative; }
-    .steps::before { content: ""; position: absolute; left: 0; right: 0; top: 0.55rem; border-top: 1px dashed rgba(214, 255, 61, 0.45); }
-    .step { position: relative; padding-top: 2.25rem; }
-    .step::before { content: ""; position: absolute; top: 0.2rem; left: 0; width: 0.75rem; height: 0.75rem; border-radius: 50%; background: var(--volt); box-shadow: 0 0 0 5px var(--bg); }
-    .step-num { font-family: var(--font-mono); font-size: 0.78rem; color: var(--lilac); }
-    .step h3 { font-size: 1.35rem; margin: 0.4rem 0 0.6rem; }
-    .step p { color: var(--muted); font-size: 0.95rem; line-height: 1.55; }
-    .steps-cta { display: flex; flex-wrap: wrap; align-items: center; gap: 1.25rem 2rem; margin-top: clamp(2.5rem, 4vw, 3.5rem); }
-
-    /* website types + industries */
-    @media (min-width: 64rem) { .types-grid, .paths-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
-    .types-grid .card p a { color: var(--cream); text-decoration-color: var(--volt); }
-    .industries { margin-top: clamp(2.5rem, 4vw, 3.5rem); }
-    .industries-label { font-family: var(--font-display); font-size: 1.35rem; font-weight: 600; letter-spacing: -0.02em; color: var(--cream); margin-bottom: 1rem; }
-    .industry-chips { list-style: none; display: flex; flex-wrap: wrap; gap: 0.6rem; }
-    .industry-chips li { font-size: 0.95rem; padding: 0.55rem 1rem; border: 1px solid var(--line); border-radius: 999px; background: rgba(12, 13, 9, 0.5); }
-    .industry-chips li:nth-child(4n+1) { border-color: rgba(214, 255, 61, 0.55); }
-
-    /* where are you starting */
-    @media (min-width: 64rem) { .paths-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
-    .path-card { display: flex; flex-direction: column; }
-    .path-card p:not(.eyebrow) { margin-bottom: 1.5rem; }
-    .path-card .btn { margin-top: auto; align-self: flex-start; }
-    .path-card--lead { border-color: rgba(214, 255, 61, 0.6); }
-
-    /* faq: six cards, three across */
-    @media (min-width: 64rem) { #faq .card-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
-
-    @media (max-width: 64rem) {
-      .steps { grid-template-columns: minmax(0, 1fr); gap: 1.75rem; padding-left: 1.75rem; }
-      .steps::before { left: 0.35rem; right: auto; top: 0.5rem; bottom: 0.5rem; border-top: 0; border-left: 1px dashed rgba(214, 255, 61, 0.45); }
-      .step { padding-top: 0; }
-      .step::before { left: -1.75rem; top: 0.3rem; }
-    }
-  </style>
-  <style>
-    .ba-hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 1.25rem 2rem; margin-top: 2rem; }
-    .symptoms { margin-top: 2rem; }
-    @media (min-width: 64rem) { .symptoms { grid-template-columns: repeat(3, minmax(0, 1fr)); } .ba-who { grid-template-columns: repeat(3, minmax(0, 1fr)); } #ba-faq .card-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-    .symptoms .card h3 { font-size: 1.25rem; }
-    .steps { list-style: none; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: clamp(1rem, 2vw, 1.75rem); position: relative; }
-    .steps::before { content: ""; position: absolute; left: 0; right: 0; top: 0.55rem; border-top: 1px dashed rgba(214, 255, 61, 0.45); }
-    .step { position: relative; padding-top: 2.25rem; }
-    .step::before { content: ""; position: absolute; top: 0.2rem; left: 0; width: 0.75rem; height: 0.75rem; border-radius: 50%; background: var(--volt); box-shadow: 0 0 0 5px var(--bg); }
-    .step-num { font-family: var(--font-mono); font-size: 0.78rem; color: var(--lilac); }
-    .step h3 { font-size: 1.35rem; margin: 0.4rem 0 0.6rem; }
-    .step p { color: var(--muted); font-size: 0.95rem; line-height: 1.55; }
-    .steps-cta { display: flex; flex-wrap: wrap; align-items: center; gap: 1.25rem 2rem; margin-top: clamp(2.5rem, 4vw, 3.5rem); }
-    .compare-col { position: relative; }
-    .ba-case { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: clamp(2rem, 5vw, 4.5rem); align-items: start; }
-    .ba-case .eyebrow { margin-bottom: 1rem; }
-    .ba-changes { list-style: none; display: grid; gap: 0.85rem; margin-bottom: 1.75rem; }
-    .ba-changes li { position: relative; padding-left: 1.6rem; color: var(--muted); line-height: 1.55; }
-    .ba-changes li::before { content: ""; position: absolute; left: 0; top: 0.5rem; width: 0.6rem; height: 0.6rem; border-radius: 50%; background: var(--volt); }
-    .ba-changes b { color: var(--cream); font-weight: 600; }
-    .ba-after { border: 1px dashed rgba(214, 255, 61, 0.5); border-radius: 1rem; padding: 1.1rem 1.25rem; margin-bottom: 1.5rem; }
-    .ba-after p { color: var(--muted); margin-top: 0.6rem; }
-    @media (max-width: 64rem) {
-      .steps { grid-template-columns: minmax(0, 1fr); gap: 1.75rem; padding-left: 1.75rem; }
-      .steps::before { left: 0.35rem; right: auto; top: 0.5rem; bottom: 0.5rem; border-top: 0; border-left: 1px dashed rgba(214, 255, 61, 0.45); }
-      .step { padding-top: 0; }
-      .step::before { left: -1.75rem; top: 0.3rem; }
-      .ba-case { grid-template-columns: minmax(0, 1fr); }
-    }
-  </style>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -155,283 +84,130 @@
   }
   </script>
 </head>
-<body class="v2 v3">
+<body class="is-intro is-loading" data-card>
+  <!-- Built by volare-media-src/console-pages.py. This page opens and works like the landing page: its headline in the centre
+       over black-and-white footage, then big words on the left for its own sections, one section per screen. No menu across the top. -->
+  <canvas id="stage" aria-hidden="true"></canvas>
+  <div class="stage-fallback" aria-hidden="true"></div>
+  <div class="sweeps" aria-hidden="true"><span class="sweep sweep--mauve"></span><span class="sweep sweep--volt"></span></div>
 
-  <header class="v2-header">
-    <div class="wrap">
-      <a class="logo" href="index.html" aria-label="Volare Media, home"><img src="assets/vm-logo.png" alt="Volare Media logo"></a>
-      <div class="v2-header-right">
-        <a class="btn" href="contact.html">Start a project</a>
-        <button class="menu-btn" aria-expanded="false" aria-controls="site-menu">Menu <span class="menu-lines" aria-hidden="true"></span></button>
-      </div>
-    </div>
+  <header class="hud-top">
+    <a class="logo" href="index.html" aria-label="Volare Media, home"><img src="assets/vm-logo.png" alt="Volare Media"></a>
   </header>
 
-  <nav class="v2-menu photo-band" id="site-menu" aria-label="Main" style="--photo: url('assets/img/footer-crew-cinema.jpg'); --photo-pos: 60% 40%;">
-    <div class="wrap">
-      <ul class="v2-menu-links">
-        <li><a href="work.html">Work</a></li>
-        <li><a href="crew.html">The Crew</a></li>
-        <li><a href="community.html">Community</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
-      <div class="v2-menu-side">
-        <h3>What we make</h3>
-        <ul>
-          <li><a href="marketing-videos.html">Marketing videos</a></li>
-          <li><a href="corporate-video.html">Corporate video</a></li>
-          <li><a href="event-videography.html">Event videography</a></li>
-          <li><a href="website-development.html" aria-current="page">Websites and branding</a></li>
-        </ul>
-        <h3>Say hello</h3>
-        <ul>
-          <li><a href="mailto:video@volaremedia.net">video@volaremedia.net</a></li>
-          <li><a href="tel:+12505894521">250.589.4521</a></li>
-        </ul>
-      </div>
-    </div>
+  <a class="more cta" href="contact.html#message" data-words="Start your project" data-href="contact.html#message"><span class="more-t">Start your project</span><span class="more-i" aria-hidden="true"></span></a>
+
+  <nav class="menu" aria-label="This page">
+    <ul>
+      <li><button type="button" data-go="sites">Our websites</button></li>
+      <li><button type="button" data-go="types">What we build</button></li>
+      <li><button type="button" data-go="brand-alignment">Brand alignment</button></li>
+      <li><button type="button" data-go="drift">Brand drift</button></li>
+      <li><button type="button" data-go="included">What's included</button></li>
+      <li><button type="button" data-go="its-a-doodle">Case study</button></li>
+      <li><button type="button" data-go="start">Start a project</button></li>
+      <li><button type="button" data-href="index.html">Home</button></li>
+    </ul>
   </nav>
 
-  <main>
-
-    <section class="hero photo-band photo-band--side" style="--photo: url('assets/img/web-development-code-dark.jpg'); --photo-pos: 60% 50%; --photo-opacity: 0.7;">
-      <div class="wrap">
-        <h1 class="display-xl">Websites and branding, built around <span class="sweep">your video</span><span class="dot">.</span></h1>
-        <p class="lede">Video is where we started. It's not where we stop. Volare Media designs, builds and rebuilds websites for businesses on Vancouver Island and across BC, shapes brands and runs marketing campaigns, with one support team of media and tech specialists behind it all.</p>
-      </div>
+  <main class="chapters">
+    <section class="chapter" data-id="home" data-clip="assets/lp-banner-720.mp4" aria-labelledby="t-home">
+      <h1 id="t-home" class="title title--page"><span class="ln">Websites and</span> <span class="ln">branding, built</span> <span class="ln">around your video<span class="dot">.</span></span></h1>
+      <p class="sub">Website development, brand building, brand alignment and marketing campaigns.</p>
     </section>
 
-    <!-- Client marquee -->
-    <section class="marquee" aria-label="Clients">
-      <div class="marquee-track">
-        <span>Harbour City Kitchens</span><span>Stratos Nutrition</span><span>Maxxam Insurance</span><span>De Mode en Vogue</span><span>Sixty Forty</span><span>VICA</span><span>Peninsula Gives</span><span>Tailgate Toolkit</span><span>Harris</span><span>White Wolf Homes</span><span>Gas 2 Go</span><span>West Haven Cabinetry</span><span>Oakcrest Estates</span><span>Centre Mountain Business Park</span><span>It's A Doodle K9 Service</span><span>Adam ATM</span>
-        <span>Harbour City Kitchens</span><span>Stratos Nutrition</span><span>Maxxam Insurance</span><span>De Mode en Vogue</span><span>Sixty Forty</span><span>VICA</span><span>Peninsula Gives</span><span>Tailgate Toolkit</span><span>Harris</span><span>White Wolf Homes</span><span>Gas 2 Go</span><span>West Haven Cabinetry</span><span>Oakcrest Estates</span><span>Centre Mountain Business Park</span><span>It's A Doodle K9 Service</span><span>Adam ATM</span>
-      </div>
-    </section>
-
-    <section class="section band--sky" id="in-the-works">
-      <style>
-        #in-the-works .site-shot {
-          display: block;
-          margin: calc(-1 * clamp(1.5rem, 3vw, 2.25rem)) calc(-1 * clamp(1.5rem, 3vw, 2.25rem)) 1.5rem;
-          position: relative;
-          overflow: hidden;
-        }
-        #in-the-works .site-shot img { display: block; width: 100%; aspect-ratio: 1152 / 648; object-fit: cover; object-position: top; opacity: 0.92; }
-        #in-the-works .site-shot::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(12,13,9,0.08), rgba(20,22,15,0.5) 100%); }
-        #in-the-works .card { overflow: hidden; }
-        #in-the-works .lede { margin-bottom: clamp(2rem, 4vw, 3rem); }
-        /* five projects: three across, then two wider */
-        @media (min-width: 64rem) {
-          #in-the-works .card-grid { grid-template-columns: repeat(6, minmax(0, 1fr)); }
-          #in-the-works .card-grid > .card { grid-column: span 2; }
-          #in-the-works .card-grid > .card:nth-child(n+4) { grid-column: span 3; }
-        }
-      </style>
-      <div class="wrap">
-        <div class="section-head reveal">
-          <div>
-            <h2 class="display-lg">Websites we've built, and some <span class="ink-volt">on the way</span><span class="dot">.</span></h2>
-          </div>
-        </div>
-        <p class="lede reveal">Website builds that are live right now, and the packages on our bench. Every one designed, written and supported by the same team.</p>
-        <div class="card-grid reveal">
-          <a class="card" href="https://jackietaylor.ca" target="_blank" rel="noopener">
-            <span class="site-shot"><img src="assets/img/site-jackietaylor.jpg" alt="The Jackie Taylor website homepage" loading="lazy"></span>
-            <h3>Jackie Taylor</h3>
-            <p>A writer-director's portfolio, bio, filmography and press, designed around her films.</p>
-            <span class="card-cue">Visit jackietaylor.ca</span>
-          </a>
-          <a class="card" href="https://sviautomotive.com" target="_blank" rel="noopener">
-            <span class="site-shot"><img src="assets/img/site-sviautomotive.jpg" alt="The SVI Automotive Equipment website homepage" loading="lazy"></span>
-            <h3>SVI Automotive</h3>
-            <p>Full build for a Vancouver Island equipment dealer: product catalogue, financing, service and an SEO-ready news blog.</p>
-            <span class="card-cue">Visit sviautomotive.com</span>
-          </a>
-          <a class="card" href="https://demodeenvogue.ca" target="_blank" rel="noopener">
-            <span class="site-shot"><img src="assets/img/site-demodeenvogue.jpg" alt="The De Mode en Vogue online store homepage" loading="lazy"></span>
-            <h3>De Mode en Vogue</h3>
-            <p>A full revamp of their online store, with a video-led homepage built from the campaign we shot for them. We now manage the site, SEO, blog and ads.</p>
-            <span class="card-cue">Visit demodeenvogue.ca</span>
-          </a>
-          <a class="card" href="https://nine6teen.ca" target="_blank" rel="noopener">
-            <span class="site-shot"><img src="assets/img/site-ninesixteen.jpg" alt="The Nine Sixteen Entertainment website homepage" loading="lazy"></span>
-            <h3>Nine Sixteen Entertainment</h3>
-            <p>A launch site for a Vancouver Island vertical-drama studio: the slate in development, how to partner with them and the team behind it.</p>
-            <span class="card-cue">Visit nine6teen.ca</span>
-          </a>
-          <div class="card">
-            <span class="site-shot"><img src="assets/img/site-itsadoodle.jpg" alt="The It's A Doodle Labradoodles website homepage, in development" loading="lazy"></span>
-            <h3>It's A Doodle K9 Service</h3>
-            <p>A full rebrand and rebuild for this Sooke Labradoodle breeder: all-new logos, a brand guide, realigned socials and a video-led website. <a href="website-development.html#its-a-doodle">See the before</a>. Launching soon.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- How it works -->
-    <section class="panel big-words" id="website-types" aria-labelledby="website-types-head">
-      <div class="wrap">
-        <h2 id="website-types-head" class="big-list-head reveal">Websites for every kind of business<span class="dot">.</span></h2>
-        <div class="big-list-grid">
-          <ul class="big-list big-list--long reveal">
-            <li><span>Business websites</span></li>
-            <li><span>Online stores</span></li>
-            <li><span>Corporate websites</span></li>
-            <li><span>Real estate websites</span></li>
-            <li><span>Portfolio sites</span></li>
-            <li><span>Campaign landing pages</span></li>
-          </ul>
-          <div class="big-list-side reveal">
-            <div class="big-list-shot"><img class="bw" src="assets/img/vm-office-shoot.jpg" alt="A Volare Media crew filming in an office" loading="lazy" style="object-position: 50% 50%;"></div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <section class="sec big-band photo-band" aria-labelledby="everything-starts-with-your-website-head" style="--photo: url('assets/img/bts-blue.jpg'); --photo-pos: 40% 40%; --photo-opacity: 0.32;">
-      <div class="wrap">
-        <h2 id="everything-starts-with-your-website-head" class="big-list-head reveal">Everything starts with your website<span class="dot">.</span></h2>
-        <ul class="big-list reveal">
-            <li id="websites"><span>Website development</span></li>
-            <li id="brand-building"><span>Brand building</span></li>
-            <li><a href="website-development.html#brand-alignment">Brand alignment</a></li>
-            <li id="campaigns"><span>Marketing campaigns</span></li>
+    <section class="chapter" data-id="sites" data-also="in-the-works" data-photo="assets/img/vm-office-shoot.jpg" data-dim="0.26" data-cta="Start your website" aria-labelledby="t-sites" hidden>
+      <div class="stack">
+        <h2 id="t-sites" class="title"><span class="ln">Websites we've built,</span> <span class="ln">and some on the way<span class="dot">.</span></span></h2>
+        <ul class="shots shots--pics">
+          <li><a class="project" href="https://jackietaylor.ca" target="_blank" rel="noopener"><span class="project-shot"><img src="assets/img/site-jackietaylor.jpg" alt="The Jackie Taylor website homepage" loading="lazy"></span><span class="project-name">Jackie Taylor</span></a></li>
+          <li><a class="project" href="https://sviautomotive.com" target="_blank" rel="noopener"><span class="project-shot"><img src="assets/img/site-sviautomotive.jpg" alt="The SVI Automotive Equipment website homepage" loading="lazy"></span><span class="project-name">SVI Automotive</span></a></li>
+          <li><a class="project" href="https://demodeenvogue.ca" target="_blank" rel="noopener"><span class="project-shot"><img src="assets/img/site-demodeenvogue.jpg" alt="The De Mode en Vogue online store homepage" loading="lazy"></span><span class="project-name">De Mode en Vogue</span></a></li>
+          <li><a class="project" href="https://nine6teen.ca" target="_blank" rel="noopener"><span class="project-shot"><img src="assets/img/site-ninesixteen.jpg" alt="The Nine Sixteen Entertainment website homepage" loading="lazy"></span><span class="project-name">Nine Sixteen Entertainment</span></a></li>
+          <li><span class="project"><span class="project-shot"><img src="assets/img/site-itsadoodle.jpg" alt="The It's A Doodle Labradoodles website homepage, in development" loading="lazy"></span><span class="project-name">It's A Doodle K9 Service</span></span></li>
         </ul>
       </div>
     </section>
-    <section class="section merged" id="brand-alignment">
-      <div class="wrap reveal">
-        <h2 class="display-lg">Make your brand look the same <span class="sweep">everywhere</span><span class="dot">.</span></h2>
-        <p class="lede">Your logo, name, colours and message, matched across your website, Facebook, Instagram, LinkedIn, Google and everything you print. Brand alignment and rebranding for businesses on Vancouver Island and across BC, from the team that makes your video.</p>
-        <div class="ba-hero-actions">
-          <a class="btn" href="contact.html?project=brand">Align my brand</a>
-          <a class="text-link" href="what-is-brand-alignment.html">What is brand alignment?</a>
-        </div>
-      </div>
-    </section>
 
-    <section class="panel big-words" aria-labelledby="signs-your-brand-has-drifted-head">
-      <div class="wrap">
-        <h2 id="signs-your-brand-has-drifted-head" class="big-list-head reveal">Signs your brand has drifted<span class="dot">.</span></h2>
-        <div class="big-list-grid">
-          <ul class="big-list big-list--long reveal">
-            <li><span>Three versions of your logo</span></li>
-            <li><span>A name that changes</span></li>
-            <li><span>Colours that are almost the same</span></li>
-            <li><span>A different story on every page</span></li>
-            <li><span>Profiles that don't match</span></li>
-            <li><span>No one can find the logo file</span></li>
-          </ul>
-          <div class="big-list-side reveal">
-            <div class="big-list-shot"><img class="bw" src="assets/img/bts-gimbal.jpg" alt="A Volare Media operator on a gimbal shot" loading="lazy" style="object-position: 50% 50%;"></div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <section class="sec big-band photo-band" aria-labelledby="what-s-included-head" style="--photo: url('assets/img/bts-spotlight.jpg'); --photo-pos: 40% 40%; --photo-opacity: 0.32;">
-      <div class="wrap">
-        <h2 id="what-s-included-head" class="big-list-head reveal">What's included<span class="dot">.</span></h2>
-        <ul class="big-list big-list--long reveal">
-            <li><span>Brand audit</span></li>
-            <li><span>Logo refresh or full rebrand</span></li>
-            <li><span>Colour, type and visual style</span></li>
-            <li><span>Voice and core message</span></li>
-            <li><span>Brand guide</span></li>
-            <li><span>Rollout everywhere</span></li>
+    <section class="chapter" data-id="types" data-also="website-types" data-photo="assets/img/bts-monitor.jpg" data-dim="0.34" data-cta="Start your website" aria-labelledby="t-types" hidden>
+      <div class="stack">
+        <h2 id="t-types" class="title"><span class="ln">Websites for every</span> <span class="ln">kind of business<span class="dot">.</span></span></h2>
+        <ul class="points">
+          <li>Business websites</li>
+          <li>Online stores</li>
+          <li>Corporate websites</li>
+          <li>Real estate websites</li>
+          <li>Portfolio sites</li>
+          <li>Campaign landing pages</li>
         </ul>
       </div>
     </section>
-    <section class="section band--sky grid-bleed grid-bleed--glow" id="its-a-doodle" aria-labelledby="ba-case">
-      <div class="wrap">
-        <div class="section-head reveal">
-          <div>
-            <h2 id="ba-case" class="display-lg">It's A Doodle <span class="ink-volt">K9 Service</span><span class="dot">.</span></h2>
-          </div>
-          <p class="lede">A much-loved Labradoodle breeder in Sooke, a brand video that was already working, and a brand that had grown in layers. On the left, a section of their current homepage. On the right, the top of the new design.</p>
-        </div>
-        <div class="reveal">
-          <div class="site-compare site-compare--static">
-          <figure class="compare-col">
-            <div class="compare-frame">
-              <img src="assets/img/doodle-before-cluttered.jpg" alt="A section of the current It's A Doodle homepage: a long wall of small bullet-point text on a pink-to-blue gradient beside four bright coloured tiles" loading="lazy">
-            </div>
-            <span class="before-stamp">Before</span>
-            <figcaption>Part of the current homepage. Walls of text, mixed colours and a layout that has grown in layers.</figcaption>
-          </figure>
-          <figure class="compare-col compare-col--after">
-            <div class="compare-frame">
-              <video class="lazy-loop" muted loop playsinline preload="none" poster="assets/img/doodle-after-top.jpg" data-src="assets/doodle-after-hero.mp4" aria-label="The top of the new It's A Doodle homepage design playing: a video hero of Labradoodle puppies, the headline Labradoodle puppies raised like family, and the cursor leaving a trail of paw prints"></video>
-            </div>
-            <span class="before-stamp">After</span>
-            <figcaption>The top of the new homepage design, in progress, paw-print cursor trail and all. The name and logos update to It's A Doodle K9 Service with the new brand.</figcaption>
-          </figure>
-        </div>
-        </div>
-        <div class="ba-case reveal" style="margin-top:clamp(2.5rem,5vw,4rem);">
-          <div class="ba-before">
-            <div class="logo-chips">
-              <figure class="logo-chip"><img src="assets/img/doodle-logo-bone.png" alt="Current It's A Doodle Labradoodles bone logo" loading="lazy"></figure>
-              <figure class="logo-chip"><img src="assets/img/doodle-logo-paw.png" alt="Current It's A Doodle Labradoodles paw badge logo" loading="lazy"></figure>
-              <figure class="logo-chip"><img src="assets/img/doodle-logo-wordmark.jpg" alt="Current Doodle Labradoodles wordmark logo" loading="lazy"></figure>
-            </div>
-            <p class="before-caption">Three logo versions in use today. All of them are being replaced.</p>
-            <p class="before-caption" style="margin-top:1.25rem;">Two names in use: It's A Doodle Labradoodles on the logos, It's A Doodle K9 Service in the website's top bar.</p>
-          </div>
-          <div>
-            <h3 class="display-md" style="margin-bottom:1.25rem;">One name. One brand. Everywhere<span class="dot">.</span></h3>
-            <ul class="ba-changes">
-              <li><b>The name.</b> Back to the original: It's A Doodle K9 Service, used the same way everywhere.</li>
-              <li><b>All-new logos and design.</b> A fresh logo set and visual style, developed with the owners and approved together.</li>
-              <li><b>A full brand guide.</b> Logos, colours, type, voice and templates, so it stays aligned for years.</li>
-              <li><b>A rebuilt website,</b> centred on the brand video we made for them.</li>
-              <li><b>Instagram and Facebook,</b> rebuilt and realigned: profile images, covers, bios and highlights.</li>
-              <li><b>Google, upgraded and connected.</b> Their Google Business Profile refreshed and linked to every social platform.</li>
-            </ul>
-            <div class="ba-after">
-              <span class="before-stamp" style="position:static;display:inline-block;">After</span>
-              <p>The finished brand and website launch in 2027, with the new name and logos in place. We'll update this page when they go live.</p>
-            </div>
-            <a class="text-link" href="what-is-brand-alignment.html">Read the full story</a>
-          </div>
-        </div>
+
+    <section class="chapter" data-id="brand-alignment" data-photo="assets/img/bts-gimbal.jpg" data-dim="0.34" data-cta="Align your brand" data-cta-href="contact.html?project=brand#message" aria-labelledby="t-brand-alignment" hidden>
+      <div class="stack">
+        <h2 id="t-brand-alignment" class="title"><span class="ln">Make your brand look</span> <span class="ln">the same everywhere<span class="dot">.</span></span></h2>
+        <p class="sub">Your logo, name, colours and message, matched across your website, Facebook, Instagram, LinkedIn, Google and everything you print.</p>
+        <a class="more" href="contact.html?project=brand#message"><span class="more-t">Align my brand</span><span class="more-i" aria-hidden="true"></span></a>
       </div>
     </section>
 
-    <section class="cta band--volt">
-      <div class="wrap reveal">
-        <h2 class="display-lg">One team for your video, website and <span class="sweep">brand</span><span class="dot">.</span></h2>
-        <a class="btn" href="contact.html">Start the conversation</a>
+    <section class="chapter" data-id="drift" data-photo="assets/img/bts-camera-rig-cool.jpg" data-dim="0.34" data-cta="Align your brand" data-cta-href="contact.html?project=brand#message" aria-labelledby="t-drift" hidden>
+      <div class="stack">
+        <h2 id="t-drift" class="title"><span class="ln">Signs your brand</span> <span class="ln">has drifted<span class="dot">.</span></span></h2>
+        <ul class="points">
+          <li>Three versions of your logo</li>
+          <li>A name that changes</li>
+          <li>Colours that are almost the same</li>
+          <li>A different story on every page</li>
+          <li>Profiles that don't match</li>
+          <li>No one can find the logo file</li>
+        </ul>
       </div>
     </section>
 
+    <section class="chapter" data-id="included" data-photo="assets/img/bts-camera-slider.jpg" data-dim="0.34" data-cta="Align your brand" data-cta-href="contact.html?project=brand#message" aria-labelledby="t-included" hidden>
+      <div class="stack">
+        <h2 id="t-included" class="title"><span class="ln">What's included<span class="dot">.</span></span></h2>
+        <ul class="points">
+          <li>Brand audit</li>
+          <li>Logo refresh or full rebrand</li>
+          <li>Colour, type and visual style</li>
+          <li>Voice and core message</li>
+          <li>Brand guide</li>
+          <li>Rollout everywhere</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="chapter" data-id="its-a-doodle" data-clip="assets/doodle-after-hero.mp4" data-dim="0.3" data-cta="Align your brand" data-cta-href="contact.html?project=brand#message" aria-labelledby="t-its-a-doodle" hidden>
+      <div class="stack">
+        <h2 id="t-its-a-doodle" class="title"><span class="ln">It's A Doodle</span> <span class="ln">K9 Service<span class="dot">.</span></span></h2>
+        <p class="sub">A much-loved Labradoodle breeder in Sooke, a brand video that was already working, and a brand that had grown in layers. One name. One brand. Everywhere.</p>
+        <ul class="points">
+          <li>The name, back to the original</li>
+          <li>All-new logos and design</li>
+          <li>A full brand guide</li>
+          <li>A rebuilt website</li>
+          <li>Instagram and Facebook, realigned</li>
+          <li>Google, upgraded and connected</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="chapter" data-id="start" data-clip="assets/lp-banner-720.mp4" aria-labelledby="t-start" hidden>
+      <div class="stack">
+        <h2 id="t-start" class="title"><span class="ln">One team for your</span> <span class="ln">video, website</span> <span class="ln">and brand<span class="dot">.</span></span></h2>
+        <a class="more" href="contact.html"><span class="more-t">Start the conversation</span><span class="more-i" aria-hidden="true"></span></a>
+      </div>
+    </section>
   </main>
 
-  <footer class="site-footer footer-v2 photo-band" style="--photo: url('assets/img/footer-crew-cinema.jpg'); --photo-pos: 60% 42%; --photo-opacity: 0.4;">
-    <div class="wrap">
-      <div class="footer-top">
-        <div>
-          <p class="footer-mark"><img src="assets/vm-logo.png" alt="Volare Media logo"></p>
-          <p class="footer-tag">Stories worth <em>sharing</em><span class="dot">.</span></p>
-        </div>
-        <ul class="footer-links">
-          <li><a href="work.html">Work</a></li>
-          <li><a href="crew.html">The Crew</a></li>
-          <li><a href="community.html">Community</a></li>
-          <li><a href="journal.html">Journal</a></li>
-          <li><a href="contact.html">Contact</a></li>
-          <li><a href="https://www.instagram.com/volare.media" rel="noopener">Instagram</a></li>
-          <li><a href="https://www.facebook.com/VolareMedia.net" rel="noopener">Facebook</a></li>
-        </ul>
-      </div>
-      <div class="footer-base">
-        <span>© 2026 Volare Media · <a href="privacy-policy.html">Privacy policy</a></span>
-        <span>Video production across Vancouver Island, BC &amp; Canada</span>
-      </div>
-    </div>
-  </footer>
+  <!-- plays a video with sound, over everything -->
+  <div class="player" hidden>
+    <div class="player-box"></div>
+    <button class="player-close" type="button">Close</button>
+  </div>
 
-  <script src="script.js?v=34"></script>
-  <script src="clean.js?v=1"></script>
-  <script type="module" src="glass.js?v=6"></script>
+  <script src="console.js?v=29" type="module"></script>
 </body>
 </html>

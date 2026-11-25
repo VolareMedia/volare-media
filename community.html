@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -7,7 +7,7 @@
   <script src="/tracking.js?v=1" defer></script>
   <noscript><img height="1" width="1" style="display:none"
     src="https://www.facebook.com/tr?id=612504680491197&ev=PageView&noscript=1"/></noscript>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Community Films for Nonprofits and Fundraisers | Volare Media</title>
   <meta name="description" content="Volare Media is media sponsor for Peninsula Gives, the Shine Gala and Fashion Splash, donating films for BC Children's Hospital and the Transition House.">
   <link rel="canonical" href="https://www.volaremedia.net/community.html">
@@ -15,15 +15,11 @@
   <meta property="og:title" content="Community &amp; Giving | Volare Media">
   <meta property="og:description" content="Volare Media is media sponsor for Peninsula Gives, the Shine Gala and Fashion Splash, donating films for BC Children's Hospital and the Transition House.">
   <meta property="og:url" content="https://www.volaremedia.net/community.html">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Inter+Tight:ital,wght@0,400..800;1,400..800&family=Fragment+Mono:ital@0;1&display=swap" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Inter+Tight:ital,wght@0,400..800;1,400..800&family=Fragment+Mono:ital@0;1&display=swap"></noscript>
-  <link rel="icon" href="favicon.svg?v=2" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css?v=43">
-  <link rel="stylesheet" href="clean.css?v=4">
-  <link rel="stylesheet" href="glass.css?v=8">
-  <script>(function(d){if(matchMedia("(prefers-reduced-motion: reduce)").matches)return;d.classList.add("anim");setTimeout(function(){if(!d.classList.contains("glass-on"))d.classList.remove("anim")},5000)})(document.documentElement)</script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Inter+Tight:wght@500;600;700&display=swap">
+  <link rel="stylesheet" href="console.css?v=18">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -36,313 +32,115 @@
   }
   </script>
 </head>
-<body class="v2 v3">
+<body class="is-intro is-loading" data-card>
+  <!-- Built by volare-media-src/console-pages.py. This page opens and works like the landing page: its headline in the centre
+       over black-and-white footage, then big words on the left for its own sections, one section per screen. No menu across the top. -->
+  <canvas id="stage" aria-hidden="true"></canvas>
+  <div class="stage-fallback" aria-hidden="true"></div>
+  <div class="sweeps" aria-hidden="true"><span class="sweep sweep--mauve"></span><span class="sweep sweep--volt"></span></div>
 
-  <header class="v2-header">
-    <div class="wrap">
-      <a class="logo" href="index.html" aria-label="Volare Media, home"><img src="assets/vm-logo.png" alt="Volare Media logo"></a>
-      <div class="v2-header-right">
-        <a class="btn" href="contact.html">Start a project</a>
-        <button class="menu-btn" aria-expanded="false" aria-controls="site-menu">Menu <span class="menu-lines" aria-hidden="true"></span></button>
-      </div>
-    </div>
+  <header class="hud-top">
+    <a class="logo" href="index.html" aria-label="Volare Media, home"><img src="assets/vm-logo.png" alt="Volare Media"></a>
   </header>
 
-  <nav class="v2-menu photo-band" id="site-menu" aria-label="Main" style="--photo: url('assets/img/footer-crew-cinema.jpg'); --photo-pos: 60% 40%;">
-    <div class="wrap">
-      <ul class="v2-menu-links">
-        <li><a href="work.html">Work</a></li>
-        <li><a href="crew.html">The Crew</a></li>
-        <li><a href="community.html" aria-current="page">Community</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
-      <div class="v2-menu-side">
-        <h3>What we make</h3>
-        <ul>
-          <li><a href="marketing-videos.html">Marketing videos</a></li>
-          <li><a href="corporate-video.html">Corporate video</a></li>
-          <li><a href="event-videography.html">Event videography</a></li>
-          <li><a href="website-development.html">Websites and branding</a></li>
-        </ul>
-        <h3>Say hello</h3>
-        <ul>
-          <li><a href="mailto:video@volaremedia.net">video@volaremedia.net</a></li>
-          <li><a href="tel:+12505894521">250.589.4521</a></li>
-        </ul>
-      </div>
-    </div>
+  <nav class="menu" aria-label="This page">
+    <ul>
+      <li><button type="button" data-go="why">Why we do it</button></li>
+      <li><button type="button" data-go="peninsula-gives">Peninsula Gives</button></li>
+      <li><button type="button" data-go="shine-gala">Shine Gala</button></li>
+      <li><button type="button" data-go="fashion-splash">Fashion Splash</button></li>
+      <li><button type="button" data-go="tailgate">Tailgate Toolkit</button></li>
+      <li><button type="button" data-go="start">Start a project</button></li>
+      <li><button type="button" data-href="index.html">Home</button></li>
+    </ul>
   </nav>
 
-  <main>
+  <main class="chapters">
+    <section class="chapter" data-id="home" data-clip="assets/fundraiser-loop.mp4" style="--lines:2" aria-labelledby="t-home">
+      <h1 id="t-home" class="title title--page"><span class="ln">Causes we're</span> <span class="ln">proud to support<span class="dot">.</span></span></h1>
+      <p class="sub">Some of the work that means the most to us never sold a single product.</p>
+    </section>
 
-    <section class="hero video-band" style="--video-opacity: 0.35;">
-      <video class="band-video" autoplay muted loop playsinline preload="metadata" poster="assets/img/peninsula-gives-event.jpg" aria-hidden="true">
-        <source src="assets/fundraiser-loop.mp4" type="video/mp4">
-      </video>
-      <div class="wrap">
-        <h1 class="display-xl">Causes we're proud to <span class="sweep">support</span><span class="dot">.</span></h1>
-        <p class="lede">Some of the work that means the most to us never sold a single product. Volare Media loves partnering with nonprofits, charities and fundraisers, telling the stories that raise money, raise awareness and genuinely fill our hearts.</p>
+    <section class="chapter" data-id="why" data-photo="assets/img/peninsula-gives-event.jpg" data-dim="0.34" aria-labelledby="t-why" hidden>
+      <div class="stack">
+        <h2 id="t-why" class="title"><span class="ln">Why we film</span> <span class="ln">for charities<span class="dot">.</span></span></h2>
+        <p class="sub">Video has a way of reaching people that a microphone and a podium can't. Visuals and sound together get past the facts and into the emotion, and for a good cause, that emotion is the whole point.</p>
       </div>
     </section>
 
-    <section class="section band--peach">
-      <div class="wrap">
-        <div class="section-head reveal">
-          <div>
-            <h2 class="display-lg">Why we film for <span class="mark-line">charities</span><span class="dot">.</span></h2>
-          </div>
-        </div>
-        <p class="lede reveal">Video has a way of reaching people that a microphone and a podium can't. Visuals and sound together get past the facts and into the emotion, and for a good cause, that emotion is the whole point. That's why we bring the exact same film craft to a fundraiser that we bring to any commercial client. Same crew, same standard, same care. It's some of the most rewarding work we get to do.</p>
-        <p class="sponsor-note reveal">On every one of these · Media Sponsor · time &amp; resources donated</p>
-      </div>
-    </section>
-
-    <section class="section wrap">
-      <div class="section-head reveal">
-        <div>
-          <h2 class="display-lg">The organisations we <span class="ink-volt">support</span><span class="dot">.</span></h2>
-        </div>
-        <a class="text-link" href="contact.html">Work with us</a>
-      </div>
-      <div class="partner-grid reveal">
-
-        <a class="partner-card" href="community.html#peninsula-gives">
-          <div class="partner-logo">
-            <img src="assets/img/peninsula-gives-logo.png" alt="Peninsula Gives logo">
-          </div>
-          <h3>Peninsula Gives</h3>
-          <p>The charity that started it all, community events raising funds for BC Children's Hospital. We've been their media sponsor since 2023.</p>
-          <span class="text-link">See the films</span>
-        </a>
-
-        <a class="partner-card" href="community.html#shine-gala">
-          <div class="partner-logo">
-            <img src="assets/img/shine-gala-logo.png" alt="Shine Gala logo">
-          </div>
-          <h3>Shine Gala</h3>
-          <p>A dazzling Victoria gala raising money for BC Children's Hospital. We came on as media sponsor in 2024.</p>
-          <span class="text-link">See the films</span>
-        </a>
-
-        <a class="partner-card" href="community.html#fashion-splash">
-          <div class="partner-logo">
-            <img src="assets/img/fashion-splash-logo.png" alt="Fashion Splash logo">
-          </div>
-          <h3>Fashion Splash</h3>
-          <p>A fundraiser for the Victoria Women's Transition House, supporting women and children leaving violence. Media sponsor, 2024.</p>
-          <span class="text-link">See our work</span>
-        </a>
-
-      </div>
-    </section>
-
-    <!-- Beyond the galas: Tailgate Toolkit callout -->
-    <section class="section section--tight band--ink photo-band photo-band--side" style="--photo: url('assets/img/tailgate-toolkit-commercial-opening-scene.jpg'); --photo-pos: 80% 40%; --photo-opacity: 0.45;">
-      <div class="wrap">
-        <div class="section-head reveal">
-          <div>
-            <h2 class="display-lg">The Tailgate <span class="sweep sweep--volt">Toolkit</span><span class="dot">.</span></h2>
-          </div>
-          <a class="text-link" href="tailgate-toolkit-61-stations.html">Read the story</a>
-        </div>
-        <p class="lede reveal">Not every cause we care about is a gala. The Tailgate Toolkit is a mental-health initiative for BC's construction community, an industry that loses far too many of its own to a crisis that too often goes unspoken. We made the campaign that carried its message onto 61 radio and TV stations across the province. It's some of the most important work we've ever pointed a camera at.</p>
-      </div>
-    </section>
-
-    <section class="section merged" id="peninsula-gives">
-      <video class="band-video" autoplay muted loop playsinline preload="metadata" poster="assets/img/peninsula-gives-event.jpg" aria-hidden="true">
-        <source src="assets/peninsula-recap-loop.mp4" type="video/mp4">
-      </video>
-      <div class="wrap reveal">
-      <h2 class="display-lg">Peninsula <span class="sweep">Gives<span class="dot">.</span></span></h2>
-      <p class="lede">Peninsula Gives is a local charity that throws unforgettable events to raise money for BC Children's Hospital. They were the ones who first brought us into this world, and every year since, we've been proud to help their story reach further than any room ever could.</p>
-      <p class="lede">On every one of these, Volare Media was the media sponsor. We donated all of our time and resources to make these films happen, because we believe in what Peninsula Gives does.</p>
-      <p class="sponsor-note">Volare Media · Media Sponsor since 2023</p>
-      <div class="partner-logo" style="max-width: 14rem; margin-top: 1.5rem; min-height: 5.5rem;">
-        <a href="https://www.bcchf.ca" rel="noopener" aria-label="BC Children's Hospital Foundation"><img src="assets/img/bcchf-logo-white.png" alt="BC Children's Hospital Foundation logo" style="max-height: 4rem;"></a>
-      </div>
-    </div>
-    </section>
-
-    <section class="section section--tight">
-      <div class="wrap">
-      <div class="year-row">
-
-        <div class="year-block reveal">
-          <div class="year-head">
-            <span class="year">2023<span class="dot">.</span></span>
-            <span class="year-raised">Where it started</span>
-          </div>
-                    <div class="work-grid">
-            <article class="work-card">
-              <button class="video-thumb" data-youtube="kUSeRtxOvEk" aria-label="Play: Lilly's Story, Peninsula Gives 2023 film for BC Children's Hospital">
-                <img src="assets/img/peninsula-gives-2023.jpg" alt="Still from Lilly's Story, the Peninsula Gives 2023 film for BC Children's Hospital" loading="lazy">
-                <span class="play-btn" aria-hidden="true"></span>
-              </button>
-              <h3>Lilly's Story</h3>
-              <span class="work-tag">Film: for BC Children's Hospital</span>
-            </article>
-          </div>
-          <p class="lede">Our first year as media sponsor, the film that began the partnership, in support of BC Children's Hospital.</p>
-        </div>
-
-        <div class="year-block reveal">
-          <div class="year-head">
-            <span class="year">2024<span class="dot">.</span></span>
-            <span class="year-raised">Media Sponsor</span>
-          </div>
-                    <div class="work-grid">
-            <article class="work-card">
-              <button class="video-thumb" data-youtube="Y1PcutXbxtA" aria-label="Play: Quinn's Story, Peninsula Gives 2024 film for BC Children's Hospital">
-                <img src="assets/img/peninsula-gives-2024.jpg" alt="Still from Quinn's Story, the Peninsula Gives 2024 film for BC Children's Hospital" loading="lazy">
-                <span class="play-btn" aria-hidden="true"></span>
-              </button>
-              <h3>Quinn's Story</h3>
-              <span class="work-tag">Film: Quinn's journey, in her family's words</span>
-            </article>
-          </div>
-          <p class="lede">Quinn's story, told through the voices of her family, the film that powered the 2024 campaign.</p>
-        </div>
-
-        <div class="year-block reveal">
-          <div class="year-head">
-            <span class="year">2025<span class="dot">.</span></span>
-            <span class="year-raised">Documentary film</span>
-          </div>
-                    <div class="work-grid">
-            <article class="work-card">
-              <button class="video-thumb" data-youtube="QGUlt4GclyY" aria-label="Play: Oliver's Story, Peninsula Gives 2025 documentary for BC Children's Hospital">
-                <img src="assets/img/peninsula-gives-2025.jpg" alt="Still from Oliver's Story, the Peninsula Gives 2025 documentary for BC Children's Hospital" loading="lazy">
-                <span class="play-btn" aria-hidden="true"></span>
-              </button>
-              <h3>Oliver's Story</h3>
-              <span class="work-tag">Documentary: a family's journey at BC Children's Hospital</span>
-            </article>
-          </div>
-          <p class="lede">A documentary following Oliver and his family through the extraordinary care at BC Children's Hospital.</p>
-        </div>
-
-      </div>
-      </div>
-    </section>
-
-    <section class="section merged" id="shine-gala">
-      <video class="band-video" autoplay muted loop playsinline preload="metadata" poster="assets/img/shine-gala-2024-xcZNd4GcZYI.jpg" aria-hidden="true">
-        <source src="assets/shine-gala-loop.mp4" type="video/mp4">
-      </video>
-      <div class="wrap reveal">
-      <h2 class="display-lg">Shine <span class="sweep">Gala<span class="dot">.</span></span></h2>
-      <p class="lede">The Shine Gala is a dazzling Victoria evening of fashion, food and fundraising, all in support of BC Children's Hospital. In 2024 we were honoured to join in and help tell the stories at its heart.</p>
-      <p class="lede">Volare Media came on as media sponsor, donating all of our time and resources to make these films, because the families behind them deserve to be seen.</p>
-      <p class="sponsor-note">Volare Media · Media Sponsor · 2024</p>
-      <div class="partner-logo" style="max-width: 14rem; margin-top: 1.5rem; min-height: 5.5rem;">
-        <a href="https://www.bcchf.ca" rel="noopener" aria-label="BC Children's Hospital Foundation"><img src="assets/img/bcchf-logo-white.png" alt="BC Children's Hospital Foundation logo" style="max-height: 4rem;"></a>
-      </div>
-    </div>
-    </section>
-
-    <section class="section section--tight band--sky">
-      <div class="wrap">
-
-      <div class="year-block reveal">
-        <div class="year-head">
-          <span class="year">2024<span class="dot">.</span></span>
-          <span class="year-raised">Media Sponsor · Two films</span>
-        </div>
-        <p class="lede">For the 2024 gala we produced two films. The first shares Quinn's story through the voices of her family, from the moment they learned she had cancer to the journey that followed. The second follows Quinn's Beads of Courage, the program that marks every brave step of a child's treatment.</p>
-        <div class="work-grid">
-          <article class="work-card">
-            <button class="video-thumb" data-youtube="xcZNd4GcZYI" aria-label="Play: Quinn's Story, Shine Gala 2024 film for BC Children's Hospital">
-              <img src="assets/img/shine-gala-2024-xcZNd4GcZYI.jpg" alt="Still from Quinn's Story, the Shine Gala 2024 film for BC Children's Hospital" loading="lazy">
-              <span class="play-btn" aria-hidden="true"></span>
-            </button>
-            <h3>Quinn's Story</h3>
-            <span class="work-tag">Film: Quinn's journey, in her family's words</span>
-          </article>
-          <article class="work-card">
-            <button class="video-thumb" data-youtube="AY32ydFKFWc" aria-label="Play: Quinn's Beads of Courage, Shine Gala 2024 film for BC Children's Hospital">
-              <img src="assets/img/shine-gala-2024-AY32ydFKFWc.jpg" alt="Still from Quinn's Beads of Courage, the Shine Gala 2024 film for BC Children's Hospital" loading="lazy">
-              <span class="play-btn" aria-hidden="true"></span>
-            </button>
-            <h3>Quinn's Beads of Courage</h3>
-            <span class="work-tag">Film: the Beads of Courage program</span>
-          </article>
-        </div>
-      </div>
-
-      </div>
-    </section>
-
-    <section class="section merged" id="fashion-splash">
-      <video class="band-video" autoplay muted loop playsinline preload="metadata" poster="assets/img/fashion-splash-2024.jpg" aria-hidden="true">
-        <source src="assets/fashion-splash-loop.mp4" type="video/mp4">
-      </video>
-      <div class="wrap reveal">
-      <h2 class="display-lg">Fashion <span class="sweep">Splash<span class="dot">.</span></span></h2>
-      <p class="lede">Fashion Splash is a Victoria fashion showcase with a purpose: every year it raises money for the Victoria Women's Transition House, the organization that gives women and children a safe place to go when they're leaving violence and abuse.</p>
-      <p class="lede">For the 2024 event we came on as a media sponsor, donating our time and resources to produce a film that put the cause front and centre.</p>
-      <p class="sponsor-note">Volare Media · Media Sponsor · 2024</p>
-    </div>
-    </section>
-
-    <section class="section section--tight band--sky">
-      <div class="wrap">
-
-      <div class="year-block reveal">
-        <div class="year-head">
-          <span class="year">2024<span class="dot">.</span></span>
-          <span class="year-raised">Media Sponsor · Fundraiser film</span>
-        </div>
-        <p class="lede">The 2024 Fashion Splash gathered Vancouver Island's designers, models and beauty professionals for a night in support of the Victoria Women's Transition House, marking the organization's 50th year. We produced the film that carried its message to the room.</p>
-        <div class="work-grid">
-          <article class="work-card">
-            <button class="video-thumb" data-youtube="x4v2k7egCoE" aria-label="Play: Fashion Splash 2024 fundraiser film for the Victoria Women's Transition House">
-              <img src="assets/img/fashion-splash-2024.jpg" alt="Still from the Fashion Splash 2024 fundraiser film for the Victoria Women's Transition House" loading="lazy">
-              <span class="play-btn" aria-hidden="true"></span>
-            </button>
-            <h3>The Fashion Splash Film</h3>
-            <span class="work-tag">Fundraiser film: for the Victoria Women's Transition House</span>
-          </article>
-        </div>
-      </div>
-      </div>
-    </section>
-
-    <section class="cta band--volt">
-      <div class="wrap reveal">
-        <h2 class="display-lg">Got a cause that needs a <span class="sweep">camera</span><span class="dot">?</span></h2>
-        <a class="btn" href="contact.html">Let's talk</a>
-      </div>
-    </section>
-
-  </main>
-
-  <footer class="site-footer footer-v2 photo-band" style="--photo: url('assets/img/footer-crew-cinema.jpg'); --photo-pos: 60% 42%; --photo-opacity: 0.4;">
-    <div class="wrap">
-      <div class="footer-top">
-        <div>
-          <p class="footer-mark"><img src="assets/vm-logo.png" alt="Volare Media logo"></p>
-          <p class="footer-tag">Stories worth <em>sharing</em><span class="dot">.</span></p>
-        </div>
-        <ul class="footer-links">
-          <li><a href="work.html">Work</a></li>
-          <li><a href="crew.html">The Crew</a></li>
-          <li><a href="community.html">Community</a></li>
-          <li><a href="journal.html">Journal</a></li>
-          <li><a href="contact.html">Contact</a></li>
-          <li><a href="https://www.instagram.com/volare.media" rel="noopener">Instagram</a></li>
-          <li><a href="https://www.facebook.com/VolareMedia.net" rel="noopener">Facebook</a></li>
+    <section class="chapter" data-id="peninsula-gives" data-clip="assets/peninsula-recap-loop.mp4" data-dim="0.3" aria-labelledby="t-peninsula-gives" hidden>
+      <div class="stack">
+        <h2 id="t-peninsula-gives" class="title"><span class="ln">Peninsula Gives<span class="dot">.</span></span></h2>
+        <p class="sub">A local charity that throws unforgettable events to raise money for BC Children's Hospital. We've been their media sponsor since 2023.</p>
+        <ul class="shots">
+          <li><button class="project" type="button" data-play="youtube:kUSeRtxOvEk" aria-label="Play: Lilly's Story">
+            <span class="project-shot"><img src="assets/img/peninsula-gives-2023.jpg" alt="Still from Lilly's Story" loading="lazy"><i aria-hidden="true"></i></span>
+            <span class="project-name">Lilly's Story</span>
+          </button></li>
+          <li><button class="project" type="button" data-play="youtube:Y1PcutXbxtA" aria-label="Play: Quinn's Story">
+            <span class="project-shot"><img src="assets/img/peninsula-gives-2024.jpg" alt="Still from Quinn's Story" loading="lazy"><i aria-hidden="true"></i></span>
+            <span class="project-name">Quinn's Story</span>
+          </button></li>
+          <li><button class="project" type="button" data-play="youtube:QGUlt4GclyY" aria-label="Play: Oliver's Story">
+            <span class="project-shot"><img src="assets/img/peninsula-gives-2025.jpg" alt="Still from Oliver's Story" loading="lazy"><i aria-hidden="true"></i></span>
+            <span class="project-name">Oliver's Story</span>
+          </button></li>
         </ul>
       </div>
-      <div class="footer-base">
-        <span>© 2026 Volare Media · <a href="privacy-policy.html">Privacy policy</a></span>
-        <span>Video production across Vancouver Island, BC &amp; Canada</span>
-      </div>
-    </div>
-  </footer>
+    </section>
 
-  <script src="script.js?v=34"></script>
-  <script src="clean.js?v=1"></script>
-  <script type="module" src="glass.js?v=6"></script>
+    <section class="chapter" data-id="shine-gala" data-clip="assets/shine-gala-loop.mp4" data-dim="0.3" aria-labelledby="t-shine-gala" hidden>
+      <div class="stack">
+        <h2 id="t-shine-gala" class="title"><span class="ln">Shine Gala<span class="dot">.</span></span></h2>
+        <p class="sub">A dazzling Victoria evening of fashion, food and fundraising, all in support of BC Children's Hospital. We came on as media sponsor in 2024.</p>
+        <ul class="shots">
+          <li><button class="project" type="button" data-play="youtube:xcZNd4GcZYI" aria-label="Play: Quinn's Story">
+            <span class="project-shot"><img src="assets/img/shine-gala-2024-xcZNd4GcZYI.jpg" alt="Still from Quinn's Story, made for the Shine Gala" loading="lazy"><i aria-hidden="true"></i></span>
+            <span class="project-name">Quinn's Story</span>
+          </button></li>
+          <li><button class="project" type="button" data-play="youtube:AY32ydFKFWc" aria-label="Play: Quinn's Beads of Courage">
+            <span class="project-shot"><img src="assets/img/shine-gala-2024-AY32ydFKFWc.jpg" alt="Still from Quinn's Beads of Courage" loading="lazy"><i aria-hidden="true"></i></span>
+            <span class="project-name">Quinn's Beads of Courage</span>
+          </button></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="chapter" data-id="fashion-splash" data-clip="assets/fashion-splash-loop.mp4" data-dim="0.3" aria-labelledby="t-fashion-splash" hidden>
+      <div class="stack">
+        <h2 id="t-fashion-splash" class="title"><span class="ln">Fashion Splash<span class="dot">.</span></span></h2>
+        <p class="sub">A Victoria fashion showcase with a purpose: every year it raises money for the Victoria Women's Transition House. Media sponsor, 2024.</p>
+        <ul class="shots">
+          <li><button class="project" type="button" data-play="youtube:x4v2k7egCoE" aria-label="Play: The Fashion Splash Film">
+            <span class="project-shot"><img src="assets/img/fashion-splash-2024.jpg" alt="Still from the Fashion Splash film" loading="lazy"><i aria-hidden="true"></i></span>
+            <span class="project-name">The Fashion Splash Film</span>
+          </button></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="chapter" data-id="tailgate" data-photo="assets/img/bts-set.jpg" data-dim="0.34" aria-labelledby="t-tailgate" hidden>
+      <div class="stack">
+        <h2 id="t-tailgate" class="title"><span class="ln">The Tailgate Toolkit<span class="dot">.</span></span></h2>
+        <p class="sub">A mental-health initiative for BC's construction community. We made the campaign that carried its message onto 61 radio and TV stations across the province.</p>
+        <a class="more" href="tailgate-toolkit-61-stations.html"><span class="more-t">Read the story</span><span class="more-i" aria-hidden="true"></span></a>
+      </div>
+    </section>
+
+    <section class="chapter" data-id="start" data-clip="assets/modelk-rolling-loop.mp4" aria-labelledby="t-start" hidden>
+      <div class="stack">
+        <h2 id="t-start" class="title"><span class="ln">Got a cause that</span> <span class="ln">needs a camera?</span></h2>
+        <a class="more" href="contact.html"><span class="more-t">Let's talk</span><span class="more-i" aria-hidden="true"></span></a>
+      </div>
+    </section>
+  </main>
+
+  <!-- plays a video with sound, over everything -->
+  <div class="player" hidden>
+    <div class="player-box"></div>
+    <button class="player-close" type="button">Close</button>
+  </div>
+
+  <script src="console.js?v=29" type="module"></script>
 </body>
 </html>

@@ -152,13 +152,10 @@ img { display: block; max-width: 100%; }
   /* a phone with its browser bars showing is short: the words size to the height as well as the width, so the menu never climbs into the title */
   .menu { left: var(--gutter); bottom: clamp(2.6rem, 9vh, 7.5rem); }
   .menu button { font-size: clamp(1.5rem, min(9.4vw, 5.2vh), 2.8rem); }
-  .is-rail .menu { top: 4.5rem; transform: none; left: 0; right: 0; overflow-x: auto; scrollbar-width: none; -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 90%, transparent); mask-image: linear-gradient(90deg, transparent, #000 6%, #000 90%, transparent); }
-  .is-rail .menu::-webkit-scrollbar { display: none; }
-  .is-rail .menu ul { display: flex; gap: 1.4rem; padding: 0.4rem var(--gutter); width: max-content; }
-  .is-rail .menu li + li { margin-top: 0; }
-  .is-rail .menu button::before { display: none; }
-  .is-rail .menu button { font-size: 0.78rem; white-space: nowrap; }
-  .is-rail .menu button[aria-current="true"] { border-bottom: 1px solid var(--volt); }
+  /* with a chapter open the words stay a list down the left, under the logo: never a bar across the top */
+  .is-rail .menu { top: 4.7rem; bottom: auto; transform: none; left: var(--gutter); }
+  .is-rail .menu li + li { margin-top: 0.34rem; }
+  .is-rail .menu button { font-size: 0.77rem; }
   /* the headline sits under the logo and the menu at the foot, with the picture between them */
   .chapter[data-id="home"] { --tf: clamp(2.2rem, 10vw, 3rem); --lines: 2; --tt: max(6.6rem, 15vh); }
   .chapter[data-id="home"]:has(.title--page) { --tf: clamp(1.9rem, 8.6vw, 2.6rem); --lines: 3; }
@@ -208,15 +205,49 @@ img { display: block; max-width: 100%; }
 .shots .project-name { margin-top: 0.6rem; font-size: clamp(1rem, 1.35vw, 1.3rem); }
 .shots .project-shot i { width: 3.4rem; height: 2.1rem; clip-path: polygon(0.64rem 0, 100% 0, calc(100% - 0.64rem) 100%, 0 100%); }
 .shots .project-shot i::after { border-left-width: 0.7rem; border-top-width: 0.42rem; border-bottom-width: 0.42rem; margin-left: 0.14rem; }
+/* the always-there way to reach us: the angled button, top right, with words that follow the section on screen */
+.cta { position: fixed; z-index: 20; top: 0.9rem; right: var(--gutter); margin: 0; font-size: 0.92rem; padding: 0.82em 1.7em 0.82em 1.9em; white-space: nowrap; transition: opacity 0.9s var(--ease); }
+.is-intro .cta, .is-loading .cta { opacity: 0; pointer-events: none; }
+@media (max-width: 760px) { .cta { font-size: 0.8rem; top: 1rem; } }
+/* pictures that are not videos (websites we built): the same row, no play mark */
+.shots--pics { grid-template-columns: repeat(5, minmax(0, 1fr)); max-width: 72rem; }
+.shots--pics .project-shot { aspect-ratio: 16 / 10; }
+.shots--pics .project-shot img { object-position: top; }
+.shots--pics .project-name { font-size: clamp(0.95rem, 1.15vw, 1.15rem); }
+a.project, span.project { color: inherit; text-decoration: none; }
+/* the contact form: plain fields on the picture, square, with the same volt button */
+.form { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem 1.4rem; width: 100%; max-width: 40rem; }
+.form-field { display: grid; gap: 0.3rem; }
+.form-field--wide, .form-notice, .form > .more { grid-column: 1 / -1; }
+.form-field span { font-size: 0.85rem; color: var(--muted); }
+.form-field em { font-style: normal; opacity: 0.7; }
+.form input, .form textarea { font: inherit; color: var(--cream); background: rgba(12, 13, 9, 0.5); border: 0; border-bottom: 1px solid rgba(244, 243, 232, 0.4);
+  padding: 0.6rem 0.7rem; border-radius: 0; width: 100%; outline: none; resize: none; transition: border-color 0.45s var(--ease); }
+.form input:focus, .form textarea:focus { border-color: var(--volt); }
+.form ::placeholder { color: rgba(244, 243, 232, 0.35); }
+.form > .more { justify-self: start; cursor: pointer; }
+.form-notice { color: var(--volt); font-family: var(--font-display); font-weight: 600; font-size: 1.15rem; }
+.form-notice[hidden] { display: none; }
 /* an inner page's own headline sits in the corner the way "Videos made with intention." does; it runs a little longer, so a little smaller */
 .chapter[data-id="home"] .title--page { font-size: clamp(1.7rem, 3vw, 3rem); }
+/* when the page opens, that headline is in the centre of the screen, big */
+.is-intro .chapter[data-id="home"] .title--page { font-size: clamp(2.4rem, 6.4vw, 6.6rem); }
 @media (max-width: 760px) {
   .stack { left: var(--gutter); bottom: 3.6rem; gap: 0.85rem; }
   .chapter:not([data-id="home"]) .stack .title { font-size: clamp(1.9rem, 8.4vw, 2.6rem); }
   .stack .sub { font-size: 0.98rem; }
-  .points li { font-size: 1.2rem; }
-  .shots { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .points li { font-size: clamp(1rem, 2.8vh, 1.2rem); }
+  /* thumbnails size to the height of the phone too, so a row of videos never climbs into the menu */
+  .shots { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: min(100%, 40vh); gap: 0.6rem 0.8rem; }
+  .shots .project-name { font-size: 0.92rem; margin-top: 0.35rem; }
+  .shots--pics { max-width: 100%; }
   .chapter[data-id="home"] .title--page { font-size: var(--tf); }
+  .is-intro .chapter[data-id="home"] .title--page { font-size: clamp(2rem, 9.6vw, 3rem); }
+  .shots--pics { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .shots--pics .project-name { font-size: 0.82rem; margin-top: 0.35rem; }
+  .form { gap: 0.55rem 0.8rem; }
+  .form input, .form textarea { padding: 0.45rem 0.6rem; }
+  .form-field span { font-size: 0.78rem; }
 }
 
 /* ---------- our work: the reel frame, then the projects ---------- */

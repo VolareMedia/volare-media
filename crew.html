@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -7,10 +7,20 @@
   <script src="/tracking.js?v=1" defer></script>
   <noscript><img height="1" width="1" style="display:none"
     src="https://www.facebook.com/tr?id=612504680491197&ev=PageView&noscript=1"/></noscript>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Meet the Crew: The Department Heads at Volare Media</title>
   <meta name="description" content="Meet Volare Media's department heads on Vancouver Island: Chris Chisholm, Jackie Taylor, Jonathan Wright and Ashley Chisholm, a crew-first production team.">
   <link rel="canonical" href="https://www.volaremedia.net/crew.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Meet the Crew | Volare Media">
+  <meta property="og:description" content="Meet Volare Media's department heads on Vancouver Island: Chris Chisholm, Jackie Taylor, Jonathan Wright and Ashley Chisholm, a crew-first production team.">
+  <meta property="og:url" content="https://www.volaremedia.net/crew.html">
+  <meta property="og:image" content="https://www.volaremedia.net/assets/img/volare-media-crew-group-shot.jpg">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Inter+Tight:wght@500;600;700&display=swap">
+  <link rel="stylesheet" href="console.css?v=18">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -54,307 +64,103 @@
     }
   }
   </script>
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="Meet the Crew | Volare Media">
-  <meta property="og:description" content="Meet Volare Media's department heads on Vancouver Island: Chris Chisholm, Jackie Taylor, Jonathan Wright and Ashley Chisholm, a crew-first production team.">
-  <meta property="og:url" content="https://www.volaremedia.net/crew.html">
-  <meta property="og:image" content="https://www.volaremedia.net/assets/img/volare-media-crew-group-shot.jpg">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Inter+Tight:ital,wght@0,400..800;1,400..800&family=Fragment+Mono:ital@0;1&display=swap" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Inter+Tight:ital,wght@0,400..800;1,400..800&family=Fragment+Mono:ital@0;1&display=swap"></noscript>
-  <link rel="icon" href="favicon.svg?v=2" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css?v=43">
-  <link rel="stylesheet" href="clean.css?v=4">
-  <link rel="stylesheet" href="glass.css?v=8">
-  <script>(function(d){if(matchMedia("(prefers-reduced-motion: reduce)").matches)return;d.classList.add("anim");setTimeout(function(){if(!d.classList.contains("glass-on"))d.classList.remove("anim")},5000)})(document.documentElement)</script>
-  <style>
-    /* crew page only — call-sheet cards */
-    .crew-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: clamp(1.25rem, 2.5vw, 2rem);
-    }
-    @media (max-width: 68rem) { .crew-grid { grid-template-columns: repeat(2, 1fr); } }
-    @media (max-width: 40rem) {
-      .crew-grid { grid-template-columns: 1fr; }
-      .crew-card { max-width: 30rem; width: 100%; margin: 0 auto; }
-    }
-    .crew-card {
-      background: var(--bg-raised);
-      border: 1px solid var(--line);
-      border-radius: 1.25rem;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      transition: transform 0.25s, border-color 0.25s;
-    }
-    .crew-card:hover { transform: translateY(-0.35rem); border-color: rgba(214, 255, 61, 0.45); }
-    .crew-photo {
-      aspect-ratio: 4 / 5;
-      width: 100%;
-      object-fit: cover;
-      border-bottom: 1px solid var(--line);
-    }
-    .crew-photo--tbd {
-      aspect-ratio: 4 / 5;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background:
-        radial-gradient(ellipse at 50% 30%, rgba(201, 186, 244, 0.12), transparent 65%),
-        var(--bg-panel);
-      border-bottom: 1px solid var(--line);
-      color: var(--muted);
-      font-family: var(--font-mono);
-      font-size: 0.8125rem;
-      letter-spacing: 0.08em;
-    }
-    .crew-body { padding: 1.5rem 1.5rem 1.75rem; display: flex; flex-direction: column; gap: 0.65rem; flex: 1; }
-    .crew-num {
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 0.14em;
-      color: var(--volt);
-    }
-    .crew-num em { font-style: normal; color: var(--lilac); }
-    .crew-name { font-size: 1.5rem; }
-    .crew-role {
-      font-family: var(--font-mono);
-      font-size: 0.8125rem;
-      color: var(--lilac);
-      letter-spacing: 0.04em;
-    }
-    .crew-bio { color: var(--muted); font-size: 0.975rem; }
-    .crew-links { margin-top: auto; padding-top: 0.75rem; display: flex; flex-wrap: wrap; gap: 0.5rem 1rem; }
-    .crew-links a {
-      font-family: var(--font-mono);
-      font-size: 0.78rem;
-      letter-spacing: 0.02em;
-      color: var(--cream);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-    .crew-links a::before { content: "[ "; color: var(--volt); }
-    .crew-links a::after { content: " ]"; color: var(--volt); }
-    .crew-links a:hover { color: var(--volt); }
-    /* faded homepage snippet at the top of each partner card */
-    #partners .card { overflow: hidden; }
-    .partner-shot {
-      display: block;
-      position: relative;
-      margin: calc(-1 * clamp(1.5rem, 3vw, 2.25rem)) calc(-1 * clamp(1.5rem, 3vw, 2.25rem)) 1.35rem;
-    }
-    .partner-shot img {
-      width: 100%;
-      aspect-ratio: 960 / 390;
-      object-fit: cover;
-      display: block;
-      opacity: 0.85;
-    }
-    .partner-shot::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to bottom, rgba(12, 13, 9, 0.18), rgba(20, 22, 15, 0.5) 62%, #14160F);
-    }
-  </style>
 </head>
-<body class="v2 v3">
+<body class="is-intro is-loading" data-card>
+  <!-- Built by volare-media-src/console-pages.py. This page opens and works like the landing page: its headline in the centre
+       over black-and-white footage, then big words on the left for its own sections, one section per screen. No menu across the top. -->
+  <canvas id="stage" aria-hidden="true"></canvas>
+  <div class="stage-fallback" aria-hidden="true"></div>
+  <div class="sweeps" aria-hidden="true"><span class="sweep sweep--mauve"></span><span class="sweep sweep--volt"></span></div>
 
-  <header class="v2-header">
-    <div class="wrap">
-      <a class="logo" href="index.html" aria-label="Volare Media, home"><img src="assets/vm-logo.png" alt="Volare Media logo"></a>
-      <div class="v2-header-right">
-        <a class="btn" href="contact.html">Start a project</a>
-        <button class="menu-btn" aria-expanded="false" aria-controls="site-menu">Menu <span class="menu-lines" aria-hidden="true"></span></button>
-      </div>
-    </div>
+  <header class="hud-top">
+    <a class="logo" href="index.html" aria-label="Volare Media, home"><img src="assets/vm-logo.png" alt="Volare Media"></a>
   </header>
 
-  <nav class="v2-menu photo-band" id="site-menu" aria-label="Main" style="--photo: url('assets/img/footer-crew-cinema.jpg'); --photo-pos: 60% 40%;">
-    <div class="wrap">
-      <ul class="v2-menu-links">
-        <li><a href="work.html">Work</a></li>
-        <li><a href="crew.html" aria-current="page">The Crew</a></li>
-        <li><a href="community.html">Community</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
-      <div class="v2-menu-side">
-        <h3>What we make</h3>
-        <ul>
-          <li><a href="marketing-videos.html">Marketing videos</a></li>
-          <li><a href="corporate-video.html">Corporate video</a></li>
-          <li><a href="event-videography.html">Event videography</a></li>
-          <li><a href="website-development.html">Websites and branding</a></li>
-        </ul>
-        <h3>Say hello</h3>
-        <ul>
-          <li><a href="mailto:video@volaremedia.net">video@volaremedia.net</a></li>
-          <li><a href="tel:+12505894521">250.589.4521</a></li>
-        </ul>
-      </div>
-    </div>
+  <nav class="menu" aria-label="This page">
+    <ul>
+      <li><button type="button" data-go="credits">The crew</button></li>
+      <li><button type="button" data-go="about">About</button></li>
+      <li><button type="button" data-go="crew-first">Crew first</button></li>
+      <li><button type="button" data-go="community">Community</button></li>
+      <li><button type="button" data-go="start">Start a project</button></li>
+      <li><button type="button" data-href="index.html">Home</button></li>
+    </ul>
   </nav>
 
-  <main>
-
-    <section class="hero photo-band photo-band--side" style="--photo: url('assets/img/volare-media-film-slate.jpg'); --photo-pos: 70% 40%; --photo-opacity: 0.5;">
-      <div class="wrap">
-        <h1 class="display-xl">Meet the people who lead <span class="sweep">each shoot</span><span class="dot">.</span></h1>
-        <p class="lede">Every Volare Media project runs like a film set: clear departments, clear roles, and one person who owns each craft. These are the people who pick up when you call, and the crew behind the work you see on this site.</p>
-      </div>
+  <main class="chapters">
+    <section class="chapter" data-id="home" data-clip="assets/banner-loop-3.mp4" aria-labelledby="t-home">
+      <h1 id="t-home" class="title title--page"><span class="ln">Meet the people</span> <span class="ln">who lead</span> <span class="ln">each shoot<span class="dot">.</span></span></h1>
+      <p class="sub">Clear departments, clear roles, and one person who owns each craft.</p>
     </section>
 
-    <section class="section wrap">
-      <div class="section-head reveal">
-        <div>
-          <h2 class="display-lg">Our <span class="mark-line">core team</span><span class="dot">.</span></h2>
+    <section class="chapter chapter--credits" data-id="credits" data-also="partners team" data-clip="assets/fundraiser-loop.mp4" aria-labelledby="t-credits" hidden>
+      <h2 id="t-credits" class="sr-only">The crew</h2>
+      <div class="roll" aria-live="off">
+        <div class="roll-inner">
+          <p class="roll-head">A Volare Media production</p>
+          <dl class="credits">
+            <div><dt>Founder, producer, editor, DP</dt><dd>Chris Chisholm</dd></div>
+            <div><dt>Producer, director, writer, props master</dt><dd>Jackie Taylor</dd></div>
+            <div><dt>Audio engineer, voice over</dt><dd>Jonathan Wright</dd></div>
+            <div><dt>Budgets, bookkeeping, customer service</dt><dd>Ashley Chisholm</dd></div>
+          </dl>
+          <p class="roll-head">The partners we bring in</p>
+          <ul class="credit-list">
+            <li>Townley Visual Media</li><li>Free Lance Industries</li><li>Untold Forge</li>
+            <li>Dominic Hall</li><li>Sarah Alexander Studio Services</li><li>Birns &amp; Sawyer</li>
+          </ul>
+          <p class="roll-head">Made for</p>
+          <ul class="credit-list credit-list--cols">
+            <li>Tailgate Toolkit</li><li>Gas 2 Go</li><li>Sixty Forty</li><li>Stratos Nutrition</li>
+            <li>De Mode en Vogue</li><li>White Wolf Homes</li><li>Harbour City Kitchens</li><li>Maxxam Insurance</li>
+            <li>Peninsula Gives</li><li>VICA</li><li>West Haven Cabinetry</li><li>It's A Doodle K9 Service</li>
+          </ul>
+          <p class="roll-end"><img src="assets/vm-logo.png" alt="Volare Media"></p>
         </div>
       </div>
-      <div class="crew-grid reveal">
-
-        <article class="crew-card">
-          <img class="crew-photo" src="assets/img/chris-chisholm-headshot.jpg" alt="Chris Chisholm, founder of Volare Media" style="object-position: center 30%;">
-          <div class="crew-body">
-            <p class="crew-num"><em>Marketing</em></p>
-            <h3 class="crew-name">Chris Chisholm</h3>
-            <p class="crew-role">Founder · Producer · Editor · DP</p>
-            <p class="crew-bio">Chris built Volare Media where film craft meets marketing strategy. With a background in <a href="marketing-videos.html#creative-direction">creative direction</a> and post-production, he brings a results-driven, cinematic eye to marketing videos, commercials and branded content. Credits include producing and editing the Tailgate Toolkit TV commercial, and shooting Senior Discount, the documentary Pagliacci's and the multi-award-winning Red Eye as director of photography.</p>
-            <div class="crew-links"><a href="mailto:chris@volaremedia.net">chris@volaremedia.net</a></div>
-          </div>
-        </article>
-
-        <article class="crew-card">
-          <img class="crew-photo" src="assets/img/jackie-taylor-headshot.jpg" alt="Jackie Taylor, head of the film department at Volare Media" style="object-position: center 40%;">
-          <div class="crew-body">
-            <p class="crew-num"><em>Film</em></p>
-            <h3 class="crew-name">Jackie Taylor</h3>
-            <p class="crew-role">Producer · Director · Writer · Props Master</p>
-            <p class="crew-bio">Jackie leads the film department with a multi-faceted background in producing, directing, writing and art department work, and experience across indie, commercial and large-scale film and series productions. Her creative vision and production expertise have shaped dozens of stories from concept to completion.</p>
-            <div class="crew-links"><a href="mailto:jackie@volaremedia.net">jackie@volaremedia.net</a> <a href="https://jackietaylor.ca" rel="noopener">jackietaylor.ca</a></div>
-          </div>
-        </article>
-
-        <article class="crew-card">
-          <div class="crew-photo--tbd" aria-hidden="true">[ photo to come ]</div>
-          <div class="crew-body">
-            <p class="crew-num"><em>Audio</em></p>
-            <h3 class="crew-name">Jonathan Wright</h3>
-            <p class="crew-role">Audio Engineer · Voice Over Specialist</p>
-            <p class="crew-bio">Jon leads the audio department with years of experience in recording, editing and post-production, specializing in dialogue clarity, tone matching and mix balance for broadcast, film and online delivery. Jon is also the founder of Untold Forge, an audio studio helping people preserve their personal stories, memories and legacies.</p>
-            <div class="crew-links"><a href="mailto:jon@untoldforge.com">jon@untoldforge.com</a> <a href="https://www.untoldforge.com/" rel="noopener">untoldforge.com</a></div>
-          </div>
-        </article>
-
-        <article class="crew-card">
-          <div class="crew-photo--tbd" aria-hidden="true">[ photo to come ]</div>
-          <div class="crew-body">
-            <p class="crew-num"><em>Production</em></p>
-            <h3 class="crew-name">Ashley Chisholm</h3>
-            <p class="crew-role">Budgets · Bookkeeping · Customer Service</p>
-            <p class="crew-bio">Ashley runs the production office: budgets, bookkeeping and customer service. Every project that stays on budget and every quick reply from the office inbox has Ashley behind it.</p>
-            <div class="crew-links"><a href="mailto:info@volaremedia.net">info@volaremedia.net</a></div>
-          </div>
-        </article>
-
-      </div>
     </section>
 
-    <section class="sec big-band photo-band" id="partners" aria-labelledby="partners-head" style="--photo: url('assets/img/bts-set.jpg'); --photo-pos: 40% 50%; --photo-opacity: 0.32;">
-      <div class="wrap">
-        <h2 id="partners-head" class="big-list-head reveal">It takes a bigger crew than this. These are the partners we bring in<span class="dot">.</span></h2>
-        <ul class="big-list big-list--long reveal">
-            <li><a href="https://townleyvm.ca/" rel="noopener">Townley Visual Media</a></li>
-            <li><a href="https://gripvictoria.ca/" rel="noopener">Free Lance Industries</a></li>
-            <li><a href="https://www.untoldforge.com/" rel="noopener">Untold Forge</a></li>
-            <li><a href="https://www.dhphotography.ca/" rel="noopener">Dominic Hall</a></li>
-            <li><a href="https://sastudioservices.com/" rel="noopener">Sarah Alexander Studio Services</a></li>
-            <li><a href="https://birnsandsawyer.com/" rel="noopener">Birns &amp; Sawyer</a></li>
+    <section class="chapter" data-id="about" data-photo="assets/img/corp-bts-4.jpg" data-dim="0.34" aria-labelledby="t-about" hidden>
+      <div class="stack">
+        <h2 id="t-about" class="title"><span class="ln">We think like a</span> <span class="ln">marketing team and shoot</span> <span class="ln">like a film crew<span class="dot">.</span></span></h2>
+        <p class="sub">We're Volare Media, a video production and marketing company based in Victoria, working across Vancouver Island, British Columbia and Canada.</p>
+        <ul class="points">
+          <li>Industry experience</li>
+          <li>Performance thinking</li>
+          <li>Videos made with intention</li>
         </ul>
       </div>
     </section>
-    <section class="section merged" id="about">
-      <div class="wrap reveal">
-      <h2 class="display-lg">We think like a marketing team and shoot like a <span class="sweep">film crew</span><span class="dot">.</span></h2>
-      <p class="lede">We're Volare Media, a video production and marketing company based in Victoria, working across Vancouver Island, British Columbia and Canada. <a href="marketing-videos.html">Marketing videos that perform</a> are the core of what we do, and we bring the same film craft to documentaries, music videos and film.</p>
+
+    <section class="chapter" data-id="crew-first" data-photo="assets/img/crew-first-video-production-set.jpg" data-dim="0.36" aria-labelledby="t-crew-first" hidden>
+      <div class="stack">
+        <h2 id="t-crew-first" class="title"><span class="ln">A well-run set</span> <span class="ln">makes a better film<span class="dot">.</span></span></h2>
+        <p class="sub">Volare Media is a crew-first production company. That means clear roles, fair treatment and a thoughtful crew structure on every shoot. People do their best work when the set runs well.</p>
       </div>
     </section>
 
-    <section class="panel big-words" aria-labelledby="film-craft-meets-marketing-strategy-head">
-      <div class="wrap">
-        <h2 id="film-craft-meets-marketing-strategy-head" class="big-list-head reveal">Film craft meets marketing strategy<span class="dot">.</span></h2>
-        <div class="big-list-grid">
-          <ul class="big-list big-list--long reveal">
-            <li><span>Industry experience</span></li>
-            <li><span>Performance thinking</span></li>
-            <li><span>Videos made with intention</span></li>
-          </ul>
-          <div class="big-list-side reveal">
-            <div class="big-list-shot"><img class="bw" src="assets/img/corp-bts-4.jpg" alt="Chris Chisholm framing a shot on set" loading="lazy" style="object-position: 50% 50%;"></div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <section class="section band--peach photo-band photo-band--side" style="--photo: url('assets/img/bts-camera-rig-cool.jpg'); --photo-pos: 55% 45%; --photo-opacity: 0.5;">
-      <div class="wrap">
-        <div class="section-head reveal">
-          <div>
-            <h2 class="display-lg">A well-run set makes a <span class="mark-line">better film</span><span class="dot">.</span></h2>
-          </div>
-        </div>
-        <p class="lede reveal">Volare Media is a <a href="crew-first-video-production.html">crew-first production company</a>. That means clear roles, fair treatment and a thoughtful crew structure on every shoot. It's the right way to work, and it's also why our footage looks the way it does. People do their best work when the set runs well.</p>
-        <p class="reveal" style="margin-top: 1.75rem;"><a class="text-link" href="crew.html">Meet the crew</a></p>
+    <section class="chapter" data-id="community" data-clip="assets/peninsula-recap-loop.mp4" data-dim="0.36" aria-labelledby="t-community" hidden>
+      <div class="stack">
+        <h2 id="t-community" class="title"><span class="ln">Causes we're proud</span> <span class="ln">to support<span class="dot">.</span></span></h2>
+        <p class="sub">Volare Media loves partnering with nonprofits, charities and fundraisers, telling the stories that raise money, raise awareness and genuinely fill our hearts.</p>
+        <a class="more" href="community.html"><span class="more-t">Community films</span><span class="more-i" aria-hidden="true"></span></a>
       </div>
     </section>
 
-    <section class="section band--ink">
-      <div class="wrap">
-        <div class="section-head reveal">
-          <div>
-            <h2 class="display-lg">Seven industries, the same <span class="sweep sweep--volt">high standard</span><span class="dot">.</span></h2>
-          </div>
-        </div>
-        <p class="lede reveal">Barnes Powersports. Harbour City Kitchens. Harris Auto Group. Stratos Performance Nutrition. Maxxam Insurance. De Mode en Vogue. Sixty Forty. Vancouver Island Construction Association. Peninsula Gives. Motorsports to fashion to construction, different audiences, same craft.</p>
+    <section class="chapter" data-id="start" data-clip="assets/modelk-rolling-loop.mp4" aria-labelledby="t-start" hidden>
+      <div class="stack">
+        <h2 id="t-start" class="title"><span class="ln">Put this crew</span> <span class="ln">on your project<span class="dot">.</span></span></h2>
+        <a class="more" href="contact.html"><span class="more-t">Start a project</span><span class="more-i" aria-hidden="true"></span></a>
       </div>
     </section>
-
-    <section class="cta band--volt">
-      <div class="wrap reveal">
-        <h2 class="display-lg">Put this crew on your <span class="sweep">project</span><span class="dot">.</span></h2>
-        <a class="btn" href="contact.html">Start a project</a>
-      </div>
-    </section>
-
   </main>
 
-  <footer class="site-footer footer-v2 photo-band" style="--photo: url('assets/img/footer-crew-cinema.jpg'); --photo-pos: 60% 42%; --photo-opacity: 0.4;">
-    <div class="wrap">
-      <div class="footer-top">
-        <div>
-          <p class="footer-mark"><img src="assets/vm-logo.png" alt="Volare Media logo"></p>
-          <p class="footer-tag">Stories worth <em>sharing</em><span class="dot">.</span></p>
-        </div>
-        <ul class="footer-links">
-          <li><a href="work.html">Work</a></li>
-          <li><a href="crew.html">The Crew</a></li>
-          <li><a href="community.html">Community</a></li>
-          <li><a href="journal.html">Journal</a></li>
-          <li><a href="contact.html">Contact</a></li>
-          <li><a href="https://www.instagram.com/volare.media" rel="noopener">Instagram</a></li>
-          <li><a href="https://www.facebook.com/VolareMedia.net" rel="noopener">Facebook</a></li>
-        </ul>
-      </div>
-      <div class="footer-base">
-        <span>© 2026 Volare Media · <a href="privacy-policy.html">Privacy policy</a></span>
-        <span>Video production across Vancouver Island, BC &amp; Canada</span>
-      </div>
-    </div>
-  </footer>
+  <!-- plays a video with sound, over everything -->
+  <div class="player" hidden>
+    <div class="player-box"></div>
+    <button class="player-close" type="button">Close</button>
+  </div>
 
-  <script src="script.js?v=34"></script>
-  <script src="clean.js?v=1"></script>
-  <script type="module" src="glass.js?v=6"></script>
+  <script src="console.js?v=29" type="module"></script>
 </body>
 </html>

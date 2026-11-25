@@ -20,7 +20,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Inter+Tight:wght@500;600;700&display=swap">
-  <link rel="stylesheet" href="console.css?v=17">
+  <link rel="stylesheet" href="console.css?v=18">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -41,9 +41,9 @@
   }
   </script>
 </head>
-<body class="is-intro is-loading">
-  <!-- An inner page built from the same parts as the landing page: full-screen footage or photos in black and white,
-       big words on the left that become a rail, one chapter per screen, glass cuts between them. No top menu bar. -->
+<body class="is-intro is-loading" data-card>
+  <!-- Built by volare-media-src/console-pages.py. This page opens and works like the landing page: its headline in the centre
+       over black-and-white footage, then big words on the left for its own sections, one section per screen. No menu across the top. -->
   <canvas id="stage" aria-hidden="true"></canvas>
   <div class="stage-fallback" aria-hidden="true"></div>
   <div class="sweeps" aria-hidden="true"><span class="sweep sweep--mauve"></span><span class="sweep sweep--volt"></span></div>
@@ -87,19 +87,19 @@
       <div class="stack">
         <h2 id="t-made" class="title"><span class="ln">Marketing videos</span> <span class="ln">we've made<span class="dot">.</span></span></h2>
         <ul class="shots">
-          <li><button class="project" type="button" data-play="vimeo:1071293680" aria-label="Play: Tailgate Toolkit TV commercial">
+          <li><button class="project" type="button" data-play="vimeo:1071293680" aria-label="Play: Tailgate Toolkit">
             <span class="project-shot"><img src="https://i.vimeocdn.com/video/1999999503-d06fd3a64afb9f18253bed85e27137c1bfe5eba9c9d5d4aa1d1b1d19d97e236f-d_1280x720?region=us" alt="Still from the Tailgate Toolkit TV commercial" loading="lazy"><i aria-hidden="true"></i></span>
             <span class="project-name">Tailgate Toolkit</span>
           </button></li>
-          <li><button class="project" type="button" data-play="vimeo:1150555122" aria-label="Play: Sixty Forty brand film">
+          <li><button class="project" type="button" data-play="vimeo:1150555122" aria-label="Play: Sixty Forty">
             <span class="project-shot"><img src="https://i.vimeocdn.com/video/2101460947-ee7b44290e2d635de2eac89c6361e2e1e66cfb6364d84fa56626f210dc1e9cba-d_1280x720?region=us" alt="Still from the Sixty Forty brand film" loading="lazy"><i aria-hidden="true"></i></span>
             <span class="project-name">Sixty Forty</span>
           </button></li>
-          <li><button class="project" type="button" data-play="vimeo:851929284" aria-label="Play: Stratos Performance Nutrition commercial">
+          <li><button class="project" type="button" data-play="vimeo:851929284" aria-label="Play: Stratos Nutrition">
             <span class="project-shot"><img src="https://i.vimeocdn.com/video/1706807741-6a3e7635fec993fb2322debbd8606ab47086d3398619d252eb2a977cb60d90aa-d_1280x720?region=us" alt="Still from the Stratos Performance Nutrition commercial" loading="lazy"><i aria-hidden="true"></i></span>
             <span class="project-name">Stratos Nutrition</span>
           </button></li>
-          <li><button class="project" type="button" data-play="youtube:G6EoryyEAEs" aria-label="Play: White Wolf Homes brand film">
+          <li><button class="project" type="button" data-play="youtube:G6EoryyEAEs" aria-label="Play: White Wolf Homes">
             <span class="project-shot"><img src="assets/img/white-wolf-homes.jpg" alt="Still from the White Wolf Homes brand film" loading="lazy"><i aria-hidden="true"></i></span>
             <span class="project-name">White Wolf Homes</span>
           </button></li>
@@ -120,9 +120,9 @@
       </div>
     </section>
 
-    <section class="chapter" data-id="creative-direction" data-photo="assets/img/bts-clapper.jpg" data-dim="0.34" aria-labelledby="t-cd" hidden>
+    <section class="chapter" data-id="creative-direction" data-photo="assets/img/bts-clapper.jpg" data-dim="0.34" aria-labelledby="t-creative-direction" hidden>
       <div class="stack">
-        <h2 id="t-cd" class="title"><span class="ln">The idea comes first<span class="dot">.</span></span></h2>
+        <h2 id="t-creative-direction" class="title"><span class="ln">The idea comes first<span class="dot">.</span></span></h2>
         <p class="sub">Cameras are the easy part. The hard part is knowing what to point them at. Creative direction is where Volare Media earns its keep, finding the concept that fits your brand, your audience and your budget before a dollar is spent on production.</p>
         <ul class="points">
           <li>Brand positioning</li>
@@ -148,12 +148,12 @@
     </section>
   </main>
 
-  <!-- plays a project with sound, over everything -->
+  <!-- plays a video with sound, over everything -->
   <div class="player" hidden>
     <div class="player-box"></div>
     <button class="player-close" type="button">Close</button>
   </div>
 
-  <script src="console.js?v=28" type="module"></script>
+  <script src="console.js?v=29" type="module"></script>
 </body>
 </html>

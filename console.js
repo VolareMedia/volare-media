@@ -310,7 +310,7 @@ function wipeOut(el, delay = 0) {
     { clipPath: CLIP_HIDDEN_R, transform: "translateX(0.4em)" },
   ], { duration: 520, delay, easing: EASE, fill: "both" }).finished;
 }
-const parts = (ch) => [...$$(".title .ln-t", ch), ...$$(".sub, .points li, .shots > li, .more, .contact-big a, .roll, .projects-in", ch)].filter((n) => !n.closest(".projects-in") || n.matches(".projects-in"));
+const parts = (ch) => [...$$(".title .ln-t", ch), ...$$(".sub, .points li, .people li, .shots > li, .form, .more, .contact-big a, .roll, .projects-in", ch)].filter((n) => !n.closest(".projects-in") || n.matches(".projects-in"));
 
 async function showChapter(ch, d0 = 0) {
   ch.hidden = false; ch.classList.add("is-on");
@@ -341,6 +341,22 @@ function morph(els, change, ms, delayOf = () => 0) {
 /* ---------------- navigation ---------------- */
 let current = "home";
 let busy = true;
+// The always-there contact button (on pages that have one): its words follow the section on screen.
+// The words fade over and the button eases to its new width, so nothing jumps.
+const cta = $(".cta"), ctaT = cta && $(".more-t", cta);
+function ctaFor(id) {
+  if (!cta) return;
+  const ch = byId[id], words = ch.dataset.cta || cta.dataset.words;
+  cta.href = ch.dataset.ctaHref || cta.dataset.href;
+  if (ctaT.textContent === words) return;
+  if (reduce) { ctaT.textContent = words; return; }
+  ctaT.animate({ opacity: [1, 0] }, { duration: 300, easing: EASE, fill: "forwards" }).finished.then(() => {
+    const from = cta.offsetWidth;
+    ctaT.textContent = words;
+    cta.animate({ width: [from + "px", cta.offsetWidth + "px"] }, { duration: 620, easing: EASE });
+    ctaT.animate({ opacity: [0, 1] }, { duration: 620, easing: EASE, fill: "forwards" });
+  });
+}
 function originOf(el) {
   if (!el) return [0.5, 0.5];
   const r = el.getBoundingClientRect();
@@ -352,6 +368,7 @@ async function go(id, from, dir = 0) {
   const prev = byId[current], next = byId[id];
   const origin = originOf(from);
   menuButtons.forEach((b) => b.setAttribute("aria-current", String(b.dataset.go === id)));
+  ctaFor(id);
   // big words <-> rail, starting on the click itself
   if ((current === "home") !== (id === "home")) {
     const toRail = id !== "home", n = menuButtons.length;
@@ -386,27 +403,30 @@ function step(d) {
 $$("[data-go]").forEach((b) => b.addEventListener("click", () => go(b.dataset.go, b)));
 // a menu word that leaves the page (for example Home on an inner page)
 $$("[data-href]").forEach((b) => b.addEventListener("click", () => { location.href = b.dataset.href; }));
+const typing = (e) => !!(e.target && e.target.closest && e.target.closest("input, textarea, select"));
 addEventListener("keydown", (e) => {
   if (!player.hidden) {                                     // while a video is open the keys belong to it
     if (e.key === "Escape") closePlayer();
     if (e.key === " " && reelVid) { e.preventDefault(); reelVid.paused ? reelVid.play() : reelVid.pause(); wake(); }
     return;
   }
+  if (typing(e)) return;                                    // arrow keys in a form field move the cursor, not the page
   if (e.key === "ArrowDown" || e.key === "ArrowRight" || e.key === "PageDown") { e.preventDefault(); step(1); }
   if (e.key === "ArrowUp" || e.key === "ArrowLeft" || e.key === "PageUp") { e.preventDefault(); step(-1); }
   if (e.key === "Escape") go("home", $(".logo"));
 });
-let wheelAcc = 0, wheelT = 0, lastWheel = 0, fromEdge = true;
+let wheelAcc = 0, wheelT = 0, lastWheel = 0, fromEdge = true, swallow = false;
 const rollInHand = () => roll.on && current === "credits" && !reduce && roll.max > 0;
 const workInHand = () => current === "work" && !busy && player.hidden;
 // whichever section scrolls by hand right now (the credits roll or the Work section), or nothing
 const inHand = () => (rollInHand() ? nudgeRoll : workInHand() ? nudgeWork : null);
 addEventListener("wheel", (e) => {
   let d = e.deltaMode === 1 ? e.deltaY * 32 : e.deltaY;
-  if (!player.hidden) return;
+  if (!player.hidden || typing(e)) return;
   // on Credits and in Work the wheel scrolls the section; only what is left over at either end goes on to the next chapter
   const hand = inHand(), now = performance.now(), fresh = now - lastWheel > 200;
   lastWheel = now;
+  if (swallow) { if (!fresh) return; swallow = false; }   // the scroll that sent the title card away does not also turn the page
   if (hand) {
     const left = hand(d, true);
     // Leaving a section takes a scroll of its own: one that starts when you are already at its end.
@@ -431,7 +451,7 @@ addEventListener("touchmove", (e) => {
 addEventListener("touchend", (e) => {
   if (touchY == null) return;
   const dy = touchY - e.changedTouches[0].clientY; touchY = touchLast = null;
-  if (touchRolled) return;                                              // that swipe moved the credits, not the chapter
+  if (touchRolled || typing(e)) return;                                 // that swipe moved the credits, not the chapter
   if (Math.abs(dy) > 60) step(dy > 0 ? 1 : -1);
 }, { passive: true });
 
@@ -444,6 +464,8 @@ if (stage && new URLSearchParams(location.search).has("debug")) window.__vm = {
 /* ---------------- arriving ---------------- */
 // The address can name a chapter by its id, or by an older anchor name the chapter also answers to (data-also).
 function named() {
+  const q = new URLSearchParams(location.search), note = q.has("sent") ? $(".form-notice--sent") : q.has("error") ? $(".form-notice--error") : null;
+  if (note) { note.hidden = false; return note.closest(".chapter").dataset.id; }
   const n = location.hash.slice(1);
   if (byId[n]) return n;
   const ch = n && chapters.find((c) => (c.dataset.also || "").split(" ").includes(n));
@@ -461,6 +483,7 @@ async function arrive(id) {
   chapters.forEach((c) => { c.hidden = c !== ch; });      // only the chapter being opened is on stage
   body.classList.toggle("is-rail", id !== "home");
   menuButtons.forEach((b) => b.setAttribute("aria-current", String(b.dataset.go === id)));
+  ctaFor(id);
   current = id;
   play(v);
   whenReady(v, 6000).then(() => {
@@ -476,9 +499,27 @@ async function arrive(id) {
 }
 
 /* ---------------- intro: title card, then the console ---------------- */
+// The title card waits in the centre of the screen until the visitor scrolls, swipes, clicks or presses a key,
+// and for `ms` at the longest, so someone who never scrolls still gets the menu.
+function held(ms) {
+  return new Promise((done) => {
+    const kinds = ["wheel", "touchmove", "keydown", "pointerdown"];
+    let t = 0;
+    const end = (e) => {
+      kinds.forEach((k) => removeEventListener(k, end));
+      clearTimeout(t);
+      if (e && e.type === "wheel") swallow = true;
+      done();
+    };
+    t = setTimeout(end, ms);
+    kinds.forEach((k) => addEventListener(k, end, { passive: true }));
+  });
+}
+// The landing page shows its card once a visit. Every other page (data-card on the body) opens on its own headline each time.
+const ownCard = body.hasAttribute("data-card");
 async function intro() {
   requestAnimationFrame(frame);
-  if (opened || reduce) return arrive(named() || "home");
+  if (reduce || (ownCard ? named() : opened)) return arrive(named() || "home");
   const v = videoFor("home");
   play(v);
   // the title card starts straight away; the footage fades up behind it as soon as it has a frame
@@ -491,7 +532,7 @@ async function intro() {
   const card = Promise.all($$(".title .ln-t", home).map((el, i) => wipeIn(el, 300 + i * 140)));
   body.classList.remove("is-loading");      // the wipes above now hold the title hidden until its turn
   await card;
-  await wait(reduce ? 200 : 1300);
+  await held(ownCard ? 5200 : 1300);
 
   // The title card leaves the centre for its corner, one line at a time, and the menu starts in the same moment.
   // Each line is moved on its own: the card is centred and the corner is not, so moving the block as a whole made the lines jump.
