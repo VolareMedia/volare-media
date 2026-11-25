@@ -213,7 +213,13 @@ void main() {
 
 const UNIFORMS = ["uA", "uB", "uProg", "uTime", "uAspA", "uAspB", "uScreen", "uDim", "uStrips", "uAngle", "uOrigin", "uPx", "uSeed", "uSwing", "uColour", "uClean"];
 // a preview switch: add ?colour to the address to see the footage in colour
-const COLOUR = new URLSearchParams(location.search).has("colour") ? 1 : 0;
+// Colour footage is on trial on the landing page only (data-colour on its body); every other page stays black and white.
+// ?colour on any address previews it there too. Colour sits a little darker so the words still lead:
+// ?dark=30 tries 30% darker (0 = no darker); without it the page's own setting is used.
+const Q = new URLSearchParams(location.search);
+const COLOUR = document.body.hasAttribute("data-colour") || Q.has("colour") ? 1 : 0;
+const darker = Q.has("dark") ? parseFloat(Q.get("dark")) : parseFloat(document.body.dataset.colour || "22");
+const COLOUR_DIM = 1 - Math.min(90, Math.max(0, isNaN(darker) ? 22 : darker)) / 100;      // 1 = no darker
 
 // Returns the stage, or null where WebGL is not available (the caller then falls back to plain pictures).
 export function createStage(canvas) {
@@ -272,7 +278,7 @@ export function createStage(canvas) {
     gl.uniform1f(U.uPx, 1 / canvas.height);
     gl.uniform1f(U.uAspA, aspect(st.a));
     gl.uniform1f(U.uAspB, aspect(st.b));
-    gl.uniform1f(U.uDim, st.dim);
+    gl.uniform1f(U.uDim, st.dim * (COLOUR ? COLOUR_DIM + (1 - COLOUR_DIM) * st.clean : 1));   // not darkened where the picture itself is the thing being shown (the reel frame)
     gl.uniform1f(U.uStrips, st.strips);
     gl.uniform1f(U.uAngle, st.angle);
     gl.uniform1f(U.uSeed, st.seed);
