@@ -205,6 +205,23 @@ img { display: block; max-width: 100%; }
 .shots .project-name { margin-top: 0.6rem; font-size: clamp(1rem, 1.35vw, 1.3rem); }
 .shots .project-shot i { width: 3.4rem; height: 2.1rem; clip-path: polygon(0.64rem 0, 100% 0, calc(100% - 0.64rem) 100%, 0 100%); }
 .shots .project-shot i::after { border-left-width: 0.7rem; border-top-width: 0.42rem; border-bottom-width: 0.42rem; margin-left: 0.14rem; }
+/* a section with more to read than the screen holds scrolls inside itself; its last lines fade out to show there is more */
+.stack { max-height: calc(100svh - 5.4rem - clamp(4.5rem, 11vh, 7rem)); }
+.stack > * { flex-shrink: 0; }
+.stack.is-long { overflow-y: auto; overscroll-behavior: contain; scrollbar-width: none; margin-left: -1.4rem; padding-left: 1.4rem; padding-bottom: 3.2rem;
+  -webkit-mask-image: linear-gradient(#000 calc(100% - 3rem), transparent); mask-image: linear-gradient(#000 calc(100% - 3rem), transparent); }
+.stack.is-long::-webkit-scrollbar { display: none; }
+.stack .sub + .sub { margin-top: -0.4rem; }
+/* a plain line of credit under the text (who sponsored what), with a partner's logo beside it if there is one */
+.credit-line { display: flex; align-items: center; flex-wrap: wrap; gap: 0.6rem 1.4rem; font-family: var(--font-display); font-weight: 600; letter-spacing: -0.02em; font-size: clamp(1rem, 1.3vw, 1.2rem); color: var(--cream); }
+.credit-line img { height: 2.3rem; width: auto; display: block; }
+/* the organisations we support: logo, name and a line each; each opens its section */
+.orgs { list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(1.2rem, 2.6vw, 2.6rem); width: 100%; max-width: 64rem; }
+.org { display: block; width: 100%; text-align: left; color: inherit; }
+.org-logo { display: block; height: clamp(2.8rem, 5vw, 4.2rem); width: auto; max-width: 100%; object-fit: contain; object-position: left; margin-bottom: 0.9rem; }
+.org .project-name { margin-top: 0; font-size: clamp(1.15rem, 1.7vw, 1.6rem); }
+.org:hover .project-name { color: var(--volt); }
+.shots .project-note, .org .project-note { font-size: 0.92rem; }
 /* the always-there way to reach us: the angled button, top right, with words that follow the section on screen */
 .cta { position: fixed; z-index: 20; top: 0.9rem; right: var(--gutter); margin: 0; font-size: 0.92rem; padding: 0.82em 1.7em 0.82em 1.9em; white-space: nowrap; transition: opacity 0.9s var(--ease); }
 .is-intro .cta, .is-loading .cta { opacity: 0; pointer-events: none; }
@@ -243,6 +260,12 @@ a.project, span.project { color: inherit; text-decoration: none; }
   .shots--pics { max-width: 100%; }
   .chapter[data-id="home"] .title--page { font-size: var(--tf); }
   .is-intro .chapter[data-id="home"] .title--page { font-size: clamp(2rem, 9.6vw, 3rem); }
+  .stack { max-height: calc(100svh - (4.4rem + var(--n, 7) * 1.34rem) - 0.7rem - 3.6rem); }
+  .orgs { grid-template-columns: 1fr; gap: 0.9rem; }
+  .org { display: grid; grid-template-columns: 4.6rem 1fr; column-gap: 0.9rem; align-items: start; }
+  .org-logo { grid-row: span 2; height: auto; width: 100%; margin: 0.15rem 0 0; }
+  .shots .project-note, .org .project-note { font-size: 0.85rem; margin-top: 0.2rem; }
+  .credit-line img { height: 1.9rem; }
   .shots--pics { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .shots--pics .project-name { font-size: 0.82rem; margin-top: 0.35rem; }
   .form { gap: 0.55rem 0.8rem; }

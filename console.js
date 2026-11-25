@@ -310,10 +310,22 @@ function wipeOut(el, delay = 0) {
     { clipPath: CLIP_HIDDEN_R, transform: "translateX(0.4em)" },
   ], { duration: 520, delay, easing: EASE, fill: "both" }).finished;
 }
-const parts = (ch) => [...$$(".title .ln-t", ch), ...$$(".sub, .points li, .people li, .shots > li, .form, .more, .contact-big a, .roll, .projects-in", ch)].filter((n) => !n.closest(".projects-in") || n.matches(".projects-in"));
+const parts = (ch) => [...$$(".title .ln-t", ch), ...$$(".sub, .credit-line, .points li, .orgs > li, .shots > li, .form, .more, .contact-big a, .roll, .projects-in", ch)].filter((n) => !n.closest(".projects-in") || n.matches(".projects-in"));
 
+// A section with more to read than the screen holds scrolls inside itself (.is-long); the page turns from its top or bottom edge.
+function fitLong(ch) {
+  const s = ch && $(".stack", ch);
+  if (!s) return;
+  s.classList.remove("is-long"); s.scrollTop = 0;
+  s.classList.toggle("is-long", s.scrollHeight > s.clientHeight + 2);
+}
+const longBox = () => $(".stack.is-long", byId[current]);
+const roomIn = (box, d) => (d > 0 ? box.scrollHeight - box.clientHeight - box.scrollTop : box.scrollTop);
+document.documentElement.style.setProperty("--n", $$(".menu li").length);   // the phone layout keeps sections clear of the menu list
+addEventListener("resize", () => fitLong(byId[current]));
 async function showChapter(ch, d0 = 0) {
   ch.hidden = false; ch.classList.add("is-on");
+  fitLong(ch);
   await Promise.all(parts(ch).map((el, i) => wipeIn(el, d0 + i * 80)));
 }
 async function hideChapter(ch) {
@@ -435,13 +447,24 @@ addEventListener("wheel", (e) => {
     if (!left || !fromEdge) return;
     d = left;
   }
+  const box = longBox();
+  if (box) {
+    const room = roomIn(box, d);
+    if (fresh) fromEdge = room < 2;
+    if (room >= 2) { if (!(e.target.closest && e.target.closest(".is-long"))) box.scrollTop += d; return; }   // over the text the browser scrolls it; elsewhere we do
+    if (!fromEdge) return;
+  }
   if (busy) return;
   wheelAcc += d;
   clearTimeout(wheelT); wheelT = setTimeout(() => (wheelAcc = 0), 220);
   if (Math.abs(wheelAcc) > (hand ? 220 : 80)) { step(wheelAcc > 0 ? 1 : -1); wheelAcc = 0; }
 }, { passive: true });
-let touchY = null, touchLast = null, touchRolled = false;
-addEventListener("touchstart", (e) => { touchY = touchLast = e.touches[0].clientY; touchRolled = false; }, { passive: true });
+let touchY = null, touchLast = null, touchRolled = false, touchRoom = null;
+addEventListener("touchstart", (e) => {
+  touchY = touchLast = e.touches[0].clientY; touchRolled = false;
+  const box = e.target.closest && e.target.closest(".is-long");       // a finger on long text scrolls the text first
+  touchRoom = box ? [roomIn(box, -1), roomIn(box, 1)] : null;
+}, { passive: true });
 addEventListener("touchmove", (e) => {
   const hand = inHand();
   if (touchLast == null || !hand) return;
@@ -451,7 +474,8 @@ addEventListener("touchmove", (e) => {
 addEventListener("touchend", (e) => {
   if (touchY == null) return;
   const dy = touchY - e.changedTouches[0].clientY; touchY = touchLast = null;
-  if (touchRolled || typing(e)) return;                                 // that swipe moved the credits, not the chapter
+  if (touchRolled || typing(e)) return;
+  if (touchRoom && touchRoom[dy > 0 ? 1 : 0] >= 2) return;              // that swipe scrolled the text; the next one from its edge turns the page                                 // that swipe moved the credits, not the chapter
   if (Math.abs(dy) > 60) step(dy > 0 ? 1 : -1);
 }, { passive: true });
 
