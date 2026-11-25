@@ -390,6 +390,11 @@ async function go(id, from, dir = 0) {
   [order[(i + 1) % order.length], order[(i - 1 + order.length) % order.length]].forEach((n) => { const m = videoFor(n); if (isClip(m)) m.load(); });
 }
 function step(d) {
+  // On the landing page the words after Work are pages of their own, so scrolling on from a section opens the next word's page.
+  if (!ownCard && d > 0) {
+    const b = $(`.menu button[data-go="${current}"]`), li = b && b.closest("li"), next = li && li.nextElementSibling, link = next && $("button[data-href]", next);
+    if (link) { location.href = link.dataset.href; return; }
+  }
   const i = order.indexOf(current);
   const n = order[(i + d + order.length) % order.length];
   go(n, $(`.menu button[data-go="${n}"]`) || $(".logo"), d);
