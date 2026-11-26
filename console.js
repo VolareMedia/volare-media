@@ -59,13 +59,16 @@ function videoFor(id) {
 const isClip = (v) => v instanceof HTMLVideoElement;
 // Putting the first picture on screen. If the clip has a still of its first frame, the still goes up the moment it arrives
 // and the moving footage takes its place as soon as it can play, so the screen is never empty while the clip starts.
+const stills = {};
+function stillFor(id) {                      // the still of a chapter's clip, fetched once
+  const src = byId[id].dataset.poster;
+  if (!src) return null;
+  if (!stills[src]) { const i = new Image(); i.decoding = "async"; i.src = src; stills[src] = i; }
+  return stills[src];
+}
 function bringUp(id, v, dim, ms) {
-  const src = stage && isClip(v) && !hasFrame(v) && byId[id].dataset.poster;
-  let still = null;
-  if (src) {
-    still = new Image(); still.decoding = "async"; still.src = src;
-    whenReady(still, 6000).then(() => { if (!stage.a && hasFrame(still)) { stage.show(still, dim(), ms); performance.mark("vm-still"); } });
-  }
+  const still = stage && isClip(v) && !hasFrame(v) ? stillFor(id) : null;
+  if (still) whenReady(still, 6000).then(() => { if (!stage.a && hasFrame(still)) { stage.show(still, dim(), ms); performance.mark("vm-still"); } });
   return whenReady(v, 6000).then(() => {
     performance.mark("vm-footage");      // the two marks say when the still and the footage went up (for checking load speed)
     if (stage) stage.show(v, dim(), still && stage.a === still ? 300 : ms);
@@ -265,7 +268,11 @@ let fallbackCuts = 0;
 async function cutTo(id, origin) {
   const v = videoFor(id);
   play(v);
-  await whenReady(v);
+  // If the footage cannot play yet, the still of its first frame stands in, so a cut never waits; the footage takes over when it can.
+  let pic = v;
+  const still = stage && isClip(v) && !hasFrame(v) ? stillFor(id) : null;
+  if (still) { await Promise.race([whenReady(v), whenReady(still)]); if (!hasFrame(v) && hasFrame(still)) pic = still; }
+  else await whenReady(v);
   if (!stage) {
     $$(".stage-fallback > *").forEach((x) => x.classList.toggle("on", x === v));
     return;
@@ -273,9 +280,9 @@ async function cutTo(id, origin) {
   const old = stage.a;
   sweeps(stage.cutNo + 1);
   // the home screen and the Work section show the same reel: no cut between them, only the brightness changes
-  if (old === v) { stage.cutNo++; return stage.glide("dim", dimFor(id), reduce ? 1 : 1100); }
-  await stage.cut(v, { origin, dim: dimFor(id) });
-  if (old !== v) rest(old);
+  if (old === v || old === pic) { stage.cutNo++; await stage.glide("dim", dimFor(id), reduce ? 1 : 1100); }
+  else { await stage.cut(pic, { origin, dim: dimFor(id) }); rest(old); }
+  if (pic !== v) whenReady(v, 8000).then(() => { if (stage.a === pic && hasFrame(v)) stage.show(v, current === id ? dimFor(id) : stage.dim, 300); });
 }
 
 // two slanted sweeps cross the screen: a thin volt line, and a wide mauve band that lags behind it
@@ -330,7 +337,7 @@ function wipeOut(el, delay = 0) {
     { clipPath: CLIP_HIDDEN_R, transform: "translateX(0.4em)" },
   ], { duration: 520, delay, easing: EASE, fill: "both" }).finished;
 }
-const parts = (ch) => [...$$(".title .ln-t", ch), ...$$(".sub, .credit-line, .points li, .orgs > li, .shots > li, .form, .more, .contact-big a, .roll, .projects-in", ch)].filter((n) => !n.closest(".projects-in") || n.matches(".projects-in"));
+const parts = (ch) => [...$$(".title .ln-t", ch), ...$$(".sub, .side-pic, .credit-line, .points li, .orgs > li, .shots > li, .form, .more, .contact-big a, .roll, .projects-in", ch)].filter((n) => !n.closest(".projects-in") || n.matches(".projects-in"));
 
 // A section with more to read than the screen holds scrolls inside itself (.is-long); the page turns from its top or bottom edge.
 function fitLong(ch) {
@@ -436,7 +443,7 @@ async function go(id, from, dir = 0) {
   busy = false;
   // warm up the neighbours so the next cut starts at once
   const i = order.indexOf(id);
-  [order[(i + 1) % order.length], order[(i - 1 + order.length) % order.length]].forEach((n) => { const m = videoFor(n); if (isClip(m)) m.load(); });
+  [order[(i + 1) % order.length], order[(i - 1 + order.length) % order.length]].forEach((n) => { const m = videoFor(n); if (isClip(m)) m.load(); stillFor(n); });
 }
 function step(d) {
   const i = order.indexOf(current);
