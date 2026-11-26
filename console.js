@@ -95,7 +95,8 @@ const work = { canvas: $("#stage"), reel: $(".reel"), label: $(".reel-play"), in
   y: 0, kick: 0, mix: 0, grow: 1, hold: 1, max: 0 };
 const measureWork = () => {
   if (!work.reel) return;
-  work.grow = innerHeight * 0.9; work.hold = innerHeight * 0.7;
+  const phone = innerWidth <= 760;                 // on a phone the reel grows and lets go in about one swipe each, not two screens of swiping
+  work.grow = innerHeight * (phone ? 0.45 : 0.9); work.hold = innerHeight * (phone ? 0.28 : 0.7);
   work.max = work.grow + work.hold + work.list.offsetHeight;
 };
 addEventListener("resize", measureWork);
@@ -323,6 +324,7 @@ function fitLong(ch) {
 const longBox = () => $(".stack.is-long", byId[current]);
 const roomIn = (box, d) => (d > 0 ? box.scrollHeight - box.clientHeight - box.scrollTop : box.scrollTop);
 document.documentElement.style.setProperty("--n", $$(".menu li").length);   // the phone layout keeps sections clear of the menu list
+document.documentElement.style.setProperty("--rows", Math.ceil($$(".menu li").length / 2));   // on a phone the small list runs in two columns
 
 /* ---------------- edges that line up ---------------- */
 // Letters do not start or end exactly at the edge of their own box: an M sits further in than a W, an e further out than a full stop.
@@ -347,7 +349,7 @@ function lineUpEdges() {
   });
 }
 lineUpEdges();
-if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { inkCache = {}; lineUpEdges(); });   // again once the real fonts are in
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { inkCache = {}; lineUpEdges(); fitLong(byId[current]); });   // again once the real fonts are in (they also change how much fits a screen)
 // The corner headline sits a fixed step above its line, so it needs to know how tall that line is (one row or two).
 const cornerSub = $(".chapter[data-id='home'] .sub");
 if (cornerSub && window.ResizeObserver) new ResizeObserver(() => cornerSub.parentElement.style.setProperty("--subh", cornerSub.offsetHeight + "px")).observe(cornerSub);
@@ -419,11 +421,6 @@ async function go(id, from, dir = 0) {
   [order[(i + 1) % order.length], order[(i - 1 + order.length) % order.length]].forEach((n) => { const m = videoFor(n); if (isClip(m)) m.load(); });
 }
 function step(d) {
-  // On the landing page the words after Work are pages of their own, so scrolling on from a section opens the next word's page.
-  if (!ownCard && d > 0) {
-    const b = $(`.menu button[data-go="${current}"]`), li = b && b.closest("li"), next = li && li.nextElementSibling, link = next && $("button[data-href]", next);
-    if (link) { location.href = link.dataset.href; return; }
-  }
   const i = order.indexOf(current);
   const n = order[(i + d + order.length) % order.length];
   go(n, $(`.menu button[data-go="${n}"]`) || $(".logo"), d);

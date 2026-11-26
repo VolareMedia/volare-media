@@ -178,10 +178,12 @@ img { display: block; max-width: 100%; }
   .menu button { font-size: clamp(1.5rem, min(9.4vw, 5.2vh), 2.8rem); }
   /* with a chapter open the words stay a list down the left, under the logo: never a bar across the top */
   .is-rail .menu { top: 4.7rem; bottom: auto; transform: none; left: var(--gutter); }
-  .is-rail .menu li + li { margin-top: 0.34rem; }
+  /* the small list runs in two columns, so it takes half the height and the section under it gets the room (--rows is set in console.js) */
+  .is-rail .menu ul { display: grid; grid-auto-flow: column; grid-template-rows: repeat(var(--rows, 3), auto); justify-content: start; gap: 0.34rem 2.6rem; }
+  .is-rail .menu li + li { margin-top: 0; }
   .is-rail .menu button { font-size: 0.77rem; }
-  /* the small words are close together for a finger: each one's touch area reaches out to its neighbours and to the right, with nothing changing on screen */
-  .is-rail .menu button::after { content: ""; position: absolute; inset: -0.17rem -2.5rem -0.17rem -0.6rem; }
+  /* the small words are close together for a finger: each one's touch area reaches out to its neighbours, with nothing changing on screen */
+  .is-rail .menu button::after { content: ""; position: absolute; inset: -0.17rem -1.2rem -0.17rem -0.6rem; }
   /* the headline sits under the logo and the menu at the foot, with the picture between them */
   .chapter[data-id="home"] { --tf: clamp(2.2rem, 10vw, 3rem); --lines: 2; --tt: max(6.6rem, 15vh); }
   .chapter[data-id="home"]:has(.title--page) { --tf: clamp(1.9rem, 8.6vw, 2.6rem); --lines: 3; }
@@ -194,6 +196,7 @@ img { display: block; max-width: 100%; }
   .chapter:not([data-id="home"]) .sub { bottom: 8rem; right: var(--gutter); font-size: 0.98rem; }
   .chapter:not([data-id="home"]) .more { bottom: 4.6rem; }
   .chapter .more { margin-left: -0.5em; }
+  .more { font-size: 0.9rem; padding: 0.82em 1.5em 0.82em 1.7em; margin-top: 1rem; }
   .chapter--contact .title { bottom: 18.5rem !important; font-size: 1.5rem !important; }
   .chapter--contact .contact-big { bottom: 12rem; }
   .contact-big a { font-size: clamp(1.7rem, 8vw, 2.4rem); }
@@ -283,22 +286,27 @@ a.project, span.project { color: inherit; text-decoration: none; }
 .is-intro .chapter[data-id="home"] .title--page { font-size: clamp(2.4rem, 6.4vw, 6.6rem); }
 @media (max-width: 760px) {
   /* on a phone the menu list sits above the section, so the section starts just under it, at the same spot on every section of the page */
-  .stack { left: var(--gutter); top: calc(4.4rem + var(--n, 7) * 1.34rem + 1rem); gap: 0.85rem; }
+  .stack { left: var(--gutter); top: calc(4.4rem + var(--rows, 4) * 1.34rem + 1rem); gap: 0.6rem; }
   .chapter:not([data-id="home"]) .stack .title { margin-top: 0; }
-  .chapter:not([data-id="home"]) .stack .title { font-size: clamp(1.9rem, 8.4vw, 2.6rem); }
-  .stack .sub { font-size: 0.98rem; }
-  .points li { font-size: clamp(1rem, 2.8vh, 1.2rem); }
-  /* thumbnails size to the height of the phone too, so a row of videos never climbs into the menu */
-  .shots { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: min(100%, 40vh); gap: 0.6rem 0.8rem; }
+  /* everything in a section is a size smaller on a phone, so a section fits the screen instead of scrolling */
+  .chapter:not([data-id="home"]) .stack .title { font-size: clamp(1.5rem, 6.9vw, 2.1rem); }
+  .stack .sub { font-size: 0.875rem; line-height: 1.4; }
+  .stack .sub + .sub { margin-top: -0.25rem; }
+  .stack .more { margin-top: 0.2rem; }
+  .points li { font-size: 1rem; line-height: 1.22; }
+  .shots .project-shot i { width: 2.6rem; height: 1.6rem; clip-path: polygon(0.5rem 0, 100% 0, calc(100% - 0.5rem) 100%, 0 100%); }
+  .shots .project-shot i::after { border-left-width: 0.54rem; border-top-width: 0.32rem; border-bottom-width: 0.32rem; margin-left: 0.1rem; }
+  /* two videos across the full width: their lines of text wrap less, so the row is shorter */
+  .shots { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 100%; gap: 0.7rem 0.8rem; }
   .shots .project-name { font-size: 0.92rem; margin-top: 0.35rem; }
   .shots--pics { max-width: 100%; }
   .chapter[data-id="home"] .title--page { font-size: var(--tf); }
   .is-intro .chapter[data-id="home"] .title--page { font-size: clamp(2rem, 9.6vw, 3rem); }
-  .stack { --smax: calc(100svh - (4.4rem + var(--n, 7) * 1.34rem + 1rem) - 1.6rem); }
+  .stack { --smax: calc(100svh - (4.4rem + var(--rows, 4) * 1.34rem + 1rem) - 1.2rem); }
   .orgs { grid-template-columns: 1fr; gap: 0.9rem; }
   .org { display: grid; grid-template-columns: 4.6rem 1fr; column-gap: 0.9rem; align-items: start; }
   .org-logo { grid-row: span 2; height: auto; width: 100%; margin: 0.15rem 0 0; }
-  .shots .project-note, .org .project-note { font-size: 0.85rem; margin-top: 0.2rem; }
+  .shots .project-note, .org .project-note { font-size: 0.8rem; line-height: 1.38; margin-top: 0.15rem; }
   .credit-line img { height: 1.9rem; }
   .shots--pics { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .shots--pics .project-name { font-size: 0.82rem; margin-top: 0.35rem; }
@@ -368,9 +376,15 @@ body::before { content: ""; position: fixed; top: 0; left: 0; right: 0; height: 
 body.in-list::before { opacity: 1; }
 
 @media (max-width: 760px) {
-  body::before { height: 8rem; background: linear-gradient(var(--bg) 78%, rgba(12, 13, 9, 0)); }
+  body::before { height: calc(4.7rem + var(--rows, 3) * 1.34rem + 2.4rem); background: linear-gradient(var(--bg) 80%, rgba(12, 13, 9, 0)); }   /* the band covers the whole menu list */
   .chapter--work { --left: var(--gutter); }
-  .chapter:not([data-id="home"]) .work-intro { top: calc(4.4rem + var(--n, 7) * 1.34rem + 1rem); margin-top: 0; font-size: clamp(1.6rem, 7vw, 2.2rem); }
-  .projects { padding-top: 8rem; }
-  .project-grid { grid-template-columns: minmax(0, 1fr); }
+  .chapter:not([data-id="home"]) .work-intro { top: calc(4.4rem + var(--rows, 3) * 1.34rem + 1rem); margin-top: 0; font-size: clamp(1.5rem, 6.6vw, 2.1rem); }
+  /* the projects sit two across with smaller words, so the eight take about one screen instead of four */
+  .projects { padding-top: 1.5rem; padding-bottom: 3.2rem; }
+  .project-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.3rem 0.9rem; }
+  .project-grid .project-name { font-size: 1.02rem; margin-top: 0.5rem; }
+  .project-grid .project-note { font-size: 0.78rem; line-height: 1.35; margin-top: 0.2rem; }
+  .project-grid .project-shot i { width: 2.6rem; height: 1.6rem; clip-path: polygon(0.5rem 0, 100% 0, calc(100% - 0.5rem) 100%, 0 100%); }
+  .project-grid .project-shot i::after { border-left-width: 0.54rem; border-top-width: 0.32rem; border-bottom-width: 0.32rem; margin-left: 0.1rem; }
+  .chapter:not([data-id="home"]) .projects .more { margin-top: 1.8rem; }
 }
