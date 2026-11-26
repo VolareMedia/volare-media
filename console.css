@@ -273,6 +273,17 @@ button.org:hover .project-name, a.org:hover .project-name { color: var(--volt); 
 .shots--6 .project-shot i::after { border-left-width: 0.58rem; border-top-width: 0.35rem; border-bottom-width: 0.35rem; margin-left: 0.12rem; }
 @media (max-width: 1100px) { .shots--6 { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 a.project, span.project { color: inherit; text-decoration: none; }
+/* a flow of steps: square boxes joined by volt arrows, with a line from the last step back to the first (it runs every month) */
+.flow { --gap: clamp(1.6rem, 2.6vw, 2.6rem); position: relative; list-style: none; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--gap); width: 100%; max-width: 72rem; padding-bottom: 1.5rem; }
+.flow-step { position: relative; display: flex; flex-direction: column; gap: 0.45rem; padding: 0.95rem 1.05rem 1.05rem; border: 1px solid rgba(244, 243, 232, 0.34); background: rgba(12, 13, 9, 0.5); }
+.flow-name { font-family: var(--font-display); font-weight: 600; letter-spacing: -0.03em; font-size: clamp(1.05rem, 1.45vw, 1.4rem); line-height: 1.12; color: var(--cream); }
+.flow-tools { font-size: 0.9rem; line-height: 1.4; color: var(--muted); }
+/* the arrow between two steps: a short volt line with a head, sitting in the gap */
+.flow-step + .flow-step::before { content: ""; position: absolute; top: 50%; right: calc(100% + var(--gap) * 0.18); width: calc(var(--gap) * 0.64); height: 1px; background: var(--volt); }
+.flow-step + .flow-step::after { content: ""; position: absolute; top: 50%; right: calc(100% + var(--gap) * 0.18); width: 0.5rem; height: 0.5rem; margin-top: -0.25rem; border-top: 1px solid var(--volt); border-right: 1px solid var(--volt); rotate: 45deg; }
+/* and round again: a line under the row from the last step back up to the first */
+.flow::before { content: ""; position: absolute; left: 12.5%; right: 12.5%; bottom: 0.45rem; height: 1.05rem; border: 1px solid var(--volt); border-top: 0; margin: 0 calc(var(--gap) * -0.375); }
+.flow::after { content: ""; position: absolute; left: 12.5%; bottom: 1.2rem; width: 0.5rem; height: 0.5rem; margin-left: calc(var(--gap) * -0.375 - 0.25rem); border-top: 1px solid var(--volt); border-left: 1px solid var(--volt); rotate: 45deg; }
 /* a photo that goes with a list: stacked, a wide strip on its own row under the list and above the paragraph that follows; it ends where the paragraphs end */
 .points-row { display: flex; flex-direction: column; gap: clamp(1rem, 2.4vh, 1.7rem); width: 100%; max-width: 48rem; }
 .points-pic { position: relative; width: 100%; height: clamp(6.5rem, 15vh, 10rem); }
@@ -339,6 +350,14 @@ a.project, span.project { color: inherit; text-decoration: none; }
   .side-pic { grid-row: 1; width: 5.8rem; }
   .points-row { gap: 0.6rem; }
   .points-pic { height: 5.6rem; }
+  /* on a phone the steps run down the page, each one a slim row, with the arrows pointing down */
+  .flow { grid-template-columns: minmax(0, 1fr); gap: 0.95rem; padding-bottom: 0; }
+  .flow-step { gap: 0.08rem; padding: 0.42rem 0.75rem 0.5rem; }
+  .flow-name { font-size: 1rem; }
+  .flow-tools { font-size: 0.82rem; }
+  .flow-step + .flow-step::before { top: auto; right: auto; bottom: calc(100% + 0.2rem); left: 1.2rem; width: 1px; height: 0.65rem; }
+  .flow-step + .flow-step::after { top: auto; right: auto; bottom: calc(100% + 0.2rem); left: 1.2rem; margin: 0 0 0 -0.22rem; width: 0.45rem; height: 0.45rem; border-top: 0; border-left: 0; border-right: 1px solid var(--volt); border-bottom: 1px solid var(--volt); }
+  .flow::before, .flow::after { display: none; }
   .reads { gap: 0.3rem 1.4rem; padding-top: 0.55rem; }
   .read { font-size: 0.84rem; }
   .shots--pics, .shots--6 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
