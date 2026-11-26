@@ -273,16 +273,14 @@ button.org:hover .project-name, a.org:hover .project-name { color: var(--volt); 
 .shots--6 .project-shot i::after { border-left-width: 0.58rem; border-top-width: 0.35rem; border-bottom-width: 0.35rem; margin-left: 0.12rem; }
 @media (max-width: 1100px) { .shots--6 { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 a.project, span.project { color: inherit; text-decoration: none; }
-/* journal articles that go with a page: one thin row of slim links under the videos, no pictures */
+/* journal articles that go with a page: plain headline text under a thin rule, like the foot of a news page. No boxes, no pictures. */
 .reads-nav { width: 100%; max-width: 72rem; }
-.reads { list-style: none; display: flex; flex-wrap: wrap; gap: 0.55rem 0.9rem; padding-left: 0.42rem; }
-.read { position: relative; isolation: isolate; display: inline-flex; align-items: center; gap: 0.6em; padding: 0.5em 1.05em 0.5em 1.1em;
-  font-family: var(--font-display); font-weight: 600; letter-spacing: -0.01em; font-size: 0.84rem; line-height: 1.1; color: var(--cream); text-decoration: none; transition: color 0.45s var(--ease); }
-.read::before { content: ""; position: absolute; inset: 0; z-index: -1; border: 1px solid rgba(244, 243, 232, 0.4); background: rgba(12, 13, 9, 0.35); transform: skewX(-24deg);
-  transition: background-color 0.45s var(--ease), border-color 0.45s var(--ease); }
-.read i { display: inline-block; width: 0.4em; height: 0.4em; border-top: 1.5px solid currentColor; border-right: 1.5px solid currentColor; rotate: 45deg; }
-.read:hover, .read:focus-visible { color: var(--bg); }
-.read:hover::before, .read:focus-visible::before { background: var(--volt); border-color: var(--volt); }
+.reads { list-style: none; display: flex; flex-wrap: wrap; gap: 0.45rem 2.2rem; padding-top: 0.75rem; border-top: 1px solid rgba(244, 243, 232, 0.22); }
+.read { display: inline-flex; align-items: center; gap: 0.6em; font-family: var(--font-body); font-weight: 500; font-size: 0.9rem; line-height: 1.3; color: rgba(244, 243, 232, 0.82); text-decoration: none; transition: color 0.45s var(--ease); }
+.read::before { content: ""; flex: none; width: 0.28em; height: 0.74em; background: var(--volt); transform: skewX(-24deg); }      /* the same slanted mark the menu uses */
+.read span { background: linear-gradient(var(--volt), var(--volt)) 0 100% / 0 1px no-repeat; padding-bottom: 0.12em; transition: background-size 0.45s var(--ease); }
+.read:hover, .read:focus-visible { color: var(--cream); }
+.read:hover span, .read:focus-visible span { background-size: 100% 1px; }
 /* a photo top right, beside the headline and the first paragraph; it ends on the same right-hand mark as the rows below */
 .with-pic { display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: clamp(1.5rem, 3vw, 3rem); row-gap: clamp(1rem, 2.4vh, 1.7rem); align-items: start; width: 100%; max-width: 72rem; }
 .with-pic .title { grid-column: 1; grid-row: 1; }
@@ -335,8 +333,8 @@ a.project, span.project { color: inherit; text-decoration: none; }
   .with-pic { column-gap: 0.8rem; row-gap: 0.6rem; align-items: center; }
   .with-pic .sub { grid-column: 1 / -1; }
   .side-pic { grid-row: 1; width: 5.8rem; }
-  .reads { gap: 0.45rem 0.8rem; }
-  .read { font-size: 0.76rem; padding: 0.46em 0.95em 0.46em 1em; }
+  .reads { gap: 0.3rem 1.4rem; padding-top: 0.55rem; }
+  .read { font-size: 0.84rem; }
   .shots--pics, .shots--6 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .shots--pics .project-name, .shots--6 .project-name { font-size: 0.82rem; margin-top: 0.35rem; }
   .shots--6 .project-note { font-size: 0.74rem; }
