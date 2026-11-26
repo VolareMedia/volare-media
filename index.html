@@ -20,6 +20,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Inter+Tight:wght@500;600;700&display=swap">
+  <link rel="preload" as="image" href="assets/img/showreel-first.jpg">
   <link rel="stylesheet" href="console.css?v=34">
   <script type="application/ld+json">
   {
@@ -69,14 +70,14 @@
   </nav>
 
   <main class="chapters">
-    <section class="chapter" data-id="home" data-clip="assets/showreel-720.mp4" aria-labelledby="t-home">
+    <section class="chapter" data-id="home" data-clip="assets/showreel-1080.mp4" data-clip-s="assets/showreel-phone.mp4" data-poster="assets/img/showreel-first.jpg" aria-labelledby="t-home">
       <h1 id="t-home" class="title"><span class="ln">Videos made</span> <span class="ln">with intention<span class="dot">.</span></span></h1>
       <p class="sub">A video production house on Vancouver Island.</p>
     </section>
 
     <!-- Our work: the footage behind the home screen becomes a frame. Scrolling grows it to fill the screen ("Play reel"),
          holds it for one more scroll, then lets it scroll away and brings the projects up underneath. -->
-    <section class="chapter chapter--work" data-id="work" data-clip="assets/showreel-720.mp4" aria-labelledby="t-work" hidden>
+    <section class="chapter chapter--work" data-id="work" data-clip="assets/showreel-1080.mp4" data-clip-s="assets/showreel-phone.mp4" data-poster="assets/img/showreel-first.jpg" aria-labelledby="t-work" hidden>
       <h2 id="t-work" class="title work-intro"><span class="ln">See what we've made</span> <span class="ln">for businesses like yours<span class="dot">.</span></span></h2>
       <div class="reel">
         <button class="reel-play" type="button" data-play="file:assets/demo-reel-1080.mp4" aria-label="Play the Volare Media demo reel with sound"><span>Play</span><i aria-hidden="true"></i><span>reel</span></button>
@@ -143,6 +144,6 @@
     <button class="player-close" type="button">Close</button>
   </div>
 
-  <script src="console.js?v=38" type="module"></script>
+  <script src="console.js?v=39" type="module"></script>
 </body>
 </html>

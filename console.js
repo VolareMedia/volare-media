@@ -8,7 +8,7 @@
 // Every movement runs on one curve (smootherstep): it starts and stops with no speed and
 // no sudden change of acceleration.
 
-import { smoother, EASE, reduce, whenReady, createStage } from "./glass-stage.js?v=6";
+import { smoother, EASE, reduce, whenReady, hasFrame, createStage } from "./glass-stage.js?v=6";
 
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
@@ -35,12 +35,15 @@ const wait = (ms) => new Promise((r) => setTimeout(r, ms));
 /* ---------------- footage ---------------- */
 const videos = {};
 // A chapter's picture: footage (data-clip) or a still photo (data-photo). One player per file, shared by chapters that use the same one.
+// A clip can name a lighter file for phones (data-clip-s) and a still of its first frame (data-poster).
+const phone = matchMedia("(max-width: 760px)").matches;
 function videoFor(id) {
-  const ch = byId[id], file = ch.dataset.clip || ch.dataset.photo;
+  const ch = byId[id], file = (phone && ch.dataset.clipS) || ch.dataset.clip || ch.dataset.photo;
   if (videos[file]) return videos[file];
   let v;
   if (ch.dataset.clip) {
     v = document.createElement("video");
+    if (ch.dataset.poster) v.poster = ch.dataset.poster;
     v.src = file;
     v.muted = true; v.loop = true; v.playsInline = true;
     v.setAttribute("playsinline", ""); v.setAttribute("muted", "");
@@ -54,6 +57,21 @@ function videoFor(id) {
   return v;
 }
 const isClip = (v) => v instanceof HTMLVideoElement;
+// Putting the first picture on screen. If the clip has a still of its first frame, the still goes up the moment it arrives
+// and the moving footage takes its place as soon as it can play, so the screen is never empty while the clip starts.
+function bringUp(id, v, dim, ms) {
+  const src = stage && isClip(v) && !hasFrame(v) && byId[id].dataset.poster;
+  let still = null;
+  if (src) {
+    still = new Image(); still.decoding = "async"; still.src = src;
+    whenReady(still, 6000).then(() => { if (!stage.a && hasFrame(still)) { stage.show(still, dim(), ms); performance.mark("vm-still"); } });
+  }
+  return whenReady(v, 6000).then(() => {
+    performance.mark("vm-footage");      // the two marks say when the still and the footage went up (for checking load speed)
+    if (stage) stage.show(v, dim(), still && stage.a === still ? 300 : ms);
+    else $$(".stage-fallback > *").forEach((x) => x.classList.toggle("on", x === v));
+  });
+}
 const rest = (v) => { if (v && isClip(v)) v.pause(); };
 function play(v) { if (!reduce && isClip(v)) v.play().catch(() => {}); }
 
@@ -523,10 +541,7 @@ async function arrive(id) {
   menuButtons.forEach((b) => b.setAttribute("aria-current", String(b.dataset.go === id || (b.dataset.covers || "").split(" ").includes(id))));   // a menu word also lights up for the sections it leads to
   current = id;
   play(v);
-  whenReady(v, 6000).then(() => {
-    if (stage) stage.show(v, dimFor(id), 1200);
-    else $$(".stage-fallback > *").forEach((x) => x.classList.toggle("on", x === v));
-  });
+  bringUp(id, v, () => dimFor(id), 1200);
   if (id === "credits") { ch.hidden = false; measureRoll(); roll.y = roll.start; roll.kick = 0; roll.heldUntil = 0; }
   if (id === "work") enterWork(true);
   const coming = Promise.all([showChapter(ch, 120), ...menuButtons.map((b, i) => wipeIn(b, 80 + i * 50))]);
@@ -560,10 +575,7 @@ async function intro() {
   const v = videoFor("home");
   play(v);
   // the title card starts straight away; the footage fades up behind it as soon as it has a frame
-  whenReady(v, 6000).then(() => {
-    if (stage) stage.show(v, body.classList.contains("is-intro") ? 0.5 : dimFor("home"), 1600);
-    else $$(".stage-fallback > *").forEach((x) => x.classList.toggle("on", x === v));
-  });
+  bringUp("home", v, () => (body.classList.contains("is-intro") ? 0.5 : dimFor("home")), 1600);
   const home = byId.home;
   home.classList.add("is-on");
   const card = Promise.all($$(".title .ln-t", home).map((el, i) => wipeIn(el, 300 + i * 140)));
