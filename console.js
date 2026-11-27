@@ -337,7 +337,7 @@ function wipeOut(el, delay = 0) {
     { clipPath: CLIP_HIDDEN_R, transform: "translateX(0.4em)" },
   ], { duration: 520, delay, easing: EASE, fill: "both" }).finished;
 }
-const parts = (ch) => [...$$(".title .ln-t", ch), ...$$(".sub, .side-pic, .points-pic, .credit-line, .flow-step, .points li, .orgs > li, .shots > li, .reads > li, .form, .more, .contact-big a, .roll, .projects-in", ch)].filter((n) => !n.closest(".projects-in") || n.matches(".projects-in"));
+const parts = (ch) => [...$$(".title .ln-t", ch), ...$$(".sub, .side-pic, .points-pic, .credit-line, .flow-step, .flow-back, .points li, .orgs > li, .shots > li, .reads-rule, .reads > li, .form, .more, .contact-big a, .roll, .projects-in", ch)].filter((n) => !n.closest(".projects-in") || n.matches(".projects-in"));
 
 // A section with more to read than the screen holds scrolls inside itself (.is-long); the page turns from its top or bottom edge.
 function fitLong(ch) {
